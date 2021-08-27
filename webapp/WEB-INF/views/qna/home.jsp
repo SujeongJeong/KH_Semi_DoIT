@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Q&A - Do IT</title>
 </head>
 <body>
+	<content class="content">
+	큐엔에이
+	
+	</content>
 
 </body>
 </html>

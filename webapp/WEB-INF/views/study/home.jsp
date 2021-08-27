@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>스터디 - Do IT</title>
 </head>
 <body>
+	<content class="content">
+	스터디
+	</content>
 
 </body>
 </html>

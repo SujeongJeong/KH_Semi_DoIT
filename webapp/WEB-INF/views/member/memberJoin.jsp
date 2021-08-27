@@ -4,9 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입 - Do IT</title>
 </head>
 <body>
+	<content class="content">
+	
+	회원가입
+	
+	</content>
+	
 
 </body>
 </html>

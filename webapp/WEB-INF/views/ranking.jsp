@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>랭킹 - Do IT</title>
 </head>
 <body>
-
+	<content class="content">
+	
+	랭킹
+	</content>
 </body>
 </html>

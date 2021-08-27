@@ -4,9 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리 - Do IT</title>
 </head>
 <body>
+	<content class="content">
+	
+	관리페이지
+	
+	</content>
 
 </body>
 </html>

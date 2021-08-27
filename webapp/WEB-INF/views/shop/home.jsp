@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>shop - Do IT</title>
 </head>
 <body>
+	<content class="content">
+	
+	</content>
 
 </body>
 </html>

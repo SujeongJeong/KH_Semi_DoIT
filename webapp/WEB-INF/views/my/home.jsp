@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이페이지 - Do IT</title>
 </head>
 <body>
+	<content class="content">
+	마이페이지
+	</content>
 
 </body>
 </html>
