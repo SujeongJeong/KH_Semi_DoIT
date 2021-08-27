@@ -7,9 +7,18 @@
 <title>마이페이지 - Do IT</title>
 </head>
 <body>
+	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
+	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
+	
 	<content class="content">
-	마이페이지
+		마이페이지
+	
+		
 	</content>
+
+	<footer>
+	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
+	</footer>
 
 </body>
 </html>

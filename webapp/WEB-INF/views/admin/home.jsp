@@ -7,11 +7,17 @@
 <title>관리 - Do IT</title>
 </head>
 <body>
+	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
+	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
+	
 	<content class="content">
+		관리홈페이지
 	
-	관리페이지
-	
+		
 	</content>
 
+	<footer>
+	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
+	</footer>
 </body>
 </html>
