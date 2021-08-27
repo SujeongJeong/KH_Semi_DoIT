@@ -7,125 +7,129 @@
 <title>회원가입</title>
 <style>
 	.outer{
-		width:60%;
-		min-width : 650px;
-		background: rgb(248, 249, 250);
-		box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 4px 0px;
+		width:40%;
+		min-width : 400px;
 		margin:auto;
 		margin-top : 70px;
 		margin-bottom : 70px;
 	}
 	
 	#joinForm {
-		width : 400px;
+		width : 300px;
 		margin: auto;
 		padding: 10px;
 	}
 	
-	#joinForm h1 {
-		text-align:center;
+	#joinForm h4 {
+		text-align:left;
 	}
 	
+	#joinForm {
+		text-align:center;
+	}
 
 	.input_area {
 	    border: solid 1px #dadada;
 	    padding : 10px 10px 14px 10px;
 	    background : white;
+	    margin-bottom: 30px;
 	}
 	
-
-	.input_area input:not([type=checkbox]) {
-		width : 250px;
+	.input_area input {
+		width : 300px;
 		height : 30px;
 		border: 0px;
+		margin-bottom: 15px;
 	}
 	
 	.btnArea {
 		text-align:center;
-		padding : 50px;
 	}
 	
 	button {
-		width : 100px;
+		width : 300px;
 		height : 35px;
 		border : 0px;
 		color:white;
-		background:#282A35;
-		margin : 5px;
+		background:#C8EBFF;
+		margin-top : 50px;
 	}
 	
+	.logo {
+	width : 300px;
+	height: 80px;
+	margin-bottom: 20px;
+	}
+
+	div[class$=box] {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 10px;
+	}
+	
+	span[id$=Result] {
+		color: red;
+	}
+	
+	
+	div[class$=box] h4 {
+		display: inline;
+		margin: 0;
+	}
+
 </style>
 </head>
 <body>
-	<!-- index.jsp 생성 후 모든 페이지에 include할 menubar.jsp 생성 -->
-	<%@ include file="/WEB-INF/views/common/menubar.jsp" %>
-
 	<div class="outer">
 		<div id="joinInfoArea">
 			<form id="joinForm" action="<%= request.getContextPath() %>/memberJoin"
 			method="post" onsubmit="return validate();">
-				<h1>회원 가입</h1>
+				<a href="/Do_IT"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo"></a><br>
+				<div class="email_box">
+					<h4>이메일</h4>
+					<span id="emailResult"></span>
+				</div>
+				<span class="input_area"><input type="email" name="userEmail" required></span><br>
 				
-				<h4>* 아이디</h4>
-				<span class="input_area"><input type="text" maxlength="13" name="userId" required></span>
-				<button id="idCheck" type="button">중복확인</button>
+				<div class="pwd_box">
+					<h4>비밀번호</h4>
+					<span id="pwdResult"></span>
+				</div>
+				<span class="input_area"><input type="password" minlength="8" maxlength="15" name="userPwd" required></span><br>
 				
-				<h4>* 비밀번호</h4>
-				<span class="input_area"><input type="password" maxlength="15" name="userPwd" required></span>
+				<div class="pwd2_box">
+					<h4>비밀번호 확인</h4>
+					<span id="pwd2Result"></span>
+				</div>
+				<span class="input_area"><input type="password" maxlength="15" name="userPwd2" required></span><br>
 				
-				<h4>* 비밀번호 확인</h4>
-				<span class="input_area"><input type="password" maxlength="15" name="userPwd2" required></span>
-				<label id="pwdResult"></label>
-				
-				<h4>* 이름</h4>
-				<span class="input_area"><input type="text" maxlength="5" name="userName" required></span>
-				
-				<h4>연락처</h4>
-				<span class="input_area"><input type="tel" maxlength="11" name="phone"
-										placeholder="(-없이)01012345678"></span>
-										
-				<h4>이메일</h4>
-				<span class="input_area"><input type="email" name="email"></span>
-				
-				<h4>우편번호</h4>
-				<span class="input_area"><input type="text" name="address" class="postcodify_postcode5" readonly></span>
-				<button id="postcodify_search_button" type="button">검색</button>
-				<h4>도로명주소</h4>
-				<span class="input_area"><input type="text" name="address" class="postcodify_address" readonly></span>
-				<h4>상세주소</h4>
-				<span class="input_area"><input type="text" name="address" class="postcodify_details"></span>
-				
-				<h4>관심분야</h4>
-				<span class="input_area">
-					<input type="checkbox" id="sports" name="interest" value="운동">
-					<label for="sports">운동</label>
-					<input type="checkbox" id="climbing" name="interest" value="등산">
-					<label for="climbing">등산</label>
-					<input type="checkbox" id="fishing" name="interest" value="낚시">
-					<label for="fishing">낚시</label>
-					<input type="checkbox" id="cooking" name="interest" value="요리">
-					<label for="cooking">요리</label>
-					<input type="checkbox" id="game" name="interest" value="게임">
-					<label for="game">게임</label>
-					<input type="checkbox" id="etc" name="interest" value="기타">
-					<label for="etc">기타</label>
-				</span>
-				
+				<div class="nick_box">
+					<h4>닉네임</h4>
+					<span id="nickResult"></span>
+				</div>
+				<span class="input_area"><input type="text" minlength="2" maxlength="10" name="nickName" required></span><br>
+			
 				<div class="btnArea">
-					<button id="joinBtn">가입하기</button>
+					<button id="joinBtn">회원가입</button>
 				</div>
 			</form>
 		</div>
 	</div>
-	
-	<!-- jQuery와 Postcodify를 로딩한다 -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-	
-	<!-- "검색" 단추를 누르면 팝업 레이어가 열리도록 설정한다 -->
-	<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
-	
+	<footer>
+	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
+	</footer>
 	<script>
+		let emailResult = document.getElementById('emailResult');
+		let pwdResult = document.getElementById('pwdResult');
+		let pwd2Result = document.getElementById('pwd2Result');
+		let nickResult = document.getElementById('nickResult');
+		
+		emailResult.innerHTML = 'emailResult';
+		pwdResult.innerHTML = 'pwdResult';
+		pwd2Result.innerHTML = 'pwd2Result';
+		nickResult.innerHTML = 'nickResult';
+		
+	
 		// 사용자 입력 값 유효성 검사
 		function vaildate(){
 			return true;	

@@ -8,6 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class LoginServlet
@@ -29,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 메뉴바의 로그인을 클릭했을 때 로그인 페이지로 이동
-		RequestDispatcher view= request.getRequestDispatcher("WEB-INF/views/member/login.jsp");
+		RequestDispatcher view= request.getRequestDispatcher("WEB-INF/views/member/loginForm.jsp");
 		view.forward(request, response);
 	}
 
@@ -37,18 +41,16 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*// 전송 값에 한글 값이 있는 경우 인코딩 처리가 필요하지만
+		// 전송 값에 한글 값이 있는 경우 인코딩 처리가 필요하지만
 		// 로그인 시에 전송 받는 값은 한글이 없기 때문에 인코딩 처리 하지 않아도 무방
 		
 		// 1. 요청에 포함된 id, pwd 값
-		String userId = request.getParameter("userId");
+		String userEmail = request.getParameter("userEmail");
 		String userPwd = request.getParameter("userPwd");
-		
-		// System.out.println(userId + " " + userPwd);
 		
 		// 2. 비즈니스 로직 처리하는 서비스 클래스의 해당 메소드를 실행 후 처리 결과를 리턴 받음
 		// id,pwd를 가지고 DB로 가서 일치하는 member가 있을 경우 member 객체를 리턴
-		Member loginUser = new MemberService().loginMember(userId, userPwd);
+		Member loginUser = new MemberService().loginMember(userEmail, userPwd);
 		
 		// System.out.println(loginUser);
 		
@@ -81,15 +83,6 @@ public class LoginServlet extends HttpServlet {
 			// sendRedirect 요청 (서버로 재요청) -> login 요청은 사라짐
 			response.sendRedirect(request.getContextPath());
 			// response.getContextPath() -> jsp
-			
-		}else {
-			// 로그인에 실패하였을 경우 error 페이지로 이동
-			request.setAttribute("msg", "로그인에 실패하였습니다.");
-			// error 페이지로 forward
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/errorpage.jsp");
-			view.forward(request, response);
 		}
-		*/
 	}
-
-	}
+}
