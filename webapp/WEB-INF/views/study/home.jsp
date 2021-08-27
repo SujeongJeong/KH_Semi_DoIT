@@ -8,7 +8,7 @@
 </head>
 <body>
 	<content class="content">
-	스터디
+	스터디 ㅇ
 	</content>
 
 </body>
