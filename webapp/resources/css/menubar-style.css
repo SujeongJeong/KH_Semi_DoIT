@@ -1,0 +1,64 @@
+@charset "UTF-8";
+.wrapper {
+	min-width : 800px;
+}
+
+#header {
+	height : 200px;
+	display : block;
+}
+
+.Logo {
+	width : 300px;
+	height : 80px;
+
+}
+
+#header .btnArea {
+	display : flex;
+	margin-right : 20px;
+	align-items: center;
+}
+
+
+
+.login {
+	background-color : #C8EBFF;
+}
+
+.gray {
+	backgound-color : #E5E5E5;
+}
+
+#nav {
+	height: 50px;
+}
+
+#nav ul{
+	width: 700px;
+	line-height : 50px;
+	margin : 0 auto;
+	display: flex;
+	justify-content: space-around; 
+	list-style: none;
+}
+
+#nav a{
+	font-family: 'Noto Sans KR', sans-serif;
+	text-decoration:none;
+	display : block;
+	margin : 10px;
+	color : #C4C4C4;
+	width : 100px;
+	text-align : center;
+}
+
+#nav a:hover{
+	cursor: pointer;
+	color : #5FC5FF;
+}
+
+#nav a:active{
+	cursor : pointer;
+	color : #5FC5FF;
+}
