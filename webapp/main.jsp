@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Do IT</title>
+<!-- 외부 스타일 시트 -->
+	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 
 </head>
 <body>
@@ -12,8 +14,8 @@
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
 	
 	<content class="content">
-		홈페이지
-	
+		
+		
 		
 	</content>
 

@@ -4,30 +4,42 @@
 }
 
 #header {
-	height : 200px;
+	height : 150px;
 	display : block;
+	margin : 20px 20px 0px 20px;
 }
 
-.Logo {
-	width : 300px;
-	height : 80px;
-
+#header .logo-area{
+	text-align: center;
+	margin-top : 20px;
 }
+
 
 #header .btnArea {
 	display : flex;
-	margin-right : 20px;
+	margin-right :  15px ;
 	align-items: center;
+	text-decoration:none;
 }
 
-
+.btnArea a{
+	text-decoration : none;
+	color : #636363;
+	margin : 5px;
+	border-radius :5px; 
+	text-align : center;
+	padding-top : 3px; 
+	height : 25px;
+}
 
 .login {
 	background-color : #C8EBFF;
+	width : 60px;
 }
 
-.gray {
-	backgound-color : #E5E5E5;
+.join-or-out {
+	background-color : #E5E5E5;
+	width : 80px;
 }
 
 #nav {
@@ -51,6 +63,7 @@
 	color : #C4C4C4;
 	width : 100px;
 	text-align : center;
+	font-size : 15pt;
 }
 
 #nav a:hover{
@@ -61,4 +74,9 @@
 #nav a:active{
 	cursor : pointer;
 	color : #5FC5FF;
+	font-weight : bold;
+}
+
+hr{
+	color: #E5E5E5;
 }

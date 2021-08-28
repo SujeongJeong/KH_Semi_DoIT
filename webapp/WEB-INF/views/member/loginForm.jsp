@@ -44,8 +44,6 @@
 }
 
 .logo {
-	width : 300px;
-	height: 80px;
 	margin-bottom: 20px;
 }
 
