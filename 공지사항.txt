@@ -42,3 +42,7 @@
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>	
+	
+5. 페이지 내 글씨 class 명 지정
+      1) 굵은 글씨 class="title"  
+	ex. study- 오픈스터디, qna- 새 글 쓰기, shop- 프리미엄 이용권, my- 하루 목표 공부시간
