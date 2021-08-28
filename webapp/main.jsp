@@ -14,7 +14,7 @@
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
 	
 	<content class="content">
-		
+		홈페이지
 		
 		
 	</content>
