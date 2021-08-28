@@ -14,7 +14,7 @@
 <!-- 구글웹폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 <%-- 세션에 담긴 msg 있을 경우 alert 처리하는 script 작성 --%>
 	<% if(session.getAttribute("msg") != null){ %>
 		<script>
@@ -56,9 +56,9 @@
 			<li><a href="<%= request.getContextPath() %>/shop/home">Shop</a></li>
 			<li><a href="<%= request.getContextPath() %>/qna/home">Q&A</a></li>
 			<li><a href="<%= request.getContextPath() %>/my/home">마이페이지</a></li>
-			<%-- 관리자 로그인 경우 관리페이지 
-			<li><a href="#">마이페이지</a></li>
-			--%>
+			<%-- 관리자 로그인 경우 관리페이지 --%>
+			<li><a href="<%= request.getContextPath() %>/admin/home">관리페이지</a></li>
+			
 		</ul>
 	</nav>	
 	<hr>

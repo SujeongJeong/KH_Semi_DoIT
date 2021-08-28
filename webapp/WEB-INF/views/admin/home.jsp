@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>관리 - Do IT</title>
+<!-- 외부 스타일 시트 -->
+	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 </head>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
