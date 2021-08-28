@@ -28,25 +28,26 @@
 <body>
 <div class="wrapper">
 	<header id='header'>
-
 		<div class="btnArea">
 			<%-- 로그인이 된 상태와 로그인이 되지 않은 상태를 구분하기 위해 if문으로 조건식 추가 --%>
 <%-- 			<% if(loginUser == null){ %> --%>
 			<!-- 회원가입/로그인 -->
-			<a href="<%= request.getContextPath() %>/login"><button class="login">로그인</button></a>
-			<a href="<%= request.getContextPath() %>/memberJoin"><button class="gray">회원가입</button></a>
+			<a class="login" href="<%= request.getContextPath() %>/login">로그인</a>
+			<a class="join-or-out" href="<%= request.getContextPath() %>/memberJoin">회원가입</a>
 <%-- 			<% } else { %> --%>
 <%-- 					
 			<a href="<%= request.getContextPath() %>/my/home"><img class="user" src="<%= request.getContextPath() %>/resources/images/user.jpg" alt="user"</a>
 			<a href="<%= request.getContextPath() %>/my/home"><img class="user" src="<%= request.getContextPath() %>/resources/images/admin.jpg" alt="admin"</a>
-			<a href="<%= request.getContextPath() %>/logout">로그아웃</a> --%>
+			<a class="join-or-out" href="<%= request.getContextPath() %>/logout">로그아웃</a> --%>
 <%-- 			<% } %> --%>
 		</div>
-	</header>
 		<!-- 로고 이미지를 클릭하면 첫 화면으로 -->
+		<div class="logo-area">
 		<a href='<%= request.getContextPath() %>'>
 			<img class="Logo" src="<%= request.getContextPath() %>/resources/images/logo.png" alt="logo">
 		</a>
+		</div>
+	</header>
 	<nav id="nav">
 		<ul>
 			<li><a href="<%= request.getContextPath() %>">홈</a></li>
@@ -60,6 +61,7 @@
 			--%>
 		</ul>
 	</nav>	
-
+	<hr>
+</div>
 </body>
 </html>

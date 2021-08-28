@@ -6,21 +6,24 @@
 <meta charset="UTF-8">
 <title>footer</title>
 <style>
-	.footerwrapper{
+	.footer-wrapper{
 		background-color : #E5E5E5;
 		margin-top : 20px;
 		text-align : center;
+		padding : 20px;
 	}
 	.name{
 		color : #5B5B5B;
+		font-weight : bold;
 	}
 	.detail{
 		color : white;
 	}
+
 </style>
 </head>
 <body>
-	<div class="footerwrapper">
+	<div class="footer-wrapper">
 		<div class="name">(주)두잇</div>
 		<div class="detail">
 			<div>주소 : 서울 강남구 테헤란로14길 6 남도빌딩</div>
