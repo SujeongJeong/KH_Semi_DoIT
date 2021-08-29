@@ -13,7 +13,7 @@
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
 	
 	<content class="content">
-		관리홈페이지
+
 	
 		
 	</content>

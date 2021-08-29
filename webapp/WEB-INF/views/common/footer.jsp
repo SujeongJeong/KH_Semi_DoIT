@@ -8,9 +8,8 @@
 <style>
 	.footer-wrapper{
 		background-color : #E5E5E5;
-		margin-top : 20px;
 		text-align : center;
-		padding : 20px;
+		padding: 20px;
 	}
 	.name{
 		color : #5B5B5B;

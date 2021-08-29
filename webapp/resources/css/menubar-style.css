@@ -66,6 +66,7 @@
 	font-size : 15pt;
 }
 
+
 #nav a:hover{
 	cursor: pointer;
 	color : #5FC5FF;
@@ -76,6 +77,8 @@
 	color : #5FC5FF;
 	font-weight : bold;
 }
+
+
 
 hr{
 	color: #E5E5E5;
