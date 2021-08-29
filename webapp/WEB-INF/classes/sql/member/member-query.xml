@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM
+"http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="loginMember">
+		SELECT 
+				  USER_NO
+				, USER_EMAIL
+				, USER_PWD
+				, NICKNAME
+				, STATUS
+			FROM MEMBER
+		  WHERE USER_EMAIL = ?
+		  	AND USER_PWD = ?
+		  	AND STATUS = 'Y'
+	</entry>
+	<entry key="insertMember">
+		INSERT
+		INTO MEMBER
+		(
+			  USER_NO
+			, USER_ID
+			, USER_PWD
+			, USER_NAME
+			, STATUS
+		)
+		VALUES
+		(
+			  SEQ_UNO.NEXTVAL
+			, ?
+			, ?
+			, ?
+			, DEFAULT
+		)
+	</entry>
+	<entry key="updateMember">
+		UPDATE
+			MEMBER
+		   SET
+		  	  USER_NAME = ?
+		  	, PHONE = ?
+		  	, EMAIL = ?
+		  	, ADDRESS = ?
+		  	, INTEREST = ?
+		  	, MODIFY_DATE = SYSDATE
+		  WHERE 
+		  	USER_NO = ?
+	</entry>
+	
+	<entry key="selectMember">
+		SELECT 
+				  USER_NO
+				, USER_ID
+				, USER_PWD
+				, USER_NAME
+				, PHONE
+				, EMAIL
+				, ADDRESS
+				, INTEREST
+				, ENROLL_DATE
+				, MODIFY_DATE
+				, STATUS
+			FROM MEMBER
+		  WHERE USER_NO = ?
+	</entry>
+	<entry key="updatePwd">
+		UPDATE
+			MEMBER
+		  SET
+			USER_PWD = ?
+		WHERE
+			  USER_NO = ?
+		  AND USER_PWD = ?
+	</entry>
+	<entry key="deleteMember">
+		UPDATE
+			MEMBER
+		  SET
+			STATUS = 'N'
+		WHERE
+			  USER_NO = ?
+	</entry>
+</properties>
