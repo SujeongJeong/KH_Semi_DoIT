@@ -45,7 +45,7 @@
 	float:left;
 	margin-right:50px;
 	margin-:50px;
-	margin-top:250px;
+	margin-top:250px; 
 }
 #set5 {
 	margin-left:200px;
