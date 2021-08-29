@@ -15,8 +15,7 @@
 	
 	<content class="content">
 		홈페이지
-		
-		<img src="resources/images/edit-hover/png">
+
 	</content>
 
 	<footer>

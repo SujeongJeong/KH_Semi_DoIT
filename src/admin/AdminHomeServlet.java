@@ -1,4 +1,4 @@
-package ToPages;
+package admin;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ToAdminServlet
+ * Servlet implementation class AdminHomeServlet
  */
 @WebServlet("/admin/home")
-public class ToAdminServlet extends HttpServlet {
+public class AdminHomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ToAdminServlet() {
+    public AdminHomeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

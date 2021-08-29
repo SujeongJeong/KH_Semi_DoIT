@@ -1,4 +1,4 @@
-package ToPages;
+package qna;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ToShopServlet
+ * Servlet implementation class QnaHomeServlet
  */
-@WebServlet("/shop/home")
-public class ToShopServlet extends HttpServlet {
+@WebServlet("/qna/home")
+public class QnaHomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ToShopServlet() {
+    public QnaHomeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +29,7 @@ public class ToShopServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 메뉴바 클릭했을 때 페이지로 이동
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/shop/home.jsp");
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/qna/home.jsp");
 		view.forward(request, response);
 	}
 
