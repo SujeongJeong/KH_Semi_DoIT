@@ -1,0 +1,48 @@
+1. 이름 짓기
+     1) <title> 페이지이름 - Do IT </title>
+            ex : 회원가입 - Do IT
+     2) 홈페이지 : /main
+     3) 로그인페이지 : /login
+     4) 회원가입페이지 : /memberJoin
+     5) 랭킹페이지 : /ranking
+     6) 스터디페이지 : /study/home
+     7) 구매페이지 : /shop/home
+     8) Q&A페이지 : /qna/home
+     9) 마이페이지(내정보) : /my/home
+          - 내스터디 : /my/study
+          - 내 Q&A : /my/qna
+          - 결제내역 : /my/coin
+     10) 관리페이지(회원관리) : /admin/home
+          - 스터디관리 : /admin/study
+          - 환불내역 : /admin/refundment
+          - 신고내역 : /admin/report
+
+2. 색상
+      - 포인트 : #5FC5FF
+      - 연한회색 : #E5E5E5
+      - 진한회색 : #C4C4C4
+
+3. 경로
+      1) icon, 스터디방 기본 배경
+           ->  webapp/resources/images
+      2) 페이지 저장 경로
+          -> webapp/WEB-INF/views/..
+      2) DoIT 접속 경로
+          ->http://localhost:8800/Do_IT/
+
+4. 페이지 안 구성요소
+      * 헤더,푸터가 있는 모든 페이지는 <body><header><content></content><footer></body>로 구성
+      1) 공동 css 추가:
+           <!-- 외부 스타일 시트 -->
+	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
+      2) header 추가 (body 첫째 줄): 
+ 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
+      3) 내용 테그는 <content></content>  => 전체 css에 margin적용되어있음
+      4) footer 추가 (body 마지막 줄) :
+	<footer>
+	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
+	</footer>	
+	
+5. 페이지 내 글씨 class 명 지정
+      1) 굵은 글씨 class="title"  
+	ex. study- 오픈스터디, qna- 새 글 쓰기, shop- 프리미엄 이용권, my- 하루 목표 공부시간
