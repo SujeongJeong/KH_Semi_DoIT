@@ -11,6 +11,8 @@
 		margin-top : 20px;
 		text-align : center;
 		padding : 20px;
+     	position: absolute;
+    	width: 100%;
 	}
 	.name{
 		color : #5B5B5B;
