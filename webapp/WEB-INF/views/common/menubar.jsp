@@ -49,7 +49,7 @@
 		</div>
 	</header>
 	<nav id="nav">
-		<ul>
+		<ul >
 			<li><a href="<%= request.getContextPath() %>">홈</a></li>
 			<li><a href="<%= request.getContextPath() %>/ranking">랭킹</a></li>
 			<li><a href="<%= request.getContextPath() %>/study/home">스터디</a></li>
