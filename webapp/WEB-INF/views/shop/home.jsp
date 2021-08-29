@@ -105,7 +105,7 @@
          <div class="premium_product" id="set3">
             <img class="premium" src="/Do_IT/resources/images/shop-premium.png">
             <div class="product_name">프리미엄 90일 이용권</div>
-            <div class="product_price"><s>135 point</s>      120 point</div>
+            <div class="product_price"><s>135 point</s>    120 point</div>
          </div>
       </div>
       
