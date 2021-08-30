@@ -8,7 +8,6 @@
 <style>
 	.footer-wrapper{
 		background-color : #E5E5E5;
-		margin-top : 20px;
 		text-align : center;
 		padding : 20px;
      	position: absolute;

@@ -49,8 +49,8 @@
 		</div>
 	</header>
 	<nav id="nav">
-		<ul>
-			<li><a href="<%= request.getContextPath() %>">홈</a></li>
+		<ul >
+			<li><a href="<%= request.getContextPath() %>" class="current">홈</a></li>
 			<li><a href="<%= request.getContextPath() %>/ranking">랭킹</a></li>
 			<li><a href="<%= request.getContextPath() %>/study/home">스터디</a></li>
 			<li><a href="<%= request.getContextPath() %>/shop/home">Shop</a></li>
