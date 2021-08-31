@@ -63,7 +63,8 @@
 
 			
 		</nav>	
-		<hr>
+		<hr/>
+		
 	</div>
 	<script>
 	
