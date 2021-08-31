@@ -1,0 +1,161 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.post{
+	margin : 50px 350px 0px;
+    border: 1px solid rgb(208, 215, 222);
+    border-right: none;
+    border-left: none;;
+}
+
+
+.btn .modify-btn,
+	 .del-btn,
+	 .report-btn{
+    width: 70px;
+    height: 30px;
+    border: none;
+    margin-left: 12px;   
+}
+
+.btn .report-btn{
+    background: rgb(204, 0, 0);
+    color: #fff;
+    border: none;
+}
+
+.nickname {
+    font-size: 15px;
+}
+
+/* 타이틀 */
+.post-info{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 15px;
+    border-bottom: 1px solid rgb(208, 215, 222);
+}
+
+.post-view{
+    line-height: 35px;
+}
+
+/* 게시물 제목 */
+.post-title p{
+    text-align: center;
+    font-size: 22px;
+    font-weight :bolder;
+    padding: 20px 0;
+    background-color: #f9f9f9;
+}
+
+/* 게시물 내용 */
+.post-text{
+    padding: 20px 30px;
+    line-height: 45px;
+    border-top: 1px solid rgb(208, 215, 222);
+    border-bottom: 1px solid rgb(208, 215, 222);
+}
+
+.thump{
+	background-color : #fff;
+	margin: 5px 25px 0 0;
+	width:30px;
+	height:30px;
+	border : none;
+}
+
+.thump img{
+	width:30px;
+	height:30px;
+	/* -webkit-filter: opacity(.5) drop-shadow(0 0 0 gray);
+	filter: opacity(.5) drop-shadow(0 0 0 gray); */
+}
+
+.writer-info{
+	height: 50px;
+}
+
+.user-img{
+	width:50px;
+	height: 100%;
+	margin-right : 10px;
+}
+
+
+.post-btn{
+    border-bottom: 1px solid rgb(208, 215, 222);
+    padding: 10px 10px;
+}
+
+.post-view{
+	line-height: 50px;
+}
+
+.nick-date{
+	    display: inline-block;
+    	vertical-align: top;
+}
+
+
+/* 댓글 등록*/
+.comment-header{
+	height: 40px;
+	font-weight :bolder;
+	line-height: 40px;
+	border-bottom :1px solid rgb(208, 215, 222);
+	background-color: #f9f9f9;
+	padding-left: 20px;
+}
+
+
+.new-comment{
+    display: flex;
+    padding : 15px 10px;
+    border-bottom: 1px solid rgb(208, 215, 222);
+}
+
+.new-comment p{
+    border : 1px solid rgb(208, 215, 222);
+    width: 60%;
+    height: 50px;
+    padding-left: 10px;
+    line-height: 50px;
+    
+}
+
+.new-comment button {
+    width: 70px;
+    height: 52px;
+    margin-left: 5px;
+    border: none;
+    
+}
+
+/* 댓글 */
+
+.comment-wrapper{
+    padding: 35px 10px;
+    border-bottom: 1px solid rgb(208, 215, 222);
+}
+
+.comment-wrapper .comment{
+    border: 1px solid rgb(208, 215, 222);
+    padding: 20px 10px;
+    line-height: 25px;
+}
+
+.comment-btn{
+    margin: 10px 0px;
+}
+
+.my-comment{
+    border: 2px solid rgb(0, 89, 171);
+}
+.report-comment{
+    background-color: rgb(208, 215, 222);
+    font-weight: bolder;
+}
