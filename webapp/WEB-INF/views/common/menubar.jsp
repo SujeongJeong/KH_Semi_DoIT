@@ -26,42 +26,45 @@
 
 </head>
 <body>
-<div class="wrapper">
-	<header id='header'>
-		<div class="btnArea">
-			<%-- 로그인이 된 상태와 로그인이 되지 않은 상태를 구분하기 위해 if문으로 조건식 추가 --%>
-<%-- 			<% if(loginUser == null){ %> --%>
-			<!-- 회원가입/로그인 -->
-			<a class="login" href="<%= request.getContextPath() %>/login">로그인</a>
-			<a class="join-or-out" href="<%= request.getContextPath() %>/memberJoin">회원가입</a>
-<%-- 			<% } else { %> --%>
-<%-- 					
-			<a href="<%= request.getContextPath() %>/my/home"><img class="user" src="<%= request.getContextPath() %>/resources/images/user.jpg" alt="user"</a>
-			<a href="<%= request.getContextPath() %>/my/home"><img class="user" src="<%= request.getContextPath() %>/resources/images/admin.jpg" alt="admin"</a>
-			<a class="join-or-out" href="<%= request.getContextPath() %>/logout">로그아웃</a> --%>
-<%-- 			<% } %> --%>
-		</div>
-		<!-- 로고 이미지를 클릭하면 첫 화면으로 -->
-		<div class="logo-area">
-		<a href='<%= request.getContextPath() %>'>
-			<img class="Logo" src="<%= request.getContextPath() %>/resources/images/logo.png" alt="logo">
-		</a>
-		</div>
-	</header>
-	<nav id="nav">
-		<ul >
-			<li><a href="<%= request.getContextPath() %>" class="current">홈</a></li>
-			<li><a href="<%= request.getContextPath() %>/ranking">랭킹</a></li>
-			<li><a href="<%= request.getContextPath() %>/study/home">스터디</a></li>
-			<li><a href="<%= request.getContextPath() %>/shop/home">Shop</a></li>
-			<li><a href="<%= request.getContextPath() %>/qna/home">Q&A</a></li>
-			<li><a href="<%= request.getContextPath() %>/my/home">마이페이지</a></li>
-			<%-- 관리자 로그인 경우 관리페이지 --%>
-			<li><a href="<%= request.getContextPath() %>/admin/home">관리페이지</a></li>
+	<div class="wrapper">
+		<header id='header'>
+			<div class="btnArea">
+				<%-- 로그인이 된 상태와 로그인이 되지 않은 상태를 구분하기 위해 if문으로 조건식 추가 --%>
+	<%-- 			<% if(loginUser == null){ %> --%>
+				<!-- 회원가입/로그인 -->
+				<a class="login" href="<%= request.getContextPath() %>/login">로그인</a>
+				<a class="join-or-out" href="<%= request.getContextPath() %>/memberJoin">회원가입</a>
+	<%-- 			<% } else { %> --%>
+	<%-- 					
+				<a href="<%= request.getContextPath() %>/my/home"><img class="user" src="<%= request.getContextPath() %>/resources/images/user.jpg" alt="user"</a>
+				<a href="<%= request.getContextPath() %>/my/home"><img class="user" src="<%= request.getContextPath() %>/resources/images/admin.jpg" alt="admin"</a>
+				<a class="join-or-out" href="<%= request.getContextPath() %>/logout">로그아웃</a> --%>
+	<%-- 			<% } %> --%>
+			</div>
+			<!-- 로고 이미지를 클릭하면 첫 화면으로 -->
+			<div class="logo-area">
+			<a href='<%= request.getContextPath() %>'>
+				<img class="Logo" src="<%= request.getContextPath() %>/resources/images/logo.png" alt="logo">
+			</a>
+			</div>
+		</header>
+		<nav id="nav">
+			<ul class="navList">
+				<li><a href="<%= request.getContextPath() %>" class="current">홈</a></li>
+				<li><a href="<%= request.getContextPath() %>/ranking">랭킹</a></li>
+				<li><a href="<%= request.getContextPath() %>/study/home">스터디</a></li>
+				<li><a href="<%= request.getContextPath() %>/shop/home">Shop</a></li>
+				<li><a href="<%= request.getContextPath() %>/qna/home">Q&A</a></li>
+				<li><a href="<%= request.getContextPath() %>/my/home">마이페이지</a></li>
+				<%-- 관리자 로그인 경우 관리페이지 --%>
+				<li><a href="<%= request.getContextPath() %>/admin/home">관리페이지</a></li>	
+			</ul>
 			
-		</ul>
-	</nav>	
-	<hr>
-</div>
+		</nav>	
+		<hr>
+	</div>
+	<script>
+	
+	</script>
 </body>
 </html>
