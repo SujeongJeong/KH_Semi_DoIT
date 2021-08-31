@@ -33,14 +33,15 @@
 	border: 0px;
 }
 
-.input_area:last-child {
-	background:#C8EBFF;
-	border: 0px;
-}
-
 .input_area input[type=submit] {
 	color:white;
 	background:#C8EBFF;
+}
+
+.login_btn {
+	background:#C8EBFF; 
+	border: 0px;
+	margin-bottom: 10px;
 }
 
 .logo {
@@ -83,16 +84,44 @@
 	float: right;
 }
 
-#findEmailBtn:hover {
+button[id$=Btn]:hover {
 	text-decoration: underline;
 }
 
-#findPwdBtn:hover {
-	text-decoration: underline;
+button[id^=easy] {
+	display: block; 
 }
 
-#joinBtn:hover {
-	text-decoration: underline;
+.easy_btn {
+	border: solid 1px #dadada;
+	padding: 10px 10px 14px 10px;
+	text-align: center;
+	margin: 10px 0;
+}
+
+.easy_btn:last-child {
+	background: #F7E600;
+}
+
+button[id^=easy] {
+	width: 300px;
+	height: 30px;
+	border: 0px;
+}
+
+#easy_google {
+	background: white;
+	color: red;
+}
+
+#easy_naver {
+	background: #2BD400;
+	color: white;
+}
+
+#easy_kakao {
+	background: #F7E600;
+	color: #3A1D1D;
 }
 
 </style>
@@ -116,7 +145,11 @@
 					<div id="join_box"><button id="joinBtn" onclick="location.href ='<%= request.getContextPath() %>/memberJoin';">회원가입</button ></div>
 				</div>
 				<h5><input type="checkbox" name="remember" id="remember"><label for="remember">이메일 기억하기</label></h5>
-				<span class="input_area"><input type="submit" value="로그인"></span>
+				<span class="input_area login_btn"><input type="submit" value="로그인"></span><br><br>
+				<hr>
+				<div class="easy_btn"><button id="easy_google">google</button></div>
+				<div class="easy_btn" style="background: #2BD400"><button id="easy_naver">naver</button></div>
+				<div class="easy_btn"><button id="easy_kakao">kakao</button></div>
 			</form>
 		</div>
 	</div>

@@ -19,6 +19,7 @@
 	#findPwdForm {
 		width : 300px;
 		margin:auto;
+	
 	}
 	
 	.input_area {
