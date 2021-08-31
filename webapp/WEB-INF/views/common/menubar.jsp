@@ -26,6 +26,7 @@
 
 </head>
 <body>
+
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
 <div class="wrapper">
 	<header id='header'>
@@ -59,10 +60,13 @@
 			<li><a href="<%= request.getContextPath() %>/my/home">마이페이지</a></li>
 			<%-- 관리자 로그인 경우 관리페이지 --%>
 			<li><a href="<%= request.getContextPath() %>/admin/home">관리페이지</a></li>
+
 			
-		</ul>
-	</nav>	
-	<hr>
-</div>
+		</nav>	
+		<hr>
+	</div>
+	<script>
+	
+	</script>
 </body>
 </html>
