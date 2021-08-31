@@ -14,6 +14,7 @@
 		grid-gap :10px;
 		border : 1px black solid;
 		text-align : center;
+		
 	}
 	.study-area{
 		grid-column : 1/2;
@@ -44,7 +45,7 @@
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
 	
-	<div class="content">
+	<div class="allcontent">
 		<div class="study-area">
 			<label class="title">내 스터디</label><img src="resources/images/left-arrow-nolist.png" alt="넘김"><img src="resources/images/right-arrow-nolist.png" alt="넘김">
 			<div class="study-list">

@@ -26,6 +26,7 @@
 
 </head>
 <body>
+<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
 <div class="wrapper">
 	<header id='header'>
 		<div class="btnArea">
