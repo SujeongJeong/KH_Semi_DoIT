@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Do IT</title>
 <!-- 외부 스타일 시트 -->
-	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
+<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
 	.content{
 		display : grid;
