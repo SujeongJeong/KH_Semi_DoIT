@@ -5,14 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>이메일 찾기</title>
+<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
-	.outer{
+	.content{
 		width:90%;
 		min-width : 450px;
 		margin:auto;
 	}
 	
-	.outer h1 {
+	.content h1 {
 		text-align:center;
 	}
 	
@@ -63,7 +64,7 @@
 </style>
 </head>
 <body>
-	<div class="outer">
+	<div class="content">
 	<h1>이메일 찾기</h1>
 	
 	<form id="findEmailForm" action="<%= request.getContextPath() %>/findEmail"

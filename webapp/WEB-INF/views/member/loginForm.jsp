@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 - Do IT</title>
+<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
-.outer {
+.content {
 	width: 40%;
 	min-width: 400px;
 	height: 600px;
@@ -128,7 +129,7 @@ button[id^=easy] {
 </head>
 <body>
 	<div class="wrapper">
-		<div class="outer">
+		<div class="content">
 			<form class="loginArea" action="<%= request.getContextPath() %>/login" method="post" onsubmit="return validate();">
 				<a href="/Do_IT"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo"></a><br>
 				<div class="email_box">

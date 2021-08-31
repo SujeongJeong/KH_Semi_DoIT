@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
-	.outer{
+	.content{
 		width:40%;
 		min-width : 400px;
 		margin:auto;
@@ -81,11 +82,16 @@
 		display: inline;
 		margin: 0;
 	}
+	
+	div[class^=terms] {
+		margin: 10px 0;
+		text-align: left;
+	}
 
 </style>
 </head>
 <body>
-	<div class="outer">
+	<div class="content">
 		<div id="joinInfoArea">
 			<form id="joinForm" action="<%= request.getContextPath() %>/memberJoin"
 			method="post" onsubmit="return validate();">
@@ -113,7 +119,11 @@
 					<span id="nickResult"></span>
 				</div>
 				<span class="input_area"><input type="text" minlength="2" maxlength="10" name="nickName" required></span><br>
-			
+				
+				<div class="terms_all"><input type="checkbox" id="termsAll" name="terms"><label for="termsAll">모두 동의</label></div>
+				<div class="terms_tos"><input type="checkbox" name="terms"><a href="#" onclick="openPopup('<%= request.getContextPath() %>/tos', '서비스이용약관', 500, 500); return false">서비스 이용 약관 동의(필수)</a></div>
+				<div class="terms_pp"><input type="checkbox" name="terms"><a href="#" onclick="openPopup('<%= request.getContextPath() %>/pp', '개인정보정책', 500, 500); return false">개인 정보 정책 동의(필수)</a></div>
+				
 				<span class="input_area joinBtnArea"><button id="joinBtn">회원가입</button></span>
 			</form>
 		</div>
@@ -136,6 +146,17 @@
 		// 사용자 입력 값 유효성 검사
 		function vaildate(){
 			return true;	
+		}
+		
+		function openPopup(url, title, width, height) {
+			let left = (document.body.clientWidth/2) - (width/2);
+			// 듀얼모니터를 위한 계산
+			left += window.screenLeft;
+			let top = (screen.availHeight/2) - (height/2);
+			
+			let options = "width="+width+",height="+height+",left="+left+",top="+top;
+			
+			window.open(url, title, options);
 		}
 	</script>
 
