@@ -24,23 +24,26 @@
 </head>
 <body>
 <!-- 모든 페이지에 include할 menubar.jsp 생성 -->
-	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
+<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
 	
-	<content class="content">
+ <div class="content">
 	<!-- 제목조건, 폼 입력 조건 나중에 설정하기 -->
 	<form class="productAddForm">
-		<input type="text" name="product_name" value=" " size="35" placeholder="상품명을 입력하세요."> 
-		<br> <br> 
-		<input type="text" name="product_price" value="" size="20" placeholder="Coin가격을 입력하세요."> Coin 
-		<br> <br> 
-		<input type="text" name="product_detail" value=" " size="35" placeholder="상품설명을 입력하세요.">
+		<img class="product_img"></img>
+           <input type="text" name="product_name" value="" size="35" placeholder="상품명을 입력하세요.">
+           <br>
+           <br>
+           <input type="text" name="product_price" value="" size="15" placeholder="Coin수를 입력하세요."> Coin
+           <br>
+           <br>
+           <input type="text" name="product_detail" value="" size="35" placeholder="상품설명을 입력하세요." height="150px">        
 	</form>
 
 
  
 
 
-	</content>
+	</div>
 	
 <footer>
 <%@ include file='/WEB-INF/views/common/footer.jsp' %>
