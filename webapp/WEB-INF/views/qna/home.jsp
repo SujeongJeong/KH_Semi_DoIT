@@ -14,6 +14,7 @@
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
 	
 	<content class="content">
+
 		<div id="board_list_wrap">
          <div class="board-header">
             <div class="del_btn">
@@ -243,6 +244,7 @@
                 <a href="#" class="bt">>></a>
             </div>
         </div>
+
 	</content>
 
 	<footer>

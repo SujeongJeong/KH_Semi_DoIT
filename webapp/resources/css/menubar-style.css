@@ -55,6 +55,15 @@
 	list-style: none;
 }
 
+#nav ul:after{
+	content :"";
+	display : block;
+	clear :both;
+}
+
+#nav li{
+	float : left;
+}
 #nav a{
 	font-family: 'Noto Sans KR', sans-serif;
 	text-decoration:none;
@@ -66,16 +75,16 @@
 	font-size : 15pt;
 }
 
-#nav a:hover{
-	cursor: pointer;
+#nav a:hover:not(.current){
 	color : #5FC5FF;
 }
 
-#nav a:active{
-	cursor : pointer;
+#nav .current{
 	color : #5FC5FF;
 	font-weight : bold;
 }
+
+
 
 hr{
 	color: #E5E5E5;

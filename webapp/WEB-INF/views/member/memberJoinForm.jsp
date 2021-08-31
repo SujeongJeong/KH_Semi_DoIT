@@ -46,13 +46,20 @@
 		text-align:center;
 	}
 	
-	button {
+	.joinBtnArea  {
 		width : 300px;
-		height : 35px;
+		height : 30px;
+		border : 0px;
+		background:#C8EBFF;
+	}
+	
+	#joinBtn {
+		width : 300px;
+		height : 30px;
 		border : 0px;
 		color:white;
 		background:#C8EBFF;
-		margin-top : 50px;
+		margin-top : 20px;
 	}
 	
 	.logo {
@@ -107,9 +114,7 @@
 				</div>
 				<span class="input_area"><input type="text" minlength="2" maxlength="10" name="nickName" required></span><br>
 			
-				<div class="btnArea">
-					<button id="joinBtn">회원가입</button>
-				</div>
+				<span class="input_area joinBtnArea"><button id="joinBtn">회원가입</button></span>
 			</form>
 		</div>
 	</div>
