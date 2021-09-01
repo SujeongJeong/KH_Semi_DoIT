@@ -19,6 +19,65 @@
 	align-items: center;
 }
 
+.productArea {
+	width: 800px;
+	margin: auto;
+}
+
+.productAddForm {
+	width: 780px;
+	margin: 100px auto;
+}
+.product_content {
+	padding: 0px 20px;
+	margin-bottom: 30px;
+}
+
+.product_content .inputarea {
+	margin-bottom: 30px;
+}
+
+.inputarea input {
+	width: 400px;
+	height: 30px;
+}
+
+.inputarea coin_count{
+	width: 150px;
+	height: 30px;
+}
+
+
+
+.textarea{
+	margin-bottom: 30px;
+}
+
+
+
+.btn_area {
+	text-align: center;
+	border-top: 1px solid #282A35;
+	padding: 30px;
+}
+
+.btn_area .enrollbtn {
+	width: 100px;
+	height: 35px;
+	border: 0px;
+	color: white;
+	background: #5FC5FF;
+	margin: 5px;
+}
+.btn_area .canclebtn {
+	width: 100px;
+	height: 35px;
+	border: 0px;
+	color: white;
+	background: #E5E5E5;
+	margin: 5px;
+}
+
 
 </style>
 </head>
@@ -27,23 +86,39 @@
 <%@ include file='/WEB-INF/views/common/menubar.jsp' %>
 	
  <div class="content">
+ 	<div class="productArea">
 	<!-- 제목조건, 폼 입력 조건 나중에 설정하기 -->
-	<form class="productAddForm">
-		<img class="product_img"></img>
-           <input type="text" name="product_name" value="" size="35" placeholder="상품명을 입력하세요.">
-           <br>
-           <br>
-           <input type="text" name="product_price" value="" size="15" placeholder="Coin수를 입력하세요."> Coin
-           <br>
-           <br>
-           <input type="text" name="product_detail" value="" size="35" placeholder="상품설명을 입력하세요." height="150px">        
+	<form class="productAddForm" action="" method="post">
+		<div class="product_content">			
+			
+			<!-- 제목, coin수, content 입력 폼 만들기. -->
+			<h6>
+				<span class="inputarea"> 
+					<input type="text" name="title" required placeholder="상품명을 입력하세요.">
+				</span>
+			</h6>
+			<h6>
+				<span class="inputarea"> 
+					<input type="text" name="coin_count" required placeholder="Coin수를 입력하세요."> Coin 
+				</span>
+			</h6>
+			
+			<textarea class="textarea" rows="15" cols="60" name="content" placeholder="상품설명을 입력하세요." required></textarea>
+			<div class="btn_area">
+			<button class=enrollbtn type="submit">등록</button>
+			<button class=canclebtn type="button" onclick="location.href='${ contextPath }/shop/home'">취소</button>
+		</div>
+		
+		
 	</form>
+	</div>
+		
+	</div>
 
 
  
 
 
-	</div>
 	
 <footer>
 <%@ include file='/WEB-INF/views/common/footer.jsp' %>
