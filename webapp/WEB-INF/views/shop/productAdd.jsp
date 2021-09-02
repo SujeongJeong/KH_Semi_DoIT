@@ -103,7 +103,7 @@
 				</span>
 			</h6>
 			
-			<textarea class="textarea" rows="15" cols="60" name="content" placeholder="상품설명을 입력하세요." required></textarea>
+			<textarea class="textarea" rows="15" cols="60"  placeholder="상품설명을 입력하세요." required></textarea>
 			<div class="btn_area">
 			<button class=enrollbtn type="submit">등록</button>
 			<button class=canclebtn type="button" onclick="location.href='${ contextPath }/shop/home'">취소</button>
