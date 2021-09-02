@@ -63,7 +63,7 @@
 			<div class="study area">
 				<label class="title">내 스터디</label><img src="resources/images/left-arrow-nolist.png" alt="넘김"><img src="resources/images/right-arrow-nolist.png" alt="넘김">
 				<div class="study-list">
-				<label class="nolist text">스터디를 만들거나 추가해보세요.</label>
+				<label class="nolist text">신님 풀되시나요?</label>
 				</div>
 			</div>
 			<div class="goal area">
