@@ -31,7 +31,7 @@ public class MemberJoinServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view= request.getRequestDispatcher("WEB-INF/views/member/memberJoinForm.jsp");
+		RequestDispatcher view= request.getRequestDispatcher("WEB-INF/views/member/form/memberJoinForm.jsp");
 		view.forward(request, response);
 	}
 
