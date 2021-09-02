@@ -28,7 +28,7 @@ public class privacyPolicyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view= request.getRequestDispatcher("WEB-INF/views/member/privacyPolicyForm.jsp");
+		RequestDispatcher view= request.getRequestDispatcher("WEB-INF/views/member/view/privacyPolicyView.jsp");
 		view.forward(request, response);
 	}
 
