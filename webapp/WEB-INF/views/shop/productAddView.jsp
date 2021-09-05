@@ -9,6 +9,7 @@
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
 
+
 .productAddForm {
 	width: 40%;
 	min-width: 400px;
@@ -33,6 +34,15 @@
 	margin-bottom: 30px;
 }
 
+.image_area {
+	text-align: center;
+}
+
+.image_area img {
+	padding: 20px;
+	width: 100%;
+}
+
 .product_content .inputarea {
 	margin-bottom: 30px;
 }
@@ -48,12 +58,9 @@
 }
 
 
-
 .textarea{
 	margin-bottom: 30px;
 }
-
-
 
 .btn_area {
 	text-align: center;
@@ -78,6 +85,13 @@
 	margin: 5px;
 }
 
+.temporary_img {
+	width: 450px;
+	height: 150px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
 
 </style>
 </head>
@@ -89,9 +103,13 @@
  	<div class="productArea">
 	<!-- 제목조건, 폼 입력 조건 나중에 설정하기 -->
 	<form class="productAddForm" action="" method="post">
-		<div class="product_content">			
+		<div class="product_content">		
+		<!-- 사진, 제목, coin수, content 입력 폼 만듬-->	
+			<!-- <div class="image_area" src="/Do_IT//resources/images/study-background3"></div> -->
+			<img class="temporary_img" src="/Do_IT/resources/images/study-background6.jpg">
+			<br>
+			<input type="file" name="thumbnail" accept="image/gif,image/jpeg,image/png" required>
 			
-			<!-- 제목, coin수, content 입력 폼 만들기. -->
 			<h6>
 				<span class="inputarea"> 
 					<input type="text" name="title" required placeholder="상품명을 입력하세요.">
@@ -102,12 +120,11 @@
 					<input type="text" name="coin_count" required placeholder="Coin수를 입력하세요."> Coin 
 				</span>
 			</h6>
-			
 			<textarea class="textarea" rows="15" cols="60" name="content" placeholder="상품설명을 입력하세요." required></textarea>
 			<div class="btn_area">
 			<button class=enrollbtn type="submit">등록</button>
 			<button class=canclebtn type="button" onclick="location.href='${ contextPath }/shop/home'">취소</button>
-		</div>
+		    </div>
 		
 		
 	</form>
