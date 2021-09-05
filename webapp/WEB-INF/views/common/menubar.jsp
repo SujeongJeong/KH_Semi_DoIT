@@ -51,7 +51,7 @@
 		</div>
 	</header>
 	<nav id="nav">
-		<ul >
+		<ul class="navList">
 			<li><a href="<%= request.getContextPath() %>" class="current">홈</a></li>
 			<li><a href="<%= request.getContextPath() %>/ranking">랭킹</a></li>
 			<li><a href="<%= request.getContextPath() %>/study/home">스터디</a></li>
@@ -60,14 +60,18 @@
 			<li><a href="<%= request.getContextPath() %>/my/home">마이페이지</a></li>
 			<%-- 관리자 로그인 경우 관리페이지 --%>
 			<li><a href="<%= request.getContextPath() %>/admin/home">관리페이지</a></li>
-
-			
+		</ul>
 		</nav>	
 		<hr/>
 		
 	</div>
 	<script>
-	
+		const navList = document.querySelector(".navList");
+		navList.addEventListener("click", function(){
+			console.log(event.target);
+		 this.classList.remove("current");
+		 event.target.classList.add("current");
+		});
 	</script>
 </body>
 </html>
