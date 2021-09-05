@@ -10,16 +10,24 @@
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
 .content {
-	margin : 50px 150px 0px 150px;
-	height : auto;
-	min-height : 100%;
-	width: 100%;
-	max-width : 100%;
+	width: 40%;
+	min-width: 400px;
+	height: 600px;
+	margin: 70px auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-#product_list_wrap {
-	margin : 50px 150px 0px 150px;
-	display: center;
+.product_area{
+	width: 780px;
+	margin: 100px auto;
+	margin-top : 300px;
+	margin-left : -100px;
+}
+
+.coincharge{
+	float: left;
 }
 
 .product_premium {
@@ -72,6 +80,7 @@
 	margin-top:250px;
 }
 
+
 .product_name{
 	width:200px;
 	text-align:center;
@@ -92,13 +101,15 @@
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
-	
+  <div class="wrapper">
 	<div class="content">
 	<!-- 스크롤바 오른쪽에 하나 만드는거 잊지말기. -->
-	<!--<div class="allProduct" style="overflow-y:scroll; height:100%; padding:4px; border:1 solid #000000;">-->
+	<!--<div class="allProduct" style="overflow-y:scroll; height:100%; padding:4px; border:1 solid #000000;">-->	
 	
-	<div class="product_list_wrap">
+	<div class="product_area">
+	<button class="coin_charge" onclick="location.href ='<%= request.getContextPath() %>/shop/coin';">코인충전</button>
 	<h3>| 프리미엄 이용권  <button class="product_addBtn" onclick="location.href ='<%= request.getContextPath() %>/shop/productAdd';"> + </button>
+	
      <button class="product_deleteBtn"> - </button> </h3>
 	
 	  <div class="product_premium">
@@ -160,7 +171,7 @@
       </div>
    </div>
    </div>
-   
+ </div> 
 
 
 
