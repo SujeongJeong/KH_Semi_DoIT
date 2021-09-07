@@ -8,50 +8,51 @@
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
-	.content{
-		margin : auto;		
-	}
 	.outer{
 		width : 1000px;
 		display : grid;
 		margin : 20px auto;	
-		grid-template-rows : 450px 450px;
-		grid-template-columns: 450px 450px;
-		column-gap : 40px;
+		grid-template-rows : 400px 400px;
+		grid-template-columns: 500px 500px;
+		gap : 40px;
 	}
-	
-	.outer:nth-child(1){
-		grid-area : 1/1/2/2;
-	}
-	.outer:nth-child(2){
-		grid-area : 1/2/2/3;
-	}
-	.outer:nth-child(3){
-		grid-area : 2/1/3/2;
-	}
-	.outer:nth-child(4){
-		grid-area : 2/2/3/3;
-	}
-	
-	ul{
-		list-style: none;
-	}
-	
+	.outer:nth-child(1){ 	grid-area : 1/1/2/2;	}
+	.outer:nth-child(2){	grid-area : 1/2/2/3;    }
+	.outer:nth-child(3){	grid-area : 2/1/3/2;	}
+	.outer:nth-child(4){	grid-area : 2/2/3/3;	}
+	ul{	list-style: none; }
 	.title{
 		font-weight : bold;
 		font-size : 20px;
 	}
-	
 	.study-list, .todo-list {
 		margin-top : 10px;
-		width : 400px;
-		height : 350px;
+		width : 480px;
+		height : 300px;
 		border-radius : 5px;
 		border : 1px #C4C4C4 solid;
 		text-align : center;
 		vertical-align: middle;
+		position : relative;
 	}
-
+	.nolist{ 
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width : 250px;
+	}
+	.semiTitle{ 	font-size : 15px;	}
+	.goalUl{ 	padding : 50px;	}
+	.todayhours, .goalhours {	 font-size : 20px;	 }
+	.icon {	float :right; padding-right : 30px;	}
+	.yesterday { 	padding-right : 30px; padding-left : 10px;	}
+	.date {	 font-size : 15px;	}
+	.rankikgUl { 	margin-top : 50px; padding : 0px;	}
+	li {	 padding-bottom : 15px;  height : 30px;	 }
+	.nickname{	 font-size : 20px; padding : 10px;	}
+	.hours { 	font-size : 18px; padding : 10px;	}
+	.myranking { 	background-color : #E5E5E5; border-radius : 5px; margin-top : 20px;	}
 </style>
 
 </head>
@@ -60,34 +61,38 @@
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
 	<div class="content">
 		<div class="outer">
-			<div class="study area">
-				<label class="title">내 스터디</label><img src="resources/images/left-arrow-nolist.png" alt="넘김"><img src="resources/images/right-arrow-nolist.png" alt="넘김">
+			<div class="study-area">
+				<span class="title">내 스터디</span>
+				<span class = "icon">
+				<img src="resources/images/left-arrow-nolist.png" alt="넘김"><img src="resources/images/right-arrow-nolist.png" alt="넘김">
+				</span>
 				<div class="study-list">
-				<label class="nolist text">신님 풀되시나요?</label>
+				<label class="nolist text">스터디를 만들거나 추가해보세요.</label>
 				</div>
 			</div>
-			<div class="goal area">
+			<div class="goal-area">
 				<label class="title">오늘의 목표</label>
 				<div class="goal-list">
-					<ul>
-						<li class="text">오늘 공부시간/목표 시간</li>
-						<li><label class="todayhours">0시간 00분</label><label class="goalhours">/ 0시간 00분</label></li>
+					<ul class="goalUl">
+						<li class="semiTitle">오늘 공부시간/목표 시간</li>
+						<li><span class="todayhours point-c">0시간 00분</span><span class="goalhours lightgray-c">/ 0시간 00분</span></li>
 					</ul>
 				</div>
 			</div>
-			<div class="ranking area">
-				<span class="title">누적 공부 시간 랭킹 </span><span class="point-c" class="yesterday">하루 전</span><span class="lightgray-c" class="date">yyyy.MM.dd(E요일) 오전 0시 기준</span>
-				<ul>
-					<li class="first"><img src="resources/images/flag-first.png" alt="1위">user01 22:59:59</li>
-					<li class="second"><img src="resources/images/flag-second.png" alt="2위">user02 18:33:33</li>
-					<li class="third"><img src="resources/images/flag-third.png" alt="3위">user03 10:00:00</li>
-					<li class="myranking"><img src="resources/images/flag.png" alt="내랭킹">nickname 5:03:00</li>
+			<div class="ranking-area">
+				<span class="title">누적 공부 시간 랭킹 </span><span class="point-c yesterday">하루 전</span>
+				<span class="lightgray-c date">yyyy.MM.dd(E요일) 오전 0시 기준</span>
+				<ul class="rankikgUl">
+				<li class="first"><img src="resources/images/flag-first.png" alt="1위"><span class="nickname">1위 user01</span><span class="hours">22:59:59</span></li>
+				<li class="second"><img src="resources/images/flag-second.png" alt="2위"><span class="nickname">2위 user02</span><span class="hours">18:33:33</span></li>
+				<li class="third"><img src="resources/images/flag-third.png" alt="3위"><span class="nickname">3위 user03</span><span class="hours">10:00:00</span></li>
+				<li class="myranking"><img src="resources/images/flag.png" alt="내랭킹"><span class="nickname">?위 nickname</span><span class="hours">5:03:00</span></li>
 				</ul>
 			</div>
-			<div class="todo area">
+			<div class="todo-area">
 				<label class="title">오늘의 할일</label><img src="resources/images/plus.png" alt="추가">
 				<div class="todo-list">
-					<label class="text">오늘의 할일을 추가하세요.</label>
+					<label class="nolist text">오늘의 할일을 추가하세요.</label>
 				</div>
 			</div>
 		</div>

@@ -17,7 +17,7 @@
 
 #header .btnArea {
 	display : flex;
-	margin-right : 15px ;
+	float : right;
 	align-items: center;
 	text-decoration:none;
 }
