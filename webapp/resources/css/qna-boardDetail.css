@@ -1,14 +1,9 @@
 @charset "UTF-8";
-* {
-    margin: 0;
-    padding: 0;
-}
-
 .post{
 	margin : 50px 350px 0px;
     border: 1px solid rgb(208, 215, 222);
     border-right: none;
-    border-left: none;;
+    border-left: none;
 }
 
 

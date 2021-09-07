@@ -1,0 +1,209 @@
+@charset "UTF-8";
+/* header ---------------------------------- */
+
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+#admin-nav a{
+	text-decoration:none;
+	display : block;
+	margin : 10px;
+	color : #C4C4C4;
+	width : 100px;
+	text-align : center;
+	font-size : 15pt;
+}
+
+#admin-nav .current a{
+	color : #5FC5FF;
+	font-weight : bold;
+}
+
+#admin-nav .current{
+	color : #5FC5FF;
+	font-weight : bold;
+}
+
+.admin-wrap{
+    display: flex;
+}
+
+#admin-nav{
+    width: 160px;
+    
+}
+
+#admin-nav ul{
+    list-style-type:none;
+}
+
+#admin-nav ul li{
+    margin: 60px 0;
+}
+
+#admin-nav ul li a{
+    text-align: left;
+}
+
+#admin-nav ul .report-ul{
+    margin-top: 5px;
+    font-size: 30px;
+    display: none;
+}
+
+#admin-nav ul .report-ul li{
+    margin: 30px 0;
+}
+
+#admin-nav ul .report:hover > .report-ul{
+    display: block;
+   
+}
+
+/*---------------------------------------------- admin content -----------------------------------------------*/
+
+.content {
+	margin : 50px 0 50px 160px;
+	height : auto;
+	min-height : 100%;
+	width: 950px;
+}
+
+.content h1{
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+caption {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button{
+	border : none;
+	cursor : pointer;
+}
+
+
+.board-header{
+    margin-bottom: 20px;
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn, .search{
+    flex:none;
+}
+
+.search{
+    margin-left: auto;
+    
+}
+
+.board-header .btn button{
+    width: 80px;
+    height: 35px;
+    margin-right: 10px;
+}
+
+.board-header .search button{
+    width: 35px;
+    height: 36px;
+}
+
+.board-header .search input[type=text]{
+    width: 200px;
+    height: 30px;
+    padding-left : 10px;
+}
+
+.board-header .search input[type=text]:focus{
+	outline:none;
+}
+
+.board-list {
+    width: 100%;
+    border-top: 2px solid gray;
+}
+
+.board-list thead {
+    background: #f9f9f9;
+}
+
+
+.board-list tbody tr{
+    position: relative;
+}
+
+.board-list tbody tr input[type=checkbox]{
+    position: absolute;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+  
+ 
+}
+
+.board-list tbody .manager input[type=checkbox]{
+    bottom: 10px;
+}
+
+.board-list tr {
+    border-bottom: 1px solid #ccc;
+  
+}
+
+.board-list th,
+.board-list td {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.board-list td {
+	height : 30px;
+    text-align: center;
+}
+
+/* 페이지 이동 */
+
+#board-list-wrap .paging {
+    margin-top: 40px;
+    text-align: center;
+    
+}
+#board-list-wrap .paging a {
+    display: inline-block;
+    border: 1px solid #dae0e9;
+    margin-left: 10px;
+	width: 37px;
+	height: 37px;
+	line-height : 37px;
+    font-size: 12px;
+}
+
+#board-list-wrap .paging a:first-child {
+    margin-left: 0;
+}
+
+#board-list-wrap .paging a.num {
+    font-weight: 600;
+    color: #222;
+    text-align: center;
+    background: #fff;
+}
+
+/* 현재 페이지 일때 */
+#board-list-wrap .paging a.num.on {
+    border: 1px solid #293243;
+    background: #222;
+    color: #fff;
+}
