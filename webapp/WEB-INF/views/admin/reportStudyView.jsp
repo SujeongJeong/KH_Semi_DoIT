@@ -7,17 +7,16 @@
 <title>관리 - Do IT</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-	<link href='<%= request.getContextPath() %>/resources/css/admin-Member.css?afters' rel='stylesheet'>
+	<link href='<%= request.getContextPath() %>/resources/css/admin-ReportStudy.css?afters' rel='stylesheet'>
 </head>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
-	
-			<!-- 관리자 nav -->
+		<!-- 관리자 nav -->
 		<div class="admin-wrap">
 			<nav id="admin-nav">
 				<ul>
-					<li class="current">
+					<li>
 						<a href="<%= request.getContextPath() %>/admin/home">회원관리</a>
 					</li>
 					<li>
@@ -26,7 +25,7 @@
 					<li>
 						<a href="<%= request.getContextPath() %>/admin/refund">환불내역</a>
 					</li>
-					<li class="report">
+					<li class="report current">
 						<a href="<%= request.getContextPath() %>/admin/reportMember">신고내역</a>
 						<ul class="report-ul">
 							<li><a href="<%= request.getContextPath() %>/admin/reportMember">-&ensp;회원</a></li>
@@ -36,47 +35,27 @@
 				</ul>
 			</nav>
 
-			<!-- 관리자 content -->   
+        <!-- 관리자 content -->    
 			<content class="content">
 				<div id="board-list-wrap">
-					<h1>회 원</h1>
-					<div class="board-header">
-						<div class="btn">
-							<button type="button">삭제</button>
-							<button type="button">권환</button>
-							<button type="button">박탈</button>
-						</div>
-						<div class="search">
-							<button><img src="../resources/images/search_btn.png"></button><input type="text">
-						</div>
-					</div>
+					<h1>신고내역 - 스터디</h1>
 					<table class="board-list">
 						<caption>게시판 목록</caption>
 						<thead>
 							<tr>
-								<th>번호</th>
-								<th>이메일</th>
-								<th>닉네임</th>
-								<th>가입날짜</th>
-								<th>신고횟수</th>
+                                <th>번호</th>
+								<th>신고</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="manager">
-								<td>
-									<input type="checkbox">M
-								</td>
-								<td>2222@naver.com</td>
-								<td>관리자</td>
-								<td>2021-08-29</td>
-								<td>0</td>
-							</tr>
 							<tr>
-								<td><input type="checkbox">1</td>
-								<td>2222@naver.com</td>
-								<td>닉네임</td>
-								<td>2021-08-28</td>
 								<td>1</td>
+								<td>
+									<b>관리자</b> : <span class="study-manager">nickname</span>&emsp;
+									<b>제목</b> : <span class="study-title">스터디제목</span>&emsp;
+									<b>신고 횟수</b> : <span class="report-count">4</span><br>
+									<span class="study-report">신고자nick1 : 이미자파일, 신고사유</span>
+								</td>
 							</tr>
 
 						</tbody>
@@ -99,10 +78,12 @@
 					</div>
 				</div>
 			</content>
-		</div>
 
+		</div>
+	</div>
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
+	
 </body>
 </html>
