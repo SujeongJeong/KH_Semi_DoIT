@@ -20,7 +20,7 @@
 		display: inline-block;
 	}
 	.createStudy{
-		margin-left : 150px;
+		margin-left : 160px;
 		margin-right : 20px;
 	}
 	.studyCategory{
@@ -77,7 +77,7 @@
 			<div class="studyRoom"><img class="studyImage" src="/resources/images/user.png">스터디방 9</div>
 			<div class="studyRoom"><img class="studyImage" src="/resources/images/user.png">스터디방 10</div>
 		</div>
-		<br><br>
+		<br>
 		<div class="studyRoomPlus">
 		<hr>
 		<button class="plusBtn">더보기</button> 
