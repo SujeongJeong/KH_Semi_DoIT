@@ -10,7 +10,6 @@
 		background-color : #E5E5E5;
 		text-align : center;
 		padding : 20px;
-     	position: absolute;
     	width: 100%;
 	}
 	.name{
