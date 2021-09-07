@@ -20,7 +20,7 @@
 		display: inline-block;
 	}
 	.createStudy{
-		margin-left : 150px;
+		margin-left : 160px;
 		margin-right : 20px;
 	}
 	.studyCategory{
@@ -66,18 +66,18 @@
 		</div>
 		<br><br>
 		<div class="studyList">
-			<div class="studyRoom"><img class="studyImage" src='/resources/images/user.png'>스터디방 1</div>
-			<div class="studyRoom"><img class="studyImage" src="/resources/images/user.png">스터디방 2</div>
-			<div class="studyRoom"><img class="studyImage" src="/resources/images/user.png">스터디방 3</div>
-			<div class="studyRoom"><img class="studyImage" src="/resources/images/user.png">스터디방 4</div>
-			<div class="studyRoom"><img class="studyImage" src="/resources/images/user.png">스터디방 5</div>
-			<div class="studyRoom"><img class="studyImage" src="/resources/images/user.png">스터디방 6</div>
-			<div class="studyRoom"><img class="studyImage" src="/resources/images/user.png">스터디방 7</div>
-			<div class="studyRoom"><img class="studyImage" src="/resources/images/user.png">스터디방 8</div>
-			<div class="studyRoom"><img class="studyImage" src="/resources/images/user.png">스터디방 9</div>
-			<div class="studyRoom"><img class="studyImage" src="/resources/images/user.png">스터디방 10</div>
+			<div class="studyRoom"><img class="studyImage" src='/Do_IT/resources/images/study-background1.jpg'>스터디방 1</div>
+			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background2.jpg">스터디방 2</div>
+			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background3.jpg">스터디방 3</div>
+			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background4.png">스터디방 4</div>
+			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background5.jpg">스터디방 5</div>
+			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background6.jpg">스터디방 6</div>
+			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background7.jpg">스터디방 7</div>
+			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background8.png">스터디방 8</div>
+			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background1.jpg">스터디방 9</div>
+			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/user.png">스터디방 10</div>
 		</div>
-		<br><br>
+		<br>
 		<div class="studyRoomPlus">
 		<hr>
 		<button class="plusBtn">더보기</button> 
