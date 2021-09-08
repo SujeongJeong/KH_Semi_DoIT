@@ -30,6 +30,7 @@ public class ShopHomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 메뉴바 클릭했을 때 페이지로 이동
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/shop/home.jsp");
+		request.setAttribute("nav1", "shop");
 		view.forward(request, response);
 	}
 

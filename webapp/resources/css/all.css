@@ -4,13 +4,13 @@
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
+
 .content {
-	margin : 100px auto;
+	margin : 50px auto;
 	height : auto;
 	min-height : 100%;
 	width: 800px;
 }
-
 
 .point-bc {
 	background-color : #5FC5FF;

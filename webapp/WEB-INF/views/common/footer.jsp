@@ -10,7 +10,11 @@
 		background-color : #E5E5E5;
 		text-align : center;
 		padding : 20px;
-    	width: 100%;
+    	width: 100%;	
+		/*position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;*/
 	}
 	.name{
 		color : #5B5B5B;
@@ -19,6 +23,7 @@
 	.detail{
 		color : white;
 	}
+	
 
 </style>
 </head>
