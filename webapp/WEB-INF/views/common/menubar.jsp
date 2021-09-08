@@ -4,6 +4,9 @@
 	// session 객체에 담긴 loginUser 정보를 변수에 담아두기
 	Member loginUser = (Member)session.getAttribute("loginUser");
 %> --%>
+<%
+	String nav1 = (String)request.getAttribute("nav1");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,26 +55,18 @@
 	</header>
 	<nav id="nav">
 		<ul class="navList">
-			<li><a href="<%= request.getContextPath() %>" class="current">홈</a></li>
-			<li><a href="<%= request.getContextPath() %>/ranking">랭킹</a></li>
-			<li><a href="<%= request.getContextPath() %>/study/home">스터디</a></li>
-			<li><a href="<%= request.getContextPath() %>/shop/home">Shop</a></li>
-			<li><a href="<%= request.getContextPath() %>/qna/home">Q&A</a></li>
-			<li><a href="<%= request.getContextPath() %>/my/home">마이페이지</a></li>
+			<li><a href="<%= request.getContextPath() %>"<% if (nav1 == null) { %>class="current"<%}%>>홈</a></li>
+			<li><a href="<%= request.getContextPath() %>/ranking"<% if ("ranking".equals(nav1)) { %>class="current"<%}%>>랭킹</a></li>
+			<li><a href="<%= request.getContextPath() %>/study/home"<% if ("study".equals(nav1)) { %>class="current"<%}%>>스터디</a></li>
+			<li><a href="<%= request.getContextPath() %>/shop/home"<% if ("shop".equals(nav1)) { %>class="current"<%}%>>Shop</a></li>
+			<li><a href="<%= request.getContextPath() %>/qna/home"<% if ("qna".equals(nav1)) { %>class="current"<%}%>>Q&A</a></li>
+			<li><a href="<%= request.getContextPath() %>/my/home"<% if ("my".equals(nav1)) { %>class="current"<%}%>>마이페이지</a></li>
 			<%-- 관리자 로그인 경우 관리페이지 --%>
-			<li><a href="<%= request.getContextPath() %>/admin/home">관리페이지</a></li>
+			<li><a href="<%= request.getContextPath() %>/admin/home"<% if ("admin".equals(nav1)) { %>class="current"<%}%>>관리페이지</a></li>
 		</ul>
 		</nav>	
-		<hr/>
 		
 	</div>
-	<script>
-		const navList = document.querySelector(".navList");
-		navList.addEventListener("click", function(){
-			console.log(event.target);
-		 this.classList.remove("current");
-		 event.target.classList.add("current");
-		});
-	</script>
+
 </body>
 </html>

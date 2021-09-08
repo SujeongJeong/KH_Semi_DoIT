@@ -29,6 +29,7 @@ public class QnaInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/qna/qnaInsertView.jsp");
+		request.setAttribute("nav1", "qna");
 		view.forward(request, response);
 	}
 
