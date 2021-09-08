@@ -17,7 +17,7 @@
 		<div id="board_list_wrap">
          <div class="board-header">
             <div class="del_btn">
-                <button type="button">삭제</button>
+                <button type="button" onclick="boardDelete()">삭제</button>
             </div>
             <div class="search">
                 <button><img src="../resources/images/search_btn.png"></button><input type="text">
@@ -269,6 +269,13 @@
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
+	
+	<script>
+		function boardDelete(){
+			if(confirm("정말로 탈퇴하시겠습니까?"))
+				location.href = '<%= request.getContextPath() %>/boardDelete';
+		}
+	</script>
 
 </body>
 </html>
