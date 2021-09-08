@@ -46,3 +46,7 @@
 5. 페이지 내 글씨 class 명 지정
       1) 굵은 글씨 class="title"  
 	ex. study- 오픈스터디, qna- 새 글 쓰기, shop- 프리미엄 이용권, my- 하루 목표 공부시간
+
+6. nav 클릭 후 css 변경 
+  Servlet doGet() 부분에 request.getAttribute("nav1","페이지명"); 추가
+  페이지명 : admin, my, study, ranking, shop

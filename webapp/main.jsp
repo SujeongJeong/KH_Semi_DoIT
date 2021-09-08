@@ -59,6 +59,7 @@
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
+	<div class="all-wrapper">
 	<div class="content">
 		<div class="outer">
 			<div class="study-area">
@@ -101,5 +102,6 @@
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
+	</div>
 </body>
 </html>
