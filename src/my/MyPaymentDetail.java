@@ -1,4 +1,4 @@
-package shop;
+package my;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ProductAddServlet
+ * Servlet implementation class MyPaymentDetail
  */
-@WebServlet("/productAdd")
-public class ProductAddServlet extends HttpServlet {
+@WebServlet("/my/details")
+public class MyPaymentDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductAddServlet() {
+    public MyPaymentDetail() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,11 +28,8 @@ public class ProductAddServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/shop/productAddView.jsp");
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/MyDetails.jsp");
 		view.forward(request, response);
-		
-		
 	}
 
 	/**

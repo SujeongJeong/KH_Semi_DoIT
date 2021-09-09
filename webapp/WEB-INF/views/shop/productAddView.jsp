@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
-
+  
 
 .productAddForm {
 	width: 40%;
@@ -109,7 +110,7 @@
 			<img class="temporary_img" src="/Do_IT/resources/images/study-background6.jpg">
 			<br>
 			<input type="file" name="thumbnail" accept="image/gif,image/jpeg,image/png" required>
-			
+			<div></div>
 			<h6>
 				<span class="inputarea"> 
 					<input type="text" name="title" required placeholder="상품명을 입력하세요.">

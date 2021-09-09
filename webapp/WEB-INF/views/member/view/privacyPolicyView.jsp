@@ -28,13 +28,13 @@
 		height: 50px;
 		border: 0px;
 		color:white;
-		background:#C8EBFF;
+		background:#5FC5FF;
 	}
 </style>
 
 </head>
 <body>
-	<div class="content">
+	<content class="content">
 		<h1>개인 정보 정책</h1>
 		<pre class="content_area">
 제 1 장 총 칙
@@ -143,7 +143,7 @@
 (시행일) 이 약관은 2015년 01월부터 시행합니다.
 		</pre>
 		<span class="input_area"><button id="closeBtn" onclick="window.close()">확인</button></span>
-	</div>
+	</content>
 	
 </body>
 </html>
