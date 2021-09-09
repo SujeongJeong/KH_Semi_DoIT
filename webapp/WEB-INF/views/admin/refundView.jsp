@@ -41,7 +41,7 @@
 					<h1>환불 내역</h1>
 					<div class="board-header">
 						<div class="btn">
-							<button type="button">환불</button>
+							<button type="button" onclick="coinRefund()">환불</button>
 						</div>
 					</div>
 					<table class="board-list">
@@ -87,5 +87,12 @@
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
+	
+	<script>
+		function coinRefund(){
+			if(confirm("환불처리를 하시겠습니까?"))
+				location.href = '<%= request.getContextPath() %>/coinRefund';
+		}
+	</script>
 </body>
 </html>

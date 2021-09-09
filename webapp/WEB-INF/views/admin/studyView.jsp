@@ -41,7 +41,7 @@
 					<h1>스터디</h1>
 					<div class="board-header">
 						<div class="btn">
-							<button type="button">삭제</button>
+							<button type="button" onclick="studyDelete()">삭제</button>
 						</div>
 						<div class="search">
 							<button><img src="../resources/images/search_btn.png"></button><input type="text">
@@ -92,5 +92,12 @@
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
+	
+	<script>
+		function studyDelete(){
+			if(confirm("정말로 삭제하시겠습니까?"))
+				location.href = '<%= request.getContextPath() %>/studyDelete';
+		}
+	</script>
 </body>
 </html>
