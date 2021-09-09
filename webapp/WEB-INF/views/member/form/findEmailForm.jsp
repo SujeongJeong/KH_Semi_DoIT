@@ -50,7 +50,7 @@
 		height : 35px;
 		border : 0px;
 		color:white;
-		background:#C8EBFF;
+		background:#5FC5FF;
 		margin : 10px;
 		padding : 10px 10px 14px 10px;
 		text-align: center;
@@ -64,7 +64,7 @@
 </style>
 </head>
 <body>
-	<div class="content">
+	<content class="content">
 	<h1>이메일 찾기</h1>
 	
 	<form id="findEmailForm" action="<%= request.getContextPath() %>/findEmail"
@@ -82,7 +82,7 @@
 				</div>
 			
 	</form>
-	</div>
+	</content>
 	
 	<script>
 		document.getElementById("close").onclick = function(){

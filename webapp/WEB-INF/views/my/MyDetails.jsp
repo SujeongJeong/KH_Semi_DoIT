@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지 - 내 정보</title>
+<title>마이페이지 - 구매내역</title>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
 	.content {
@@ -50,13 +50,12 @@
 	<content class="content">
 		
 		<nav class="side_menu">
-			<li class="current"><a href="#">내 정보</a></li>
+			<li><a href="<%= request.getContextPath() %>/my/home">내 정보</a></li>
 			<li><a href="<%= request.getContextPath() %>/my/study">내 스터디</a></li>
 			<li><a href="<%= request.getContextPath() %>/my/q&a">내 Q&A</a></li>
-			<li><a href="<%= request.getContextPath() %>/my/details">결제 내역</a></li>
+			<li class="current"><a href="#">결제 내역</a></li>
 		</nav>
 		<div class="content_area">
-		
 		</div>
 	</content>
 	

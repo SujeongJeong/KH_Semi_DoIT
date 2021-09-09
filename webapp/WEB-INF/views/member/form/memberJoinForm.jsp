@@ -10,37 +10,32 @@
 	.content{
 		width:40%;
 		min-width : 400px;
+		height: 600px;
 		margin:auto;
-		margin-top : 70px;
-		margin-bottom : 70px;
 	}
 	
 	#joinForm {
-		width : 300px;
-		margin: auto;
-		padding: 10px;
+		width : 400px;
+		margin: 70px auto;
 	}
 	
 	#joinForm h4 {
 		text-align:left;
 	}
-	
-	#joinForm {
-		text-align:center;
-	}
-
 	.input_area {
 	    border: solid 1px #dadada;
 	    padding : 10px 10px 14px 10px;
 	    background : white;
 	    margin-bottom: 30px;
+	    margin-right: 10px;
 	}
 	
 	.input_area input {
-		width : 300px;
+		width : 250px;
 		height : 30px;
 		border: 0px;
 		margin-bottom: 15px;
+		margin-left: 0;
 	}
 	
 	.btnArea {
@@ -48,19 +43,19 @@
 	}
 	
 	.joinBtnArea  {
-		width : 300px;
-		height : 30px;
+		width : 400px;
 		border : 0px;
-		background:#C8EBFF;
+		background:#5FC5FF;
 	}
 	
 	#joinBtn {
-		width : 300px;
-		height : 30px;
+		width : 400px;
+		height : 50px;
 		border : 0px;
 		color:white;
-		background:#C8EBFF;
+		background:#5FC5FF;
 		margin-top : 20px;
+		font-size: 1.5em;
 	}
 	
 	.logo {
@@ -70,7 +65,7 @@
 	div[class$=box] {
 		display: flex;
 		justify-content: space-between;
-		margin-bottom: 10px;
+		margin-bottom: 20px;
 	}
 	
 	span[id$=Result] {
@@ -87,11 +82,18 @@
 		margin: 10px 0;
 		text-align: left;
 	}
+	#emailCheck, #nickCheck {
+		width : 100px;
+		height: 30px;
+		border : 0px;
+		color:white;
+		background:#5FC5FF;
+	}
 
 </style>
 </head>
 <body>
-	<div class="content">
+	<content class="content">
 		<div id="joinInfoArea">
 			<form id="joinForm" action="<%= request.getContextPath() %>/memberJoin"
 			method="post" onsubmit="return validate();">
@@ -100,7 +102,8 @@
 					<h4>이메일</h4>
 					<span id="emailResult"></span>
 				</div>
-				<span class="input_area"><input type="email" name="userEmail" required></span><br>
+				<span class="input_area"><input type="email" name="userEmail" required></span>
+				<button id="emailCheck" type="button">중복확인</button>
 				
 				<div class="pwd_box">
 					<h4>비밀번호</h4>
@@ -118,16 +121,17 @@
 					<h4>닉네임</h4>
 					<span id="nickResult"></span>
 				</div>
-				<span class="input_area"><input type="text" minlength="2" maxlength="10" name="nickName" required></span><br>
+				<span class="input_area"><input type="text" minlength="2" maxlength="10" name="nickName" required></span>
+				<button id="nickCheck" type="button">중복확인</button>
 				
 				<div class="terms_all"><input type="checkbox" id="termsAll" name="terms"><label for="termsAll">모두 동의</label></div>
-				<div class="terms_tos"><input type="checkbox" name="terms"><a href="#" onclick="openPopup('<%= request.getContextPath() %>/tos', '서비스이용약관', 500, 500); return false">서비스 이용 약관 동의(필수)</a></div>
-				<div class="terms_pp"><input type="checkbox" name="terms"><a href="#" onclick="openPopup('<%= request.getContextPath() %>/pp', '개인정보정책', 500, 500); return false">개인 정보 정책 동의(필수)</a></div>
+				<div class="terms_tos"><input type="checkbox" name="terms"><a href="#" onclick="openPopup('<%= request.getContextPath() %>/tos', 'tos', 500, 500); return false">서비스 이용 약관 동의(필수)</a></div>
+				<div class="terms_pp"><input type="checkbox" name="terms"><a href="#" onclick="openPopup('<%= request.getContextPath() %>/pp', 'pp', 500, 500); return false">개인 정보 정책 동의(필수)</a></div>
 				
-				<span class="input_area joinBtnArea"><button id="joinBtn">회원가입</button></span>
+				<span class="joinBtnArea"><button id="joinBtn">회원가입</button></span>
 			</form>
 		</div>
-	</div>
+	</content>
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
@@ -144,9 +148,10 @@
 		
 	
 		// 사용자 입력 값 유효성 검사
-		function vaildate(){
+		/* 
+			function vaildate(){
 			return true;	
-		}
+		} */
 		
 		function openPopup(url, title, width, height) {
 			let left = (document.body.clientWidth/2) - (width/2);

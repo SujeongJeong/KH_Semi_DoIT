@@ -44,7 +44,7 @@
 		width : 300px;
 		height : 30px;
 		border : 0px;
-		background:#C8EBFF;
+		background:#5FC5FF;
 	}
 	
 	#joinBtn {
@@ -52,7 +52,7 @@
 		height : 30px;
 		border : 0px;
 		color:white;
-		background:#C8EBFF;
+		background:#5FC5FF;
 		margin-top : 20px;
 	}
 	
@@ -79,7 +79,7 @@
 </style>
 </head>
 <body>
-	<div class="content">
+	<content class="content">
 		<div id="resetInfoArea">
 			<form id="resetPwdForm" action="<%= request.getContextPath() %>/resetPwd"
 			method="post" onsubmit="return validate();">
@@ -99,7 +99,7 @@
 				<span class="input_area joinBtnArea"><button id="joinBtn">비밀번호 재설정</button></span>
 			</form>
 		</div>
-	</div>
+	</content>
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
