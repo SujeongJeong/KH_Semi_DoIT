@@ -42,9 +42,9 @@
 					<h1>회 원</h1>
 					<div class="board-header">
 						<div class="btn">
-							<button type="button">삭제</button>
-							<button type="button">권환</button>
-							<button type="button">박탈</button>
+							<button type="button" onclick="memberDelete()">삭제</button>
+							<button type="button" onclick="adminGrant()">권환</button>
+							<button type="button" onclick="adminDisqualify()">박탈</button>
 						</div>
 						<div class="search">
 							<button><img src="../resources/images/search_btn.png"></button><input type="text">
@@ -104,5 +104,22 @@
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
+	
+	<script>
+		function memberDelete(){
+			if(confirm("정말로 삭제하시겠습니까?"))
+				location.href = '<%= request.getContextPath() %>/memberDelete';
+		}
+		
+		function adminGrant(){
+			if(confirm("관리자 권환을 부여하시겠습니까?"))
+				location.href = '<%= request.getContextPath() %>/adminGrant';
+		}
+		
+		function adminDisqualify(){
+			if(confirm("관리자 권한을 박탈하시겠습니까?"))
+				location.href = '<%= request.getContextPath() %>/adminDisqualify';
+		}
+	</script>
 </body>
 </html>

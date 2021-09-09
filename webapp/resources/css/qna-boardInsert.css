@@ -9,13 +9,13 @@
    /*  padding: 25px; */
 }
 
-.board_content .content {
+.board_content .contents {
     padding: 20px 0;
 	margin-bottom: 30px;
-    border-top: 2px solid darkgray;
+    border-top: 3px solid darkgray;
 }
 
-.board_content .content .title_span{
+.board_content .contents .title_span{
     display: inline-block;
     font-size: 200;
     font-weight: normal;
@@ -32,10 +32,18 @@
 	
 }
 
+.input_area select {
+	width: 510px;
+	height: 30px;
+	border: 2px solid rgb(242, 245, 249);
+
+}
+
 .input_area input {
 	width: 500px;
 	height: 30px;
 	border: 0px;
+	border: 2px solid rgb(242, 245, 249);
 }
 
 .input_area input:focus,
