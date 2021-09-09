@@ -10,7 +10,7 @@
 		background-color : #E5E5E5;
 		text-align : center;
 		padding : 20px;
-    	width: 100%;	
+    	max-width: 100%;	
 		/*position: absolute;
 		bottom: 0;
 		left: 0;
