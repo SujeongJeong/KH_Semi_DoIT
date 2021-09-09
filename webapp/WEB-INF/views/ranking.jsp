@@ -21,9 +21,7 @@ ul{	list-style: none;	}
 .group-wrapper *:not([type=radio],select), .period-wrapper *:not([type=radio]) { margin-right : 30px; }
 .outer { border : 1px solid #E5E5E5; border-radius : 5px; height : 80px; margin-left :25px; padding-left : 20px; padding-top:5px;  }
 select { padding : 3px;}
-
-</style>
-</head>
+  
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
@@ -69,7 +67,7 @@ select { padding : 3px;}
 		<li class="last"><img src="resources/images/flag.png" alt="10위"><span>10위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
 		<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>?위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>			
 		</ul>
-		
+
 	</div>
 
 	<footer>

@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <title>menubar</title>
 <!-- 외부 스타일 시트 -->
-	<link href='<%= request.getContextPath() %>/resources/css/menubar-style.css' rel='stylesheet'>
+	<link href='<%= request.getContextPath() %>/resources/css/menubar-style.css?after' rel='stylesheet'>
 <!-- 구글웹폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
