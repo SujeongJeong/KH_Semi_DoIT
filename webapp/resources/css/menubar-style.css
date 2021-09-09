@@ -6,7 +6,7 @@
 #header {
 	height : 150px;
 	display : block;
-	margin : 20px 20px 0px 20px;
+/* 	margin : 20px 20px 0px 20px; */
 }
 
 #header .logo-area{
@@ -16,13 +16,14 @@
 
 
 #header .btnArea {
-	display : flex;
-	float : right;
 	align-items: center;
 	text-decoration:none;
+	text-align : right;
+	margin : 20px 20px 0 0;
 }
 
 .btnArea a{
+	display : inline-block;
 	text-decoration : none;
 	color : #636363;
 	margin : 5px;
@@ -45,6 +46,7 @@
 #nav {
 	height: 50px;
 	padding-bottom : 15px;
+	margin-top : 70px;
 	border-bottom: 1px solid #E5E5E5;
 }
 
