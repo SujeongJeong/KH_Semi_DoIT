@@ -14,7 +14,8 @@
 		margin : 20px auto;	
 		grid-template-rows : 400px 400px;
 		grid-template-columns: 500px 500px;
-		gap : 40px;
+		gap : 30px 40px ;
+		 
 	}
 	.outer:nth-child(1){ 	grid-area : 1/1/2/2;	}
 	.outer:nth-child(2){	grid-area : 1/2/2/3;    }
@@ -24,6 +25,7 @@
 	.title{
 		font-weight : bold;
 		font-size : 20px;
+		padding-right : 5px;
 	}
 	.study-list, .todo-list {
 		margin-top : 10px;
@@ -42,24 +44,25 @@
 		transform: translate(-50%, -50%);
 		width : 250px;
 	}
-	.semiTitle{ 	font-size : 15px;	}
+	.semiTitle{ 	font-size : 16px;	}
 	.goalUl{ 	padding : 50px;	}
-	.todayhours, .goalhours {	 font-size : 20px;	 }
+	.todayhours, .goalhours {	 font-size : 23px;	 }
 	.icon {	float :right; padding-right : 30px;	}
-	.yesterday { 	padding-right : 30px; padding-left : 10px;	}
-	.date {	 font-size : 15px;	}
-	.rankikgUl { 	margin-top : 40px; padding : 0px;	}
-	li {	 padding-bottom : 15px;  height : 30px;	 }
+	.yesterday { 	padding-right : 30px; padding-left : 30px; font-size : 18px;	}
+	.date {	 font-size : 14px;	}
+	.rankikgUl { 	margin-top : 20px; padding : 0px;	}
+	.rankikgUl li {	 padding: 13px;  height : 30px;	 }
 	.nickname{	 font-size : 20px; padding : 10px;	}
 	.hours { 	font-size : 18px; padding : 10px;	}
 	.myranking { 	background-color : #E5E5E5; border-radius : 5px; margin-top : 20px;	}
+	.icon img{ width : 20px; height : 20px; margin-5px;}
+	.todo-title img { width : 25px; height : 25px;}
 </style>
 
 </head>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
-	<div class="all-wrapper">
 	<div class="content">
 		<div class="outer">
 			<div class="study-area">
@@ -87,11 +90,13 @@
 				<li class="first"><img src="resources/images/flag-first.png" alt="1위"><span class="nickname">1위 user01</span><span class="hours">22:59:59</span></li>
 				<li class="second"><img src="resources/images/flag-second.png" alt="2위"><span class="nickname">2위 user02</span><span class="hours">18:33:33</span></li>
 				<li class="third"><img src="resources/images/flag-third.png" alt="3위"><span class="nickname">3위 user03</span><span class="hours">10:00:00</span></li>
-				<li class="myranking"><img src="resources/images/flag.png" alt="내랭킹"><span class="nickname">?위 nickname</span><span class="hours">5:03:00</span></li>
+				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹"><span class="nickname">?위 nickname</span><span class="hours">5:03:00</span></li>
 				</ul>
 			</div>
 			<div class="todo-area">
-				<label class="title">오늘의 할일</label><img src="resources/images/plus.png" alt="추가">
+				<div class="todo-title">
+					<label class="title">오늘의 할일</label><img src="resources/images/plus.png" alt="추가">
+				</div>
 				<div class="todo-list">
 					<label class="nolist text">오늘의 할일을 추가하세요.</label>
 				</div>
