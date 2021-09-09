@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Do IT</title>
 <!-- 외부 스타일 시트 -->
-<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
+<link href='<%= request.getContextPath() %>/resources/css/all.css?after' rel='stylesheet'>
 <style>
 	.outer{
 		width : 1000px;
@@ -48,7 +48,7 @@
 	.icon {	float :right; padding-right : 30px;	}
 	.yesterday { 	padding-right : 30px; padding-left : 10px;	}
 	.date {	 font-size : 15px;	}
-	.rankikgUl { 	margin-top : 50px; padding : 0px;	}
+	.rankikgUl { 	margin-top : 40px; padding : 0px;	}
 	li {	 padding-bottom : 15px;  height : 30px;	 }
 	.nickname{	 font-size : 20px; padding : 10px;	}
 	.hours { 	font-size : 18px; padding : 10px;	}

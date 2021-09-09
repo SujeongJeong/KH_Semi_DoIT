@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +25,9 @@
 			<input type="radio" name="yesterday" value="yesterday" checked><label for="yesterday">어제</label>
 			<input type="radio" name="week" value="week"><label for="week">이번주</label>
 			<input type="radio" name="month" value="month"><label for="month">이번달</label>		
+			</div>
+			<div class="">
+			<span>yyyy년 MM월 dd일(E요일) 오전0시 기준</span>
 			</div>
 			<div class="ranking-wrapper">
 			<div class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span class="nickname">nickname</span><span class='hours'>00:00:00</span></div>
