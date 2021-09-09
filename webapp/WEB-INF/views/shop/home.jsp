@@ -10,21 +10,10 @@
 <link href='<%= request.getContextPath() %>/resources/css/all.css?after' rel='stylesheet'>
 <style>
 
-.shoparea {
-	width: 40%;
-	min-width: 400px;
-	height: 600px;
-	margin: 70px auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 .product_area{
 	width: 780px;
 	margin: 100px auto;
-	margin-top : 300px;
-	margin-left : -100px;
+
 }
 
 .coincharge{
@@ -32,18 +21,18 @@
 }
 
 .product_premium {
-		    display: grid;
-		    grid-template-columns: 100px 100px 100px;
-		    grid-template-rows: 100px 100px 100px;
-		    margin : 50px;
+	margin:50px 15px;
+	display : grid;
+	grid-template-columns: 80px 80px 80px;
+	gap : 20px;
 		   
 }
 
 .product_single {
-		    display: grid;
-		    grid-template-columns: 100px 100px 100px;
-		    grid-template-rows: 100px 100px 100px;
-		    margin : 50px;
+	margin:50px 15px;
+	display : grid;
+	grid-template-columns: 80px 80px 80px;
+	gap : 20px;
 }
 
 #set1 {
@@ -53,7 +42,7 @@
 }
 #set2 {
 	margin-left:200px;
-	margin-right:150px;
+	margin-right:50px;
 	margin-bottom:50px;
 }
 
@@ -67,18 +56,18 @@
 	float:left;
 	margin-right:50px;
 	margin-:50px;
-	margin-top:250px; 
+
 }
 #set5 {
 	margin-left:200px;
 	margin-right:150px;
-	margin-top:250px;
+	
 }
 
 #set6 {
 	margin-left:400px;
 	margin-right:150px;
-	margin-top:250px;
+	
 }
 
 
@@ -103,7 +92,6 @@
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
   <div class="content">
-	<div class="shoparea">
 	<!-- 스크롤바 오른쪽에 하나 만드는거 잊지말기. -->
 	<!--<div class="allProduct" style="overflow-y:scroll; height:100%; padding:4px; border:1 solid #000000;">-->	
 	
@@ -181,7 +169,7 @@
       </div>
    </div>
    </div>
- </div> 
+
 
 
 
