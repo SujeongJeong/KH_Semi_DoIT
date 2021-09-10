@@ -80,25 +80,25 @@
 		<br><br>
 		<div class="studyList">
 			<div class="studyRoom"><img class="studyImage" src='/Do_IT/resources/images/study-background1.jpg'
-			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 800);">스터디방 1<br>#ai</div>
+			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 1000);">스터디방 1<br>#ai</div>
 			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background2.jpg"
-			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 800);">스터디방 2<br>#front-end</div>
+			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 1000);">스터디방 2<br>#front-end</div>
 			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background3.jpg"
-			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 800);">스터디방 3<br>#back-end</div>
+			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 1000);">스터디방 3<br>#back-end</div>
 			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background4.png"
-			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 800);">스터디방 4<br>#language</div>
+			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 1000);">스터디방 4<br>#language</div>
 			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background5.jpg"
-			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 800);">스터디방 5<br>#embeded</div>
+			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 1000);">스터디방 5<br>#embeded</div>
 			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background6.jpg"
-			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 800);">스터디방 6<br>#app</div>
+			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 1000);">스터디방 6<br>#app</div>
 			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background7.jpg"
-			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 800);">스터디방 7<br>#bigdata</div>
+			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 1000);">스터디방 7<br>#bigdata</div>
 			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background8.png"
-			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 800);">스터디방 8<br>#blockchain</div>
+			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 1000);">스터디방 8<br>#blockchain</div>
 			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/study-background1.jpg"
-			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 800);">스터디방 9<br>#game</div>
+			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 1000);">스터디방 9<br>#game</div>
 			<div class="studyRoom"><img class="studyImage" src="/Do_IT/resources/images/user.png"
-			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 800);">스터디방 10<br>#project</div>
+			 onclick="openPopup('<%= request.getContextPath() %>/studyInfo', 'studyInfo', 700, 1000);">스터디방 10<br>#project</div>
 		</div>
 		<br>
 		<div class="studyRoomPlus">
