@@ -50,7 +50,7 @@
 
 <div class="content">
 	<form method="POST">
-	<label class="title">스터디 배경화면</label>
+	<span class="span1"><label class="title">스터디 배경화면</label></span>
 	<input type="file" id="studyImage" name="studyImage" value="studyImage">
 	<div id="imgArea"></div>
 	

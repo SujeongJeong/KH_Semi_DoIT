@@ -146,10 +146,11 @@ h2, h3 {
 		</div>
 		<br>
 		<div class="bottom">
-			<button id="studyRoomBtn">로그인 / 가입하기 / 입장하기</button>
+			<button id="studyRoomBtn" onclick="opener.location.href='<%=request.getContextPath()%>/enterStudy';window.close();">로그인 / 가입하기 / 입장하기</button>
 		</div>
 
 	</div>
+
 </body>
 </html>
 
