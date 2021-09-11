@@ -10,6 +10,7 @@
 	.content {
 		display: flex;
 	 }
+	 
 	/* 사이드메뉴 영역 */
 	.side_menu { 
 		border: 1px solid black;

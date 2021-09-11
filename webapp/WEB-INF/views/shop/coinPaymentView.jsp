@@ -132,7 +132,7 @@ button[id$=payment] {
 				<div class="cerrent_coin">
 					<span id="cerrent_result"><h2>현재 보유 중인 코인 : 00 코인</h2></span>
 				</div>
-				<h4>충전 할 코인 : <input type="number" id="charge_input" placeholder="충전 할 코인 수를 입력하세요."></h4>
+				<h4>충전 할 코인 : <input type="number" id="charge_input" min= 1 placeholder="충전 할 코인 수를 입력하세요."></h4>
 				<span class="charge_coin"></span>
 				
 				
