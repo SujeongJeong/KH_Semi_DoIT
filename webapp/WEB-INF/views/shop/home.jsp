@@ -8,16 +8,23 @@
 <title>shop - Do IT</title>
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css?after' rel='stylesheet'>
+<script src="resources/js/jquery-3.6.0.min.js"></script>
 <style>
 
 .product_area{
 	width: 780px;
-	margin: 100px auto;
+	margin: 80px auto;
 
 }
 
-.coincharge{
-	float: left;
+.coin_charge{
+	border: 0px;
+	color: white;
+	background: #5FC5FF;
+	width: 100px;
+	height: 35px;
+	margin-bottom: 30px;
+	margin-left: -80px;
 }
 
 .product_premium {
@@ -91,75 +98,75 @@
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
-  <div class="content">
-	<!-- 스크롤바 오른쪽에 하나 만드는거 잊지말기. -->
-	<!--<div class="allProduct" style="overflow-y:scroll; height:100%; padding:4px; border:1 solid #000000;">-->	
+  <div class="content">	
 	
 	<div class="product_area">
-	<button class="coin_charge" onclick="location.href ='<%= request.getContextPath() %>/shop/coin';">코인충전</button>
+	 <button class="coin_charge" onclick="openPopup('<%=request.getContextPath()%>/coin', 'coin_charge', 700, 900);">코인충전</button>
 	
-	<h3>| 프리미엄 이용권  <button class="product_addBtn" onclick="location.href ='<%= request.getContextPath() %>/productAdd';"> + </button>
-     <button class="product_deleteBtn"> - </button> </h3>
+	<h3>| 프리미엄 이용권  <button class="product_addBtn" onclick="openPopup('<%=request.getContextPath()%>/productAdd', 'ProductAdd', 900, 1200);"> + </button>
+     <button class="product_deleteBtn" id="checkbox_btn" onclick="checkbox()"> - </button> </h3>
 	
 	  <div class="product_premium">
-	    <div class="premium_product" id="set1">
-	    	<span><input type="checkbox" name="product_check"></span>
+	    <div class="premium_product" id="set1" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 700, 1000);">
+	    	<span><input type="checkbox" id="product_check" checked="unchecked" style="display:none"></span>
             <img class="premium_img" src="/Do_IT//resources/images/shop-premium.png">
             <div class="product_name"> (체험) 프리미엄 7일 이용권</div>
             <div class="product_price">15 point</div>
          </div>
-		 <div class="premium_product" id="set2">
-		 <span><input type="checkbox" name="product_check"></span>
+         
+		 <div class="premium_product" id="set2" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 700, 1000);">
+		 	<span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
             <img class="premium_img" src="/Do_IT//resources/images/shop-premium.png">
             <div class="product_name"> 프리미엄 30일 이용권</div>
             <div class="product_price">45 point</div>
          </div>
-         <div class="premium_product" id="set3">
-         <span><input type="checkbox" name="product_check"></span>
+         
+         <div class="premium_product" id="set3" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 700, 1000);">
+        	 <span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
             <img class="premium_img" src="/Do_IT/resources/images/shop-premium.png">
             <div class="product_name">프리미엄 90일 이용권</div>
             <div class="product_price"><s class="lightgray-c">135 point</s>    120 point</div>
          </div>
       </div>
       
-      	<h3>| 이용권 단품  <button class="product_addBtn" onclick="location.href ='<%= request.getContextPath() %>/productAdd';"> + </button>
-     <button class="product_deleteBtn"> - </button> </h3>
+      	<h3>| 이용권 단품  <button class="product_addBtn" onclick="openPopup('<%=request.getContextPath()%>/productAdd', 'ProductAdd', 900, 1200);"> + </button>
+        <button class="product_deleteBtn"> - </button> </h3>
       <div class="product_single">
     
-         <div class="studyroomjoin_product" id="set1">
-         <span><input type="checkbox" name="product_check"></span>
+         <div class="studyroomjoin_product" id="set1" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 700, 1000);">
+         <span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
             <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
             <div class="product_name">스터디 가입 제한 해제 + todo 이용권(7일)</div>
             <div class="product_price">8 point</div>
          </div>
-         <div class="studyroomjoin_product" id="set2">
-         <span><input type="checkbox" name="product_check"></span>
+         <div class="studyroomjoin_product" id="set2" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 700, 1000);">
+         <span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
             <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
             <div class="product_name">스터디 가입 제한 해제 + todo 이용권(30일)</div>
             <div class="product_price">32 point</div>
          </div>
-         <div class="studyroomjoin_product" id="set3">
-         <span><input type="checkbox" name="product_check"></span>
+         <div class="studyroomjoin_product" id="set3" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 700, 1000);">
+         <span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
             <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
             <div class="product_name">스터디 가입 제한 해제 + todo 이용권(90일)</div>
             <div class="product_price">
                <s class="lightgray-c"> 96 point</s> 90 point
             </div>
          </div>
-         <div class="studymember_product" id="set4">
-         <span><input type="checkbox" name="product_check"></span>
+         <div class="studymember_product" id="set4" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 700, 1000);">
+         <span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
             <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
             <div class="product_name">스터디 인원 수 해제 + todo 이용권(7일)</div>
             <div class="product_price">8 point</div>
          </div>
-         <div class="studymember_product" id="set5">
-         <span><input type="checkbox" name="product_check"></span>
+         <div class="studymember_product" id="set5" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 700, 1000);">
+         <span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
             <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
             <div class="product_name">스터디 인원 수 해제 + todo 이용권(30일)</div>
             <div class="product_price">32 point</div>
          </div>
-         <div class="studymember_product" id="set6">
-         <span><input type="checkbox" name="product_check"></span>
+         <div class="studymember_product" id="set6" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 700, 1000);">
+         <span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
             <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
             <div class="product_name">스터디 인원 수 해제 + todo 이용권(90일)</div>
             <div class="product_price">
@@ -170,6 +177,28 @@
    </div>
    </div>
 
+<script>
+
+		function openPopup(url, title, width, height){			
+			let left = (document.body.clientWidth/2) - (width/2);
+			left += window.screenLeft;
+			let top = (screen.availHeight/2) - (height/2);
+			let options = "width=" + width+",height="+height + ",left="+left + ", top=" + top;
+			
+			window.open(url, title, options);
+		}
+		
+	
+		
+		function checkbox(){
+            if($("#product_check").css('display') == 'none'){
+            $("#product_check").show();
+        }else{
+            $("#product_check").hide();
+        }
+        }
+
+</script>
 
 
 

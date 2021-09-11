@@ -9,7 +9,7 @@
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
 .wrapper{
-	margin-top : 150px;
+	margin-top : 100px;
 }
 
 .content {
@@ -141,7 +141,7 @@ button[id$=payment] {
 				<div class="payment_btn"><button id="card_payment">카드 결제</button></div>
 				<div class="payment_btn"><button id="kakao_payment">카카오 결제</button></div>
 				<hr>
-				<textarea class="textarea" rows="10" cols="60" name="content" placeholder="환불 주의사항 채우기" readonly></textarea>
+				<textarea class="textarea" rows="10" cols="60" name="content" placeholder="환불 주의사항 채우기" required></textarea>
 				<div class="btn_area">
 				<button class=chargebtn type="submit">충전</button>
 				<button class=canclebtn type="button" onclick="window.close();">취소</button>
