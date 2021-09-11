@@ -9,26 +9,28 @@
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
- 
- .wrapper{
-	margin-top : 80px;
-} 
+  
 
 .productAddForm {
-	width: 70%;
+	width: 40%;
 	min-width: 400px;
 	height: 600px;
-	margin: auto;
+	margin: 70px auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-
 .logo_area {
 	margin-bottom: 30px;
 	text-align : center;
 	justify-content: center;
+}
+
+.productArea {
+	width: 800px;
+	margin: auto;
+	padding : 30px;
 }
 
 .productAddForm {
@@ -59,7 +61,7 @@
 }
 
 .inputarea coin_count{
-	width: 80px;
+	width: 150px;
 	height: 30px;
 }
 
@@ -74,7 +76,7 @@
 	padding: 30px;
 }
 
-.btn_area .enrollbtn {
+.btn_area .paymentbtn {
 	width: 100px;
 	height: 35px;
 	border: 0px;
@@ -103,38 +105,46 @@
 </head>
 <body>
 
-<div class="wrapper">
- 	<div class="content">
+ <div class="content">
+ 	<div class="logo_area"><img class="logo" src="/Do_IT/resources/images/logo.png" onclick="window.close();" alt="logo"><br></div><br>
+ 	<div class="productArea">
 	<!-- 제목조건, 폼 입력 조건 나중에 설정하기 -->
-	<div class="logo_area"><img class="logo" src="/Do_IT/resources/images/logo.png" onclick="window.close();" alt="logo"><br></div><br>
-	
 	<form class="productAddForm" action="" method="post">
 		<div class="product_content">		
+		<!-- 사진, 제목, coin수, content 입력 폼 만듬-->	
+			<!-- <div class="image_area" src="/Do_IT//resources/images/study-background3"></div> -->
 			<img class="temporary_img" src="/Do_IT/resources/images/study-background6.jpg">
 			<br>
-			<input type="file" name="thumbnail" accept="image/gif,image/jpeg,image/png" required>
 			<div></div>
 			<h6>
 				<span class="inputarea"> 
-					<input type="text" name="title" required placeholder="상품명을 입력하세요.">
+					<input type="text" name="title"  placeholder="상품명을 입력하세요." readonly>
 				</span>
 			</h6>
 			<h6>
 				<span class="inputarea"> 
-					<input type="select" name="coin_count" required placeholder="Coin수를 입력하세요."> Coin 
+					<input type="number" name="coin_count" placeholder="Coin수를 입력하세요." readonly > Coin 
 				</span>
 			</h6>
 			<textarea class="textarea" rows="15" cols="60" name="content" placeholder="상품설명을 입력하세요." readonly></textarea>
 			<div class="btn_area">
-			<button class=enrollbtn type="submit">등록</button>
+			<button class=paymentbtn type="submit" onclick="buy();">구매</button>
 			<button class=canclebtn type="button" onclick="window.close();">취소</button>
 		    </div>
 		
 		
 	</form>
 	</div>
-	</div>	
+	</div>
 	
+	<script>
+	function buy(){ 
+		alert('정말 구매하시겠습니까?'); 
+	}
+
+
+	
+	</script>
 
 
 </body>

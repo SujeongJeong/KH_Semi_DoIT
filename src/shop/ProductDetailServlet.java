@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CoinPaymenServlet
+ * Servlet implementation class ProductDetailServlet
  */
-@WebServlet("/coin")
-public class CoinPaymenServlet extends HttpServlet {
+@WebServlet("/productDetail")
+public class ProductDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CoinPaymenServlet() {
+    public ProductDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,8 @@ public class CoinPaymenServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/shop/coinPaymentView.jsp");
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/shop/productDetailView.jsp");
+		request.setAttribute("nav1", "shop");
 		view.forward(request, response);
 	}
 
