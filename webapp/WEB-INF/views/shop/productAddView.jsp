@@ -12,13 +12,13 @@
  
  .wrapper{
 	margin-top : 80px;
+	
 } 
 
 .productAddForm {
-	width: 70%;
-	min-width: 400px;
-	height: 600px;
-	margin: auto;
+	width: 600px;
+	height: 500px;
+	margin: 100px auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -31,41 +31,39 @@
 	justify-content: center;
 }
 
-.productAddForm {
-	width: 780px;
-	margin: 100px auto;
-}
+
+
 .product_content {
 	padding: 0px 20px;
 	margin-bottom: 30px;
 }
 
-.image_area {
-	text-align: center;
+
+.temporary_img {
+	width: 500px;
+	height: 150px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	justify-content : center;
 }
 
-.image_area img {
-	padding: 20px;
-	width: 100%;
-}
-
-.product_content .inputarea {
-	margin-bottom: 30px;
-}
-
-.inputarea input {
+.title {
 	width: 400px;
-	height: 30px;
+	height: 40px;
+	justify-content : center;
 }
 
-.inputarea coin_count{
-	width: 80px;
-	height: 30px;
+.coin_count{
+	width: 100px;
+	height: 40px;
+	justify-content : center;
+	
 }
 
 
 .textarea{
 	margin-bottom: 30px;
+	resize: none;
 }
 
 .btn_area {
@@ -91,12 +89,7 @@
 	margin: 5px;
 }
 
-.temporary_img {
-	width: 450px;
-	height: 150px;
-	margin-top: 30px;
-	margin-bottom: 20px;
-}
+
 
 
 </style>
@@ -113,18 +106,18 @@
 			<img class="temporary_img" src="/Do_IT/resources/images/study-background6.jpg">
 			<br>
 			<input type="file" name="thumbnail" accept="image/gif,image/jpeg,image/png" required>
-			<div></div>
+			
 			<h6>
 				<span class="inputarea"> 
-					<input type="text" name="title" required placeholder="상품명을 입력하세요.">
+					<input type="text" class="title" required placeholder="상품명을 입력하세요.">
 				</span>
 			</h6>
 			<h6>
 				<span class="inputarea"> 
-					<input type="select" name="coin_count" required placeholder="Coin수를 입력하세요."> Coin 
+					<input type="number" class="coin_count" min= 1 required placeholder="Coin수를 입력하세요."> Coin 
 				</span>
 			</h6>
-			<textarea class="textarea" rows="15" cols="60" name="content" placeholder="상품설명을 입력하세요." readonly></textarea>
+			<textarea class="textarea" rows="15" cols="80" name="content" placeholder="상품설명을 입력하세요." readonly></textarea>
 			<div class="btn_area">
 			<button class=enrollbtn type="submit">등록</button>
 			<button class=canclebtn type="button" onclick="window.close();">취소</button>
