@@ -86,7 +86,7 @@ button[id$=Btn]:hover {
 	<div class="wrapper">
 		<div class="content">
 			<form id="refundForm" action="<%= request.getContextPath() %>/my/refund" method="post" onsubmit="return validate();">
-				<div class="logo_area"><a href="/Do_IT"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo" onclick="window.close();"></a></div><br>
+				<div class="logo_area" onclick="window.close();"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo"></div>
 				<div class="current_coin">
 					<span id="current_result"><h2>현재 보유 중인 코인 : <span>00 코인</span></h2></span>
 				</div>
