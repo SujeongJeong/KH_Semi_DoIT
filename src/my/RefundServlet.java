@@ -1,4 +1,4 @@
-package member.controller;
+package my;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class findEmailServlet
+ * Servlet implementation class RefundServlet
  */
-@WebServlet("/findEmail")
-public class findEmailServlet extends HttpServlet {
+@WebServlet("/my/refund")
+public class RefundServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public findEmailServlet() {
+    public RefundServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -7,35 +7,40 @@
 <title>서비스 이용 약관</title>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
+	.content {
+		width: 500px;
+		height: 500px;
+	}
 	body {
 		background: lightgray;
 	}
 	h1 {
 		text-align: center;
 	}
-	.content_area {
-		height: 800px;
+	
+	.text_area {
+		width: 500px;
+		height: 400px;
 		background: white;
 		overflow-x: scroll; 
  		overflow-y: scroll;
 	}
-	.input_area {
-		display: block;
-		text-align: center;
-	}
-	#closeBtn {
-		width: 500px;
+	#close_btn {
+		width: 100px;
 		height: 50px;
 		border: 0px;
 		color:white;
 		background:#5FC5FF;
 	}
+	.btn_area {
+		text-align: center;
+	}
 </style>
 </head>
 <body>
-	<content class="content">
+	<div class="content">
 		<h1>서비스 이용 약관</h1>
-		<pre class="content_area">
+		<pre class="text_area">
 제 1 장 총 칙
 
 제 1 조 (목적)
@@ -141,7 +146,7 @@
 
 (시행일) 이 약관은 2015년 01월부터 시행합니다.
 		</pre>
-		<span class="input_area"><button id="closeBtn" onclick="window.close()">확인</button></span>
-	</content>
+		<div class="btn_area"><button id="close_btn" onclick="window.close()">확인</button></div>
+	</div>
 </body>
 </html>

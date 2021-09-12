@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MyPaymentDetail
+ * Servlet implementation class ChangePwdViewServlet
  */
-@WebServlet("/my/details")
-public class MyPaymentDetail extends HttpServlet {
+@WebServlet("/my/changePwdView")
+public class ChangePwdViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPaymentDetail() {
+    public ChangePwdViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,7 @@ public class MyPaymentDetail extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/MyDetails.jsp");
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/changePwdView.jsp");
 		view.forward(request, response);
 	}
 

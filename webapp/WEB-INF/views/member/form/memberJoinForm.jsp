@@ -10,13 +10,17 @@
 	.content{
 		width:40%;
 		min-width : 400px;
-		height: 600px;
+		height: 800px;
 		margin:auto;
 	}
 	
 	#joinForm {
 		width : 400px;
 		margin: 70px auto;
+	}
+	.logo {
+		display: block;
+		text-align: center;
 	}
 	
 	#joinForm h4 {
@@ -31,7 +35,7 @@
 	}
 	
 	.input_area input {
-		width : 250px;
+		width : 255px;
 		height : 30px;
 		border: 0px;
 		margin-bottom: 15px;
@@ -57,11 +61,6 @@
 		margin-top : 20px;
 		font-size: 1.5em;
 	}
-	
-	.logo {
-	margin-bottom: 20px;
-	}
-
 	div[class$=box] {
 		display: flex;
 		justify-content: space-between;
@@ -93,11 +92,11 @@
 </style>
 </head>
 <body>
-	<content class="content">
+	<div class="content">
 		<div id="joinInfoArea">
 			<form id="joinForm" action="<%= request.getContextPath() %>/memberJoin"
 			method="post" onsubmit="return validate();">
-				<a href="/Do_IT"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo"></a><br>
+				<a href="/Do_IT" class="logo"><img src="/Do_IT/resources/images/logo.png" alt="logo"></a><br>
 				<div class="email_box">
 					<h4>이메일</h4>
 					<span id="emailResult"></span>
@@ -131,7 +130,7 @@
 				<span class="joinBtnArea"><button id="joinBtn">회원가입</button></span>
 			</form>
 		</div>
-	</content>
+	</div>
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>

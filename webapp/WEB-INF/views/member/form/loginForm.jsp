@@ -130,7 +130,7 @@ button[id^=easy] {
 </head>
 <body>
 	<div class="wrapper">
-		<content class="content">
+		<div class="content">
 			<form class="loginArea" action="<%= request.getContextPath() %>/login" method="post" onsubmit="return validate();">
 				<a href="/Do_IT"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo"></a><br>
 				<div class="email_box">
@@ -142,7 +142,7 @@ button[id^=easy] {
 				<span class="input_area"><input type="password" name="userPwd" id="userPwd" placeholder="비밀번호를 입력하세요"></span><br>
 				<div class="fun_box">
 					<div class="find_Btns">
-						<button id="findEmailBtn" type="button" onclick="openPopup('<%= request.getContextPath() %>/findEmail', 'findEmail', 500, 500);">이메일 찾기</button>|<button id="findPwdBtn" type="button" onclick="openPopup('<%= request.getContextPath() %>/findPwd', 'findPwd', 500, 500);">비밀번호 찾기</button>
+						<button id="findEmailBtn" type="button" onclick="openPopup('<%= request.getContextPath() %>/findEmailView', 'findEmail', 500, 500);">이메일 찾기</button>|<button id="findPwdBtn" type="button" onclick="openPopup('<%= request.getContextPath() %>/findPwdView', 'findPwd', 500, 500);">비밀번호 찾기</button>
 					</div>
 					<div id="join_box"><button id="joinBtn" onclick="location.href ='<%= request.getContextPath() %>/memberJoin';">회원가입</button ></div>
 				</div>
@@ -153,7 +153,7 @@ button[id^=easy] {
 				<div class="easy_btn" style="background: #2BD400"><button id="easy_naver">naver</button></div>
 				<div class="easy_btn"><button id="easy_kakao">kakao</button></div>
 			</form>
-		</content>
+		</div>
 	</div>
 	
 	<script>

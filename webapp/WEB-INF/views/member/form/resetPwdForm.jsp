@@ -79,7 +79,7 @@
 </style>
 </head>
 <body>
-	<content class="content">
+	<div class="content">
 		<div id="resetInfoArea">
 			<form id="resetPwdForm" action="<%= request.getContextPath() %>/resetPwd"
 			method="post" onsubmit="return validate();">
@@ -99,7 +99,7 @@
 				<span class="input_area joinBtnArea"><button id="joinBtn">비밀번호 재설정</button></span>
 			</form>
 		</div>
-	</content>
+	</div>
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
