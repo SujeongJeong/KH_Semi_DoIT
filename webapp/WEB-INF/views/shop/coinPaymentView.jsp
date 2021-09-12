@@ -144,7 +144,7 @@ button[id$=payment] {
 	</div>
 	<script>
 		function charge(){
-			if(confirm("충전이 완료되었습니다. "))
+			if(confirm("충전이 완료되었습니다."))
 				window.close();
 		}
 		

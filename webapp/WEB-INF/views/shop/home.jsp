@@ -184,7 +184,7 @@
 			left += window.screenLeft;
 			let top = (screen.availHeight/2) - (height/2);
 			let options = "width=" + width+",height="+height + ",left="+left + ", top=" + top;
-			
+			  
 			window.open(url, title, options);
 		}
 		
