@@ -27,36 +27,26 @@
 	margin-bottom: 30px;
 }
 
-.input_area {
-	border: solid 1px #dadada;
-	padding: 10px 10px 14px 10px;
-	background: white;
+.cerrent_coin{
+	text-align: center;
 }
 
-.input_area input {
-	width: 300px;
-	height: 30px;
-	border: 0px;
+#charge_input{
+	display: inline;
+	text-align: center;
 }
 
-.input_area input[type=submit] {
-	color:white;
-	background:#C8EBFF;
+#result{
+	text-align: center;
+	border: none;
+	font-size: 25px;
+	color: #5FC5FF
+
 }
 
-.login_btn {
-	background:#C8EBFF; 
-	border: 0px;
-	margin-bottom: 10px;
-}
 
 .logo {
 	margin-bottom: 20px;
-}
-
-
-#charge_input{
-	text-align: center;
 }
 
 
@@ -100,6 +90,7 @@ button[id$=payment] {
 .textarea{
 	margin-bottom: 30px;
 }
+
 .btn_area {
 	text-align: center;
 	border-top: 1px solid #282A35;
@@ -131,25 +122,45 @@ button[id$=payment] {
 				<div class="logo_area"><a href="/Do_IT"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo" onclick="window.close();"></a></div><br>
 				<div class="cerrent_coin">
 					<span id="cerrent_result"><h2>현재 보유 중인 코인 : 00 코인</h2></span>
-				</div>
-				<h4>충전 할 코인 : <input type="number" id="charge_input" min= 1 placeholder="충전 할 코인 수를 입력하세요."></h4>
-				<span class="charge_coin"></span>
+				
+				<div id="charge_area">충전 할 코인 : <input type="text" id="charge_input"  id="charge_input" onkeyup="calc(this.value)"  
+						min= 1 placeholder="충전 할 코인 수를 입력하세요.">
+						<input type="text" id="result" disabled/></div>
 				
 				
 				<hr>
-				<div class="payment_btn"><button id="phone_payment">핸드폰 결제</button></div>
-				<div class="payment_btn"><button id="card_payment">카드 결제</button></div>
-				<div class="payment_btn"><button id="kakao_payment">카카오 결제</button></div>
+				 <div class="payment_btn"><button id="phone_payment">핸드폰 결제</button></div>
+				 <div class="payment_btn"><button id="card_payment">카드 결제</button></div>
+				 <div class="payment_btn"><button id="kakao_payment">카카오 결제</button></div>
 				<hr>
-				<textarea class="textarea" rows="10" cols="60" name="content" placeholder="환불 주의사항 채우기" readonly></textarea>
-				<div class="btn_area">
-				<button class=chargebtn type="submit">충전</button>
-				<button class=canclebtn type="button" onclick="window.close();">취소</button>
+				 <textarea class="textarea" rows="10" cols="60" name="content" placeholder="환불 주의사항 채우기" readonly></textarea>
+				 <div class="btn_area">
+				 <button class=chargebtn type="submit" onclick="charge();">충전</button>
+				 <button class=canclebtn type="button" onclick="window.close();">취소</button>
 			    </div>
 				
 			</form>
 		</div>
 	</div>
+	<script>
+		function charge(){
+			if(confirm("충전이 완료되었습니다."))
+				window.close();
+		}
+		
+		function calc(val){ //수수료포함 코인가격 현금화.
+		    var charge = parseInt(val);
+		    var price = 110*charge;
+		    
+		    if(val == ""){
+		        document.getElementById('result').value = "0";
+		    }else{
+		        document.getElementById('result').value = price + "원";
+		    }
+		}	
+		
+	</script>
+
 	
 </body>
 </html>

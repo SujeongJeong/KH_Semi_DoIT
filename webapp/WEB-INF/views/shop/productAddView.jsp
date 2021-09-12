@@ -115,19 +115,26 @@
 			<h6>
 				<span class="inputarea"> 
 					<input type="number" class="coin_count" min= 1 required placeholder="Coin수를 입력하세요."> Coin 
+					
 				</span>
 			</h6>
 			<textarea class="textarea" rows="15" cols="80" name="content" placeholder="상품설명을 입력하세요." readonly></textarea>
 			<div class="btn_area">
-			<button class=enrollbtn type="submit">등록</button>
+			<button class=enrollbtn type="submit" onclick="enroll();">등록</button>
 			<button class=canclebtn type="button" onclick="window.close();">취소</button>
 		    </div>
 		
 		
-	</form>
-	</div>
+			</form>
+		</div>
 	</div>	
-	
+	<script>
+		function enroll(){
+			if(confirm("등록하시겠습니까? "))
+				window.close();
+			//코인금액이 가격보다 작으면 코인창으로 가기.
+		}
+	</script>
 
 
 </body>
