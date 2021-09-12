@@ -9,13 +9,16 @@
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
-  
+ 
+.wrapper{
+	margin-top : 80px;
+	
+} 
 
 .productAddForm {
-	width: 40%;
-	min-width: 400px;
-	height: 600px;
-	margin: 70px auto;
+	width: 600px;
+	height: 500px;
+	margin: 100px auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -27,47 +30,37 @@
 	justify-content: center;
 }
 
-.productArea {
-	width: 800px;
-	margin: auto;
-	padding : 30px;
-}
-
-.productAddForm {
-	width: 780px;
-	margin: 100px auto;
-}
 .product_content {
 	padding: 0px 20px;
 	margin-bottom: 30px;
 }
 
-.image_area {
-	text-align: center;
+
+.temporary_img {
+	width: 500px;
+	height: 150px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	justify-content : center;
 }
 
-.image_area img {
-	padding: 20px;
-	width: 100%;
-}
-
-.product_content .inputarea {
-	margin-bottom: 30px;
-}
-
-.inputarea input {
+.title {
 	width: 400px;
-	height: 30px;
+	height: 40px;
+	justify-content : center;
 }
 
-.inputarea coin_count{
-	width: 150px;
-	height: 30px;
+.coin_count{
+	width: 100px;
+	height: 40px;
+	justify-content : center;
+	
 }
 
 
 .textarea{
 	margin-bottom: 30px;
+	resize: none;
 }
 
 .btn_area {
@@ -93,57 +86,48 @@
 	margin: 5px;
 }
 
-.temporary_img {
-	width: 450px;
-	height: 150px;
-	margin-top: 30px;
-	margin-bottom: 20px;
-}
-
 
 </style>
 </head>
 <body>
 
- <div class="content">
- 	<div class="logo_area"><img class="logo" src="/Do_IT/resources/images/logo.png" onclick="window.close();" alt="logo"><br></div><br>
- 	<div class="productArea">
+<div class="wrapper">
+ 	<div class="content">
 	<!-- 제목조건, 폼 입력 조건 나중에 설정하기 -->
+	<div class="logo_area"><img class="logo" src="/Do_IT/resources/images/logo.png" onclick="window.close();" alt="logo"><br></div><br>
+	
 	<form class="productAddForm" action="" method="post">
 		<div class="product_content">		
-		<!-- 사진, 제목, coin수, content 입력 폼 만듬-->	
-			<!-- <div class="image_area" src="/Do_IT//resources/images/study-background3"></div> -->
 			<img class="temporary_img" src="/Do_IT/resources/images/study-background6.jpg">
 			<br>
-			<div></div>
+			<input type="file" name="thumbnail" accept="image/gif,image/jpeg,image/png" readonly>
+			
 			<h6>
 				<span class="inputarea"> 
-					<input type="text" name="title"  placeholder="상품명을 입력하세요." readonly>
+					<input type="text" class="title" required placeholder="상품명을 입력하세요." readonly>
 				</span>
 			</h6>
 			<h6>
 				<span class="inputarea"> 
-					<input type="number" name="coin_count" placeholder="Coin수를 입력하세요." readonly > Coin 
+					<input type="number" class="coin_count" min= 1 required placeholder="Coin수를 입력하세요." readonly > Coin 
 				</span>
 			</h6>
-			<textarea class="textarea" rows="15" cols="60" name="content" placeholder="상품설명을 입력하세요." readonly></textarea>
+			<textarea class="textarea" rows="15" cols="80" name="content" placeholder="상품설명을 입력하세요." readonly></textarea>
 			<div class="btn_area">
-			<button class=paymentbtn type="submit" onclick="buy();">구매</button>
+			<button class=paymentbtn type="button" onclick="parchase();">구매</button>
 			<button class=canclebtn type="button" onclick="window.close();">취소</button>
 		    </div>
 		
 		
 	</form>
 	</div>
-	</div>
-	
+	</div>	
 	<script>
-	function buy(){ 
-		alert('정말 구매하시겠습니까?'); 
-	}
-
-
-	
+		function parchase(){
+			if(confirm("구매하시겠습니까?"))
+				window.close();
+			//코인금액이 가격보다 작으면 코인창으로 가기.
+		}
 	</script>
 
 
