@@ -7,22 +7,22 @@
 <title>마이페이지 - 구매내역</title>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
-	.content {
+	/* 전체 감싸는 div */
+	.my_wrap {
 		display: flex;
-	 }
+	}	
 	/* 사이드메뉴 영역 */
-	.side_menu { 
-		border: 1px solid black;
-		width: 160px;
+	.side_menu{
+	    width: 160px;
 	}
-	
 	.side_menu ul {
-		position: sticky;
+		padding-left: 40px;
+		list-style-type:none;
 	}
 	.side_menu li {
-		list-style: none;
+		 margin: 60px 0;
 	}
-	.side_menu a {
+	.side_menu a{
 		text-decoration:none;
 		display : block;
 		margin : 10px;
@@ -31,36 +31,133 @@
 		text-align : left;
 		font-size : 15pt;
 	}
-	.side_menu a:hover {
-		color: #5FC5FF;
+	.side_menu a:hover:not(.current){
+		color : #5FC5FF;
 	}
+	
 	.side_menu .current a{
 		color : #5FC5FF;
 		font-weight : bold;
 	}
-	/* 메인 콘텐츠 영역 */
-	.content_area {
+	/* 콘텐츠 영역 */
+	/* 보유 코인 박스 */
+	.coin_area {
+		height: 100px;
+		margin-bottom: 10px;
 		border: 1px solid black;
-		width: 950px;
+	}
+	.coin_box {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px 20px;
+	}
+	.btn_area {
+		padding: 10px 0;
+	}
+	button[id$=btn] {
+		width: 100px;
+		height: 50px;
+		margin-left: 20px;
+	}
+	#charge_btn {
+		background: #5FC5FF;
+		color: white;
+	}
+	#coin h1{
+		margin-top: 12px;
+	
+	}
+	/* 리스트 */
+	div[class$=list] {
+		border: 1px solid black;
+		width: 100%;
+		height: 350px;
+	}
+	.list_header {
+		background: #5FC5FF;
+		color: white;
+		font-weight: bold;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		justify-content: space-around;
+		list-style: none;
+		height: 50px;
+	}
+	.list_header li {
+		font-size: 18px;
+		padding: 10px 0;
+	}
+	div[class$=list] p {
+		color: lightgray;
+		margin-top: 15%;
+		text-align: center;
 	}
 </style>
 </head>
 <body>
 <%@ include file='/WEB-INF/views/common/menubar.jsp' %>
-	<content class="content">
-		
+	<div class="my_wrap">
 		<nav class="side_menu">
-			<li><a href="<%= request.getContextPath() %>/my/home">내 정보</a></li>
-			<li><a href="<%= request.getContextPath() %>/my/study">내 스터디</a></li>
-			<li><a href="<%= request.getContextPath() %>/my/q&a">내 Q&A</a></li>
-			<li class="current"><a href="#">결제 내역</a></li>
+			<ul>
+				<li><a href="<%= request.getContextPath() %>/my/home">내 정보</a></li>
+				<li><a href="<%= request.getContextPath() %>/my/study">내 스터디</a></li>
+				<li><a href="<%= request.getContextPath() %>/my/q&a">내 Q&A</a></li>
+				<li class="current"><a href="#">결제 내역</a></li>
+			</ul>
 		</nav>
-		<div class="content_area">
+		<div class="content">
+			<div class="coin_area">
+				<div class="coin_box">
+					<h2>보유 코인</h2>
+					<span id="coin"><h1>445코인</h1></span>
+					<span class="btn_area">
+						<button id="charge_btn" onclick="openPopup('<%=request.getContextPath()%>/coin', 'coin_charge', 700, 900);">충전</button>
+						<button id="refund_btn" onclick="openPopup('<%=request.getContextPath()%>/my/refundView', 'refund', 700, 900);">환불</button>
+					</span>
+				</div>
+				
+			</div>
+			<div class="detail_list">
+				<ul class="list_header">
+					<li>날짜</li>
+					<li>구매/충전/환불</li>
+					<li>코인</li>
+					<li>총 코인</li>
+				</ul>
+				<p>구매/충전/환불 기록이 없습니다</p>
+			</div>
+			<div class="my_item">
+				<h1>내 아이템</h1>
+				<div class="item_list">
+					<ul class="list_header">
+						<li>아이템명</li>
+						<li>코인</li>
+						<li>구매일</li>
+						<li>유효기간</li>
+					</ul>
+					<p>구매하신 아이템이 없습니다</p>
+				</div>
+			</div>
 		</div>
-	</content>
+	</div>
+	
 	
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
+	
+	<script>
+	function openPopup(url, title, width, height) {
+		let left = (document.body.clientWidth/2) - (width/2);
+		// 듀얼모니터를 위한 계산
+		left += window.screenLeft;
+		let top = (screen.availHeight/2) - (height/2);
+		
+		let options = "width="+width+",height="+height+",left="+left+",top="+top;
+		
+		window.open(url, title, options);
+	}
+	</script>
 </body>
 </html>
