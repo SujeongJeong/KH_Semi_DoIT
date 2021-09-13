@@ -108,7 +108,7 @@
 	
 	  <div class="product_premium">
 	    <div class="premium_product" id="set1" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-	    	<span><input type="checkbox" id="product_check" checked="unchecked" style="display:none"></span>
+	    	<span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
             <img class="premium_img" src="/Do_IT//resources/images/shop-premium.png">
             <div class="product_name"> (체험) 프리미엄 7일 이용권</div>
             <div class="product_price">15 point</div>
@@ -134,7 +134,7 @@
       <div class="product_single">
     
          <div class="studyroomjoin_product" id="set1" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-         <span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
+         <span><input type="checkbox" id="product_check" checked="unchecked" style="display:none"></span>
             <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
             <div class="product_name">스터디 가입 제한 해제 + todo 이용권(7일)</div>
             <div class="product_price">8 point</div>
@@ -191,12 +191,12 @@
 	
 		
 		function checkbox(){
-            if($("#product_check").css('display') == 'none'){
-            $("#product_check").show();
+            if($('input[name=product_check]').css('display') == 'none'){
+            $('input[name=product_check]').show();
         }else{
-            $("#product_check").hide();
+            $('input[name=product_check]').hide();
         }
-        }
+      }
 
 </script>
 
