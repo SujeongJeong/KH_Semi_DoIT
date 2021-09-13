@@ -8,7 +8,7 @@
 <title>shop - Do IT</title>
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css?after' rel='stylesheet'>
-<script src="resources/js/jquery-3.6.0.min.js"></script>
+<script src="<%= request.getContextPath() %>/resources/js/jquery-3.6.0.min.js"></script>
 <style>
 
 .product_area{
@@ -108,21 +108,21 @@
 	
 	  <div class="product_premium">
 	    <div class="premium_product" id="set1" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-	    	<span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
+	    	<span><input type="checkbox" name="product_check"  style="display:none"></span>
             <img class="premium_img" src="/Do_IT//resources/images/shop-premium.png">
             <div class="product_name"> (체험) 프리미엄 7일 이용권</div>
             <div class="product_price">15 point</div>
          </div>
          
 		 <div class="premium_product" id="set2" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-		 	<span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
+		 	<span><input type="checkbox" name="product_check"  style="display:none"></span>
             <img class="premium_img" src="/Do_IT//resources/images/shop-premium.png">
             <div class="product_name"> 프리미엄 30일 이용권</div>
             <div class="product_price">45 point</div>
          </div>
          
          <div class="premium_product" id="set3" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-        	 <span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
+        	 <span><input type="checkbox" name="product_check"  style="display:none"></span>
             <img class="premium_img" src="/Do_IT/resources/images/shop-premium.png">
             <div class="product_name">프리미엄 90일 이용권</div>
             <div class="product_price"><s class="lightgray-c">135 point</s>    120 point</div>
@@ -134,19 +134,19 @@
       <div class="product_single">
     
          <div class="studyroomjoin_product" id="set1" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-         <span><input type="checkbox" id="product_check" checked="unchecked" style="display:none"></span>
+         <span><input type="checkbox" name="product_check"  style="display:none"></span>
             <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
             <div class="product_name">스터디 가입 제한 해제 + todo 이용권(7일)</div>
             <div class="product_price">8 point</div>
          </div>
          <div class="studyroomjoin_product" id="set2" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-         <span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
+         <span><input type="checkbox" name="product_check"  style="display:none"></span>
             <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
             <div class="product_name">스터디 가입 제한 해제 + todo 이용권(30일)</div>
             <div class="product_price">32 point</div>
          </div>
          <div class="studyroomjoin_product" id="set3" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-         <span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
+         <span><input type="checkbox" name="product_check"  style="display:none"></span>
             <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
             <div class="product_name">스터디 가입 제한 해제 + todo 이용권(90일)</div>
             <div class="product_price">
@@ -154,19 +154,19 @@
             </div>
          </div>
          <div class="studymember_product" id="set4" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-         <span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
+         <span><input type="checkbox" name="product_check"  style="display:none"></span>
             <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
             <div class="product_name">스터디 인원 수 해제 + todo 이용권(7일)</div>
             <div class="product_price">8 point</div>
          </div>
          <div class="studymember_product" id="set5" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-         <span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
+         <span><input type="checkbox" name="product_check" " style="display:none"></span>
             <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
             <div class="product_name">스터디 인원 수 해제 + todo 이용권(30일)</div>
             <div class="product_price">32 point</div>
          </div>
          <div class="studymember_product" id="set6" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-         <span><input type="checkbox" name="product_check" checked="unchecked" style="display:none"></span>
+         <span><input type="checkbox" name="product_check"  style="display:none"></span>
             <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
             <div class="product_name">스터디 인원 수 해제 + todo 이용권(90일)</div>
             <div class="product_price">
@@ -189,10 +189,10 @@
 		}
 		
 	
-		
-		function checkbox(){
+		function checkbox(){ //-버튼을 누르면 체크박스 활성화. 단, 클릭시 기능구현 아직 덜 했음.
             if($('input[name=product_check]').css('display') == 'none'){
             $('input[name=product_check]').show();
+            
         }else{
             $('input[name=product_check]').hide();
         }
