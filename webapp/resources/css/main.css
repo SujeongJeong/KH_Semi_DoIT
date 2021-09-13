@@ -1,0 +1,39 @@
+@charset "UTF-8";
+	ul{	list-style: none; }
+	.title{
+		font-weight : bold;
+		font-size : 20px;
+		padding-right : 5px;
+	}
+	.study-list, .todo-list {
+		margin-top : 10px;
+		width : 480px;
+		height : 300px;
+		border-radius : 5px;
+		border : 1px #C4C4C4 solid;
+		vertical-align: middle;
+		position : relative;
+	}
+	.study-list{display:flex; padding-left: 10px; padding-right: 10px;}
+	.nolist{ 
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width : 250px;
+	}
+	.semiTitle{ 	font-size : 16px;	}
+	.goalUl{ 	padding : 50px;	}
+	.todayhours, .goalhours {	 font-size : 23px;	 }
+	.icon {	float :right; padding-right : 30px;	}
+	.yesterday { 	padding-right : 30px; padding-left : 30px; font-size : 18px;	}
+	.date {	 font-size : 14px;	}
+	.rankikgUl { 	margin-top : 20px; padding : 0px;	}
+	.rankikgUl li {	 padding: 13px;  height : 30px;	 }
+	.nickname{	 font-size : 20px; padding : 10px;	}
+	.hours { 	font-size : 18px; padding : 10px;	}
+	.myranking { 	background-color : #E5E5E5; border-radius : 5px; margin-top : 20px;	}
+	.icon img{ width : 20px; height : 20px; margin-5px;}
+	.todo-title img { width : 25px; height : 25px;}
+	.study-list img { width : 200px; height : 200px;}
+	.study-info { width : 210px; margin : 10px;}

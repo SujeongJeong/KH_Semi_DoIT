@@ -7,8 +7,9 @@
 <title>Do IT</title>
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css?after' rel='stylesheet'>
+<link href='<%= request.getContextPath() %>/resources/css/main.css?after' rel='stylesheet'>
 <style>
-	.outer{
+.outer{
 		width : 1000px;
 		display : grid;
 		margin : 20px auto;	
@@ -21,44 +22,7 @@
 	.outer:nth-child(2){	grid-area : 1/2/2/3;    }
 	.outer:nth-child(3){	grid-area : 2/1/3/2;	}
 	.outer:nth-child(4){	grid-area : 2/2/3/3;	}
-	ul{	list-style: none; }
-	.title{
-		font-weight : bold;
-		font-size : 20px;
-		padding-right : 5px;
-	}
-	.study-list, .todo-list {
-		margin-top : 10px;
-		width : 480px;
-		height : 300px;
-		border-radius : 5px;
-		border : 1px #C4C4C4 solid;
-		text-align : center;
-		vertical-align: middle;
-		position : relative;
-	}
-	.nolist{ 
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width : 250px;
-	}
-	.semiTitle{ 	font-size : 16px;	}
-	.goalUl{ 	padding : 50px;	}
-	.todayhours, .goalhours {	 font-size : 23px;	 }
-	.icon {	float :right; padding-right : 30px;	}
-	.yesterday { 	padding-right : 30px; padding-left : 30px; font-size : 18px;	}
-	.date {	 font-size : 14px;	}
-	.rankikgUl { 	margin-top : 20px; padding : 0px;	}
-	.rankikgUl li {	 padding: 13px;  height : 30px;	 }
-	.nickname{	 font-size : 20px; padding : 10px;	}
-	.hours { 	font-size : 18px; padding : 10px;	}
-	.myranking { 	background-color : #E5E5E5; border-radius : 5px; margin-top : 20px;	}
-	.icon img{ width : 20px; height : 20px; margin-5px;}
-	.todo-title img { width : 25px; height : 25px;}
 </style>
-
 </head>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
@@ -71,7 +35,17 @@
 				<img src="resources/images/left-arrow-nolist.png" alt="넘김"><img src="resources/images/right-arrow-nolist.png" alt="넘김">
 				</span>
 				<div class="study-list">
-				<label class="nolist text">스터디를 만들거나 추가해보세요.</label>
+					<%-- <label class="nolist text">스터디를 만들거나 추가해보세요.</label>--%>
+					<div class="study-info">
+					<img src="resources/images/study-background1.jpg" alt="스터디배경사진"><br>
+					<label class="study-name">스터디방 이름</label><br>
+					<label class="study-category">#category</label>
+					</div>
+					<div class="study-info">
+					<img src="resources/images/study-background1.jpg" alt="스터디배경사진"><br>
+					<label class="study-name">스터디방 이름</label><br>
+					<label class="study-category">#category</label>
+					</div>
 				</div>
 			</div>
 			<div class="goal-area">
@@ -85,7 +59,7 @@
 			</div>
 			<div class="ranking-area">
 				<span class="title">누적 공부 시간 랭킹 </span><span class="point-c yesterday">하루 전</span>
-				<span class="lightgray-c date">yyyy.MM.dd(E요일) 오전 0시 기준</span>
+				<span class="lightgray-sc date">yyyy.MM.dd(E요일) 오전 0시 기준</span>
 				<ul class="rankikgUl">
 				<li class="first"><img src="resources/images/flag-first.png" alt="1위"><span class="nickname">1위 user01</span><span class="hours">22:59:59</span></li>
 				<li class="second"><img src="resources/images/flag-second.png" alt="2위"><span class="nickname">2위 user02</span><span class="hours">18:33:33</span></li>
