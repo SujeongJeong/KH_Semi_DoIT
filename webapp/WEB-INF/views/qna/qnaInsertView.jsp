@@ -45,12 +45,24 @@
 							<span class="input_area"> <input type="text" name="title"
 								placeholder="제목을 입력해주세요." required>
 							</span> <br><br>
-							<input type="file" name="file"><br><br>
-							<textarea class="textarea" rows="20" cols="121" name="content"
-								required></textarea>
+							
+							
+							<div class="image_area"></div>
+							<div class="image_area"></div>
+
+							<input type="file" name="contentImg1" accept="image/gif,image/jpeg,image/png"> 
+							<input type="file" name="contentImg2" accept="image/gif,image/jpeg,image/png">
+							
+							
+							
+							
+							<textarea class="textarea" rows="20" cols="137" name="content" required>
+								
+								
+								</textarea>
 						</div>
 						<div class="btn_area">
-							<button type="button">목록으로</button>
+							<button type="button" onclick="location.href='<%= request.getContextPath() %>/qna/home'">목록으로</button>
 							<button type="submit">작성하기</button>
 						</div>
 					</form>
@@ -62,5 +74,7 @@
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
+	
+	<script src="<%= request.getContextPath() %>/resources/js/imagePreview.js"></script>
 </body>
 </html>

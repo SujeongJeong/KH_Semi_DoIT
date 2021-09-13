@@ -14,7 +14,6 @@ a {
 }
 
 button{
-	cursor : pointer;
 	border : none;
 }
 
@@ -86,7 +85,7 @@ button{
 
 .board_list tbody tr input[type=checkbox]{
     position: absolute;
-    left: 0px;
+    left: -4px;
     width: 20px;
     height: 20px;
  

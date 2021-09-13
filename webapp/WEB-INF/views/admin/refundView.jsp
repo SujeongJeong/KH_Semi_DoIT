@@ -7,7 +7,7 @@
 <title>관리 - Do IT</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-	<link href='<%= request.getContextPath() %>/resources/css/admin-Refund.css?afters' rel='stylesheet'>
+	<link href='<%= request.getContextPath() %>/resources/css/admin-Refund.css?after' rel='stylesheet'>
 </head>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
@@ -57,7 +57,7 @@
 						<tbody>
 							<tr>
 								<td><input type="checkbox">1</td>
-								<td>30</td>
+								<td onclick="openPopup('<%= request.getContextPath() %>/refundList', 'refundList', 800, 500);">30</td>
 								<td>닉네임</td>
 								<td>2021-09-10</td>
 							</tr>
@@ -93,6 +93,23 @@
 			if(confirm("환불처리를 하시겠습니까?"))
 				location.href = '<%= request.getContextPath() %>/coinRefund';
 		}
+		
+		// 팝업창 호출
+		function openPopup(url, title, width, height){
+			// 왼쪽으로 부터 거리(가운데 맞추기)
+			let left = (document.body.clientWidth/2) - (width/2);
+			// 듀얼모니터를 위한 계산 (듀얼모니터를 쓰고 있을때 추가로 )
+			left += window.screenLeft;
+			let top = (screen.availHeight/2) - (height/2);
+			
+			let options = "width="+width+",height="+height+",left="+left+",top="+top;
+			
+			
+			// 새창 열기
+			window.open(url, title, options);
+		}
+		
+		
 	</script>
 </body>
 </html>

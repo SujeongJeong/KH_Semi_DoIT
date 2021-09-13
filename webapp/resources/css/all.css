@@ -12,6 +12,10 @@
 	width: 900px;
 }
 
+button {
+	cursor:pointer;
+}
+
 .point-bc {
 	background-color : #5FC5FF;
 }
