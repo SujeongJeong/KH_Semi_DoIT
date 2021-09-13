@@ -11,6 +11,7 @@
 		width: 500px;
 		height: 500px;
 		margin: 0 auto;
+		padding: 50px 0;
 	}
 	h1 {
 		text-align: center;
@@ -56,9 +57,14 @@
 		padding-top: 10px;
 		color: red;
 	}
+	.logo_area {
+		display: block;
+		text-align: center;
+	}
 </style>
 <body>
 	<div class="content">
+		<div class="logo_area" onclick="window.close();"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo"></div>
 		<h1>비밀번호 변경</h1>
 		<form id="changePwdForm" action="<%= request.getContextPath() %>/my/changePwd"
 		method="post" onsubmit="return validate();">

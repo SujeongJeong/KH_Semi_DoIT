@@ -35,10 +35,15 @@
 	.btn_area {
 		text-align: center;
 	}
+	.logo_area {
+		display: block;
+		text-align: center;
+	}
 </style>
 </head>
 <body>
 	<div class="content">
+		<div class="logo_area" onclick="window.close();"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo"></div>
 		<h1>서비스 이용 약관</h1>
 		<pre class="text_area">
 제 1 장 총 칙

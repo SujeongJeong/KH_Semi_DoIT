@@ -11,6 +11,14 @@
 		width: 500px;
 		height: 500px;
 		margin: 0 auto;
+		padding: 50px 0;
+	}
+	.logo_area {
+		display: block;
+		text-align: center;
+	}
+	.logo {
+		width: 300px;
 	}
 	#findPwdForm {
 		padding: 20px 100px;
@@ -25,47 +33,51 @@
 	}
 	
 	.input_area input{
-		width : 250px;
-		height : 30px;
+		width : 200px;
+		height : 20px;
 		border: 0px;
 	}
-	.btn_area {
-		width: 100%;
-		height: 50px;
-		margin: 20px 0;
-	}
-	.btn_area > button {
-		width: 100%;
-		height: 100%;
-		border: 0;
+	.find_btn {
+		width: 50px;
 		background: #5FC5FF;
-		color:white;
+		color: white;
+		border: 0;
 	}
 	textarea {
 		width: 100%;
 		height: 100px;
 		resize: none;
+		margin-bottom: 10px;
 	}
 	#close_btn {
 		width: 100px;
 		height: 30px;
 		background: lightgray;
+		border: 0;
 	}
 	.close {
 		text-align: center;
+	}
+	.find_area {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 10px;
 	}
 </style>
 </head>
 <body>
 	<div class="content">
+		<div class="logo_area" onclick="window.close();"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo"></div>
 		<h1>비밀번호 찾기</h1>
 		<form id="findPwdForm" action="<%= request.getContextPath() %>/findPwd"
 		method="post" onsubmit="return checkEmail();">
 			<p>이메일</p>
-			<span class="input_area">
-				<input type="email" name="userEmail" id="userEmail">
-			</span>
-			<div class="btn_area"><button>비밀번호 찾기</button></div>
+			<div class="find_area">
+				<span class="input_area">
+					<input type="email" name="userEmail" id="userEmail">
+				</span>
+				<button class="find_btn">조회</button>
+			</div>
 			<textarea rows="5" cols="5" readonly></textarea>
 			<div class="btn_area close"><button id="close_btn" onclick="window.close()">확인</button></div>
 		</form>
