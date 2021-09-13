@@ -7,7 +7,7 @@
 <title>관리 - Do IT</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-	<link href='<%= request.getContextPath() %>/resources/css/admin-Member.css?afters' rel='stylesheet'>
+	<link href='<%= request.getContextPath() %>/resources/css/admin-Member.css?after' rel='stylesheet'>
 </head>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
@@ -59,24 +59,27 @@
 								<th>닉네임</th>
 								<th>가입날짜</th>
 								<th>신고횟수</th>
+								<th>상태</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr class="manager">
 								<td>
-									<input type="checkbox">M
+									<input type="checkbox">12
 								</td>
 								<td>2222@naver.com</td>
 								<td>관리자</td>
 								<td>2021-08-29</td>
 								<td>0</td>
+								<td>A</td>
 							</tr>
 							<tr>
 								<td><input type="checkbox">1</td>
 								<td>2222@naver.com</td>
 								<td>닉네임</td>
 								<td>2021-08-28</td>
-								<td>1</td>
+								<td>2</td>
+								<td>U</td>
 							</tr>
 
 						</tbody>

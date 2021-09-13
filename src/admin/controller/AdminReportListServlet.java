@@ -1,8 +1,6 @@
-package admin;
+package admin.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AdminReportMemberServlet
+ * Servlet implementation class AdminReportList
  */
-@WebServlet("/admin/reportMember")
-public class AdminReportMemberServlet extends HttpServlet {
+@WebServlet("/reportList")
+public class AdminReportListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminReportMemberServlet() {
+    public AdminReportListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,10 +26,18 @@ public class AdminReportMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 메뉴바 클릭했을 때 페이지로 이동
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/admin/reportMemberView.jsp");
-		request.setAttribute("nav1", "admin");
-		view.forward(request, response);
+		String view = "";
+		// 세션에 로그인 유저 객체가 없다면
+//		if(request.getSession().getAttribute("loginUser") == null) {
+//			// 세션에 로그인 유저 객체가 없다면 에러페이지로 이동
+//			request.setAttribute("msg", "올바르지 않은 요청입니다.");
+//			view = "WEB-INF/views/common/errorpage.jsp";
+//		} else {
+//			// 비밀번호 변경 창으로 이동
+//			view = "WEB-INF/views/qna/qnaReportForm.jsp";
+//		}
+		view = "WEB-INF/views/admin/reportListForm.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	/**

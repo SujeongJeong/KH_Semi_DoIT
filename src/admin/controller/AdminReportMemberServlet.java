@@ -1,4 +1,4 @@
-package admin;
+package admin.controller;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AdminReportStudyServlet
+ * Servlet implementation class AdminReportMemberServlet
  */
-@WebServlet("/admin/reportStudy")
-public class AdminReportStudyServlet extends HttpServlet {
+@WebServlet("/admin/reportMember")
+public class AdminReportMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminReportStudyServlet() {
+    public AdminReportMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +29,7 @@ public class AdminReportStudyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 메뉴바 클릭했을 때 페이지로 이동
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/admin/reportStudyView.jsp");
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/admin/reportMemberView.jsp");
 		request.setAttribute("nav1", "admin");
 		view.forward(request, response);
 	}

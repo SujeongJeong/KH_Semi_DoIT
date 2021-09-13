@@ -78,8 +78,8 @@
 								<td>게시글</td>
 								<td>학원 홍보</td>
 								<td>닉네임1</td>
-								<td>1</td>
-								<td>6</td>
+								<td onclick="openPopup('<%= request.getContextPath() %>/reportList', 'reportList', 800, 500);">1</td>
+								<td onclick="openPopup('<%= request.getContextPath() %>/reportAllList', 'reportAllList', 800, 500);">6</td>
 							</tr>
 
 						</tbody>
@@ -110,5 +110,23 @@
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
+	
+	<script>
+	// 팝업창 호출
+	function openPopup(url, title, width, height){
+		// 왼쪽으로 부터 거리(가운데 맞추기)
+		let left = (document.body.clientWidth/2) - (width/2);
+		// 듀얼모니터를 위한 계산 (듀얼모니터를 쓰고 있을때 추가로 )
+		left += window.screenLeft;
+		let top = (screen.availHeight/2) - (height/2);
+		
+		let options = "width="+width+",height="+height+",left="+left+",top="+top;
+		
+		
+		// 새창 열기
+		window.open(url, title, options);
+	}
+	
+	</script>
 </body>
 </html>

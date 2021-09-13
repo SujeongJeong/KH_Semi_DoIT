@@ -1,4 +1,4 @@
-package admin;
+package qna.controller;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AdminHomeServlet
+ * Servlet implementation class QnaHomeServlet
  */
-@WebServlet("/admin/home")
-public class AdminHomeServlet extends HttpServlet {
+@WebServlet("/qna/home")
+public class QnaHomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminHomeServlet() {
+    public QnaHomeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,8 +29,8 @@ public class AdminHomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 메뉴바 클릭했을 때 페이지로 이동
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/admin/home.jsp");
-		request.setAttribute("nav1", "admin");
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/qna/home.jsp");
+		request.setAttribute("nav1", "qna");
 		view.forward(request, response);
 	}
 
