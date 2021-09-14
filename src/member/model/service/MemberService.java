@@ -9,6 +9,7 @@ import member.model.dao.MemberDao;
 import member.model.vo.Member;
 
 public class MemberService {
+	
 	private MemberDao md = new MemberDao();
 	// 1. 로그인 기능
 	public Member loginMember(String email, String pwd) {
@@ -17,7 +18,7 @@ public class MemberService {
 		// System.out.println(conn);
 		
 		// MemberDao 클래스 만들어 loginMember 메소드 작성
-		Member loginUser = new MemberDao().loginMember(conn, email, pwd);
+		Member loginUser = md.loginMember(conn, email, pwd);
 		
 		close(conn);
 		
@@ -28,7 +29,7 @@ public class MemberService {
 	public  int insertMember(Member m) {
 		Connection conn = getConnection();
 		
-		int result = new MemberDao().insertMember(conn, m);
+		int result = md.insertMember(conn, m);
 		
 		if(result > 0)
 			commit(conn);
