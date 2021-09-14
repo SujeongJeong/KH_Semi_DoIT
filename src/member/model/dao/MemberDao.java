@@ -47,8 +47,18 @@ public class MemberDao {
 				loginUser = new Member(rset.getInt("user_no"),
 										rset.getString("user_email"),
 										rset.getString("user_pwd"),
-										rset.getString("nickname"));
+										rset.getString("nickname"),
+										rset.getTimestamp("eroll_date"),
+										rset.getString("user_type"),
+										rset.getString("profile_img"),
+										rset.getString("target_hour"),
+										rset.getInt("user_coin"),
+										rset.getInt("report_count"),
+										rset.getString("status"));
+				
 			}
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
