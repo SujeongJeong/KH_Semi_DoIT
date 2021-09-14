@@ -1,32 +1,39 @@
 package member.model.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Member {
 	private int userNo;
 	private String userEmail;
 	private String userPwd;
 	private String nickName;
+	private Date enrollDate;
+	private String userType;
+	private String profileImg;
+	private String targetHour;
+	private int userCoin;
+	private int reportCount;
 	private String status;
 	
 	public Member() {}
 
-	public Member(int userNo, String userEmail, String userPwd, String nickName, String status) {
+	
+	public Member(int userNo, String userEmail, String userPwd, String nickName, Date enrollDate, String userType,
+			String profileImg, String targetHour, int userCoin, int reportCount, String status) {
 		super();
 		this.userNo = userNo;
 		this.userEmail = userEmail;
 		this.userPwd = userPwd;
 		this.nickName = nickName;
+		this.enrollDate = enrollDate;
+		this.userType = userType;
+		this.profileImg = profileImg;
+		this.targetHour = targetHour;
+		this.userCoin = userCoin;
+		this.reportCount = reportCount;
 		this.status = status;
 	}
-	
-	public Member(int userNo, String userEmail, String userPwd, String nickName) {
-		super();
-		this.userNo = userNo;
-		this.userEmail = userEmail;
-		this.userPwd = userPwd;
-		this.nickName = nickName;
-	}
+
 
 	public Member(String userEmail, String userPwd, String nickName) {
 		super();
@@ -34,6 +41,7 @@ public class Member {
 		this.userPwd = userPwd;
 		this.nickName = nickName;
 	}
+
 
 	public int getUserNo() {
 		return userNo;
@@ -67,12 +75,70 @@ public class Member {
 		this.nickName = nickName;
 	}
 
+	public Date getEnrollDate() {
+		return enrollDate;
+	}
+
+	public void setEnrollDate(Date enrollDate) {
+		this.enrollDate = enrollDate;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	public String getProfileImg() {
+		return profileImg;
+	}
+
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
+	}
+
+	public String getTargetHour() {
+		return targetHour;
+	}
+
+	public void setTargetHour(String targetHour) {
+		this.targetHour = targetHour;
+	}
+
+	public int getUserCoin() {
+		return userCoin;
+	}
+
+	public void setUserCoin(int userCoin) {
+		this.userCoin = userCoin;
+	}
+
+	public int getReportCount() {
+		return reportCount;
+	}
+
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
+	}
+
 	public String getStatus() {
 		return status;
 	}
 
 	public void setStatus(String status) {
 		this.status = status;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "Member [userNo=" + userNo + ", userEmail=" + userEmail + ", userPwd=" + userPwd + ", nickName="
+				+ nickName + ", enrollDate=" + enrollDate + ", userType=" + userType + ", profileImg=" + profileImg
+				+ ", targetHour=" + targetHour + ", userCoin=" + userCoin + ", reportCount=" + reportCount + ", status="
+				+ status + "]";
+	}
+
+	
 	
 }

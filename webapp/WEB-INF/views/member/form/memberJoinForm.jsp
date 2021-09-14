@@ -140,17 +140,113 @@
 		let pwd2Result = document.getElementById('pwd2Result');
 		let nickResult = document.getElementById('nickResult');
 		
-		emailResult.innerHTML = 'emailResult';
-		pwdResult.innerHTML = 'pwdResult';
-		pwd2Result.innerHTML = 'pwd2Result';
-		nickResult.innerHTML = 'nickResult';
-		
+		function validate() {
+			// 비밀번호가 8 ~ 16 자리 사이이고 특수문자, 숫자, 영어만 가능
+			
+			
+			// 비밀번호와 비밀번호 확인이 일치하지 않으면
+			if($("[name=userPwd]").val() != $("[name=userPwd2]").val()) {
+				pwd2Result.innerHtml = "비밀번호가 일치하지 않습니다.";
+				$("[name=userPwd2]").focus();
+				return false;
+			}
 	
-		// 사용자 입력 값 유효성 검사
-		/* 
-			function vaildate(){
-			return true;	
-		} */
+			return true;
+		}
+		
+		$("#emailCheck").click(function(){
+			// input userId 변수
+			var userEmail = $("[name=userEmail]");
+			// 아이디 중복 시 false, 아이디 사용 가능 시 true
+			var isUsable = false;
+			
+			if(!userEmail || !userEmail.val().contains("@") ) {
+				emailResult.innerHtml = "올바른 이메일 형식을 입력해주세요."
+				userEmail.focus();
+			} else {
+				// 4자리 이상의 userId 값을 입력 했을 경우 중복 확인을 위해 ajax 통신 요청
+				$.ajax({
+					url : "${ contextPath }/emailCheck",
+					type : "post",
+					data : { userEmail : userEmail.val() },
+					success : function(result){
+						console.log(result);
+						if(result == "fail") {
+							emailResult.innerHtml = "이미 사용중이거나 탈퇴한 이메일입니다."
+							userEmail.focus();
+						} else {
+							if(confirm('사용 가능한 이메일입니다. 사용하시겠습니까?')) {
+								// 더 이상 id 입력 공간을 수정할 수 없도록 readonly 처리
+								userEmail.attr('readonly', true);
+								isUsable = true; // 사용 가능한 아이디라는 flag 값
+							} else {
+								// confirm 창에서 취소를 누를 경우(처음 , 또는 반복해서) 다시 id 수정 가능하도록
+								userEmail.attr('readonly', false);
+								userEmail.focus();
+								isUsable = false; // 사용 불가능한 아이디라는 flag 값
+							}
+						}
+						// 아이디 중복 체크 후 중복이 아니며 사용하겠다고 선택한 경우에만
+						// joinBtn disable 제거
+						if(isUsable) {
+							$("#joinBtn").removeAttr("disabled");
+						} else {
+							$("#joinBtn").attr("disabled", true);
+						}
+					},
+					error : function(e){
+						console.log(e);
+					}
+				});
+			}
+		});
+		
+		$("#nickCheck").click(function(){
+			// input userId 변수
+			var nickName = $("[name=nickName]");
+			// 아이디 중복 시 false, 아이디 사용 가능 시 true
+			var isUsable = false;
+			
+			if(!nickName || userId.val().length < 4 ) {
+				alert('아이디는 최소 4자리 이상이어야 합니다.');
+				userId.focus();
+			} else {
+				// 4자리 이상의 userId 값을 입력 했을 경우 중복 확인을 위해 ajax 통신 요청
+				$.ajax({
+					url : "${ contextPath }/nickCheck",
+					type : "post",
+					data : { nickName : nickName.val() },
+					success : function(result){
+						console.log(result);
+						if(result == "fail") {
+							alert("사용할 수 없는 아이디 입니다.");
+							nickName.focus();
+						} else {
+							if(confirm('사용 가능한 아이디입니다. 사용하시겠습니까?')) {
+								// 더 이상 id 입력 공간을 수정할 수 없도록 readonly 처리
+								nickName.attr('readonly', true);
+								isUsable = true; // 사용 가능한 아이디라는 flag 값
+							} else {
+								// confirm 창에서 취소를 누를 경우(처음 , 또는 반복해서) 다시 id 수정 가능하도록
+								nickName.attr('readonly', false);
+								nickName.focus();
+								isUsable = false; // 사용 불가능한 아이디라는 flag 값
+							}
+						}
+						// 아이디 중복 체크 후 중복이 아니며 사용하겠다고 선택한 경우에만
+						// joinBtn disable 제거
+						if(isUsable) {
+							$("#joinBtn").removeAttr("disabled");
+						} else {
+							$("#joinBtn").attr("disabled", true);
+						}
+					},
+					error : function(e){
+						console.log(e);
+					}
+				});
+			}
+		});
 		
 		function openPopup(url, title, width, height) {
 			let left = (document.body.clientWidth/2) - (width/2);
@@ -164,6 +260,8 @@
 		}
 	</script>
 
+	<!-- 쿠키 사용하여 아이디 기억하기 기능 외부 파일로 작성하여 하단에 넣기 -->
+	<script src="<%= request.getContextPath() %>/resources/js/rememberUserId.js"></script>
 </body>
 </html>
 
