@@ -39,12 +39,12 @@
 					<div class="study-info">
 					<img src="resources/images/study-background1.jpg" alt="스터디배경사진"><br>
 					<label class="study-name">스터디방 이름</label><br>
-					<label class="study-category">#category</label>
+					<label class="study-category darkgray-c">#category</label>
 					</div>
 					<div class="study-info">
 					<img src="resources/images/study-background1.jpg" alt="스터디배경사진"><br>
 					<label class="study-name">스터디방 이름</label><br>
-					<label class="study-category">#category</label>
+					<label class="study-category darkgray-c">#category</label>
 					</div>
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 			</div>
 			<div class="ranking-area">
 				<span class="title">누적 공부 시간 랭킹 </span><span class="point-c yesterday">하루 전</span>
-				<span class="lightgray-sc date">yyyy.MM.dd(E요일) 오전 0시 기준</span>
+				<span class="lightgray-c date">yyyy.MM.dd(E요일) 오전 0시 기준</span>
 				<ul class="rankikgUl">
 				<li class="first"><img src="resources/images/flag-first.png" alt="1위"><span class="nickname">1위 user01</span><span class="hours">22:59:59</span></li>
 				<li class="second"><img src="resources/images/flag-second.png" alt="2위"><span class="nickname">2위 user02</span><span class="hours">18:33:33</span></li>
@@ -72,7 +72,24 @@
 					<label class="title">오늘의 할일</label><img src="resources/images/plus.png" alt="추가">
 				</div>
 				<div class="todo-list">
-					<label class="nolist text">오늘의 할일을 추가하세요.</label>
+					<div class="hiddenScroll">
+					<div class="scrollBlind">
+						<ul class="list">
+							<li>두잇<button class="edit"></button><button class="delete"></button></li>
+							<li>두잇두잇<button class="edit"></button><button class="delete"></button></li>
+							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
+							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
+							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
+							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
+							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
+							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
+							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
+							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
+							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
+						</ul>
+						<%-- <label class="nolist text">오늘의 할일을 추가하세요.</label>--%>
+					</div>
+					</div>
 				</div>
 			</div>
 		</div>
