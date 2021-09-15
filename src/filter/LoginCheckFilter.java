@@ -86,6 +86,7 @@ public class LoginCheckFilter implements Filter {
 		permitList.add("/Do_IT/idCheck");
 		permitList.add("/Do_IT/nickCheck");
 		permitList.add("/Do_IT/memberJoin");
+		permitList.add("/Do_IT/shop/home");
 		
 		resourceList = new ArrayList<>();
 		resourceList.add("/resources/");

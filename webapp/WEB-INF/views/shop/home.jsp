@@ -13,7 +13,7 @@
 
 .product_area{
 	width: 780px;
-	margin: 80px auto;
+	margin-right: 80px -10px 80px 80px;
 
 }
 
@@ -23,8 +23,9 @@
 	background: #5FC5FF;
 	width: 100px;
 	height: 35px;
-	margin-bottom: 30px;
+	margin-top: -20px;
 	margin-left: -80px;
+	border-radius : 5px; 
 }
 
 .product_premium {
@@ -112,6 +113,7 @@
             <img class="premium_img" src="/Do_IT//resources/images/shop-premium.png">
             <div class="product_name"> (체험) 프리미엄 7일 이용권</div>
             <div class="product_price">15 point</div>
+     
          </div>
          
 		 <div class="premium_product" id="set2" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
