@@ -1,5 +1,47 @@
 @charset "UTF-8";
 	ul{	list-style: none; }
+	.todo-list ul {
+		 list-style : decimal; 
+		 padding: 10px 10px 10px 40px; 
+		 margin : 0; 
+		 max-width : 100%;
+	}
+	.scrollBlind {
+		width : 500px;
+		height: 100%;
+		overflow-y : scroll;		
+	}
+	.hiddenScroll{
+		width : 480px;
+		height : 302px;
+		position : absolute;
+		overflow : hidden;
+	}
+	.todo-list li { margin : 5px 5px 10px 5px;}
+	.edit { 
+		background : url("/Do_IT/resources/images/edit.png");
+		border: none;
+		width : 20px; height : 20px;
+		margin : 0 10px 0 50px;
+	}
+	.edit:hover{
+		background : url("/Do_IT/resources/images/edit-hover.png");
+		border: none;
+		width : 20px; height : 20px;
+		margin : 0 10px 0 50px;
+	}
+	.delete { 
+		background : url("/Do_IT/resources/images/delete.png");
+		border: none;
+		width : 20px; height : 20px;
+		margin : 0 10px 0 10px;
+	}
+	.delete:hover{ 
+		background : url("/Do_IT/resources/images/delete-hover.png");
+		border: none;
+		width : 20px; height : 20px;
+		margin : 0 10px 0 10px;
+	}
 	.title{
 		font-weight : bold;
 		font-size : 20px;
@@ -13,6 +55,7 @@
 		border : 1px #C4C4C4 solid;
 		vertical-align: middle;
 		position : relative;
+		padding-bottom : 10px;
 	}
 	.study-list{display:flex; padding-left: 10px; padding-right: 10px;}
 	.nolist{ 
@@ -36,4 +79,4 @@
 	.icon img{ width : 20px; height : 20px; margin-5px;}
 	.todo-title img { width : 25px; height : 25px;}
 	.study-list img { width : 200px; height : 200px;}
-	.study-info { width : 210px; margin : 10px;}
+	.study-info { width : 210px; height : 250px; margin : 10px; padding: 15px 0 0 10px;}
