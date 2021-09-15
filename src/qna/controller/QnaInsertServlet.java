@@ -37,8 +37,14 @@ public class QnaInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("utf-8");
+		 int cid = Integer.parseInt(request.getParameter("category"));
+		 String title = request.getParameter("title");
+		 String content = request.getParameter("content");
+		 
+		 System.out.println(cid);
+		 System.out.println("제목:"+title);
+		    System.out.println("내용:"+content);  
 	}
 
 }

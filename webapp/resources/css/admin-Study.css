@@ -31,6 +31,7 @@
 
 #admin-nav{
     width: 160px;
+    padding-left :5%;
     
 }
 
@@ -63,12 +64,10 @@
 
 /*---------------------------------------------- admin content -----------------------------------------------*/
 
-.content {
-	margin : 50px 0 50px 160px;
-	height : auto;
-	min-height : 100%;
-	width: 950px;
-}
+.content { 
+	margin : 50px 0 50px 110px;
+	width: 850px;
+	} 
 
 .content h1{
     text-align: center;
@@ -112,6 +111,7 @@ button{
     width: 80px;
     height: 35px;
     margin-right: 10px;
+    border-radius : 5px;
 }
 
 .board-header .search button{
