@@ -28,6 +28,26 @@
 	border-radius : 5px; 
 }
 
+.product_addBtn{
+	background: url("/Do_IT//resources/images/plus.png");
+	border: none;
+	width : 20px; height : 20px;
+}
+.product_addBtn:hover{
+ 	background: url("/Do_IT//resources/images/plus-hover.png");
+}
+
+.product_deleteBtn{
+	background : url("/Do_IT//resources/images/minus.png");
+	border: none;
+	width : 20px; height : 20px;
+}
+
+.product_deleteBtn:hover{
+	 background : url("/Do_IT//resources/images/minus-hover.png")
+} 
+
+
 .product_premium {
 	margin:50px 15px;
 	display : grid;
@@ -104,8 +124,8 @@
 	<div class="product_area">
 	 <button class="coin_charge" onclick="openPopup('<%=request.getContextPath()%>/coin', 'coin_charge', 700, 900);">코인충전</button>
 	
-	<h3>| 프리미엄 이용권  <button class="product_addBtn" onclick="openPopup('<%=request.getContextPath()%>/productAdd', 'ProductAdd', 900, 1200);"> + </button>
-     <button class="product_deleteBtn" id="checkbox_btn" onclick="checkbox()"> - </button> </h3>
+	<h3>| 프리미엄 이용권  <button class="product_addBtn" onclick="openPopup('<%=request.getContextPath()%>/productAdd', 'ProductAdd', 900, 1200);"></button>
+	<button class="product_deleteBtn" id="checkbox_btn" onclick="checkbox()"></button> </h3>
 	
 	  <div class="product_premium">
 	    <div class="premium_product" id="set1" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
@@ -131,8 +151,8 @@
          </div>
       </div>
       
-      	<h3>| 이용권 단품  <button class="product_addBtn" onclick="openPopup('<%=request.getContextPath()%>/productAdd', 'ProductAdd', 900, 1200);"> + </button>
-        <button class="product_deleteBtn"> - </button> </h3>
+      	<h3>| 이용권 단품  <button class="product_addBtn" onclick="openPopup('<%=request.getContextPath()%>/productAdd', 'ProductAdd', 900, 1200);"></button>
+	<button class="product_deleteBtn" id="checkbox_btn" onclick="checkbox()"></button></h3>
       <div class="product_single">
     
          <div class="studyroomjoin_product" id="set1" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
@@ -173,7 +193,7 @@
             <div class="product_name">스터디 인원 수 해제 + todo 이용권(90일)</div>
             <div class="product_price">
                <s class="lightgray-c"> 96 point</s> 90 point
-            </div>
+          </div>
          </div>
       </div>
    </div>
