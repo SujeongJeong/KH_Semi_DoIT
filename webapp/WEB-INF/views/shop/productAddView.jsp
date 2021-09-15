@@ -5,20 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상품 추가 – Do IT</title>
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
  
  .wrapper{
-	margin-top : 80px;
+	margin : 50px auto;
 	
 } 
 
 .productAddForm {
 	width: 600px;
-	height: 500px;
-	margin: 100px auto;
+	height: auto;
+	margin: 50px auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -26,21 +26,19 @@
 
 
 .logo_area {
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 	text-align : center;
 	justify-content: center;
 }
 
 
-
 .product_content {
 	padding: 0px 20px;
-	margin-bottom: 30px;
 }
 
 
 .temporary_img {
-	width: 500px;
+	width: 100%;
 	height: 150px;
 	margin-top: 30px;
 	margin-bottom: 20px;
@@ -49,17 +47,16 @@
 
 .title {
 	width: 400px;
-	height: 40px;
+	height: 30px;
 	justify-content : center;
 }
 
 .coin_count{
 	width: 100px;
-	height: 40px;
+	height: 30px;
 	justify-content : center;
 	
 }
-
 
 .textarea{
 	margin-bottom: 30px;
@@ -75,7 +72,7 @@
 .btn_area .enrollbtn {
 	width: 100px;
 	height: 35px;
-	border: 0px;
+	border-radius : 5px; border: 0px; 
 	color: white;
 	background: #5FC5FF;
 	margin: 5px;
@@ -83,7 +80,7 @@
 .btn_area .canclebtn {
 	width: 100px;
 	height: 35px;
-	border: 0px;
+	border-radius : 5px; border: 0px;
 	color: white;
 	background: #E5E5E5;
 	margin: 5px;
@@ -97,27 +94,29 @@
 <body>
 
 <div class="wrapper">
- 	<div class="content">
+ 
 	<!-- 제목조건, 폼 입력 조건 나중에 설정하기 -->
-	<div class="logo_area"><img class="logo" src="/Do_IT/resources/images/logo.png" onclick="window.close();" alt="logo"><br></div><br>
-	
+	<div class="logo_area"><img class="logo" src="/Do_IT/resources/images/logo.png" onclick="window.close();" alt="logo"></div>
+	<div>
 	<form class="productAddForm" action="" method="post">
 		<div class="product_content">		
 			<img class="temporary_img" src="/Do_IT/resources/images/study-background6.jpg">
-			<br>
+			<h3>상품 이미지</h3>
 			<input type="file" name="thumbnail" accept="image/gif,image/jpeg,image/png" required>
 			
-			<h6>
-				<span class="inputarea"> 
+			
+				<div class="inputarea"> 
+					<h3>상품명</h3>
 					<input type="text" class="title" required placeholder="상품명을 입력하세요.">
-				</span>
-			</h6>
-			<h6>
-				<span class="inputarea"> 
+				</div>
+		
+				<div class="inputarea"> 
+				<h3>상품 코인</h3>
 					<input type="number" class="coin_count" min= 1 required placeholder="Coin수를 입력하세요."> Coin 
 					
-				</span>
-			</h6>
+				</div>
+		
+			<h3>상품 설명</h3>
 			<textarea class="textarea" rows="15" cols="80" name="content" placeholder="상품설명을 입력하세요." readonly></textarea>
 			<div class="btn_area">
 			<button class=enrollbtn type="submit" onclick="enroll();">등록</button>
@@ -126,8 +125,8 @@
 		
 		
 			</form>
-		</div>
-	</div>	
+			</div>
+		</div>	
 	<script>
 		function enroll(){
 			if(confirm("등록하시겠습니까? "))
