@@ -70,6 +70,7 @@
 .studyImage {
 	width: 150px;
 	height: 150px;
+	border:1px solid black;
 }
 
 .plusBtn {
@@ -83,6 +84,10 @@
 .plusLine {
 	border-style: dotted;
 	position: relative;
+}
+
+.onmouseover {
+	cursor: pointer;
 }
 </style>
 </head>
@@ -220,6 +225,30 @@
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+
+<script>
+		//게시글 목록에 mouseover/mouseout 시 onmouseover클래스 추가/제거 처리
+		const studyList = document.querySelector(".studyList");
+		
+		studyList.addEventListener('mouseover', function(){
+			
+			if(event.target.classList.contains('studyImage'))
+				event.target.classList.add('onmouseover');
+			else if(event.target.parentNode.classList.contains('studyImage'))
+				event.target.parentNode.classList.add('onmouseover');
+		});
+		
+		studyList.addEventListener('mouseout', function(){
+			
+			if(event.target.classList.contains('studyImage'))
+				event.target.classList.remove('onmouseover');
+			else if(event.target.parentNode.classList.contains('studyImage'))
+				event.target.parentNode.classList.add('onmouseover');
+		})
+		
+	
+	</script>
+
 
 	<script>
 
