@@ -28,9 +28,20 @@ public class QnaInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/qna/qnaInsertView.jsp");
+		
+		/*
+		 * String usertype =
+		 * ((Member)request.getSession().getAttribute("loginUser")).getUser_type();
+		 * 
+		 * if(usertype == 'A') {
+		 * request.getRequestDispatcher("/WEB-INF/views/qna/noticeInsertView.jsp").
+		 * forward(request, response); } else { //
+		 * request.getRequestDispatcher("/WEB-INF/views/qna/qnaInsertView.jsp").forward(
+		 * request, response); }
+		 */
+		
+		request.getRequestDispatcher("/WEB-INF/views/qna/noticeInsertView.jsp").forward(request, response);
 		request.setAttribute("nav1", "qna");
-		view.forward(request, response);
 	}
 
 	/**
