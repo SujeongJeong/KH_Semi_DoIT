@@ -183,5 +183,6 @@ button[id$=Btn]:hover {
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
+	
 </body>
 </html>
