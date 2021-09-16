@@ -4,7 +4,6 @@
 		 list-style : decimal; 
 		 padding: 10px 10px 10px 40px; 
 		 margin : 0; 
-		 max-width : 100%;
 	}
 	.scrollBlind {
 		width : 500px;
@@ -18,11 +17,13 @@
 		overflow : hidden;
 	}
 	.todo-list li { margin : 5px 5px 10px 5px;}
-	.edit { 
+	.todo-list li:hover button{ display : inline;}
+	.edit{ 
 		background : url("/Do_IT/resources/images/edit.png");
 		border: none;
 		width : 20px; height : 20px;
 		margin : 0 10px 0 50px;
+		display:none;
 	}
 	.edit:hover{
 		background : url("/Do_IT/resources/images/edit-hover.png");
@@ -30,11 +31,12 @@
 		width : 20px; height : 20px;
 		margin : 0 10px 0 50px;
 	}
-	.delete { 
+	.delete{ 
 		background : url("/Do_IT/resources/images/delete.png");
 		border: none;
 		width : 20px; height : 20px;
 		margin : 0 10px 0 10px;
+		display:none;
 	}
 	.delete:hover{ 
 		background : url("/Do_IT/resources/images/delete-hover.png");

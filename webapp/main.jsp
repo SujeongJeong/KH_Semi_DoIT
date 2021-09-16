@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,7 @@
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css?after' rel='stylesheet'>
 <link href='<%= request.getContextPath() %>/resources/css/main.css?after' rel='stylesheet'>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <style>
 .outer{
 		width : 1000px;
@@ -35,7 +37,11 @@
 				<img src="resources/images/left-arrow-nolist.png" alt="넘김"><img src="resources/images/right-arrow-nolist.png" alt="넘김">
 				</span>
 				<div class="study-list">
-					<%-- <label class="nolist text">스터디를 만들거나 추가해보세요.</label>--%>
+					<c:choose>
+					<c:when test="${ loginUser == null }">
+					 <label class="nolist text">스터디를 만들거나 추가해보세요.</label>
+					</c:when>
+					<c:otherwise>
 					<div class="study-info">
 					<img src="resources/images/study-background1.jpg" alt="스터디배경사진"><br>
 					<label class="study-name">스터디방 이름</label><br>
@@ -46,6 +52,8 @@
 					<label class="study-name">스터디방 이름</label><br>
 					<label class="study-category darkgray-c">#category</label>
 					</div>
+					</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 			<div class="goal-area">
@@ -53,7 +61,14 @@
 				<div class="goal-list">
 					<ul class="goalUl">
 						<li class="semiTitle">오늘 공부시간/목표 시간</li>
+						<c:choose>
+						<c:when test="${ loginUser == null }">
 						<li><span class="todayhours point-c">0시간 00분</span><span class="goalhours lightgray-c">/ 0시간 00분</span></li>
+						</c:when>
+						<c:otherwise>
+						<li><span class="todayhours point-c">3시간 00분</span><span class="goalhours lightgray-c">/ 5시간 00분</span></li>
+						</c:otherwise>
+						</c:choose>
 					</ul>
 				</div>
 			</div>
@@ -64,7 +79,14 @@
 				<li class="first"><img src="resources/images/flag-first.png" alt="1위"><span class="nickname">1위 user01</span><span class="hours">22:59:59</span></li>
 				<li class="second"><img src="resources/images/flag-second.png" alt="2위"><span class="nickname">2위 user02</span><span class="hours">18:33:33</span></li>
 				<li class="third"><img src="resources/images/flag-third.png" alt="3위"><span class="nickname">3위 user03</span><span class="hours">10:00:00</span></li>
-				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹"><span class="nickname">?위 nickname</span><span class="hours">5:03:00</span></li>
+				<c:choose>
+				<c:when test="${ loginUser == null }">
+				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹">로그인하여 나의 랭킹을 확인해보세요.</li>
+				</c:when>
+				<c:otherwise>
+				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹"><span class="nickname">?위 ${ loginUser.nickName }</span><span class="hours">5:03:00</span></li>
+				</c:otherwise>
+				</c:choose>
 				</ul>
 			</div>
 			<div class="todo-area">
@@ -74,30 +96,31 @@
 				<div class="todo-list">
 					<div class="hiddenScroll">
 					<div class="scrollBlind">
+						<c:choose>
+						<c:when test="${ loginUser == null }">
+						 <label class="nolist text">오늘의 할일을 추가하세요.</label>
+						</c:when>
+						<c:otherwise>
 						<ul class="list">
 							<li>두잇<button class="edit"></button><button class="delete"></button></li>
-							<li>두잇두잇<button class="edit"></button><button class="delete"></button></li>
-							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
-							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
-							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
-							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
-							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
-							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
-							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
-							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
+							<li>두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
 							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
 						</ul>
-						<%-- <label class="nolist text">오늘의 할일을 추가하세요.</label>--%>
+						</c:otherwise>
+						</c:choose>
 					</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
-	</div>
+	<script>
+		$(".edit").click(function(){
+			$(this).parent().html().replaceWith("<textarea>"+parent().value()+"</textarea>");
+		});
+	</script>
 </body>
 </html>
