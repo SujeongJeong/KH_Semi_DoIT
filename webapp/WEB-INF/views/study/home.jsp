@@ -101,7 +101,7 @@
 		</div>
 		<div class="search createStudy">
 			<button class="studyCreateBtn"
-				onclick="location.href='<%=request.getContextPath()%>/createStudy'">스터디
+				onclick="location.href='<%=request.getContextPath()%>/study/createStudy'">스터디
 				만들기</button>
 		</div>
 		<div class="search category">
@@ -133,7 +133,7 @@
 			<div class="studyRoom">
 				<img class="studyImage"
 					src='/Do_IT/resources/images/study-background1.jpg'
-					onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);"><span
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
 					class="sName">스터디방 1</span><br>
 				<span class="sCategory">#Ai</span>
 				<h4 class="studyTO">n/m</h4>
@@ -141,7 +141,7 @@
 			<div class="studyRoom">
 				<img class="studyImage"
 					src="/Do_IT/resources/images/study-background2.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);"><span
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
 					class="sName">스터디방 2</span><br>
 				<span class="sCategory">#Front-end</span>
 				<h4 class="studyTO">n/m</h4>
@@ -149,7 +149,7 @@
 			<div class="studyRoom">
 				<img class="studyImage"
 					src="/Do_IT/resources/images/study-background3.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);"><span
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
 					class="sName">스터디방 3</span><br>
 				<span class="sCategory">#Back-end</span>
 				<h4 class="studyTO">n/m</h4>
@@ -157,7 +157,7 @@
 			<div class="studyRoom">
 				<img class="studyImage"
 					src="/Do_IT/resources/images/study-background4.png"
-					onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);"><span
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
 					class="sName">스터디방 4</span><br>
 				<span class="sCategory">#Language</span>
 				<h4 class="studyTO">n/m</h4>
@@ -165,7 +165,7 @@
 			<div class="studyRoom">
 				<img class="studyImage"
 					src="/Do_IT/resources/images/study-background5.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);"><span
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
 					class="sName">스터디방 5</span><br>
 				<span class="sCategory">#Embeded</span>
 				<h4 class="studyTO">n/m</h4>
@@ -173,7 +173,7 @@
 			<div class="studyRoom">
 				<img class="studyImage"
 					src="/Do_IT/resources/images/study-background6.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);"><span
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
 					class="sName">스터디방 6</span><br>
 				<span class="sCategory">#App</span>
 				<h4 class="studyTO">n/m</h4>
@@ -181,7 +181,7 @@
 			<div class="studyRoom">
 				<img class="studyImage"
 					src="/Do_IT/resources/images/study-background7.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);"><span
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
 					class="sName">스터디방 7</span><br>
 				<span class="sCategory">#Bigdata</span>
 				<h4 class="studyTO">n/m</h4>
@@ -189,7 +189,7 @@
 			<div class="studyRoom">
 				<img class="studyImage"
 					src="/Do_IT/resources/images/study-background8.png"
-					onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);"><span
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
 					class="sName">스터디방 8</span><br>
 				<span class="sCategory">#Blockchain</span>
 				<h4 class="studyTO">n/m</h4>
@@ -197,14 +197,14 @@
 			<div class="studyRoom">
 				<img class="studyImage"
 					src="/Do_IT/resources/images/study-background1.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);"><span
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
 					class="sName">스터디방 9</span><br>
 				<span class="sCategory">#Game</span>
 				<h4 class="studyTO">n/m</h4>
 			</div>
 			<div class="studyRoom">
 				<img class="studyImage" src="/Do_IT/resources/images/user.png"
-					onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);"><span
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
 					class="sName">스터디방 10</span><br>
 				<span class="sCategory">#Project</span>
 				<h4 class="studyTO">n/m</h4>
