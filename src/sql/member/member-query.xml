@@ -24,7 +24,7 @@
 		INSERT
 		INTO MEMBER
 		(
-			   USER_NO
+			  USER_NO
 			, USER_EMAIL
 			, USER_PWD
 			, NICKNAME
