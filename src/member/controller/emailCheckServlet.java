@@ -1,25 +1,27 @@
-package study;
+package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.model.service.MemberService;
+
 /**
- * Servlet implementation class studyRoomInfo
+ * Servlet implementation class emailCheckServlet
  */
-@WebServlet("/study/studyInfo")
-public class studyRoomInfo extends HttpServlet {
+@WebServlet("/emailCheck")
+public class emailCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public studyRoomInfo() {
+    public emailCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,16 +30,29 @@ public class studyRoomInfo extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/studyRoomInfo.jsp");
-		request.setAttribute("nav1", "study");
-		view.forward(request, response);
+		String userEmail = request.getParameter("userEmail");
+		
+		System.out.println("userEmail : " + userEmail);
+		
+		// 중복 아이디가 있으면  1, 없으면 0 리턴
+		int result = new MemberService().emailCheck(userEmail);
+		
+		PrintWriter out = response.getWriter();
+		
+		if(result > 0) {
+			// 중복 이메일이 있음
+	         out.print("fail");
+	      } else {
+	    	 // 중복 이메일 없음
+	         out.print("success");
+	      }
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		doGet(request, response);
 	}
 

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>coinPaymentView</title>
+<title>코인 충전 – Do IT</title>
 
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
@@ -36,17 +36,20 @@
 	text-align: center;
 }
 
+#charge_area{
+	margin-top: 10px;
+}
+
 #result{
 	text-align: center;
 	border: none;
 	font-size: 25px;
-	color: #5FC5FF
-
+	color: #5FC5FF;
+	margin-botton: 10px;
 }
 
-
 .logo {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 
@@ -59,7 +62,7 @@ button[id^=easy] {
 }
 
 .payment_btn {
-	border: solid 1px #dadada;
+	border: 0;
 	text-align: center;
 	margin: 15px 0;
 	height: 45px;
@@ -68,12 +71,13 @@ button[id^=easy] {
 button[id$=payment] {
 	width: 100%;
 	height: 100%;
-	border: 0px;
+	border-radius : 5px; border:0; outline:0;
+	
 }
 
 
 #phone_payment {
-	background: skyblue;
+	background: #C8EBFF;
 	color: black;
 }
 
@@ -83,7 +87,7 @@ button[id$=payment] {
 }
 
 #kakao_payment {
-	background: #F7E600;
+	background: #FFEA00;
 	color: #3A1D1D;
 }
 
@@ -100,14 +104,14 @@ button[id$=payment] {
 .btn_area .chargebtn {
 	width: 100px;
 	height: 35px;
-	border: 0px;
+	border-radius : 5px; border:0; outline:0;
 	color: white;
 	background: #5FC5FF;
 }
 .btn_area .canclebtn {
 	width: 100px;
 	height: 35px;
-	border: 0px;
+	border-radius : 5px; border:0; outline:0;
 	color: white;
 	background: #E5E5E5;
 	margin: 5px;
@@ -121,11 +125,10 @@ button[id$=payment] {
 			<form class="paymentArea" action="<%= request.getContextPath() %>/login" method="post" onsubmit="return validate();">
 				<div class="logo_area"><a href="/Do_IT"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo" onclick="window.close();"></a></div><br>
 				<div class="cerrent_coin">
-					<span id="cerrent_result"><h2>현재 보유 중인 코인 : 00 코인</h2></span>
-				
+					<span id="cerrent_result"><h4>현재 보유 중인 코인 : 00 코인</h4></span>
+				<input type="text" id="result" disabled/>
 				<div id="charge_area">충전 할 코인 : <input type="text" id="charge_input"  id="charge_input" onkeyup="calc(this.value)"  
-						min= 1 placeholder="충전 할 코인 수를 입력하세요.">
-						<input type="text" id="result" disabled/></div>
+						min= 1 placeholder="충전 할 코인 수를 입력하세요."></div>
 				
 				
 				<hr>
