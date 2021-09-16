@@ -19,7 +19,8 @@ import wrapper.EncryptWrapper;
 // LoginServlet, MemberJoinServlet, PwdModifyServlet에 필터 적용이 되어야 함
 @WebFilter(filterName="encrypt", servletNames= {"LoginServlet",
 												"MemberJoinServlet", 
-												"PwdModifyServlet"})
+												"PwdModifyServlet",
+												"rsetPwdServlet"})
 public class EncryptFilter implements Filter {
 
     /**
@@ -54,7 +55,7 @@ public class EncryptFilter implements Filter {
 		// pass the request along the filter chain
 		// request를 가공한 encWrapper 객체로 변경하여 서블릿 넘김
 		// 3개의 요청에 대해서 request.getParameter(key)를 수행하면
-		// EncryptWrapper에 오버라이딩 된 getParameter 메소드 오버라이딩
+		// EncryptWrapper에 오버라이딩 된 getParameter 메소드 오버라이 딩
 		chain.doFilter(encWrapper, response);
 	}
 

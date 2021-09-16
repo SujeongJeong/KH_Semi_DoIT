@@ -1,4 +1,4 @@
-package study;
+package my;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class studyRoomInfo
+ * Servlet implementation class ChangePwdViewServlet
  */
-@WebServlet("/study/studyInfo")
-public class studyRoomInfo extends HttpServlet {
+@WebServlet("/my/changePwdView")
+public class PwdModifyViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public studyRoomInfo() {
+    public PwdModifyViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +28,7 @@ public class studyRoomInfo extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/studyRoomInfo.jsp");
-		request.setAttribute("nav1", "study");
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/changePwdView.jsp");
 		view.forward(request, response);
 	}
 

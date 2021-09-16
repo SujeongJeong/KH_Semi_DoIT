@@ -8,7 +8,10 @@
 <!-- 외부 스타일 시트 -->
 <link href='<%=request.getContextPath()%>/resources/css/all.css'
 	rel='stylesheet'>
-<script src="resources/js/jquery-3.6.0.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
 <style>
 #content {
 	margin: 50px auto;
@@ -26,13 +29,19 @@
 	margin-right: 20px;
 }
 
+.studyCreateBtn, .plusBtn {
+	background-color: #5FC5FF;
+	border : 0; 
+    outline :0;
+    border-radius:5px;
+}
+
 .category {
 	margin-left: 5px;
 }
 
 .studyCategory {
 	margin-right: 15px;
-	border: none;
 	background-color: white;
 }
 
@@ -40,18 +49,22 @@
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	grid-auto-rows: minmax(225px, auto);
+	gap: 20px 15px;
 }
 
-.sr1{
-	display:relative;
+.sCategory{
+	color:#C4C4C4;
 }
 
-.studyTO{
-	display:absolute;
-	width:100px;
-	height:10px;
-	left:20px;
-	top:20px;
+.studyRoom {
+	position: relative;
+}
+
+.studyTO {
+	position: absolute;
+	top:100px;
+	left:10px;
+	
 }
 
 .studyImage {
@@ -64,6 +77,7 @@
 	left: 48.5%;
 	bottom: 22px;
 	position: relative;
+	
 }
 
 .plusLine {
@@ -87,81 +101,116 @@
 		</div>
 		<div class="search createStudy">
 			<button class="studyCreateBtn"
-				onclick="location.href='<%=request.getContextPath()%>/createStudy'">스터디
+				onclick="location.href='<%=request.getContextPath()%>/study/createStudy'">스터디
 				만들기</button>
 		</div>
 		<div class="search category">
-			카테고리
-			<button class="studyCategory" name="studyCategory">▼</button>
+			<form>
+				<select class="studyCategory">
+					<option value="default" selected>카테고리</option>
+					<option value="Language">Language</option>
+					<option value="Embeded">Embeded</option>
+					<option value="Ai">Ai</option>
+					<option value="Front-End">Front-End</option>
+					<option value="Back-End">Back-End</option>
+					<option value="App">App</option>
+					<option value="Bigdata">Bigdata</option>
+					<option value="BlockChain">BlockChain</option>
+					<option value="Devops">Devops</option>
+					<option value="Project">Project</option>
+					<option value="Game">Game</option>
+				</select>
+			</form>
+
+
 		</div>
 		<div class="search canJoinStudy">
 			<input type="checkbox" name="canJoinStudy">바로 참여 가능한 방
 		</div>
 		<br> <br>
-		
-			<div class="studyList">
-				<div class="studyRoom sr1">
-					<img class="studyImage"
-						src='/Do_IT/resources/images/study-background1.jpg'
-						onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);">스터디방
-					1<br>#ai
-					<h4 class="studyTO">n/m</h4>
-				</div>
-				<div class="studyRoom">
-					<img class="studyImage"
-						src="/Do_IT/resources/images/study-background2.jpg"
-						onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);">스터디방
-					2<br>#front-end
-				</div>
-				<div class="studyRoom">
-					<img class="studyImage"
-						src="/Do_IT/resources/images/study-background3.jpg"
-						onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);">스터디방
-					3<br>#back-end
-				</div>
-				<div class="studyRoom">
-					<img class="studyImage"
-						src="/Do_IT/resources/images/study-background4.png"
-						onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);">스터디방
-					4<br>#language
-				</div>
-				<div class="studyRoom">
-					<img class="studyImage"
-						src="/Do_IT/resources/images/study-background5.jpg"
-						onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);">스터디방
-					5<br>#embeded
-				</div>
-				<div class="studyRoom">
-					<img class="studyImage"
-						src="/Do_IT/resources/images/study-background6.jpg"
-						onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);">스터디방
-					6<br>#app
-				</div>
-				<div class="studyRoom">
-					<img class="studyImage"
-						src="/Do_IT/resources/images/study-background7.jpg"
-						onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);">스터디방
-					7<br>#bigdata
-				</div>
-				<div class="studyRoom">
-					<img class="studyImage"
-						src="/Do_IT/resources/images/study-background8.png"
-						onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);">스터디방
-					8<br>#blockchain
-				</div>
-				<div class="studyRoom">
-					<img class="studyImage"
-						src="/Do_IT/resources/images/study-background1.jpg"
-						onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);">스터디방
-					9<br>#game
-				</div>
-				<div class="studyRoom">
-					<img class="studyImage" src="/Do_IT/resources/images/user.png"
-						onclick="openPopup('<%=request.getContextPath()%>/studyInfo', 'studyInfo', 700, 1000);">스터디방
-					10<br>#project
-				</div>
+
+		<div class="studyList">
+			<div class="studyRoom">
+				<img class="studyImage"
+					src='/Do_IT/resources/images/study-background1.jpg'
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
+					class="sName">스터디방 1</span><br>
+				<span class="sCategory">#Ai</span>
+				<h4 class="studyTO">n/m</h4>
 			</div>
-		
+			<div class="studyRoom">
+				<img class="studyImage"
+					src="/Do_IT/resources/images/study-background2.jpg"
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
+					class="sName">스터디방 2</span><br>
+				<span class="sCategory">#Front-end</span>
+				<h4 class="studyTO">n/m</h4>
+			</div>
+			<div class="studyRoom">
+				<img class="studyImage"
+					src="/Do_IT/resources/images/study-background3.jpg"
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
+					class="sName">스터디방 3</span><br>
+				<span class="sCategory">#Back-end</span>
+				<h4 class="studyTO">n/m</h4>
+			</div>
+			<div class="studyRoom">
+				<img class="studyImage"
+					src="/Do_IT/resources/images/study-background4.png"
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
+					class="sName">스터디방 4</span><br>
+				<span class="sCategory">#Language</span>
+				<h4 class="studyTO">n/m</h4>
+			</div>
+			<div class="studyRoom">
+				<img class="studyImage"
+					src="/Do_IT/resources/images/study-background5.jpg"
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
+					class="sName">스터디방 5</span><br>
+				<span class="sCategory">#Embeded</span>
+				<h4 class="studyTO">n/m</h4>
+			</div>
+			<div class="studyRoom">
+				<img class="studyImage"
+					src="/Do_IT/resources/images/study-background6.jpg"
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
+					class="sName">스터디방 6</span><br>
+				<span class="sCategory">#App</span>
+				<h4 class="studyTO">n/m</h4>
+			</div>
+			<div class="studyRoom">
+				<img class="studyImage"
+					src="/Do_IT/resources/images/study-background7.jpg"
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
+					class="sName">스터디방 7</span><br>
+				<span class="sCategory">#Bigdata</span>
+				<h4 class="studyTO">n/m</h4>
+			</div>
+			<div class="studyRoom">
+				<img class="studyImage"
+					src="/Do_IT/resources/images/study-background8.png"
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
+					class="sName">스터디방 8</span><br>
+				<span class="sCategory">#Blockchain</span>
+				<h4 class="studyTO">n/m</h4>
+			</div>
+			<div class="studyRoom">
+				<img class="studyImage"
+					src="/Do_IT/resources/images/study-background1.jpg"
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
+					class="sName">스터디방 9</span><br>
+				<span class="sCategory">#Game</span>
+				<h4 class="studyTO">n/m</h4>
+			</div>
+			<div class="studyRoom">
+				<img class="studyImage" src="/Do_IT/resources/images/user.png"
+					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
+					class="sName">스터디방 10</span><br>
+				<span class="sCategory">#Project</span>
+				<h4 class="studyTO">n/m</h4>
+			</div>
+		</div>
+
 		<br>
 		<div class="studyRoomPlus">
 			<hr class="plusLine">
@@ -189,11 +238,6 @@ function openPopup(url, title, width, height){
 }
 
 </script>
-
-
-
-
-
 
 
 	<footer>

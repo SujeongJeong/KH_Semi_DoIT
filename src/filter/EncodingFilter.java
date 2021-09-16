@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 // 1. Annotation을 이용한 매핑
 // "/*" 로 지정하게 되면 모든 것을 의미함
-//@WebFilter("/*")
+@WebFilter("/*")
 
 // 2. web.xml 파일에 필터 등록하는 매핑
 // 필터를 여러개 사용할때 어떤 필터를 먼저 거칠지는 web.xml안에 등록 된 순서에 따르므로
