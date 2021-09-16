@@ -83,12 +83,22 @@ public class LoginCheckFilter implements Filter {
       // 인스턴스 초기화 시 permitList, resourceList 값 설정하기
       permitList = new ArrayList<>();
       permitList.add("/Do_IT/");
+      
+      // 로그인 & 회원가입
       permitList.add("/Do_IT/login");
-      permitList.add("/Do_IT/idCheck");
+      permitList.add("/Do_IT/emailCheck");
       permitList.add("/Do_IT/nickCheck");
       permitList.add("/Do_IT/memberJoin");
+      
+      // 랭킹
+      permitList.add("/Do_IT/ranking/home");
+      
+      // 샵
       permitList.add("/Do_IT/shop/home");
       permitList.add("/Do_IT/productAdd");
+      
+      // Q&A 게시판
+      permitList.add("/Do_IT/qna/home");
       
       //스터디
       permitList.add("/Do_IT/study/home"); // 스터디홈
