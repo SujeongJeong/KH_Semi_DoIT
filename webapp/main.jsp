@@ -81,10 +81,10 @@
 				<li class="third"><img src="resources/images/flag-third.png" alt="3위"><span class="nickname">3위 user03</span><span class="hours">10:00:00</span></li>
 				<c:choose>
 				<c:when test="${ loginUser == null }">
-				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹"><span class="nickname">로그인하여 나의 랭킹을 확인해보세요.</li>
+				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹">로그인하여 나의 랭킹을 확인해보세요.</li>
 				</c:when>
 				<c:otherwise>
-				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹"><span class="nickname">?위 ${ loginUser.nickname }</span><span class="hours">5:03:00</span></li>
+				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹"><span class="nickname">?위 ${ loginUser.nickName }</span><span class="hours">5:03:00</span></li>
 				</c:otherwise>
 				</c:choose>
 				</ul>
