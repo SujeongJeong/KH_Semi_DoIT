@@ -8,40 +8,38 @@ public class Member {
 	private String userPwd;
 	private String nickName;
 	private Date enrollDate;
+	private String status;
 	private String userType;
 	private String profileImg;
 	private String targetHour;
 	private int userCoin;
 	private int reportCount;
-	private String status;
 	
 	public Member() {}
 
-	
-	public Member(int userNo, String userEmail, String userPwd, String nickName, Date enrollDate, String userType,
-			String profileImg, String targetHour, int userCoin, int reportCount, String status) {
+	public Member(int userNo, String userEmail, String userPwd, String nickName, Date enrollDate, String status,
+			String userType, String profileImg, String targetHour, int userCoin, int reportCount) {
 		super();
 		this.userNo = userNo;
 		this.userEmail = userEmail;
 		this.userPwd = userPwd;
 		this.nickName = nickName;
 		this.enrollDate = enrollDate;
+		this.status = status;
 		this.userType = userType;
 		this.profileImg = profileImg;
 		this.targetHour = targetHour;
 		this.userCoin = userCoin;
 		this.reportCount = reportCount;
-		this.status = status;
 	}
 
-
+	
 	public Member(String userEmail, String userPwd, String nickName) {
 		super();
 		this.userEmail = userEmail;
 		this.userPwd = userPwd;
 		this.nickName = nickName;
 	}
-
 
 	public int getUserNo() {
 		return userNo;
@@ -81,6 +79,14 @@ public class Member {
 
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getUserType() {
@@ -123,22 +129,16 @@ public class Member {
 		this.reportCount = reportCount;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userEmail=" + userEmail + ", userPwd=" + userPwd + ", nickName="
-				+ nickName + ", enrollDate=" + enrollDate + ", userType=" + userType + ", profileImg=" + profileImg
-				+ ", targetHour=" + targetHour + ", userCoin=" + userCoin + ", reportCount=" + reportCount + ", status="
-				+ status + "]";
+				+ nickName + ", enrollDate=" + enrollDate + ", status=" + status + ", userType=" + userType
+				+ ", profileImg=" + profileImg + ", targetHour=" + targetHour + ", userCoin=" + userCoin
+				+ ", reportCount=" + reportCount + "]";
 	}
 
+	
+	
 	
 	
 }

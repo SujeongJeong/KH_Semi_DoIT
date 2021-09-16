@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%-- <%
-	// session 객체에 담긴 loginUser 정보를 변수에 담아두기
+    pageEncoding="UTF-8" import="member.model.vo.Member"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	// session 갹체에 담긴 loginUSer 정보를 변수에 담아두기
 	Member loginUser = (Member)session.getAttribute("loginUser");
-%> --%>
+%>
 <%
 	String nav1 = (String)request.getAttribute("nav1");
 %>
@@ -19,18 +20,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 <%-- 세션에 담긴 msg 있을 경우 alert 처리하는 script 작성 --%>
-	<% if(session.getAttribute("msg") != null){ %>
-		<script>
-			alert('<%= session.getAttribute("msg")%>');
-		</script>
-	<% 
-		session.removeAttribute("msg");
-		} %>
+<% if(session.getAttribute("msg") != null) { %>
+<script>
+	 alert('<%= session.getAttribute("msg") %>');
+</script>
+<% 
+		session.removeAttribute("msg");	
+	} 
+%>
+
 
 </head>
 <body>
 
-<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
+<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 <div class="wrapper">
 	<header id='header'>
 		<div class="btnArea">
