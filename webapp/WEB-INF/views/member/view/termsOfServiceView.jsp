@@ -24,6 +24,7 @@
 		background: white;
 		overflow-x: scroll; 
  		overflow-y: scroll;
+ 		border-radius : 5px; 
 	}
 	#close_btn {
 		width: 100px;
@@ -31,6 +32,7 @@
 		border: 0px;
 		color:white;
 		background:#5FC5FF;
+		border-radius : 5px; 
 	}
 	.btn_area {
 		text-align: center;
