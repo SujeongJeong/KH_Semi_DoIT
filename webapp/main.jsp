@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,7 @@
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css?after' rel='stylesheet'>
 <link href='<%= request.getContextPath() %>/resources/css/main.css?after' rel='stylesheet'>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <style>
 .outer{
 		width : 1000px;
@@ -76,7 +78,7 @@
 					<div class="scrollBlind">
 						<ul class="list">
 							<li>두잇<button class="edit"></button><button class="delete"></button></li>
-							<li>두잇두잇<button class="edit"></button><button class="delete"></button></li>
+							<li>두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
 							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
 							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
 							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
@@ -94,10 +96,13 @@
 			</div>
 		</div>
 	</div>
-
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
-	</div>
+	<script>
+		$(".edit").click(function(){
+			$(this).parent().html().replaceWith("<textarea>"+parent().value()+"</textarea>");
+		});
+	</script>
 </body>
 </html>
