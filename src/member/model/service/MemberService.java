@@ -105,9 +105,7 @@ public class MemberService {
 		int result = md.emailCheck(conn, userEmail);
 		
 		close(conn);
-		
-		// select는 commit, rollback 필요 X
-		
+	
 		return result;
 	}
 
@@ -118,8 +116,6 @@ public class MemberService {
 		int result = md.nickCheck(conn, nickname);
 		
 		close(conn);
-		
-		// select는 commit, rollback 필요 X
 		
 		return result;
 	}

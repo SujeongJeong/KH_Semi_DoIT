@@ -61,6 +61,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			request.getSession().setAttribute("msg", "로그인 실패");
 			response.sendRedirect(request.getContextPath());
+			
 		}
 	}
 }

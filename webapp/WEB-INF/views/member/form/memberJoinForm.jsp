@@ -268,6 +268,7 @@
 			
 			window.open(url, title, options);
 		}
+		
 	</script>
 </body>
 </html>

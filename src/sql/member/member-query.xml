@@ -64,7 +64,6 @@
 		  WHERE 
 		  	USER_NO = ?
 	</entry>
-	
 	<entry key="selectMember">
 		SELECT 
 				  USER_NO

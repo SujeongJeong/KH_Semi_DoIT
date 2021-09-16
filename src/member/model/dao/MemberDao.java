@@ -22,7 +22,7 @@ public class MemberDao {
 			try {
 				query.loadFromXML(new FileInputStream(fileName));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			
 				e.printStackTrace();
 			}
 		}
