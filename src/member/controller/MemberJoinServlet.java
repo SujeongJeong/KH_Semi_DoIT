@@ -15,7 +15,8 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class MemberJoinServlet
  */
-@WebServlet("/memberJoin")
+//@WebServlet("/memberJoin")
+@WebServlet(name="MemberJoinServlet", urlPatterns = "/memberJoin")
 public class MemberJoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,15 +49,19 @@ public class MemberJoinServlet extends HttpServlet {
 				// 2. request에 담긴 값 꺼내서 변수에 저장
 				String userEmail = request.getParameter("userEmail");
 				String userPwd = request.getParameter("userPwd");
-				String nickName= request.getParameter("nickName");
+				String nickname= request.getParameter("nickname");
 
-				// 가입 정보를 담은 Member 객체 생성
-				Member mem = new Member(userEmail, userPwd, nickName);
+				System.out.println("joinForm : " + userEmail + " " + userPwd);
 				
-				// System.out.println(mem);
+				// 가입 정보를 담은 Member 객체 생성
+				Member mem = new Member(userEmail, userPwd, nickname);
+				
+				 System.out.println(mem);
 				
 				// 3. 비지니스 로직을 수행할 서비스 메소드로 Member 객체 전달 후 결과 값 리턴 받기
 				int result = new MemberService().insertMember(mem);
+				
+				System.out.println(result);
 				
 				// 4. 결과 성공/실패 여부에 따라 응답 화면 결정
 				if(result > 0) {
@@ -70,6 +75,7 @@ public class MemberJoinServlet extends HttpServlet {
 					
 				} else {
 					// 회원 가입 실패했을 경우 main 페이지로 이동
+					request.getSession().setAttribute("msg", "회원가입 실패!!");
 					response.sendRedirect(request.getContextPath());
 				}
 	}

@@ -4,18 +4,18 @@
 <properties>
 	<entry key="loginMember">
 		SELECT 
-				  USER_NO
-				, USER_EMAIL
-				, USER_PWD
-				, NICKNAME
-				, ENROLL_DATE
-				, STATUS
-				, USER_TYPE
-				, PROFILE_IMG
-				, TARGET_HOUR
-				, USER_COIN
-				, REPORT_COUNT
-			FROM MEMBER
+		      USER_NO
+			, USER_EMAIL
+			, USER_PWD
+			, NICKNAME
+			, ENROLL_DATE
+			, STATUS
+			, USER_TYPE
+			, PROFILE_IMG
+			, TARGET_HOUR
+			, USER_COIN
+			, REPORT_COUNT
+		   FROM MEMBER
 		  WHERE USER_EMAIL = ?
 		  	AND USER_PWD = ?
 		  	AND STATUS = 'Y'
@@ -24,7 +24,7 @@
 		INSERT
 		INTO MEMBER
 		(
-			  USER_NO
+			   USER_NO
 			, USER_EMAIL
 			, USER_PWD
 			, NICKNAME
@@ -48,9 +48,10 @@
 			, DEFAULT
 			, DEFAULT
 			, DEFAULT
+			, DEFAULT
 		)
 	</entry>
-	<entry key="updateMember">
+	<!-- <entry key="updateMember">
 		UPDATE
 			MEMBER
 		   SET
@@ -96,5 +97,18 @@
 			STATUS = 'N'
 		WHERE
 			  USER_NO = ?
+	</entry> -->
+	<entry key="emailCheck">
+		SELECT
+			  COUNT(*)
+			FROM MEMBER
+		 WHERE USER_EMAIL = ?
+	</entry>
+	
+	<entry key="nickCheck">
+		SELECT
+			  COUNT(*)
+			FROM MEMBER
+		 WHERE NICKNAME = ?
 	</entry>
 </properties>

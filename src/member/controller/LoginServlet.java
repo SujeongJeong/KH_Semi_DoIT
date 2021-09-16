@@ -16,7 +16,8 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login")
+//@WebServlet("/login")
+@WebServlet(name="LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -45,19 +46,21 @@ public class LoginServlet extends HttpServlet {
 		String userEmail = request.getParameter("userEmail");
 		String userPwd = request.getParameter("userPwd");
 		
+		System.out.println("loginForm : " + userEmail + " " + userPwd);
+		
 		Member loginUser = new MemberService().loginMember(userEmail, userPwd);
 		
-	
 		if(loginUser != null) {
+			request.getSession().setAttribute("msg", "로그인 성공.");
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 
 			response.sendRedirect(request.getContextPath());
 
 		} else {
-			request.setAttribute("msg", "로그인에 실패하였습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/errorpage.jsp");
-			view.forward(request, response);
+			request.getSession().setAttribute("msg", "로그인 실패");
+			response.sendRedirect(request.getContextPath());
 		}
 	}
 }
