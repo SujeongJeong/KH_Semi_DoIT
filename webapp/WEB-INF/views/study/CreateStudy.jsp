@@ -51,7 +51,7 @@
 	<%@ include file='/WEB-INF/views/common/menubar.jsp'%>
 
 	<div class="content">
-		<form method="POST">
+		<form id="createForm" method="POST" action="<%= request.getContextPath() %>/study/createStudy">
 			<span class="span1"><label class="title">스터디 배경화면</label></span> <input
 				type="file" id="studyImage" name="studyImage" value="studyImage">
 			<div id="imgArea"></div>

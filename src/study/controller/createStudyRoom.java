@@ -1,4 +1,4 @@
-package study;
+package study.controller;
 
 import java.io.IOException;
 
@@ -9,17 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import study.model.vo.Study;
+
 /**
- * Servlet implementation class StudyHomeServlet
+ * Servlet implementation class createStudyRoom
  */
-@WebServlet("/study/home")
-public class StudyHomeServlet extends HttpServlet {
+@WebServlet("/study/createStudy")
+public class createStudyRoom extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudyHomeServlet() {
+    public createStudyRoom() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +30,7 @@ public class StudyHomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 메뉴바 클릭했을 때 페이지로 이동
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/home.jsp");
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/CreateStudy.jsp");
 		request.setAttribute("nav1", "study");
 		view.forward(request, response);
 	}
@@ -38,8 +39,24 @@ public class StudyHomeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		// 파일 첨부 추가 예정
+		String studyName = request.getParameter("studyName");
+		String studyTO = request.getParameter("studyTO");
+		String[] studyDayArr = request.getParameterValues("studyDay");
+		String studyDay="";
+		if(!studyDayArr[0].equals(""))
+			studyDay = String.join(",", studyDayArr);
+		String cid = request.getParameter("cid");
+		String studyExplain = request.getParameter("studyExplain");
+		
+		
+		Study study = new Study();
 	}
 
 }
+
+
+
+
+
+
