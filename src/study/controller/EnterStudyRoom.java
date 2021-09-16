@@ -1,4 +1,4 @@
-package study;
+package study.controller;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class createStudyRoom
+ * Servlet implementation class EnterStudyRoom
  */
-@WebServlet("/study/createStudy")
-public class createStudyRoom extends HttpServlet {
+@WebServlet("/study/enterStudy")
+public class EnterStudyRoom extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public createStudyRoom() {
+    public EnterStudyRoom() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +28,7 @@ public class createStudyRoom extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/CreateStudy.jsp");
-		request.setAttribute("nav1", "study");
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/innerStudyRoom.jsp");
 		view.forward(request, response);
 	}
 
