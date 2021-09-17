@@ -41,9 +41,7 @@
                 </thead>
                 <tbody>
                     <tr class="manager">
-                        <td>
-                            <input type="checkbox">
-                        </td>
+                        <td></td>
                         <td></td>
                         <td class="tit" onclick="detailView(<%-- ${b.bid} --%>)">
                            Q_A 게시판 사용시 주의사항!! [12]
@@ -53,21 +51,19 @@
                         <td>211</td>
                     </tr>
                     
-                    
-                    <%-- <div class="notice_list">
 						<c:forEach var="n" items="${ noticeList }">
-							<tr class = "notice_ul" onclick="detailView(${ n.notice_no });">
+							<tr class = "manager"<%--  onclick="detailView(${ n.notice_no });" --%>>
 								<td></td>
 								<td></td>
-								<td class="tit" onclick="detailView(${b.bid})">${ n.notice_title } [${ n.댓글겟수 }]</td>
-								<td>${ n.ntitle }</td>
+								<td class="tit" onclick="detailView(${n.notice_no})">${ n.notice_title }</td>
 								<td>관리자</td>
+								<td>${ n.create_date }</td>
 								<td>${ n.count }</td>
 							</tr>
 						</c:forEach>
-					</div> --%>
+
 				
-                    <tr class="manager">
+                  <!--   <tr class="manager">
                         <td>
                             <input type="checkbox">
                         </td>
@@ -78,7 +74,7 @@
                         <td>관리자</td>
                         <td>2021-08-29</td>
                         <td>321</td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td><input type="checkbox">1118</td>
                         <td>Language</td>
@@ -301,11 +297,11 @@
 	</script>
 	
 	
-<%-- 	<c:choose>
+	<c:choose>
 		<c:when test="${ !empty loginUser }">
 			<script>
-				function detailView(bid){
-					location.href = '<%= request.getContextPath() %>/board/detail?bid=' + bid;
+				function detailView(notice_no){
+					location.href = '<%= request.getContextPath() %>/notice/detail?notice_no=' + notice_no;
 				}
 			</script>
 		</c:when>
@@ -317,7 +313,7 @@
 				}
 			</script>
 		</c:otherwise>
-	</c:choose> --%>
+	</c:choose>
 
 </body>
 </html>

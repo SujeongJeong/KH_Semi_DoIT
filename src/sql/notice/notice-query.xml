@@ -10,6 +10,7 @@
 			, COUNT
 			, CREATE_DATE
 			, MODIFY_DATE
+			, STATUS
 			, USER_NO
 		 FROM NOTICE
 		WHERE STATUS = 'Y'

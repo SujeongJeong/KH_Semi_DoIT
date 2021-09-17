@@ -37,16 +37,17 @@ public class NoticeDao {
 			
 			rset = pstmt.executeQuery();
 					
-//			while(rset.next()) {
-//				noticeList.add(new Notice(rset.getInt("notic_no"),
-//										  rset.getString("notice_title"),
-//										  rset.getString("ncotice_content"),
-//										  rset.getInt("count"),
-//										  rset.getDate("create_date"),
-//										  rset.getDate("modify_date"),
-//										  rset.getString("user_no") ,
-//										  rset.getString("status")));
-//			}
+			while(rset.next()) {
+				noticeList.add(new Notice(rset.getInt("notice_no"),
+										  rset.getString("notice_title"),
+										  rset.getString("notice_content"),
+										  rset.getInt("count"),
+										  rset.getDate("create_date"),
+										  rset.getDate("modify_date"),
+										  rset.getString("status"),
+										  rset.getInt("user_no")));
+
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,7 +56,7 @@ public class NoticeDao {
 			close(pstmt);
 		}
 		
-		
+		System.out.println(noticeList);
 		return noticeList;
 	}
 	
