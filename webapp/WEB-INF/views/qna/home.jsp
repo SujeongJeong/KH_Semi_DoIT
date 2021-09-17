@@ -52,6 +52,21 @@
                         <td>2021-08-29</td>
                         <td>211</td>
                     </tr>
+                    
+                    
+                    <%-- <div class="notice_list">
+						<c:forEach var="n" items="${ noticeList }">
+							<tr class = "notice_ul" onclick="detailView(${ n.notice_no });">
+								<td></td>
+								<td></td>
+								<td class="tit" onclick="detailView(${b.bid})">${ n.notice_title } [${ n.댓글겟수 }]</td>
+								<td>${ n.ntitle }</td>
+								<td>관리자</td>
+								<td>${ n.count }</td>
+							</tr>
+						</c:forEach>
+					</div> --%>
+				
                     <tr class="manager">
                         <td>
                             <input type="checkbox">

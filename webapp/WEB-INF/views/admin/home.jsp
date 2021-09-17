@@ -7,7 +7,7 @@
 <title>관리 - Do IT</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-	<link href='<%= request.getContextPath() %>/resources/css/admin-Member.css?after' rel='stylesheet'>
+	<link href='<%= request.getContextPath() %>/resources/css/admin-Member.css' rel='stylesheet'>
 </head>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
@@ -59,7 +59,7 @@
 								<th>닉네임</th>
 								<th>가입날짜</th>
 								<th>신고횟수</th>
-								<th>상태</th>
+								<th>타입</th>
 							</tr>
 						</thead>
 						<tbody>

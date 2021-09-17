@@ -7,7 +7,7 @@
 <title>관리 - Do IT</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-	<link href='<%= request.getContextPath() %>/resources/css/admin-Study.css?after' rel='stylesheet'>
+	<link href='<%= request.getContextPath() %>/resources/css/admin-Study.css' rel='stylesheet'>
 </head>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
@@ -53,9 +53,9 @@
 							<tr>
                                 <th>번호</th>
 								<th>이름</th>
-								<th>관리자</th>
+								<th>방장</th>
 								<th>인원수</th>
-								<th>날짜</th>
+								<th>유효 날짜</th>
 							</tr>
 						</thead>
 						<tbody>

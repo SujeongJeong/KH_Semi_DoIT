@@ -30,6 +30,7 @@
 
 #admin-nav{
     width: 160px;
+    padding-left: 5%;
     
 }
 
@@ -62,12 +63,10 @@
 
 /*---------------------------------------------- admin content -----------------------------------------------*/
 
-.content {
-	margin : 50px 0 50px 160px;
-	height : auto;
-	min-height : 100%;
-	width: 950px;
-}
+.content { 
+	margin : 50px 0 50px 110px;
+	width: 850px;
+} 
 
 .content h1{
     text-align: center;
@@ -88,6 +87,7 @@ a {
 
 button{
 	border : none;
+	border-radius : 5px;
 }
 
 
@@ -167,6 +167,12 @@ button{
 .board-list td {
 	height : 30px;
     text-align: center;
+}
+
+.board-list .refundPopup:hover{
+	text-decoration:underline;
+	cursor: pointer;
+	
 }
 
 /* 페이지 이동 */
