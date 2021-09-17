@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
+import static common.JDBCTemplate.*;
 import shop.model.vo.Product;
 
 
@@ -40,9 +40,7 @@ public class ShopDao {
 					productList.add(new Product(rset.getInt("PRODUCT_NO"),
 												rset.getString("PRODUCT_CATEGORY"),
 												rset.getString("PRODUCT_NAME"),
-												rset.getInt("EXPIRATION_DATE"),
 												rset.getInt("PRODUCT_PRICE"),
-												rset.getString("PRODUCT_DETAIL"),
 												rset.getString("PRODUCT_IMG")));
 				}
 			} catch (SQLException e) {
