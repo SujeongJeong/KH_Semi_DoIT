@@ -6,7 +6,7 @@
 
 .board_title {
     text-align: center;
-   /*  padding: 25px; */
+    margin : 80px 0 50px;
 }
 
 .board_content .contents {

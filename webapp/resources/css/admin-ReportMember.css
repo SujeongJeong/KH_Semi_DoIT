@@ -30,9 +30,8 @@
 }
 
 #admin-nav{
-    /* border-right: 5px solid black; */
     width: 160px;
-    
+    padding-left : 5%;
 }
 
 #admin-nav ul{
@@ -50,7 +49,6 @@
 #admin-nav ul .report-ul{
     margin-top: 5px;
     font-size: 30px;
-    display: none;
 }
 
 #admin-nav ul .report-ul li{
@@ -62,19 +60,13 @@
     font-weight : normal;
 }
 
-#admin-nav ul .report:hover > .report-ul{
-    display: block;
-   
-}
 
 /*---------------------------------------------- admin content -----------------------------------------------*/
 
-.content {
-	margin : 50px 0 50px 160px;
-	height : auto;
-	min-height : 100%;
-	width: 950px;
-}
+.content { 
+	margin : 50px 0 50px 110px;
+	width: 850px;
+	} 
 
 .content h1{
     text-align: center;
@@ -154,6 +146,11 @@ a {
 .board-list td {
 	height : 30px;
     text-align: center;
+}
+
+.board-list .reportPopup:hover{
+	text-decoration : underline;
+	cursor: pointer;
 }
 
 /* 페이지 이동 */

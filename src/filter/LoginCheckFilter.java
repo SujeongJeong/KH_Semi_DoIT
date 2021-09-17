@@ -89,6 +89,8 @@ public class LoginCheckFilter implements Filter {
       permitList.add("/Do_IT/emailCheck");
       permitList.add("/Do_IT/nickCheck");
       permitList.add("/Do_IT/memberJoin");
+      permitList.add("/Do_IT/tos");
+      permitList.add("/Do_IT/pp");
       
       // 랭킹
       permitList.add("/Do_IT/ranking/home");

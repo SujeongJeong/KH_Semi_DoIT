@@ -21,8 +21,6 @@ button{
 	width : 1000px;
 }
 
-#board_list_wrap{
-}
 
 
 .board-header{
@@ -43,6 +41,7 @@ button{
 .board-header .del_btn button{
     width: 80px;
     height: 35px;
+    border-radius :5px;
 }
 
 .board-header .search button{
@@ -64,6 +63,7 @@ button{
 	margin-left: 20px;
     width: 80px;
     height: 35px;
+    background-color:#5FC5FF;
 }
 
 .board_list {
