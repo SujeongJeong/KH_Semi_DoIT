@@ -91,7 +91,6 @@ public class LoginCheckFilter implements Filter {
       permitList.add("/Do_IT/memberJoin");
       permitList.add("/Do_IT/findPwd");
       permitList.add("/Do_IT/findEmail");
-      permitList.add("/Do_IT/memberJoin");
       permitList.add("/Do_IT/tos");
       permitList.add("/Do_IT/pp");
       
