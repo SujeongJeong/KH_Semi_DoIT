@@ -51,52 +51,17 @@
 .product_premium {
 	margin:50px 15px;
 	display : grid;
-	grid-template-columns: 80px 80px 80px;
-	gap : 20px;
-		   
+	grid-template-columns: 230px 230px 230px;
+	gap : 30px;
 }
 
 .product_single {
 	margin:50px 15px;
 	display : grid;
-	grid-template-columns: 80px 80px 80px;
-	gap : 20px;
+	grid-template-columns: 230px 230px 230px;
+	gap : 30px;
 }
 
-#set1 {
-	float:left;
-	margin-right:50px;
-	margin-bottom:50px;
-}
-#set2 {
-	margin-left:200px;
-	margin-right:50px;
-	margin-bottom:50px;
-}
-
-#set3 {
-	margin-left:400px;
-	margin-right:150px;
-	margin-bottom:50px;;
-}
-
-#set4 {
-	float:left;
-	margin-right:50px;
-	margin-:50px;
-
-}
-#set5 {
-	margin-left:200px;
-	margin-right:150px;
-	
-}
-
-#set6 {
-	margin-left:400px;
-	margin-right:150px;
-	
-}
 
 
 .product_name{
@@ -128,73 +93,35 @@
 	<button class="product_deleteBtn" id="checkbox_btn" onclick="checkbox()"></button> </h3>
 	
 	  <div class="product_premium">
-	    <div class="premium_product" id="set1" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-	    	<span><input type="checkbox" name="product_check"  style="display:none"></span>
-            <img class="premium_img" src="/Do_IT//resources/images/shop-premium.png">
-            <div class="product_name"> (체험) 프리미엄 7일 이용권</div>
-            <div class="product_price">15 point</div>
+	   <c:forEach var="p" items="${ productList }">
+	   <c:if test="${ p.product_category == '세트' }">
+		<div class="premium_product"  onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
+            <input type="checkbox" name="product_check"  style="display:none">
+            <img class="premium_img" src="/Do_IT/resources/images/shop-study.png">
+            <div class="product_name">${p.product_name}</div>
+            <div class="product_price">${p.product_price} coin</div>
      
          </div>
-         
-		 <div class="premium_product" id="set2" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-		 	<span><input type="checkbox" name="product_check"  style="display:none"></span>
-            <img class="premium_img" src="/Do_IT//resources/images/shop-premium.png">
-            <div class="product_name"> 프리미엄 30일 이용권</div>
-            <div class="product_price">45 point</div>
-         </div>
-         
-         <div class="premium_product" id="set3" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-        	 <span><input type="checkbox" name="product_check"  style="display:none"></span>
-            <img class="premium_img" src="/Do_IT/resources/images/shop-premium.png">
-            <div class="product_name">프리미엄 90일 이용권</div>
-            <div class="product_price"><s class="lightgray-c">135 point</s>    120 point</div>
-         </div>
+         </c:if>
+		</c:forEach>
       </div>
-      
+     
       	<h3>| 이용권 단품  <button class="product_addBtn" onclick="openPopup('<%=request.getContextPath()%>/productAdd', 'ProductAdd', 900, 1200);"></button>
 	<button class="product_deleteBtn" id="checkbox_btn" onclick="checkbox()"></button></h3>
       <div class="product_single">
     
-         <div class="studyroomjoin_product" id="set1" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-         <span><input type="checkbox" name="product_check"  style="display:none"></span>
-            <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
-            <div class="product_name">스터디 가입 제한 해제 + todo 이용권(7일)</div>
-            <div class="product_price">8 point</div>
+        <c:forEach var="p" items="${ productList }">
+	   <c:if test="${ p.product_category == '단품' }">
+		<div class="premium_product"  onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
+            <input type="checkbox" name="product_check"  style="display:none">
+            <img class="premium_img" src="/Do_IT/resources/images/shop-study.png">
+            <div class="product_name">${p.product_name}</div>
+            <div class="product_price">${p.product_price} coin</div>
+     
          </div>
-         <div class="studyroomjoin_product" id="set2" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-         <span><input type="checkbox" name="product_check"  style="display:none"></span>
-            <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
-            <div class="product_name">스터디 가입 제한 해제 + todo 이용권(30일)</div>
-            <div class="product_price">32 point</div>
-         </div>
-         <div class="studyroomjoin_product" id="set3" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-         <span><input type="checkbox" name="product_check"  style="display:none"></span>
-            <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
-            <div class="product_name">스터디 가입 제한 해제 + todo 이용권(90일)</div>
-            <div class="product_price">
-               <s class="lightgray-c"> 96 point</s> 90 point
-            </div>
-         </div>
-         <div class="studymember_product" id="set4" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-         <span><input type="checkbox" name="product_check"  style="display:none"></span>
-            <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
-            <div class="product_name">스터디 인원 수 해제 + todo 이용권(7일)</div>
-            <div class="product_price">8 point</div>
-         </div>
-         <div class="studymember_product" id="set5" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-         <span><input type="checkbox" name="product_check" " style="display:none"></span>
-            <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
-            <div class="product_name">스터디 인원 수 해제 + todo 이용권(30일)</div>
-            <div class="product_price">32 point</div>
-         </div>
-         <div class="studymember_product" id="set6" onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
-         <span><input type="checkbox" name="product_check"  style="display:none"></span>
-            <img class="single_img" src="/Do_IT/resources/images/shop-study.png">
-            <div class="product_name">스터디 인원 수 해제 + todo 이용권(90일)</div>
-            <div class="product_price">
-               <s class="lightgray-c"> 96 point</s> 90 point
-          </div>
-         </div>
+         </c:if>
+		</c:forEach>
+     
       </div>
    </div>
    </div>

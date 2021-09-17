@@ -30,7 +30,6 @@
 
 </head>
 <body>
-
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 <div class="wrapper">
 	<header id='header'>
@@ -38,41 +37,41 @@
 			<c:choose>
 				<c:when test="${ loginUser == null }">
 				<!-- 회원가입/로그인 -->
-				<a class="login" href="<%= request.getContextPath() %>/login">로그인</a>
-				<a class="join-or-out" href="<%= request.getContextPath() %>/memberJoin">회원가입</a>
+				<a class="login" href="${ contextPath }/login">로그인</a>
+				<a class="join-or-out" href="${ contextPath }/memberJoin">회원가입</a>
 				</c:when>
 				<c:otherwise>
 					<c:if test="${ loginUser.userType =='U'  }">
-					<a href="<%= request.getContextPath() %>/my/home"><img class="user" src="${ loginUser.profileImg }" alt="user"></a>
+					<a href="${ contextPath }/my/home"><img class="user" src="${ loginUser.profileImg }" alt="user"></a>
 					</c:if>
 					<c:if  test="${ loginUser.userType =='A'  }">
-					<a href="<%= request.getContextPath() %>/my/home"><img class="user" src="<%= request.getContextPath() %>/resources/images/admin.png" alt="admin"></a>
+					<a href="${ contextPath }/my/home"><img class="user" src="${ contextPath }/resources/images/admin.png" alt="admin"></a>
 					</c:if>
 				<span>${ loginUser.nickName }</span>
-				<a class="join-or-out" href="<%= request.getContextPath() %>/logout">로그아웃</a>
+				<a class="join-or-out" href="${ contextPath }/logout">로그아웃</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
 		<!-- 로고 이미지를 클릭하면 첫 화면으로 -->
 		<div class="logo-area">
-		<a href='<%= request.getContextPath() %>'>
-			<img class="Logo" src="<%= request.getContextPath() %>/resources/images/logo.png" alt="logo">
+		<a href='${ contextPath }'>
+			<img class="Logo" src="${ contextPath }/resources/images/logo.png" alt="logo">
 		</a>
 		</div>
 	</header>
 	<nav id="nav">
 		<ul class="navList">
-			<li><a href="<%= request.getContextPath() %>"<% if (nav1 == null) { %>class="current"<%}%>>홈</a></li>
-			<li><a href="<%= request.getContextPath() %>/ranking"<% if ("ranking".equals(nav1)) { %>class="current"<%}%>>랭킹</a></li>
-			<li><a href="<%= request.getContextPath() %>/study/home"<% if ("study".equals(nav1)) { %>class="current"<%}%>>스터디</a></li>
-			<li><a href="<%= request.getContextPath() %>/shop/home"<% if ("shop".equals(nav1)) { %>class="current"<%}%>>Shop</a></li>
-			<li><a href="<%= request.getContextPath() %>/qna/home"<% if ("qna".equals(nav1)) { %>class="current"<%}%>>Q&amp;A</a></li>
+			<li><a href="${ contextPath }"<% if (nav1 == null) { %>class="current"<%}%>>홈</a></li>
+			<li><a href="${ contextPath }/ranking"<% if ("ranking".equals(nav1)) { %>class="current"<%}%>>랭킹</a></li>
+			<li><a href="${ contextPath }/study/home"<% if ("study".equals(nav1)) { %>class="current"<%}%>>스터디</a></li>
+			<li><a href="${ contextPath }/shop/home"<% if ("shop".equals(nav1)) { %>class="current"<%}%>>Shop</a></li>
+			<li><a href="${ contextPath }/qna/home"<% if ("qna".equals(nav1)) { %>class="current"<%}%>>Q&amp;A</a></li>
 			<c:choose>
 			<c:when test="${ loginUser.userType == 'U' }">
-			<li><a href="<%= request.getContextPath() %>/my/home"<% if ("my".equals(nav1)) { %>class="current"<%}%>>마이페이지</a></li>
+			<li><a href="${ contextPath }/my/home"<% if ("my".equals(nav1)) { %>class="current"<%}%>>마이페이지</a></li>
 			</c:when>
 			<c:when  test="${ loginUser.userType =='A'  }">
-			<li><a href="<%= request.getContextPath() %>/admin/home"<% if ("admin".equals(nav1)) { %>class="current"<%}%>>관리페이지</a></li>
+			<li><a href="${ contextPath }/admin/home"<% if ("admin".equals(nav1)) { %>class="current"<%}%>>관리페이지</a></li>
 			</c:when>
 			</c:choose>
 		</ul>

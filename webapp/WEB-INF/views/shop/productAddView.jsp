@@ -52,11 +52,18 @@
 }
 
 .coin_count{
-	width: 100px;
-	height: 30px;
+	width: 80px;
+	height: 25px;
 	justify-content : center;
 	
 }
+
+.expirtion{
+	width: 50px;
+	height: 25px;
+	justify-content : center;
+}
+
 
 .textarea{
 	margin-bottom: 30px;
@@ -111,13 +118,13 @@
 				</div>
 		
 				<div class="inputarea"> 
-				<h3>상품 코인</h3>
-					<input type="number" class="coin_count" min= 1 required placeholder="Coin수를 입력하세요."> Coin 
-					
+				<h3>상품 코인 | 기간</h3>
+					<input type="number" class="coin_count" min= 1 required placeholder="Coin 입력"> Coin / 
+					<input type="number" class="expirtion" min= 1 required> 일
 				</div>
 		
 			<h3>상품 설명</h3>
-			<textarea class="textarea" rows="15" cols="80" name="content" placeholder="상품설명을 입력하세요." readonly></textarea>
+			<textarea class="textarea" rows="15" cols="80" name="content" placeholder="상품설명을 입력하세요."></textarea>
 			<div class="btn_area">
 			<button class=enrollbtn type="submit" onclick="enroll();">등록</button>
 			<button class=canclebtn type="button" onclick="window.close();">취소</button>
