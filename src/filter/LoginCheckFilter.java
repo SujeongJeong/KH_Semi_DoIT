@@ -1,6 +1,7 @@
 package filter;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,6 +98,8 @@ public class LoginCheckFilter implements Filter {
       // 샵
       permitList.add("/Do_IT/shop/home");
       permitList.add("/Do_IT/productAdd");
+      permitList.add("/Do_IT/productDetail");
+      permitList.add("/Do_IT/coin");
       
       // Q&A 게시판
       permitList.add("/Do_IT/qna/home");

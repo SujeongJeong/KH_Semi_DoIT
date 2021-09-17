@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM
+"http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="productList">
+	SELECT
+				PRODUCT_NO
+			  ,	PRODUCT_CATEGORY
+			  , PRODUCT_NAME
+			  , PRODUCT_PRICE
+			  , PRODUCT_IMG
+		 FROM PRODUCT
+		 ORDER BY PRODUCT_PRICE
+	</entry>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</properties>
