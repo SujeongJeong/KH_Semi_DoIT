@@ -54,7 +54,7 @@
                     </tr>
                     
                     
-                    <div class="notice_list">
+                    <%-- <div class="notice_list">
 						<c:forEach var="n" items="${ noticeList }">
 							<tr class = "notice_ul" onclick="detailView(${ n.notice_no });">
 								<td></td>
@@ -65,7 +65,7 @@
 								<td>${ n.count }</td>
 							</tr>
 						</c:forEach>
-					</div>
+					</div> --%>
 				
                     <tr class="manager">
                         <td>
