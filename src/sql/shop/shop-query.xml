@@ -10,6 +10,7 @@
 			  , PRODUCT_PRICE
 			  , PRODUCT_IMG
 		 FROM PRODUCT
+		 ORDER BY PRODUCT_PRICE
 	</entry>
 
 
