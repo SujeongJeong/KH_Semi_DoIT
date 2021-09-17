@@ -142,34 +142,9 @@
 	        });
 	      }); 
 	
-		function validate() {
-			
-			// 비밀번호가 8 ~ 16 자리 사이이고 특수문자, 숫자, 영어만 가능 (숫자, 영문, 특수문자 각 1자리 이상 ( 그외 글자 X ))
-			let regExp = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
-			
-			if(!regExp.test($('#userPwd').val())) {
-				alert("비밀번호는 8~16 자 영문 대 소문자,숫자,특수문자를 모두 포함하여 입력하세요.");
-				return false;
-			}
-     
-			// 비밀번호와 비밀번호 확인이 일치하지 않으면
-			if($("#userPwd").val() != $("#userPwd2").val()) {
-				alert("비밀번호가 일치하지 않습니다.");
-				$("#userPwd2").focus();
-				return false;
-			}
-	
-			// 약관 동의 체크 박스가 체크되어 있지 않으면
-			if(!$("#terms1").is(":checked") || !$("#terms2").is(":checked")) {
-				alert("서비스 이용 약관과 개인정보 정책에 대한 안내 모두 동의해주세요.");
-				return false;
-			}
-			
-			return true;
-		}
-		
-		var isUsable_e = false;
+	    var isUsable_e = false;
 		var isUsable_n = false;
+		
 		
 		$("#emailCheck").click(function(){
 			// input userId 변수
@@ -264,6 +239,36 @@
 				});
 			}
 		}); 
+		
+		function validate() {
+			
+			// 비밀번호가 8 ~ 16 자리 사이이고 특수문자, 숫자, 영어만 가능 (숫자, 영문, 특수문자 각 1자리 이상 ( 그외 글자 X ))
+			let regExp = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
+			
+			if(!regExp.test($('#userPwd').val())) {
+				alert("비밀번호는 8~16 자 영문 대 소문자,숫자,특수문자를 모두 포함하여 입력하세요.");
+				return false;
+			}
+     
+			// 비밀번호와 비밀번호 확인이 일치하지 않으면
+			if($("#userPwd").val() != $("#userPwd2").val()) {
+				alert("비밀번호가 일치하지 않습니다.");
+				$("#userPwd2").focus();
+				return false;
+			}
+	
+			// 약관 동의 체크 박스가 체크되어 있지 않으면
+			if(!$("#terms1").is(":checked") || !$("#terms2").is(":checked")) {
+				alert("서비스 이용 약관과 개인정보 정책에 대한 안내 모두 동의해주세요.");
+				return false;
+			}
+			if(!isUsable_e && !isUsable_n) {
+				alert("아이디, 닉네임 중복체크 해주세요.");
+				return false;
+			}
+			
+			return true;
+		}
 		
 		function openPopup(url, title, width, height) {
 			let left = (document.body.clientWidth/2) - (width/2);
