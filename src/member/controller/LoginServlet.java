@@ -45,14 +45,10 @@ public class LoginServlet extends HttpServlet {
 	
 		String userEmail = request.getParameter("userEmail");
 		String userPwd = request.getParameter("userPwd");
-		
-		System.out.println("loginForm : " + userEmail + " " + userPwd);
-		
+
 		Member loginUser = new MemberService().loginMember(userEmail, userPwd);
 		
 		if(loginUser != null) {
-			request.getSession().setAttribute("msg", "로그인 성공.");
-			
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 
@@ -60,8 +56,7 @@ public class LoginServlet extends HttpServlet {
 
 		} else {
 			request.getSession().setAttribute("msg", "로그인 실패");
-			response.sendRedirect(request.getContextPath());
-			
+			response.sendRedirect(request.getContextPath()+"/login");
 		}
 	}
 }

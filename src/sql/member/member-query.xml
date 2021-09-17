@@ -9,6 +9,7 @@
 			, USER_PWD
 			, NICKNAME
 			, ENROLL_DATE
+			, MODIFY_DATE
 			, STATUS
 			, USER_TYPE
 			, PROFILE_IMG
@@ -29,6 +30,7 @@
 			, USER_PWD
 			, NICKNAME
 			, ENROLL_DATE
+			, MODIFY_DATE
 			, STATUS
 			, USER_TYPE
 			, PROFILE_IMG
@@ -42,6 +44,7 @@
 			, ?
 			, ?
 			, ?
+			, SYSDATE
 			, SYSDATE
 			, DEFAULT
 			, DEFAULT

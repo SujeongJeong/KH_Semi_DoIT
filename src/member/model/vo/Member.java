@@ -8,6 +8,7 @@ public class Member {
 	private String userPwd;
 	private String nickName;
 	private Date enrollDate;
+	private Date modifyDate;
 	private String status;
 	private String userType;
 	private String profileImg;
@@ -17,7 +18,7 @@ public class Member {
 	
 	public Member() {}
 
-	public Member(int userNo, String userEmail, String userPwd, String nickName, Date enrollDate, String status,
+	public Member(int userNo, String userEmail, String userPwd, String nickName, Date enrollDate, Date modifyDate, String status,
 			String userType, String profileImg, String targetHour, int userCoin, int reportCount) {
 		super();
 		this.userNo = userNo;
@@ -25,6 +26,7 @@ public class Member {
 		this.userPwd = userPwd;
 		this.nickName = nickName;
 		this.enrollDate = enrollDate;
+		this.modifyDate = modifyDate;
 		this.status = status;
 		this.userType = userType;
 		this.profileImg = profileImg;
@@ -129,16 +131,19 @@ public class Member {
 		this.reportCount = reportCount;
 	}
 
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userEmail=" + userEmail + ", userPwd=" + userPwd + ", nickName="
-				+ nickName + ", enrollDate=" + enrollDate + ", status=" + status + ", userType=" + userType
-				+ ", profileImg=" + profileImg + ", targetHour=" + targetHour + ", userCoin=" + userCoin
-				+ ", reportCount=" + reportCount + "]";
+				+ nickName + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status=" + status
+				+ ", userType=" + userType + ", profileImg=" + profileImg + ", targetHour=" + targetHour + ", userCoin="
+				+ userCoin + ", reportCount=" + reportCount + "]";
 	}
-
-	
-	
-	
-	
 }

@@ -48,6 +48,7 @@ public class MemberDao {
 											rset.getString("USER_PWD"),
 											rset.getString("NICKNAME"),
 											rset.getDate("ENROLL_DATE"),
+											rset.getDate("MODIFY_DATE"),
 											rset.getString("STATUS"),
 											rset.getString("USER_TYPE"),
 											rset.getString("PROFILE_IMG"),

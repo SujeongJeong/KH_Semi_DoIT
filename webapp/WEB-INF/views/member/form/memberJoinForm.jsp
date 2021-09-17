@@ -1,20 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-<% if(session.getAttribute("msg") != null) { %>
-<script>
-	 alert('<%= session.getAttribute("msg") %>');
-</script>
-<% 
-		session.removeAttribute("msg");	
-	} 
-%>
 <style>
 	.content{
 		width:40%;
@@ -73,7 +64,7 @@
 		font-size: 1.5em;
 		border-radius : 5px; 
 	}
-	div[class^=terms] {
+	.chk_line {
 		margin: 10px 0;
 		text-align: left;
 	}
@@ -89,7 +80,6 @@
 </style>
 </head>
 <body>
-<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 	<div class="content">
 		<form id="joinForm" action="<%= request.getContextPath() %>/memberJoin" method="post" onsubmit="return validate();">
 			<a href="/Do_IT" class="logo"><img src="/Do_IT/resources/images/logo.png" alt="logo"></a>
@@ -109,9 +99,18 @@
 			<span class="input_area"><input type="text" name="nickname"  id="nickname" required></span>
 			<button id="nickCheck" type="button">중복확인</button>
 				
-			<div class="terms_all"><input type="checkbox" id="termsAll" name="terms"><label for="termsAll">모두 동의</label></div>
-			<div class="terms_tos"><input type="checkbox" class="terms" name="terms"><a href="#" onclick="openPopup('<%= request.getContextPath() %>/tos', 'tos', 500, 500); return false">서비스 이용 약관 동의(필수)</a></div>
-			<div class="terms_pp"><input type="checkbox" class="terms" name="terms"><a href="#" onclick="openPopup('<%= request.getContextPath() %>/pp', 'pp', 500, 500); return false">개인 정보 정책 동의(필수)</a></div>
+			<div class="checkbox_group">
+				<div class="chk_line">
+					<input type="checkbox" id="termsAll" name="termsAll"><label for="termsAll">모두 동의</label>
+				</div>
+				<div class="chk_line">
+					<input type="checkbox" class="terms" id="terms1" name="terms"><a href="#" onclick="openPopup('<%= request.getContextPath() %>/tos', 'tos', 500, 500); return false">서비스 이용 약관 동의(필수)</a>
+				</div>
+				<div class="chk_line">
+					<input type="checkbox" class="terms" id="terms2" name="terms"><a href="#" onclick="openPopup('<%= request.getContextPath() %>/pp', 'pp', 500, 500); return false">개인 정보 정책 동의(필수)</a>
+				</div>
+			</div>
+			
 				
 			<span class="joinBtnArea"><button id="joinBtn">회원가입</button></span>
 		</form>
@@ -123,17 +122,25 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	
 	<script>
-		// 전체 동의 체크 박스
+	    // 약관 부분 처리
 	    $(document).ready( function() {
-	    	if(!$(".terms").is(":checked")) {
-	    		$('#termsAll').prop('checked', false);
-	    	}
-	    	
-	    	
+	    	// 전체동의 체크박스 선택, 해제
 	        $('#termsAll').click( function() {
-	          $('.terms').prop('checked', this.checked);
+	          $('#terms1').prop('checked', this.checked);
+	          $('#terms2').prop('checked', this.checked);
 	        } );
-	      } ); 
+	    	
+	    	// 체크박스 개별 선택
+	        $(".checkbox_group").on("click", ".terms", function() {
+	            var is_checked = true;
+
+	            $(".checkbox_group .terms").each(function(){
+	                is_checked = is_checked && $(this).is(":checked");
+	            });
+
+	            $("#termsAll").prop("checked", is_checked);
+	        });
+	      }); 
 	
 		function validate() {
 			
@@ -141,7 +148,7 @@
 			let regExp = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
 			
 			if(!regExp.test($('#userPwd').val())) {
-				alert("8~16 자 영문 대 소문자,숫자,특수문자를 모두 포함하여 입력하세요");
+				alert("비밀번호는 8~16 자 영문 대 소문자,숫자,특수문자를 모두 포함하여 입력하세요.");
 				return false;
 			}
      
@@ -153,7 +160,7 @@
 			}
 	
 			// 약관 동의 체크 박스가 체크되어 있지 않으면
-			if(!$(".terms").is(":checked")) {
+			if(!$("#terms1").is(":checked") || !$("#terms2").is(":checked")) {
 				alert("서비스 이용 약관과 개인정보 정책에 대한 안내 모두 동의해주세요.");
 				return false;
 			}
@@ -218,7 +225,7 @@
 			var regExp = /^[가-힣a-zA-Z\d]{2,10}$/; 
 			
 			if(!nickname || !regExp.test(nickname.val()) ) {
-				alert('2~10자 한글, 숫자, 영어 대 소문자를 입력하세요.');
+				alert('닉네임은 2~10자 한글, 숫자, 영어 대 소문자를 입력하세요.');
 				nickname.focus();
 			} else {
 				// 4자리 이상의 userId 값을 입력 했을 경우 중복 확인을 위해 ajax 통신 요청
