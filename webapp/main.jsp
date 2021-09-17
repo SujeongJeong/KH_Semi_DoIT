@@ -91,7 +91,7 @@
 			</div>
 			<div class="todo-area">
 				<div class="todo-title">
-					<label class="title">오늘의 할일</label><img src="resources/images/plus.png" alt="추가">
+					<label class="title">오늘의 할일</label><button class="add"></button>
 				</div>
 				<div class="todo-list">
 					<div class="hiddenScroll">
@@ -117,10 +117,57 @@
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
+
+	<c:if test="${ loginUser != null }">
 	<script>
-		$(".edit").click(function(){
-			$(this).parent().html().replaceWith("<textarea>"+parent().value()+"</textarea>");
+		history.pushState(null, null, location.href); 
+		window.onpopstate = function(event) { history.go(1); };
+		
+	<%-- todolist 추가 --%>
+		$(".add").click(function(){
+			
+			$(".list").append("<li><textarea maxlength='48'></textarea></li>");
+			$(".list:last-child textarea").focus();
+			
+			$(".list:last-child textarea").keydown(function(event){
+				if(event.key == "Enter"){
+					this.blur();
+				}
+			});
+			
+			$(".list:last-child textarea").blur(function(){
+				console.log(blur);
+				/*$.ajax({
+					url : "${ contextPath }/main/todolistAdd",
+					data : { addList : lastText.value() },
+					type : "post",
+					success : function(result){
+						if(result > 0 ){
+							lastLi.innerHTML(lastText);
+						}else{
+							alert("리스트 추가 실패")
+						}
+					},
+					error : function(e){
+						console.log(e);
+					}
+				});
+				*/
+			};
 		});
+		
 	</script>
+	</c:if>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

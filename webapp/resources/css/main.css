@@ -16,6 +16,16 @@
 		position : absolute;
 		overflow : hidden;
 	}
+	.add{
+		background : url("/Do_IT/resources/images/plus.png");
+		border: none;
+		width : 20px; height : 20px;
+	}
+	.add:hover{
+		background : url("/Do_IT/resources/images/plus-hover.png");
+		border: none;
+		width : 20px; height : 20px;
+	}
 	.todo-list li { margin : 5px 5px 10px 5px;}
 	.todo-list li:hover button{ display : inline;}
 	.edit{ 
@@ -63,9 +73,15 @@
 	.nolist{ 
 		position: absolute;
 		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+		left: 55%;
+		transform: translate(-50%, -55%);
 		width : 250px;
+	}
+	.list textarea{
+		height : 35px;
+		width : 423px;
+		resize : none;
+		font-size : 15px;
 	}
 	.semiTitle{ 	font-size : 16px;	}
 	.goalUl{ 	padding : 50px;	}
@@ -82,3 +98,4 @@
 	.todo-title img { width : 25px; height : 25px;}
 	.study-list img { width : 200px; height : 200px;}
 	.study-info { width : 210px; height : 250px; margin : 10px; padding: 15px 0 0 10px;}
+	
