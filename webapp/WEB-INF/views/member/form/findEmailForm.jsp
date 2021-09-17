@@ -57,6 +57,7 @@
 		resize: none;
 		margin-bottom: 10px;
 		color: red;
+		border: 0;
 	}
 	#close_btn {
 		width: 100px;
@@ -85,12 +86,12 @@
 			<h4>이메일</h4>
 			<div class="find_area">
 				<span class="input_area">
-					<input type="email" name="userEmail" id="userEmail">
+					<input type="email" name="userEmail" id="userEmail" value="${ userEmail }">
 				</span>
 				<button id="find_btn">조회</button>
 			</div>
 			
-			<textarea rows="5" cols="5" readonly></textarea>
+			<textarea rows="5" cols="5" readonly>${ msg }</textarea>
 			<div class="close"><button id="close_btn" type="button" onclick="window.close()">닫기</button></div>
 		</form>
 	</div>
@@ -108,6 +109,7 @@
 			
 		};
 			
+		
 		
 	</script>
 </body>

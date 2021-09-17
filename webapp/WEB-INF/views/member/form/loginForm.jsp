@@ -127,7 +127,7 @@ button[id$=Btn]:hover {
 			<span class="input_area"><input type="password" name="userPwd" id="userPwd" placeholder="비밀번호를 입력하세요"></span>
 			<div class="fun_box">
 				<div class="find_Btns">
-					<button id="findEmailBtn" type="button" onclick="openPopup('<%= request.getContextPath() %>/findEmailView', 'findEmail', 500, 500);">이메일 찾기</button>|<button id="findPwdBtn" type="button" onclick="openPopup('<%= request.getContextPath() %>/findPwdView', 'findPwd', 500, 500);">비밀번호 찾기</button>
+					<button id="findEmailBtn" type="button" onclick="openPopup('<%= request.getContextPath() %>/findEmail', 'findEmail', 500, 500);">이메일 찾기</button>|<button id="findPwdBtn" type="button" onclick="openPopup('<%= request.getContextPath() %>/findPwd', 'findPwd', 500, 500);">비밀번호 찾기</button>
 				</div>
 				<div id="join_box"><button id="joinBtn" type="button" onclick="location.href ='<%= request.getContextPath() %>/memberJoin';">회원가입</button ></div>
 			</div>

@@ -54,12 +54,8 @@ public class MemberJoinServlet extends HttpServlet {
 				// 가입 정보를 담은 Member 객체 생성
 				Member mem = new Member(userEmail, userPwd, nickname);
 				
-				 System.out.println(mem);
-				
 				// 3. 비지니스 로직을 수행할 서비스 메소드로 Member 객체 전달 후 결과 값 리턴 받기
 				int result = new MemberService().insertMember(mem);
-				
-				System.out.println(result);
 				
 				// 4. 결과 성공/실패 여부에 따라 응답 화면 결정
 				if(result > 0) {
