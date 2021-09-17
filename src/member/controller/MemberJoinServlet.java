@@ -50,8 +50,6 @@ public class MemberJoinServlet extends HttpServlet {
 				String userEmail = request.getParameter("userEmail");
 				String userPwd = request.getParameter("userPwd");
 				String nickname= request.getParameter("nickname");
-
-				System.out.println("joinForm : " + userEmail + "  " + userPwd);
 				
 				// 가입 정보를 담은 Member 객체 생성
 				Member mem = new Member(userEmail, userPwd, nickname);
