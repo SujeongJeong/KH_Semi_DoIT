@@ -37,7 +37,6 @@
 
     .report_table td {
         height : 30px;
-        text-align: center;
     }
 	
 
@@ -48,13 +47,12 @@
 	    <%-- <form id="updatePwdForm" action="<%= request.getContextPath() %>/pwdModify"
 	method="post" onsubmit="return checkPwd();"> --%>
 	        <h1>회원신고 누적리스트</h1>
-	        <div class="report_list">
 	            	<table class="report_table">
 						<thead>
 							<tr>
                                 <th>날짜</th>
 								<th>신고자 ID</th>
-								<th>제목/내용</th>
+								<th>구분</th>
 								<th>신고사유</th>
 							</tr>
 						</thead>
@@ -62,12 +60,11 @@
 							<tr>
 								<td>2021-08-25</td>
 								<td>닉네임1</td>
-								<td>욕설</td>
+								<td>게시판</td>
 								<td>욕설</td>
 							</tr>
 						</tbody>
 					</table>
-	        </div>
     </div>
 
 	
