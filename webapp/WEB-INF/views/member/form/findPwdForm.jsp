@@ -57,15 +57,14 @@
 		resize: none;
 		margin-bottom: 10px;
 		color: red;
-		border: 0;
 	}
 	#close_btn {
 		width: 100px;
 		height: 30px;
 		background: lightgray;
 		border: 0;
-		 border-radius : 5px;
-		 padding: 5px 0;
+		border-radius : 5px;
+		padding: 5px 0;
 	}
 	.close {
 		text-align: center;

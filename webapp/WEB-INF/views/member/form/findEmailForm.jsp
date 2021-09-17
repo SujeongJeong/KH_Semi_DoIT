@@ -57,7 +57,6 @@
 		resize: none;
 		margin-bottom: 10px;
 		color: red;
-		border: 0;
 	}
 	#close_btn {
 		width: 100px;
