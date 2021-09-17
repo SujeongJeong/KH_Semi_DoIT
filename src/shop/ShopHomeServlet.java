@@ -33,19 +33,13 @@ public class ShopHomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
 		  List<Product> productList = new ShopService().selectList();
-		  System.out.println("공지사항 목록 : " + productList);
-		 /* 
-		 * request.setAttribute("productList", productList);
-		 * request.getRequestDispatcher("/WEB-INF/views/shop/home.jsp").forward(request,
-		 * response);
-		 */
+		  //System.out.println("공지사항 목록 : " + productList); 리스트 출력테스트
+		  //리스트 가져오고, 네비css도 가져오기.
+		  request.setAttribute("productList", productList);
+		  request.setAttribute("nav1", "shop");
+		  request.getRequestDispatcher("/WEB-INF/views/shop/home.jsp").forward(request,response);
 		
-		// 메뉴바 클릭했을 때 페이지로 이동
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/shop/home.jsp");
-		request.setAttribute("nav1", "shop");
-		view.forward(request, response);
 	}
 
 	/**

@@ -6,11 +6,13 @@ import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Properties;
 
 import shop.model.dao.ShopDao;
 import shop.model.vo.Product;
 
 public class ShopService {
+	private Properties query = new Properties();
 	private ShopDao sd = new ShopDao();
 	
 	//1.조회리스트.
