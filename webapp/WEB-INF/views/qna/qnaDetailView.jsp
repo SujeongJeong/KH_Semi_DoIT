@@ -58,7 +58,7 @@
             <button>등록</button>
         </div>
         <!-- 댓글 -->
-        <div class="comment_wrapper my_comment">
+        <div class="comment_wrapper">
             <div class="writer_info">
                 <img class="user_img" src='<%= request.getContextPath() %>/resources/images/user.png' alt="게시글 유저">
                 <div class="avatar_info">

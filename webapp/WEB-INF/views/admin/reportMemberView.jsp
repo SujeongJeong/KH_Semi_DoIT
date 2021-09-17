@@ -65,7 +65,7 @@
                                 <th>번호</th>
 								<th>날짜</th>
 								<th>구분</th>
-								<th>제목/내용</th>
+								<!-- <th>제목/내용</th> -->
 								<th>신고당한 ID</th>
 								<th>신고 횟수</th>
 								<th>회원 누적신고</th>
@@ -75,11 +75,11 @@
 							<tr>
 								<td>1</td>
 								<td>2021-08-28</td>
-								<td>게시글</td>
-								<td>학원 홍보</td>
+								<td class="reportPopup">게시글</td>
+								<!-- <td>학원 홍보</td> -->
 								<td>닉네임1</td>
-								<td onclick="openPopup('<%= request.getContextPath() %>/reportList', 'reportList', 800, 500);">1</td>
-								<td onclick="openPopup('<%= request.getContextPath() %>/reportAllList', 'reportAllList', 800, 500);">6</td>
+								<td class="reportPopup" onclick="openPopup('<%= request.getContextPath() %>/reportList', 'reportList', 800, 500);">1</td>
+								<td class="reportPopup" onclick="openPopup('<%= request.getContextPath() %>/reportAllList', 'reportAllList', 800, 500);">6</td>
 							</tr>
 
 						</tbody>

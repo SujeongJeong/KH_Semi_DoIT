@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.model.vo.Member;
+
 /**
  * Servlet implementation class QnaInsertServlet
  */
@@ -28,17 +30,35 @@ public class QnaInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/qna/qnaInsertView.jsp");
 		request.setAttribute("nav1", "qna");
-		view.forward(request, response);
+		
+		
+		  String usertype =((Member)request.getSession().getAttribute("loginUser")).getUserType();
+		  
+		  if(usertype.equals("A")) {
+			  	request.getRequestDispatcher("/WEB-INF/views/qna/noticeInsertView.jsp").forward(request, response); 
+			} else {
+				 request.getRequestDispatcher("/WEB-INF/views/qna/qnaInsertView.jsp").forward(request, response); 
+			}
+		 
+		
+		// request.getRequestDispatcher("/WEB-INF/views/qna/noticeInsertView.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	/**
+		request.setCharacterEncoding("utf-8");
+		 int cid = Integer.parseInt(request.getParameter("category"));
+		 String title = request.getParameter("title");
+		 String content = request.getParameter("content");
+		 
+		 System.out.println(cid);
+		 System.out.println("제목:"+title);
+		 System.out.println("내용:"+content);  
+		 **/
 	}
 
 }
