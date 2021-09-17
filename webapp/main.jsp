@@ -39,7 +39,7 @@
 				<div class="study-list">
 					<c:choose>
 					<c:when test="${ loginUser == null }">
-					 <label class="nolist text">스터디를 만들거나 추가해보세요.</label>
+					 <label class="nolist">스터디를 만들거나 추가해보세요.</label>
 					</c:when>
 					<c:otherwise>
 					<div class="study-info">
@@ -97,15 +97,17 @@
 					<div class="hiddenScroll">
 					<div class="scrollBlind">
 						<c:choose>
-						<c:when test="${ loginUser == null }">
-						 <label class="nolist text">오늘의 할일을 추가하세요.</label>
+						<c:when test="${ loginUser == null || Todolist == null}">
+							 <label class="nolist">오늘의 할일을 추가하세요.</label>
 						</c:when>
 						<c:otherwise>
-						<ul class="list">
-							<li>두잇<button class="edit"></button><button class="delete"></button></li>
-							<li>두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
-							<li>두잇두잇두잇<button class="edit"></button><button class="delete"></button></li>
-						</ul>
+							<ul class="list">
+							<c:if test="${ loginUser.userNo == Todolist.user_No }">							
+							<c:forEach var="todo" items="${ Todolist.todo_content }">
+								<li>${ todo }<button class="edit"></button><button class="delete"></button></li>
+							</c:forEach>
+							</c:if>
+							</ul>
 						</c:otherwise>
 						</c:choose>
 					</div>
@@ -117,16 +119,30 @@
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
-
+	<%-- 로그인 하지 않았을 시 --%>
+	<c:if test="${ loginUser == null }">
+	<script>
+		<%-- 로그아웃 후 뒤로가기로 로그인된 페이지 접속 못하게 막기 --%>
+		history.pushState(null, null, location.href); 
+		window.onpopstate = function(event) { history.go(1); };	
+		<%-- 로그인 안했을 때 리스트 추가 시 로그인 페이지로 이동여부묻기 --%>
+		$(".add").click(function(){
+			 if(confirm("로그인 하시겠습니까?")){
+				 location.href="${ contextPath}/login";
+			 }
+		  });
+	</script>
+	</c:if>
 	<c:if test="${ loginUser != null }">
 	<script>
-		history.pushState(null, null, location.href); 
-		window.onpopstate = function(event) { history.go(1); };
-		
 	<%-- todolist 추가 --%>
 		$(".add").click(function(){
+			if( $(".scrollBlind ul").hasClass("list")){
+				$(".list").append("<li><textarea maxlength='48'></textarea></li>");
+			}else{
+				$(".scrollBlind label").replaceWith("<ul class='list'><li><textarea maxlength='48'></textarea></li></ul>")
+			}
 			
-			$(".list").append("<li><textarea maxlength='48'></textarea></li>");
 			$(".list:last-child textarea").focus();
 			
 			$(".list:last-child textarea").keydown(function(event){
@@ -153,21 +169,10 @@
 					}
 				});
 				*/
-			};
+			});
 		});
 		
 	</script>
 	</c:if>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
