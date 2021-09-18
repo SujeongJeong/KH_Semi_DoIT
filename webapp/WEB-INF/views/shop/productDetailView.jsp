@@ -36,7 +36,7 @@
 }
 
 
-.temporary_img {
+.image_area {
 	width: 500px;
 	height: 150px;
 	margin-top: 30px;
@@ -98,9 +98,9 @@
 	
 	<form class="productAddForm" action="" method="post">
 		<div class="product_content">		
-			<img class="temporary_img" src="/Do_IT/resources/images/study-background6.jpg">
+			<img class="image_area" src="/Do_IT/resources/images/study-background6.jpg">
 			<br>
-			<input type="file" name="thumbnail" accept="image/gif,image/jpeg,image/png" readonly>
+			<input type="file" name="productimg" accept="image/gif,image/jpeg,image/png" readonly>
 			
 			<h6>
 				<span class="inputarea"> 
@@ -117,12 +117,15 @@
 			<button class=paymentbtn type="button" onclick="parchase();">구매</button>
 			<button class=canclebtn type="button" onclick="window.close();">취소</button>
 		    </div>
-		
+		</div>
 		
 	</form>
 	</div>
-	</div>	
+	</div>
+	
 	<script>
+	
+	
 		function parchase(){
 			if(confirm("구매하시겠습니까? "))
 				window.close();

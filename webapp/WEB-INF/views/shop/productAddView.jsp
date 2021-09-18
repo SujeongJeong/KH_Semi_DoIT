@@ -37,13 +37,19 @@
 }
 
 
-.temporary_img {
+.image_area {
 	width: 100%;
 	height: 150px;
 	margin-top: 30px;
 	margin-bottom: 20px;
 	justify-content : center;
 }
+
+
+.image_area img{
+	width: 100%;
+	height: 150px;}
+
 
 .title {
 	width: 400px;
@@ -93,9 +99,6 @@
 	margin: 5px;
 }
 
-
-
-
 </style>
 </head>
 <body>
@@ -105,11 +108,14 @@
 	<!-- 제목조건, 폼 입력 조건 나중에 설정하기 -->
 	<div class="logo_area"><img class="logo" src="/Do_IT/resources/images/logo.png" onclick="window.close();" alt="logo"></div>
 	<div>
-	<form class="productAddForm" action="" method="post">
+	<form class="productAddForm"  method="post" action="${ contextPath }/productAdd"
+               enctype="multipart/form-data">
+
 		<div class="product_content">		
-			<img class="temporary_img" src="/Do_IT/resources/images/study-background6.jpg">
+			
 			<h3>상품 이미지</h3>
-			<input type="file" name="thumbnail" accept="image/gif,image/jpeg,image/png" required>
+			<div class="image_area"></div>
+			<input type="file" name="file" id="productimg" accept="image/gif,image/jpeg,image/png" required>
 			
 			
 				<div class="inputarea"> 
@@ -130,17 +136,32 @@
 			<button class=canclebtn type="button" onclick="window.close();">취소</button>
 		    </div>
 		
-		
+			</div>
 			</form>
 			</div>
 		</div>	
+		
+		<script src="${ contextPath }/resources/js/imagePreview.js"></script>
+		
+		<c:choose>
+		<c:when test="${ !empty loginUser }">
+		<script>
+			function detailView(bid){
+				location.href = '${contextPath}/product/detail?bid=' = bid;
+			}
+		</script>
+		</c:when>
+		</c:choose>	
+		
 	<script>
+	
+	
 		function enroll(){
 			if(confirm("등록하시겠습니까? "))
-				window.close();
-			//코인금액이 가격보다 작으면 코인창으로 가기.
+			//코인금액이 가격보다 작으면 코인창으로 가기.	
 		}
-	</script>
+		
+	 </script>
 
 
 </body>

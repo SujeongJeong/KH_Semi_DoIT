@@ -51,14 +51,14 @@
 .product_premium {
 	margin:50px 15px;
 	display : grid;
-	grid-template-columns: 230px 230px 230px;
+	grid-template-columns: 300px 300px 300px;
 	gap : 30px;
 }
 
 .product_single {
 	margin:50px 15px;
 	display : grid;
-	grid-template-columns: 230px 230px 230px;
+	grid-template-columns: 300px 300px 300px;
 	gap : 30px;
 }
 
