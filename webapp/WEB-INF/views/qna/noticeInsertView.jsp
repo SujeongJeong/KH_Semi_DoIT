@@ -61,38 +61,5 @@
 	
 	  </script>
 
-
-
-
-	<%-- <!-- Smart Editor -->
-	<script type="text/javascript" src="<%=request.getContextPath()%>/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
-	 
-	 
-	<!-- Smart Editor -->
-	<script type="text/javascript">
-	 
-	var oEditors = [];
-	nhn.husky.EZCreator.createInIFrame({
-	    oAppRef: oEditors,
-	    elPlaceHolder: "textAreaContent",
-	    sSkinURI: "<%=request.getContextPath()%>/se2/SmartEditor2Skin.html",
-	    fCreator: "createSEditor2"
-	});
-	
-	//저장버튼 클릭시 form 전송
-	$("#save").click(function(){
-	    oEditors.getById["textAreaContent"].exec("UPDATE_CONTENTS_FIELD", []);
-	    $("#frm").submit();
-	});    
- --%>
- 
-	// textArea에 이미지 첨부
-	<%-- function pasteHTML(filepath){
-	    var sHTML = '<img src="<%=request.getContextPath()%>/resources/uploadFiles/'+filepath+'">';
-	    //["기존 DB에 저장된 내용을 에디터에 적용할 문구"]
-	    oEditors.getById["textAreaContent"].exec("PASTE_HTML", [sHTML]);
-	} --%>
- </script>
 </body>
 </html>
