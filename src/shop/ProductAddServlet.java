@@ -9,6 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+
+import common.MyFileRenamePolicy;
+
 /**
  * Servlet implementation class ProductAddServlet
  */
@@ -40,8 +46,23 @@ public class ProductAddServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			request.setAttribute("msg", "잘못 된 전송입니다.");
+			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
+		}
+		
+		//최대용량제한
+		int maxSize = 1024*1024*10;
+		
+		String root = request.getSession().getServletContext().getRealPath("/");
+		System.out.println(root);
+		
+		String savePath = root + "resources\\uploadFiles\\";
+		System.out.println(savePath);
+	
+		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+		System.out.println(multiRequest);
+		
 	}
-
 }
