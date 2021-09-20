@@ -9,6 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import wrapper.EncryptWrapper;
 
@@ -19,8 +20,7 @@ import wrapper.EncryptWrapper;
 // LoginServlet, MemberJoinServlet, PwdModifyServlet에 필터 적용이 되어야 함
 @WebFilter(filterName="encrypt", servletNames= {"LoginServlet",
 												"MemberJoinServlet", 
-												"PwdModifyServlet",
-												"rsetPwdServlet"})
+												"PwdModifyServlet"})
 public class EncryptFilter implements Filter {
 
     /**
@@ -65,5 +65,4 @@ public class EncryptFilter implements Filter {
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
 	}
-
 }

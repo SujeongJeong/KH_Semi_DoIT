@@ -19,7 +19,10 @@
 		width : 300px;
 		margin: auto;
 		padding: 10px;
-		text-align:center;
+	}
+	
+	#resetPwdForm h1 {
+		text-align: center;
 	}
 	
 	.input_area {
@@ -59,44 +62,21 @@
 	.logo {
 	margin-bottom: 20px;
 	}
-
-	div[class$=box] {
-		display: flex;
-		justify-content: space-between;
-		margin-bottom: 10px;
-	}
-	
-	span[id$=Result] {
-		color: red;
-	}
-	
-	
-	div[class$=box] h4 {
-		display: inline;
-		margin: 0;
-	}
-
 </style>
 </head>
 <body>
 	<div class="content">
 		<div id="resetInfoArea">
-			<form id="resetPwdForm" action="<%= request.getContextPath() %>/resetPwd"
-			method="post" onsubmit="return validate();">
+			<form id="resetPwdForm" action="<%= request.getContextPath() %>/resetPwd" method="post" onsubmit="return validate();">
 				<a href="/Do_IT"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo"></a><br>
-				<div class="pwd_box">
+					<h1>비밀번호 재설정</h1>
 					<h4>새로운 비밀번호</h4>
-					<span id="pwdResult"></span>
-				</div>
-				<span class="input_area"><input type="password" minlength="8" maxlength="15" name="newPwd" required></span><br>
+					<span class="input_area"><input type="password" minlength="8" maxlength="15" name="newPwd" required></span><br>
 				
-				<div class="pwd2_box">
 					<h4>새로운 비밀번호 확인</h4>
-					<span id="pwd2Result"></span>
-				</div>
-				<span class="input_area"><input type="password" maxlength="15" name="newPwd2" required></span><br>
+					<span class="input_area"><input type="password" maxlength="15" name="newPwd2" required></span><br>
 			
-				<span class="input_area joinBtnArea"><button id="joinBtn">비밀번호 재설정</button></span>
+					<span class="input_area joinBtnArea"><button id="joinBtn">비밀번호 재설정</button></span>
 			</form>
 		</div>
 	</div>
@@ -104,13 +84,6 @@
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
 	<script>
-		let pwdResult = document.getElementById('pwdResult');
-		let pwd2Result = document.getElementById('pwd2Result');
-	
-		pwdResult.innerHTML = 'pwdResult';
-		pwd2Result.innerHTML = 'pwd2Result';
-		
-	
 		// 사용자 입력 값 유효성 검사
 		function vaildate(){
 			return true;	
