@@ -119,4 +119,20 @@ public class MemberService {
 		
 		return result;
 	}
+
+	// 임시 비밀번호 설정
+	public int rsetPwd(String userEmail, String encPwd) {
+		Connection conn = getConnection();
+		
+		int result = md.rsetPwd(conn, userEmail, encPwd);
+		
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
 }

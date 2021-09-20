@@ -113,4 +113,9 @@
 			FROM MEMBER
 		 WHERE NICKNAME = ?
 	</entry>
+	<entry key="rsetPwd">
+		UPDATE MEMBER
+		SET USER_PWD = ?
+		WHERE USER_EMAIL = ?
+	</entry>
 </properties>

@@ -240,4 +240,27 @@ public class MemberDao {
 			
 			return result;
 		}
+
+		public int rsetPwd(Connection conn, String userEmail, String encPwd) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String sql = query.getProperty("rsetPwd");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, encPwd);
+				pstmt.setString(2, userEmail);
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
 }
