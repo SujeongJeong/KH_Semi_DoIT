@@ -141,18 +141,17 @@
 		<%-- 스터디방 리스트 조회 --%>
 		<%-- begin="1" end="${ StudyListSize }" --%>
 		<c:forEach var="g" items="${ StudyList }" begin="0" end="${ StudyList.size() }">
-			
-		
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="${ contextPath }${ g.sImgList.get(0).file_path }${ g.sImgList.get(0).change_name }"
-					onclick="studyInfo(${ g.s_no })"><span
-					class="sName">${ g.s_name } </span><br>
-				<span class="sCategory">#${ g.cname }</span>
-				<h4 class="studyTO">n/ ${ g.s_to }</h4>	
-			</div>
-		
-		</c:forEach>	
+
+
+				<div class="studyRoom">
+					<img class="studyImage"
+						src="${ contextPath }${ g.sImgList.get(0).file_path }${ g.sImgList.get(0).change_name }"
+						onclick="studyInfo(${ g.s_no })"> <span class="sName">${ g.s_name }
+					</span><br> <span class="sCategory">#${ g.cname }</span>
+					<h4 class="studyTO">n/ ${ g.s_to }</h4>
+				</div>
+
+			</c:forEach>	
 		</div>
 
 		<br>
