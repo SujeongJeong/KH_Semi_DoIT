@@ -2,5 +2,130 @@
 <!DOCTYPE properties SYSTEM
 "http://java.sun.com/dtd/properties.dtd">
 <properties>
-
+	<entry key="selectStudyList">
+		SELECT
+		  S_NO
+		, S_NAME
+		, S_TO
+		, S_DAY
+		, S_STARTPERIOD
+		, S_ENDPERIOD
+		, S_STARTTIME
+		, S_ENDTIME
+		, S_EXPLAIN
+		, S_NOTICE
+		, CNAME
+		, NICKNAME
+		, FILE_PATH
+		, CHANGE_NAME
+		FROM STUDY
+		JOIN CATEGORY USING(CID)
+		JOIN MEMBER USING(USER_NO)
+		JOIN ATTACHMENT USING(S_NO)
+		WHERE S_STATUS = 'Y'
+		ORDER BY S_NO DESC
+	</entry>
+	<entry key="insertStudyRoom">
+	INSERT 
+	INTO STUDY
+	(
+		S_NO
+	  , S_NAME
+	  , S_TO
+	  , S_DAY
+	  , S_STARTPERIOD
+	  , S_ENDPERIOD
+	  , S_STARTTIME
+	  , S_ENDTIME
+	  , S_EXPLAIN
+	  , S_NOTICE
+	  , S_STATUS
+	  , USER_NO
+	  , CID
+	)
+	VALUES
+	(
+		SEQ_SNO.NEXTVAL
+	  , ?
+	  , ?
+	  , ?
+	  , SYSDATE
+	  , SYSDATE
+	  , SYSDATE
+	  , SYSDATE
+	  , ?
+	  , ?
+	  , DEFAULT
+	  , ?
+	  , ?
+	)
+	</entry>
+	<entry key="insertStudyPhoto">
+	INSERT
+	INTO ATTACHMENT
+	(
+			FILE_NO
+		  , BOARD_NO
+		  , NOTICE_NO	
+		  , S_NO
+		  , ORIGIN_NAME
+		  , CHANGE_NAME
+		  , FILE_PATH
+		  , UPLOAD_DATE
+		  , STATUS
+	)
+	VALUES
+	(
+			SEQ_ANO.NEXTVAL
+		  , SEQ_SNO.CURRVAL
+		  , SEQ_SNO.CURRVAL
+		  , SEQ_SNO.CURRVAL
+		  , ?
+		  , ?
+		  , ?
+		  , SYSDATE
+		  , DEFAULT
+	)
+	</entry>
+	<entry key="selectStudyRoom">
+	SELECT
+		  S_NO
+		, S_NAME
+		, S_TO
+		, S_DAY
+		, S_STARTPERIOD
+		, S_ENDPERIOD
+		, S_STARTTIME
+		, S_ENDTIME
+		, S_EXPLAIN
+		, S_NOTICE
+		, CNAME
+		, NICKNAME
+		FROM STUDY
+		JOIN CATEGORY USING(CID)
+		JOIN MEMBER USING(USER_NO)
+		JOIN ATTACHMENT USING(S_NO)
+		WHERE S_STATUS = 'Y'
+          AND S_NO = ?
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </properties>
+
+
+
+
+
+
+
+

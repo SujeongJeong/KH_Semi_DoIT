@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,6 +89,7 @@
 
 .onmouseover {
 	cursor: pointer;
+	transform:scale(1.05);
 }
 </style>
 </head>
@@ -135,85 +137,22 @@
 		<br> <br>
 
 		<div class="studyList">
+		
+		<%-- 스터디방 리스트 조회 --%>
+		<%-- begin="1" end="${ StudyListSize }" --%>
+		<c:forEach var="g" items="${ StudyList }" begin="0" end="${ StudyList.size() }">
+			
+		
 			<div class="studyRoom">
 				<img class="studyImage"
-					src='/Do_IT/resources/images/study-background1.jpg'
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 1</span><br>
-				<span class="sCategory">#Ai</span>
-				<h4 class="studyTO">n/m</h4>
+					src="${ contextPath }${ g.sImgList.get(0).file_path }${ g.sImgList.get(0).change_name }"
+					onclick="studyInfo(${ g.s_no })"><span
+					class="sName">${ g.s_name } </span><br>
+				<span class="sCategory">#${ g.cname }</span>
+				<h4 class="studyTO">n/ ${ g.s_to }</h4>	
 			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background2.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 2</span><br>
-				<span class="sCategory">#Front-end</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background3.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 3</span><br>
-				<span class="sCategory">#Back-end</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background4.png"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 4</span><br>
-				<span class="sCategory">#Language</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background5.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 5</span><br>
-				<span class="sCategory">#Embeded</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background6.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 6</span><br>
-				<span class="sCategory">#App</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background7.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 7</span><br>
-				<span class="sCategory">#Bigdata</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background8.png"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 8</span><br>
-				<span class="sCategory">#Blockchain</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background1.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 9</span><br>
-				<span class="sCategory">#Game</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage" src="/Do_IT/resources/images/user.png"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 10</span><br>
-				<span class="sCategory">#Project</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
+		
+		</c:forEach>	
 		</div>
 
 		<br>
@@ -265,6 +204,15 @@ function openPopup(url, title, width, height){
 	
 	window.open(url, title, options);
 }
+
+function studyInfo(s_no){
+	
+	openPopup('${contextPath}/study/studyInfo?s_no='+s_no, 'studyInfo', 700, 1000);
+	
+	
+}
+
+
 
 </script>
 
