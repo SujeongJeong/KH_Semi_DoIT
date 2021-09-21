@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,9 +71,14 @@
 	width: 90%;
 	height: 175px;
 	border: 1px solid black;
-	border-color : #E5E5E5; border-radius:5px;
+	border-color : #E5E5E5; 
+	border-radius:5px;
 	
+	word-wrap: break-word;
+	word-break: keep-all;
+	overflow: auto;
 }
+
 
 .studyNotice {
 	background-color: #E5E5E5;
@@ -100,7 +107,7 @@
 	height: 45px;
 	color: red;
 	font-weight: bold;
-	backround-color:#E5E5E5;
+	background-color:#E5E5E5;
 	font-size: 1.2rem;
 	border-radius: 5px;
 	border: 0;
@@ -119,14 +126,14 @@ h2, h3 {
 			<img id="backImage"
 				src="/Do_IT/resources/images/study-background1.jpg">
 			<div id="studyName">
-				<h2>스터디방 이름</h2>
+				<h2>${ studyRoom.s_name }</h2>
 			</div>
 			<div id="nickName">
-				<h3>방장 아이디</h3>
+				<h3>${ studyRoom.user_nkname }</h3>
 			</div>
 			<div id="studyTO">
 				<h3>
-					스터디 정원<br>n/m명
+					스터디 정원<br>n / ${ studyRoom.s_to } 명
 				</h3>
 			</div>
 			
@@ -136,7 +143,7 @@ h2, h3 {
 		<div class="mid1">
 			<div>
 				<h3>공부 요일</h3>
-				<div class="sDay">설정한 날짜 표시</div>
+				<div class="sDay">${ studyRoom.s_day }</div>
 			</div>
 
 			<div>
@@ -150,7 +157,7 @@ h2, h3 {
 			</div>
 
 			<div class="category">
-				<h3 class="sCategory">#설정한 카테고리</h3>
+				<h3 class="sCategory"># ${studyRoom.cname }</h3>
 			</div>
 		</div>
 		<hr>
@@ -158,8 +165,7 @@ h2, h3 {
 		<div class="mid2">
 			<div class="studyExplain">
 				<h3>
-					스터디방 생성시 입력한 소개(설명)<br> 영역 확인용 테두리, 추후 테두리 삭제 예정<br> 해당
-					영역 이상의 내용 있을 시 스크롤바 생성
+					${ studyRoom.s_explain }
 				</h3>
 			</div>
 		</div>
@@ -167,16 +173,37 @@ h2, h3 {
 		<div class="mid3">
 			<div class="studyNotice">
 				<h3>
-					스터디방 생성시 입력한 공지사항(주의사항,규칙) 출력<br> 해당 영역 이상의 내용 있을 시 스크롤바 생성
-				</h3>
+					${ studyRoom.s_notice }
 				</h3>
 			</div>
 		</div>
 		<br>
 		<div class="bottom">
 			<button id="studyRoomBtn"
-				onclick="opener.location.href='<%=request.getContextPath()%>/study/enterStudy';window.close();">로그인
-				/ 가입하기 / 입장하기</button>
+				onclick="studyBtn()">
+				
+				<c:choose>
+					<c:when test="${ !empty loginUser }">
+						<c:out value="입장하기/가입하기"/>
+							<script>
+								function studyBtn(){
+									opener.location.href='<%=request.getContextPath()%>/study/home';window.close();
+									
+								}
+							</script>
+					</c:when>
+					<c:otherwise>
+						<c:out value="로그인"/>
+							<script>
+								function studyBtn(){
+									opener.location.href='<%=request.getContextPath()%>/login';window.close();
+									
+								}
+							</script>
+					</c:otherwise>
+				</c:choose>
+				
+				</button>
 			<button id="report">신고하기</button>
 		</div>
 

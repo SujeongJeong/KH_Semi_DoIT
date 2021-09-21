@@ -1,6 +1,7 @@
 package study.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import study.model.service.StudyService;
+import study.model.vo.Study;
 
 /**
  * Servlet implementation class StudyHomeServlet
@@ -28,9 +32,16 @@ public class StudyHomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 메뉴바 클릭했을 때 페이지로 이동
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/home.jsp");
+	
+		List<Study> StudyList = new StudyService().selectStudyList();
+		 
 		request.setAttribute("nav1", "study");
+
+		request.setAttribute("StudyList", StudyList);
+//		System.out.println(StudyList);
+//		System.out.println(StudyList.size());
+		
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/home.jsp");
 		view.forward(request, response);
 	}
 
