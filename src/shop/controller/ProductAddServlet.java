@@ -1,4 +1,4 @@
-package shop;
+package shop.controller;
 
 import java.io.IOException;
 import java.util.Enumeration;

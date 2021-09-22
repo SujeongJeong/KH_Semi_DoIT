@@ -1,4 +1,4 @@
-package shop;
+package shop.controller;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -19,16 +19,16 @@ import shop.model.service.ShopService;
 import shop.model.vo.Product;
 
 /**
- * Servlet implementation class ProductAddServlet
+ * Servlet implementation class ProductModifyServlet
  */
-@WebServlet("/productAdd")
-public class ProductAddServlet extends HttpServlet {
+@WebServlet("/productModify")
+public class ProductModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductAddServlet() {
+    public ProductModifyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,12 +38,9 @@ public class ProductAddServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/shop/productAddView.jsp");
-		request.setAttribute("nav1", "shop");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/shop/productModifyView.jsp");
 		view.forward(request, response);
-
-		
-	}
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -62,38 +59,34 @@ public class ProductAddServlet extends HttpServlet {
 		String savePath = root + "resources\\uploadFiles\\shop\\";
 		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 		
-		//가져올값 -> 파일의 요소를 elment로 가져오기.
 	
 		String files = "/resources/uploadFiles/shop/"+multiRequest.getFilesystemName("file");
-		 
-		String category = multiRequest.getParameter("category");
-		String title = multiRequest.getParameter("title");
-		int price =  Integer.parseInt(multiRequest.getParameter("price"));
-		int expirtion = Integer.parseInt(multiRequest.getParameter("expirtion"));
-		String content = multiRequest.getParameter("content");
-
 		
-		Product p = new Product(category, title, price, expirtion, content, files);
+		Product p = new Product();
+		
+		int product_no = Integer.parseInt(multiRequest.getParameter("product_no"));
+	
+		p.setProduct_no(product_no);
+		
+		p.setProduct_category(multiRequest.getParameter("product_category"));
+		p.setProduct_name(multiRequest.getParameter("title"));
+		p.setProduct_price(Integer.parseInt(multiRequest.getParameter("price")));
+		p.setExpiration_date(Integer.parseInt(multiRequest.getParameter("expirtion")));
+		p.setProduct_detail(multiRequest.getParameter("product_category"));
+		p.setProduct_img(multiRequest.getFilesystemName("files"));
 
-		int result = new ShopService().insertProduct(p);
 		
 	
+		int result = new ShopService().modifyProduct(p);
+		System.out.println(result);
 		
 		if(result > 0) {
-			request.getSession().setAttribute("msg", "상품이 등록되었습니다.");
-			response.sendRedirect(request.getContextPath()+"/shop/home");
-		}else {
-			request.setAttribute("msg", "상품 등록에 실패하였습니다.");
+			response.sendRedirect(request.getContextPath() + "/product/detail?product_no=" + product_no);
+		} else {
+			request.setAttribute("msg", "게시글 수정에 실패했습니다.");
 			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
 		}
-		
-		
 	}
 	
-	
-	
-	
-	
-	
-	
+
 }

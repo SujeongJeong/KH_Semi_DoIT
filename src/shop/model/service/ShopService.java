@@ -42,14 +42,16 @@ public class ShopService {
 	}
 
 	//1개 상품 상세보기.
-	public Product selectGallery(int pno) {
+	public Product selectProduct(int product_no) {
 		Connection conn = getConnection();
-		Product p = sd.selectProduct(conn, pno);
+		Product p = sd.selectProduct(conn, product_no);
 		close(conn);
 		
 		return p;
 	}
-
+	
+	
+ //수정할 상품보기
 	public int modifyProduct(Product p) {
 		
 			Connection conn = getConnection();
@@ -67,6 +69,8 @@ public class ShopService {
 			
 			return result;
 		}
+
+	
 	
 	
 	
