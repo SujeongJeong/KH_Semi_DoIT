@@ -187,6 +187,32 @@ public class StudyDao {
 		return result;
 	}
 
+	// 스터디방 총 갯수 구하기
+	public int selectStudyListNumber(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int studyListCount = 0;
+		
+		String sql = query.getProperty("selectStudyListNumber");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset=pstmt.executeQuery();
+			
+			if(rset.next()) {
+				studyListCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return studyListCount;
+	}
+
 	
 
 }

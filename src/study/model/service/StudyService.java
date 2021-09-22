@@ -74,6 +74,17 @@ public class StudyService {
 		return resultSum;
 	}
 
+	// 스터디방 갯수 알아오기
+	public int selectStudyListNumber() {
+		Connection conn = getConnection();
+		
+		int result = sd.selectStudyListNumber(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
 
 	
 	
