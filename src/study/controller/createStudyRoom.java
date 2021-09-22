@@ -57,8 +57,10 @@ public class createStudyRoom extends HttpServlet {
 		
 		// 파일 첨부 
 		int maxSize = 1024*1024*10;	// 파일 10mbyte 제한
-		
+		String fileRoot = "";
 		String root = request.getSession().getServletContext().getRealPath("/");	// 웹서버 컨테이너 경로
+		String test = this.getClass().getResource("/").toString();
+		System.out.println("test: " + test);
 		System.out.println(root);
 		String savePath = root + "resources\\uploadFiles\\";		// 저장될 경로
 		System.out.println(savePath);

@@ -161,6 +161,7 @@
 		<%-- 스터디방 리스트 조회 --%>
 		<%-- begin="1" end="${ StudyListSize }" --%>
 		
+		<c:if test=""></c:if>
 		<c:forEach var="g" items="${ StudyList }" begin="0" end="${ StudyList.size() }">
 
 
@@ -190,7 +191,7 @@
 		<br>
 		<div class="studyRoomPlus">
 			<hr class="plusLine">
-			<button class="plusBtn">더보기</button>
+			<button class="plusBtn" onclick="plusBtn()">더보기</button>
 		</div>
 	</div>
 
@@ -244,6 +245,12 @@ function studyInfo(s_no){
 	
 }
 
+function plusBtn(){
+	let sCount=10;
+	
+	sCount += 10;
+	
+}
 
 
 </script>

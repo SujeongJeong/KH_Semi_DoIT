@@ -32,14 +32,16 @@ public class StudyHomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		List<Study> StudyList = new StudyService().selectStudyList();
-		 
 		request.setAttribute("nav1", "study");
 
+		// 스터디방 리스트
+		List<Study> StudyList = new StudyService().selectStudyList();
 		request.setAttribute("StudyList", StudyList);
-//		System.out.println(StudyList);
-//		System.out.println(StudyList.size());
+		
+		// 페이징 처리(기본 1P, 더보기 버튼 클릭시 추가 출력)하기 위해 스터디방 총 갯수 가져오기
+		int studyListNumber = new StudyService().selectStudyListNumber();
+		request.setAttribute("studyListNumber", studyListNumber);
+//		System.out.println("studyListNumber : "+studyListNumber);
 		
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/home.jsp");
 		view.forward(request, response);
