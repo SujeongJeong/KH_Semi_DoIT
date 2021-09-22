@@ -114,21 +114,21 @@
 			
 			<h3>상품 이미지</h3>
 			<img class="image_area" name="fileimg" src="${ contextPath }${ p.product_img}">
-			<input type="file" name="file" id="productimg" accept="image/gif,image/jpeg,image/png" required>
+			수정 파일 <input type="file" name="file" id="productimg" accept="image/gif,image/jpeg,image/png" required>
 			<input type="hidden" name="product_no" value="${p.product_no }">
 				<div class="inputarea"> 
 					<div><h3>상품명</h3> 	
 					<select name="category">
-						<option value="세트">세트</option>
-						<option value="단품">단품</option>
+						<option value="세트" <c:if test="${ p.category == '세트'}"> selected</c:if>>세트</option>
+						<option value="단품" <c:if test="${ p.category == '단품'}"> selected</c:if>>단품</option>
 					</select></div>
 					<input type="text" class="title" name="title" readonly value="${ p.product_name }">	
 				</div>
 		
 				<div class="inputarea"> 
 				<h3>상품 코인 | 기간</h3>
-					<input type="number" class="coin_count" name="price" min= 1 required value="${ p.product_price }"> Coin / 
-					<input type="number" class="expirtion" name="expirtion" min= 1 required value="${ p.expiration_date }"> 일
+					<input type="number" class="coin_count" name="price" min= 1  value="${ p.product_price }"> Coin / 
+					<input type="number" class="expirtion" name="expirtion" min= 1  value="${ p.expiration_date }"> 일
 				</div>
 		
 			<h3>상품 설명</h3>

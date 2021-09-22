@@ -62,9 +62,6 @@ public class ProductAddServlet extends HttpServlet {
 		String savePath = root + "resources\\uploadFiles\\shop\\";
 		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 		
-		//
-		
-		
 		//가져올값 -> 파일의 요소를 elment로 가져오기.
 	
 		String files = "/resources/uploadFiles/shop/"+multiRequest.getFilesystemName("file");

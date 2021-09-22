@@ -118,7 +118,7 @@
 	<div class=allcontents>
 	<form class="productModifyForm"  method="post" action="${ contextPath }/productModify"
                enctype="multipart/form-data">
-	<input type="hidden" name="pno" value="${p.product_no}">
+	<input type="hidden" name="product_no" value="${p.product_no}">
 		<button class="modifybtn" onclick="productModify()">수정</button>
 	</form>
 		<div class="product_content">	
