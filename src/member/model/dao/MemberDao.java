@@ -113,7 +113,7 @@ public class MemberDao {
 			
 			return result;
 		} 
-		
+		*/
 		// 4. userNo로 member 객체 조회
 		public Member selectMember(Connection conn, int userNo) {
 			Member mem = null;
@@ -129,7 +129,18 @@ public class MemberDao {
 				rset = pstmt.executeQuery();
 				
 				if(rset.next()) {
-					mem = new Member(rset.getXXX);
+					mem = new Member(rset.getInt("USER_NO"),
+							rset.getString("USER_EMAIL"),
+							rset.getString("USER_PWD"),
+							rset.getString("NICKNAME"),
+							rset.getDate("ENROLL_DATE"),
+							rset.getDate("MODIFY_DATE"),
+							rset.getString("STATUS"),
+							rset.getString("USER_TYPE"),
+							rset.getString("PROFILE_IMG"),
+							rset.getString("TARGET_HOUR"),
+							rset.getInt("USER_COIN"),
+							rset.getInt("REPORT_COUNT"));
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -141,7 +152,7 @@ public class MemberDao {
 			
 			return mem;
 		}
-		
+	
 		// 5. 비밀번호 수정 기능
 		public int updatePwd(Connection conn, int userNo, String userPwd, String newPwd) {
 			int result = 0;
@@ -151,7 +162,9 @@ public class MemberDao {
 			try {
 				pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setXXX
+				pstmt.setString(1, newPwd);
+				pstmt.setInt(2, userNo);
+				pstmt.setString(3, userPwd);
 				
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
@@ -164,9 +177,9 @@ public class MemberDao {
 			
 			return result;
 		}
-
+	
 		// 6. 회원 탈퇴 기능 
-		public int deleteMember(Connection conn, int userNo) {
+		public int deleteMember(Connection conn, int userNo, String userPwd) {
 			int result = 0;
 			PreparedStatement pstmt = null;
 			String sql = query.getProperty("deleteMember");
@@ -174,7 +187,8 @@ public class MemberDao {
 			try {
 				pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setXXX
+				pstmt.setInt(1, userNo);
+				pstmt.setString(2, userPwd);
 				
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
@@ -185,7 +199,7 @@ public class MemberDao {
 			}
 			
 			return result;
-		}*/
+		}
 		
 		// 이메일 중복체크
 		public int emailCheck(Connection conn, String userEmail) {
@@ -251,6 +265,74 @@ public class MemberDao {
 				
 				pstmt.setString(1, encPwd);
 				pstmt.setString(2, userEmail);
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+
+		public int updateNickName(Connection conn, int userNo, String nickName) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql = query.getProperty("updateNickName");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, nickName);
+				pstmt.setInt(2, userNo);
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+
+		public int setHour(Connection conn, int userNo, String targetHour) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String sql = query.getProperty("setHour");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, targetHour);
+				pstmt.setInt(2, userNo);
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+
+		public int modifyImg(Connection conn, int userNo, String profile_img) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String sql = query.getProperty("modifyImg");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, profile_img);
+				pstmt.setInt(2, userNo);
 				
 				result = pstmt.executeUpdate();
 				

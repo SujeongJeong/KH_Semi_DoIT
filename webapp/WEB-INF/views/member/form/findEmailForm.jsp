@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>이메일 찾기</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
 	.content {
