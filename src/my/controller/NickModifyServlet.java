@@ -51,7 +51,6 @@ public class NickModifyServlet extends HttpServlet {
 			request.setAttribute("result", "fail");
 		}
 		response.sendRedirect(request.getContextPath()+"/my/home");
-		
 	}
 	
 
