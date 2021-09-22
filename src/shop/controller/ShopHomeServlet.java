@@ -34,7 +34,7 @@ public class ShopHomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		  List<Product> productList = new ShopService().selectList();
-		  //System.out.println("공지사항 목록 : " + productList); 리스트 출력테스트
+		  //System.out.println("공지사항 목록 : " + productList);  리스트 출력테스트
 		  //리스트 가져오고, 네비css도 가져오기.
 		  request.setAttribute("productList", productList);
 		  request.setAttribute("nav1", "shop");
