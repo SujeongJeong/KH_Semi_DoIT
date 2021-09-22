@@ -1,4 +1,4 @@
-package my;
+package my.controller;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MyPaymentDetail
+ * Servlet implementation class RefundViewServlet
  */
-@WebServlet("/my/details")
-public class MyPaymentDetailServlet extends HttpServlet {
+@WebServlet("/my/refundView")
+public class RefundViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPaymentDetailServlet() {
+    public RefundViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,7 @@ public class MyPaymentDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/MyDetails.jsp");
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/refundView.jsp");
 		view.forward(request, response);
 	}
 

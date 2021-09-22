@@ -12,8 +12,57 @@
 		 FROM PRODUCT
 		 ORDER BY PRODUCT_PRICE
 	</entry>
-
-
+	
+	<entry key="insertProduct">
+		INSERT
+			INTO PRODUCT
+			(
+				PRODUCT_NO
+			  , PRODUCT_CATEGORY
+			  , PRODUCT_NAME
+			  , EXPIRATION_DATE
+			  , PRODUCT_DETAIL
+			  , PRODUCT_PRICE
+			  , PRODUCT_IMG	
+			)
+			VALUES
+			(
+				SEQ_PNO.NEXTVAL
+			  , ?
+			  , ?
+			  , ?
+			  , ?
+			  , ?
+			  , ?	
+			)
+	
+	</entry>
+	 <entry key="selectProduct">
+	   SELECT
+			    PRODUCT_NO
+			  ,	PRODUCT_CATEGORY
+			  ,	PRODUCT_NAME
+			  ,	EXPIRATION_DATE
+			  , PRODUCT_PRICE
+			  ,	PRODUCT_DETAIL
+			  ,	PRODUCT_IMG
+		   FROM PRODUCT
+		  WHERE PRODUCT_NO = ?
+	  </entry>
+	  
+	  
+	  <entry key="modifyProduct">
+	   UPDATE PRODUCT
+   	  	SET 	
+   	  		  PRODUCT_CATEGORY = ?
+			  , PRODUCT_NAME = ?
+			  , EXPIRATION_DATE = ?
+			  , PRODUCT_DETAIL = ?
+			  , PRODUCT_PRICE = ?
+			  , PRODUCT_IMG = ?	
+   	  	
+   	WHERE PRODUCT_NO = ?
+	  </entry>
 
 
 

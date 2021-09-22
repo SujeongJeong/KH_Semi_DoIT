@@ -1,4 +1,4 @@
-package my;
+package my.controller;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MyStudyServlet
+ * Servlet implementation class MyHomeServlet
  */
-@WebServlet("/my/study")
-public class MyStudyServlet extends HttpServlet {
+@WebServlet("/my/home")
+public class MyHomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyStudyServlet() {
+    public MyHomeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,13 @@ public class MyStudyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/MyStudy.jsp");
+		// 메뉴바 클릭했을 때 페이지로 이동
+		if(request.getSession().getAttribute("loginUser") == null) {
+			request.setAttribute("msg", "올바르지 않은 요청입니다.");
+			response.sendRedirect(request.getContextPath());
+		}
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/home.jsp");
+		request.setAttribute("nav1", "my");
 		view.forward(request, response);
 	}
 

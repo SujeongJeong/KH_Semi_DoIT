@@ -77,6 +77,7 @@
 		</ul>
 		</nav>	
 	</div>
+
 	<c:if test="${ loginUser == null }">
 	<script>
 		$(".mypage").click(function(){
@@ -86,5 +87,8 @@
 		  });
 	</script>
 	</c:if>
+
+	<script src="${ contextPath }/resources/js/imagePreview.js"></script>
+
 </body>
 </html>

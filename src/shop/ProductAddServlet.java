@@ -1,6 +1,7 @@
 package shop;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import common.MyFileRenamePolicy;
+import shop.model.service.ShopService;
+import shop.model.vo.Product;
 
 /**
  * Servlet implementation class ProductAddServlet
@@ -56,13 +59,41 @@ public class ProductAddServlet extends HttpServlet {
 		int maxSize = 1024*1024*10;
 		
 		String root = request.getSession().getServletContext().getRealPath("/");
-		System.out.println(root);
-		
-		String savePath = root + "resources\\uploadFiles\\";
-		System.out.println(savePath);
-	
+		String savePath = root + "resources\\uploadFiles\\shop\\";
 		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-		System.out.println(multiRequest);
+		
+		//가져올값 -> 파일의 요소를 elment로 가져오기.
+	
+		String files = "/resources/uploadFiles/shop/"+multiRequest.getFilesystemName("file");
+		 
+		String category = multiRequest.getParameter("category");
+		String title = multiRequest.getParameter("title");
+		int price =  Integer.parseInt(multiRequest.getParameter("price"));
+		int expirtion = Integer.parseInt(multiRequest.getParameter("expirtion"));
+		String content = multiRequest.getParameter("content");
+
+		
+		Product p = new Product(category, title, price, expirtion, content, files);
+
+		int result = new ShopService().insertProduct(p);
+		
+	
+		
+		if(result > 0) {
+			request.getSession().setAttribute("msg", "상품이 등록되었습니다.");
+			response.sendRedirect(request.getContextPath()+"/shop/home");
+		}else {
+			request.setAttribute("msg", "상품 등록에 실패하였습니다.");
+			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
+		}
+		
 		
 	}
+	
+	
+	
+	
+	
+	
+	
 }

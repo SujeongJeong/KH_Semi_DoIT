@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM
+"http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="getListCount">
+		SELECT
+			   COUNT(*)
+		  FROM BOARD
+		 WHERE STATUS = 'Y'
+	</entry>
+	<entry key="getTitleListCount">
+		SELECT
+			   COUNT(*)
+		  FROM BOARD
+		 WHERE STATUS = 'Y'
+		   AND BOARD_TITLE LIKE '%' || ? || '%'
+	</entry>
+	
+	<entry key="selectList">
+	SELECT
+		      BOARD_NO
+		    , CNAME
+		    , BOARD_TITLE
+		    , NICKNAME
+		    , CREATE_DATE
+		    , COUNT
+	FROM (SELECT 
+				ROWNUM RNUM
+			  , BLIST.*
+    FROM(SELECT
+            *
+		      FROM BOARD B
+		      JOIN CATEGORY USING(CID)
+		      JOIN MEMBER USING (USER_NO)
+		     WHERE B.STATUS = 'Y'
+		     ORDER BY BOARD_NO DESC) BLIST)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectTitleList">
+	SELECT
+		      BOARD_NO
+		    , CNAME
+		    , BOARD_TITLE
+		    , NICKNAME
+		    , CREATE_DATE
+		    , COUNT
+	FROM (SELECT 
+				ROWNUM RNUM
+			  , BLIST.*
+    FROM(SELECT
+            *
+		      FROM BOARD B
+		      JOIN CATEGORY USING(CID)
+		      JOIN MEMBER USING (USER_NO)
+		     WHERE B.STATUS = 'Y'
+		       AND BOARD_TITLE LIKE '%' || ? || '%'
+		     ORDER BY BOARD_NO DESC) BLIST)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectContentList">
+	SELECT
+		      BID
+		    , CNAME
+		    , BTITLE
+		    , USER_NAME
+		    , BCOUNT
+		    , CREATE_DATE
+	FROM (SELECT 
+				ROWNUM RNUM
+			  , BLIST.*
+    FROM(SELECT
+            *
+		      FROM BOARD B
+		      JOIN CATEGORY USING(CID)
+		      JOIN MEMBER ON (BWRITER = USER_NO)
+		     WHERE BTYPE = 1
+		       AND B.STATUS = 'Y'
+		       AND BCONTENT LIKE '%' || ? || '%'
+		     ORDER BY BID DESC) BLIST)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+		<entry key="selectWriterList">
+	SELECT
+		      BID
+		    , CNAME
+		    , BTITLE
+		    , USER_NAME
+		    , BCOUNT
+		    , CREATE_DATE
+	FROM (SELECT 
+				ROWNUM RNUM
+			  , BLIST.*
+    FROM(SELECT
+            *
+		      FROM BOARD B
+		      JOIN CATEGORY USING(CID)
+		      JOIN MEMBER ON (BWRITER = USER_NO)
+		     WHERE BTYPE = 1
+		       AND B.STATUS = 'Y'
+		       AND USER_NAME LIKE '%' || ? || '%'
+		     ORDER BY BID DESC) BLIST)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="insertBoard">
+		INSERT
+		INTO BOARD
+		(
+			BOARD_NO
+		  , CID
+		  , BOARD_TITLE
+		  , BOARD_CONTENT
+		  , CREATE_DATE
+		  , MODIFY_DATE
+		  , STATUS
+		  , BOARD_SECRET
+		  , USER_NO
+		  , COUNT
+		)
+		VALUES
+		(
+			SEQ_BID.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , DEFAULT
+		  , DEFAULT
+		  , DEFAULT
+		  , DEFAULT
+		  , ?
+		  , DEFAULT
+		)
+	</entry>
+	<entry key="increaseCount">
+		UPDATE BOARD
+		   SET COUNT = COUNT + 1
+		 WHERE BOARD_NO = ?
+	</entry>
+	<entry key="selectBoard">
+		SELECT
+		        BOARD_NO
+		      , CID
+		      , CNAME
+		      , BOARD_TITLE
+		      , NICKNAME
+		      , BOARD_CONTENT
+		      , CREATE_DATE
+		      , B.MODIFY_DATE
+		      , USER_NO		      
+		      , COUNT
+			   FROM BOARD B
+			   JOIN CATEGORY USING(CID)
+			   JOIN MEMBER USING (USER_NO)
+			  WHERE B.STATUS = 'Y'
+			    AND BOARD_NO = ?
+	</entry>
+	<entry key="updateBoard">
+		UPDATE BOARD
+			   SET CID = ?
+			     , BOARD_TITLE = ?
+			     , BOARD_CONTENT = ?
+			     , MODIFY_DATE = SYSDATE
+			 WHERE BOARD_NO = ?
+	</entry>
+	<entry key="deleteBoard">
+		UPDATE BOARD
+		   SET STATUS = 'N'
+		 WHERE BOARD_NO = ?
+	</entry>
+	<entry key="selectBoardList">
+		SELECT
+		        BOARD_NO
+		      , CNAME
+		      , BOARD_TITLE
+		      , NICKNAME
+		      , BOARD_CONTENT
+		      , CREATE_DATE
+		      , MODIFY_DATE
+		      , STATUS
+		      , BOARD_SECRET
+		      , COUNT
+	   FROM BOARD B
+	   JOIN CATEGORY USING(CID)
+	   JOIN MEMBER USING (USER_NO)
+	  WHERE B.STATUS = 'Y'
+	  ORDER BY BOARD_NO DESC
+	</entry>
+	
+	<entry key="selectReplyList">
+		SELECT
+		        RID
+		      , RCONTENT
+		      , REF_BID
+		      , RWRITER
+		      , USER_NAME
+		      , CREATE_DATE
+		   FROM REPLY R
+		   JOIN MEMBER M ON (RWRITER = USER_NO)
+		  WHERE REF_BID = ?
+		    AND R.STATUS = 'Y'
+		  ORDER BY RID DESC
+	</entry>
+	<entry key="insertReply">
+		INSERT
+		INTO REPLY
+		(
+			RID
+		  , RCONTENT
+		  , REF_BID
+		  , RWRITER
+		  , CREATE_DATE
+		  , MODIFY_DATE
+		  , STATUS
+		)
+		VALUES
+		(
+			SEQ_RID.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , SYSDATE
+		  , SYSDATE
+		  , DEFAULT
+		)
+	</entry>
+</properties>

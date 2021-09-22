@@ -1,6 +1,8 @@
-package my;
+package my.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class RefundServlet
+ * Servlet implementation class MyQnAServlet
  */
-@WebServlet("/my/refund")
-public class RefundServlet extends HttpServlet {
+@WebServlet("/my/q&a")
+public class MyQnAServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RefundServlet() {
+    public MyQnAServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +28,9 @@ public class RefundServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/my/MyQ&A.jsp");
+		request.setAttribute("nav1", "my");
+		view.forward(request, response);
 	}
 
 	/**

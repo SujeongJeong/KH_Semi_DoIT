@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,17 +19,30 @@
 	height: auto;
 	min-height: 100%;
 	width: 800px;
+	position : relative;
 }
 
 .search {
 	display: inline-block;
+}
+.deleteStudyRoom{
+	position : absolute;
+	left : 718px;
+	top : 25px;
 }
 
 .createStudy {
 	margin-left: 185px;
 	margin-right: 20px;
 }
-
+.deleteStudyRoomBtn{
+	background-color: #E5E5E5;
+	border : 0; 
+    outline :0;
+    border-radius:5px;
+    color:red;
+    border : 1px solid red;
+}
 .studyCreateBtn, .plusBtn {
 	background-color: #5FC5FF;
 	border : 0; 
@@ -59,12 +73,15 @@
 .studyRoom {
 	position: relative;
 }
-
+#deleteStudy{
+	position: absolute;
+	top:185px;
+	left:130px;
+}
 .studyTO {
 	position: absolute;
 	top:100px;
 	left:10px;
-	
 }
 
 .studyImage {
@@ -88,6 +105,7 @@
 
 .onmouseover {
 	cursor: pointer;
+	transform:scale(1.05);
 }
 </style>
 </head>
@@ -96,7 +114,8 @@
 	<%@ include file='/WEB-INF/views/common/menubar.jsp'%>
 
 	<div class="content" id="content">
-		<h1>오픈 스터디</h1>
+		<span><h1>오픈 스터디</h1></span>
+
 		<div class="search search1">
 			<form>
 				<input type="text" size="15px" name="search"
@@ -104,6 +123,7 @@
 					value="검색하기">
 			</form>
 		</div>
+		
 		<div class="search createStudy">
 			<button class="studyCreateBtn"
 				onclick="location.href='<%=request.getContextPath()%>/study/createStudy'">스터디
@@ -134,92 +154,44 @@
 		</div>
 		<br> <br>
 
+		<form id="deleteStudyForm" method="get" action="<%=request.getContextPath()%>/study/deleteStudy">
+			
 		<div class="studyList">
-			<div class="studyRoom">
-				<img class="studyImage"
-					src='/Do_IT/resources/images/study-background1.jpg'
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 1</span><br>
-				<span class="sCategory">#Ai</span>
-				<h4 class="studyTO">n/m</h4>
+		
+		<%-- 스터디방 리스트 조회 --%>
+		<%-- begin="1" end="${ StudyListSize }" --%>
+		
+		<c:if test=""></c:if>
+		<c:forEach var="g" items="${ StudyList }" begin="0" end="${ StudyList.size() }">
+
+
+				<div class="studyRoom">
+					<img class="studyImage"
+						src="${ contextPath }${ g.sImgList.get(0).file_path }${ g.sImgList.get(0).change_name }"
+						onclick="studyInfo(${ g.s_no })"> <span class="sName">${ g.s_name }
+					</span><br> <span class="sCategory">#${ g.cname }</span>
+					<h4 class="studyTO">n/ ${ g.s_to }</h4>
+					
+					<c:if test="${ loginUser.userType == 'A' }">
+					<input type="checkbox" name="deleteStudy" id="deleteStudy" value="${ g.s_no }">
+					</c:if>
+				</div>
+	
+			</c:forEach>
+			<c:if test="${ loginUser.userType == 'A' }">
+			<div class="deleteStudyRoom">
+				<button type="submit" class="deleteStudyRoomBtn"
+					onclick="location.href='<%=request.getContextPath()%>/study/createStudy'">
+					스터디 삭제</button>
 			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background2.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 2</span><br>
-				<span class="sCategory">#Front-end</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background3.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 3</span><br>
-				<span class="sCategory">#Back-end</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background4.png"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 4</span><br>
-				<span class="sCategory">#Language</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background5.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 5</span><br>
-				<span class="sCategory">#Embeded</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background6.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 6</span><br>
-				<span class="sCategory">#App</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background7.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 7</span><br>
-				<span class="sCategory">#Bigdata</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background8.png"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 8</span><br>
-				<span class="sCategory">#Blockchain</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage"
-					src="/Do_IT/resources/images/study-background1.jpg"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 9</span><br>
-				<span class="sCategory">#Game</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
-			<div class="studyRoom">
-				<img class="studyImage" src="/Do_IT/resources/images/user.png"
-					onclick="openPopup('<%=request.getContextPath()%>/study/studyInfo', 'studyInfo', 700, 1000);"><span
-					class="sName">스터디방 10</span><br>
-				<span class="sCategory">#Project</span>
-				<h4 class="studyTO">n/m</h4>
-			</div>
+			</c:if>
 		</div>
+		</form>
 
 		<br>
 		<div class="studyRoomPlus">
 			<hr class="plusLine">
-			<button class="plusBtn">더보기</button>
+			<button class="plusBtn" onclick="plusBtn()">더보기</button>
 		</div>
 	</div>
 
@@ -265,6 +237,21 @@ function openPopup(url, title, width, height){
 	
 	window.open(url, title, options);
 }
+
+function studyInfo(s_no){
+	
+	openPopup('${contextPath}/study/studyInfo?s_no='+s_no, 'studyInfo', 700, 1000);
+	
+	
+}
+
+function plusBtn(){
+	let sCount=10;
+	
+	sCount += 10;
+	
+}
+
 
 </script>
 

@@ -1,25 +1,26 @@
-package my;
+package qna.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import qna.model.service.BoardService;
+import qna.model.vo.Board;
+
 /**
- * Servlet implementation class MyQnAServlet
+ * Servlet implementation class QnaUpdateViewServlet
  */
-@WebServlet("/my/q&a")
-public class MyQnAServlet extends HttpServlet {
+@WebServlet("/qna/updateView")
+public class QnaUpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyQnAServlet() {
+    public QnaUpdateViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,16 +29,24 @@ public class MyQnAServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/MyQ&A.jsp");
-		view.forward(request, response);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		int board_no = Integer.parseInt(request.getParameter("board_no"));
+		
+		Board b = new BoardService().selectBoard(board_no);
+		
+		if(b != null) {
+			request.setAttribute("board", b);
+			request.getRequestDispatcher("/WEB-INF/views/qna/qnaUpdateView.jsp").forward(request, response);
+		} else {
+			request.setAttribute("msg", "수정한 게시글을 조회하는데 실패하였습니다.");
+			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
+		}
 	}
 
 }

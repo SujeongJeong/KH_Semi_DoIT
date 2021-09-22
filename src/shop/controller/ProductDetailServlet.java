@@ -1,4 +1,4 @@
-package my;
+package shop.controller;
 
 import java.io.IOException;
 
@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import shop.model.service.ShopService;
+import shop.model.vo.Product;
+
 /**
- * Servlet implementation class MyHomeServlet
+ * Servlet implementation class ProductDetailServlet
  */
-@WebServlet("/my/home")
-public class MyHomeServlet extends HttpServlet {
+@WebServlet("/productDetail")
+public class ProductDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyHomeServlet() {
+    public ProductDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,19 +31,30 @@ public class MyHomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 메뉴바 클릭했을 때 페이지로 이동
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/home.jsp");
-		request.setAttribute("nav1", "my");
-
-		view.forward(request, response);
+		
+		//request.setAttribute("nav1", "shop");
+		//view.forward(request, response);
+		int product_no = Integer.parseInt(request.getParameter("product_no"));
+		
+		Product p = new ShopService().selectProduct(product_no);
+		//System.out.println(p);
+		
+		if(p != null) {
+			request.setAttribute("p", p);
+			request.getRequestDispatcher("/WEB-INF/views/shop/productDetailView.jsp").forward(request, response);
+		} else {
+			request.setAttribute("msg", "수정할 게시글을 불러오는데 실패했습니다.");
+			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
+		}
+		
+	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
 	}
 
 }

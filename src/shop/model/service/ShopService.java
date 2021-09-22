@@ -1,8 +1,7 @@
 package shop.model.service;
 
 
-import static common.JDBCTemplate.close;
-import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -10,6 +9,7 @@ import java.util.Properties;
 
 import shop.model.dao.ShopDao;
 import shop.model.vo.Product;
+
 
 public class ShopService {
 	private Properties query = new Properties();
@@ -23,6 +23,53 @@ public class ShopService {
 		
 		return productList;
 	}
+
+	//2. 상품추가
+	public int insertProduct(Product p) {
+		
+		Connection conn = getConnection();
+		int result = sd.insertProduct(conn, p);
+	
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	//1개 상품 상세보기.
+	public Product selectProduct(int product_no) {
+		Connection conn = getConnection();
+		Product p = sd.selectProduct(conn, product_no);
+		close(conn);
+		
+		return p;
+	}
+	
+	
+ //수정할 상품보기
+	public int modifyProduct(Product p) {
+		
+			Connection conn = getConnection();
+			
+			int result = sd.modifyProduct(conn, p);
+			
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+			
+			return result;
+		}
+
+	
+	
 	
 	
 	

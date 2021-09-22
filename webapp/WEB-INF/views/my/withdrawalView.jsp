@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지 - 회원탈퇴</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 </head>
 <style>
 	.content {
@@ -68,8 +69,7 @@
 	<div class="content">
 		<div class="logo_area" onclick="window.close();"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo"></div>
 		<h1>회원 탈퇴</h1>
-		<form id="withdrawalForm" action="<%= request.getContextPath() %>/my/withdrawal"
-		method="post" onsubmit="return validate();">
+		<form id="withdrawalForm" action="<%= request.getContextPath() %>/my/withdrawal" method="post" onsubmit="return validate();">
 			<h3>탈퇴 안내</h3>
 			<pre class="text_area">
 Do IT에 가입된 계정의 탈퇴를 원하시나요?
@@ -80,7 +80,7 @@ Do IT에 가입된 계정의 탈퇴를 원하시나요?
 			<label for="agreement">안내 사항을 모두 확인하였으며, 이에 동의합니다.</label>
 			<p>현재 비밀번호 입력</p>
 			<span class="input_area">
-				<input type="password" name="userPwd" required>
+				<input type="password" name="userPwd" id="userPwd" required>
 			</span>
 			<div class="btn_area">
 				<button id="withdrawal_btn">탈퇴</button>
@@ -88,6 +88,16 @@ Do IT에 가입된 계정의 탈퇴를 원하시나요?
 			</div>
 		</form>
 	</div>
-	
+	<script>
+		function validate() {
+			// 약관동의 체크가 안되어있으면 
+			if($("[name=agreement]").is(":checked") == false) {
+				alert("약관에 동의해주세요.");
+				return false;
+			}
+			return true;
+		}
+	</script>
+
 </body>
 </html>

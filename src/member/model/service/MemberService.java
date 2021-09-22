@@ -62,41 +62,41 @@ public class MemberService {
 //	return updateMember;
 //	}
 //	
-//	// 4. 비밀번호 수정 가능
-//	public Member updatePwd(int userNo, String userPwd, String newPwd) {
-//		Connection conn = getConnection();
-//		Member updateMember = null;
-//		
-//		int result = md.updatePwd(conn, userNo, userPwd, newPwd);
-//		
-//		if(result > 0) {
-//			updateMember = md.selectMember(conn, userNo);
-//			commit(conn);
-//		} else {
-//			rollback(conn);
-//		}
-//		
-//		close(conn);
-//		
-//		return updateMember;
-//	}
-//
-//	// 5. 회원 탈퇴 기능
-//	public int deleteMember(int userNo) {
-//		Connection conn = getConnection();
-//		
-//		int result = md.deleteMember(conn, userNo);
-//		
-//		if(result > 0) {
-//			commit(conn);
-//		} else {
-//			rollback(conn);
-//		}
-//		
-//		close(conn);
-//		
-//		return result;
-//	}
+	// 4. 비밀번호 수정 가능
+	public Member updatePwd(int userNo, String userPwd, String newPwd) {
+		Connection conn = getConnection();
+		Member updateMember = null;
+		
+		int result = md.updatePwd(conn, userNo, userPwd, newPwd);
+		
+		if(result > 0) {
+			updateMember = md.selectMember(conn, userNo);
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return updateMember;
+	}
+
+	// 5. 회원 탈퇴 기능
+	public int deleteMember(int userNo, String userPwd) {
+		Connection conn = getConnection();
+		
+		int result = md.deleteMember(conn, userNo, userPwd);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 
 	// 아이디 중복체크
 	public int emailCheck(String userEmail) {
@@ -134,5 +134,62 @@ public class MemberService {
 		close(conn);
 		
 		return result;
+	}
+
+	public Member updateNickName(int userNo, String nickName) {
+		Connection conn = getConnection();
+		
+		Member updateMember = null;
+		
+		int result = md.updateNickName(conn, userNo, nickName);
+		
+		if(result > 0) {
+			updateMember = md.selectMember(conn, userNo);
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return updateMember;
+	}
+
+	public Member setHour(int userNo, String targetHour) {
+		Connection conn = getConnection();
+
+		Member updateMember = null;
+		
+		int result = md.setHour(conn, userNo, targetHour);
+		
+		if(result > 0) {
+			updateMember = md.selectMember(conn, userNo);
+			commit(conn);
+		}
+		else
+			rollback(conn);
+		
+		close(conn);
+		
+		return updateMember;
+	}
+
+	public Member modifyImg(int userNo, String profile_img) {
+		Connection conn = getConnection();
+
+		Member updateMember = null;
+		
+		int result = md.modifyImg(conn, userNo, profile_img);
+		
+		if(result > 0) {
+			updateMember = md.selectMember(conn, userNo);
+			commit(conn);
+		}
+		else
+			rollback(conn);
+		
+		close(conn);
+		
+		return updateMember;
 	}
 }
