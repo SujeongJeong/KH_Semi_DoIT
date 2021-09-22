@@ -19,17 +19,30 @@
 	height: auto;
 	min-height: 100%;
 	width: 800px;
+	position : relative;
 }
 
 .search {
 	display: inline-block;
+}
+.deleteStudyRoom{
+	position : absolute;
+	left : 718px;
+	top : 25px;
 }
 
 .createStudy {
 	margin-left: 185px;
 	margin-right: 20px;
 }
-
+.deleteStudyRoomBtn{
+	background-color: #E5E5E5;
+	border : 0; 
+    outline :0;
+    border-radius:5px;
+    color:red;
+    border : 1px solid red;
+}
 .studyCreateBtn, .plusBtn {
 	background-color: #5FC5FF;
 	border : 0; 
@@ -60,12 +73,15 @@
 .studyRoom {
 	position: relative;
 }
-
+#deleteStudy{
+	position: absolute;
+	top:185px;
+	left:130px;
+}
 .studyTO {
 	position: absolute;
 	top:100px;
 	left:10px;
-	
 }
 
 .studyImage {
@@ -98,7 +114,8 @@
 	<%@ include file='/WEB-INF/views/common/menubar.jsp'%>
 
 	<div class="content" id="content">
-		<h1>오픈 스터디</h1>
+		<span><h1>오픈 스터디</h1></span>
+
 		<div class="search search1">
 			<form>
 				<input type="text" size="15px" name="search"
@@ -106,6 +123,7 @@
 					value="검색하기">
 			</form>
 		</div>
+		
 		<div class="search createStudy">
 			<button class="studyCreateBtn"
 				onclick="location.href='<%=request.getContextPath()%>/study/createStudy'">스터디
@@ -136,10 +154,13 @@
 		</div>
 		<br> <br>
 
+		<form id="deleteStudyForm" method="get" action="<%=request.getContextPath()%>/study/deleteStudy">
+			
 		<div class="studyList">
 		
 		<%-- 스터디방 리스트 조회 --%>
 		<%-- begin="1" end="${ StudyListSize }" --%>
+		
 		<c:forEach var="g" items="${ StudyList }" begin="0" end="${ StudyList.size() }">
 
 
@@ -149,10 +170,22 @@
 						onclick="studyInfo(${ g.s_no })"> <span class="sName">${ g.s_name }
 					</span><br> <span class="sCategory">#${ g.cname }</span>
 					<h4 class="studyTO">n/ ${ g.s_to }</h4>
+					
+					<c:if test="${ loginUser.userType == 'A' }">
+					<input type="checkbox" name="deleteStudy" id="deleteStudy" value="${ g.s_no }">
+					</c:if>
 				</div>
-
-			</c:forEach>	
+	
+			</c:forEach>
+			<c:if test="${ loginUser.userType == 'A' }">
+			<div class="deleteStudyRoom">
+				<button type="submit" class="deleteStudyRoomBtn"
+					onclick="location.href='<%=request.getContextPath()%>/study/createStudy'">
+					스터디 삭제</button>
+			</div>
+			</c:if>
 		</div>
+		</form>
 
 		<br>
 		<div class="studyRoomPlus">

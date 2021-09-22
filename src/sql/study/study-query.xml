@@ -108,7 +108,11 @@
 		WHERE S_STATUS = 'Y'
           AND S_NO = ?
 	</entry>
-	
+	<entry key="deleteStudy">
+	UPDATE STUDY
+	   SET S_STATUS = 'N'
+	 WHERE S_NO = ?
+	</entry>
 	
 	
 	

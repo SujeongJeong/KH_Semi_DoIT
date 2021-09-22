@@ -167,6 +167,26 @@ public class StudyDao {
 		return s;
 	}
 
+	public int deleteStudy(Connection conn, int s_no) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		String sql=query.getProperty("deleteStudy");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, s_no);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 
 }
