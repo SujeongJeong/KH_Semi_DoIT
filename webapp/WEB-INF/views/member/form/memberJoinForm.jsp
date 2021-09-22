@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
 	.content{
@@ -89,10 +90,10 @@
 			<button id="emailCheck" type="button">중복확인</button>
 				
 			<h4>비밀번호</h4>
-			<span class="input_area"><input type="password" name="userPwd" id="userPwd" required></span><br>
+			<span class="input_area"><input type="password" name="userPwd" id="userPwd" autocomplete="on" required></span><br>
 		
 			<h4>비밀번호 확인</h4>
-			<span class="input_area"><input type="password" name="userPwd2" id="userPwd2" required></span><br>
+			<span class="input_area"><input type="password" name="userPwd2" id="userPwd2" autocomplete="on" required></span><br>
 				
 		
 			<h4>닉네임</h4>
@@ -119,8 +120,6 @@
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
 	
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	
 	<script>
 	    // 약관 부분 처리
 	    $(document).ready( function() {
@@ -144,7 +143,6 @@
 	
 	    var isUsable_e = false;
 		var isUsable_n = false;
-		
 		
 		$("#emailCheck").click(function(){
 			// input userId 변수

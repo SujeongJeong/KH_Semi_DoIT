@@ -67,6 +67,7 @@
 		  WHERE 
 		  	USER_NO = ?
 	</entry>
+	 -->
 	<entry key="selectMember">
 		SELECT 
 				  USER_NO
@@ -74,6 +75,7 @@
 				, USER_PWD
 				, NICKNAME
 				, ENROLL_DATE
+				, MODIFY_DATE
 				, STATUS
 				, USER_TYPE
 				, PROFILE_IMG
@@ -97,9 +99,9 @@
 			MEMBER
 		  SET
 			STATUS = 'N'
-		WHERE
-			  USER_NO = ?
-	</entry> -->
+		WHERE USER_NO = ?
+		  AND USER_PWD = ?
+	</entry>
 	<entry key="emailCheck">
 		SELECT
 			  COUNT(*)
@@ -117,5 +119,23 @@
 		UPDATE MEMBER
 		SET USER_PWD = ?
 		WHERE USER_EMAIL = ?
+	</entry>
+	<entry key="updateNickName">
+		UPDATE
+			MEMBER
+		  SET
+			  NICKNAME = ?
+		WHERE
+			  USER_NO = ?
+	</entry>
+	<entry key="setHour">
+		UPDATE MEMBER
+			SET TARGET_HOUR = ?
+		 WHERE USER_NO = ?
+	</entry>
+	<entry key="modifyImg">
+		UPDATE MEMBER
+			SET PROFILE_IMG = ?
+		 WHERE USER_NO = ?
 	</entry>
 </properties>
