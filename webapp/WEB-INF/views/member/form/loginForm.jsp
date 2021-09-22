@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 - Do IT</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <% if(session.getAttribute("msg") != null) { %>
 <script>
@@ -124,7 +125,7 @@ button[id$=Btn]:hover {
 			<h4>이메일</h4>
 			<span class="input_area"><input type="email" name="userEmail" id="userEmail" placeholder="이메일을 입력하세요"></span>
 			<h4>비밀번호</h4>
-			<span class="input_area"><input type="password" name="userPwd" id="userPwd" placeholder="비밀번호를 입력하세요"></span>
+			<span class="input_area"><input type="password" name="userPwd" id="userPwd" placeholder="비밀번호를 입력하세요" autocomplete="on"></span>
 			<div class="fun_box">
 				<div class="find_Btns">
 					<button id="findEmailBtn" type="button" onclick="openPopup('<%= request.getContextPath() %>/findEmail', 'findEmail', 500, 500);">이메일 찾기</button>|<button id="findPwdBtn" type="button" onclick="openPopup('<%= request.getContextPath() %>/findPwd', 'findPwd', 500, 500);">비밀번호 찾기</button>

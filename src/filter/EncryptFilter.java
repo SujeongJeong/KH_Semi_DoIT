@@ -20,7 +20,8 @@ import wrapper.EncryptWrapper;
 // LoginServlet, MemberJoinServlet, PwdModifyServlet에 필터 적용이 되어야 함
 @WebFilter(filterName="encrypt", servletNames= {"LoginServlet",
 												"MemberJoinServlet", 
-												"PwdModifyServlet"})
+												"PwdModifyServlet",
+												"WithdrawalServlet"})
 public class EncryptFilter implements Filter {
 
     /**
