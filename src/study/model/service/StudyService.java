@@ -53,6 +53,28 @@ public class StudyService {
 		
 		return s;
 	}
+
+	// 스터디방 삭제(status N으로)
+	public int deleteStudy(int[] deleteStudyArrInt) {
+		Connection conn = getConnection();
+		int resultSum = 0;
+		for(int i=0; i<deleteStudyArrInt.length; i++) {	
+			int result = sd.deleteStudy(conn,deleteStudyArrInt[i]);
+			resultSum += result;
+		}
+		
+		if(resultSum>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return resultSum;
+	}
+
+
 	
 	
 }
