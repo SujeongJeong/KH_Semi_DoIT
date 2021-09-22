@@ -116,17 +116,18 @@
 	<!-- 제목조건, 폼 입력 조건 나중에 설정하기 -->
 	
 	<div class=allcontents>
-	<form class="productModifyForm"  method="post" action="${ contextPath }/productModify"
-               enctype="multipart/form-data">
-	<input type="hidden" name="product_no" value="${p.product_no}">
-		<button class="modifybtn" onclick="productModify()">수정</button>
-	</form>
+	<form class="productModifyForm"  method="post" action='<%= request.getContextPath() %>/productModifyView'>
+		<input type="hidden" name="product_no" value="${p.product_no}">
+		<input type="hidden" name="expirtion" value="${p.expiration_date}">
+		<input type="hidden" name="category" value="${p.product_category}">
+		<button class="modifybtn" >수정</button>
+	
 		<div class="product_content">	
 		
 			<div class="image_area"  src="${ contextPath }${ p.product_img }"></div>
 			
 				<div class="inputarea"> 
-					<div><h2 class="title" >${ p.product_name }</h2> <hr>
+					<h2 class="title" >${ p.product_name }</h2> <hr>
 				</div> 
 		
 				<div class="inputarea" id="coinarea"> 
@@ -138,11 +139,11 @@
 			<button class=paymentbtn type="button" onclick="parchase();">구매</button>
 			<button class=canclebtn type="button" onclick="window.close();">취소</button>
 		    </div>
+		    </div>
+		</form>
+			</div>
+			</div>
 		
-			</div>
-			</div>
-			</div>
-		</div>
 	
 		
 	<script>

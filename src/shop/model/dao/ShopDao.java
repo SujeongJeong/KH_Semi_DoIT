@@ -83,8 +83,8 @@ public class ShopDao {
 		return result;
 	}
 	
-//디테일
-	public Product selectProduct(Connection conn, int pno) {
+//상세게시글조회
+	public Product selectProduct(Connection conn, int product_no) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -93,7 +93,7 @@ public class ShopDao {
 	
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, pno);
+			pstmt.setInt(1, product_no);
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
@@ -115,7 +115,7 @@ public class ShopDao {
 				return p;
 			}
 
-	//수정
+	//수정할 게시글 조회 
 	public int modifyProduct(Connection conn, Product p) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -125,12 +125,12 @@ public class ShopDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, p.getProduct_no());
-			pstmt.setString(1, p.getProduct_category());
-			pstmt.setString(2, p.getProduct_name());
-			pstmt.setInt(3, p.getExpiration_date());
-			pstmt.setString(4, p.getProduct_detail());
-			pstmt.setInt(5, p.getProduct_price());
-			pstmt.setString(6, p.getProduct_img());
+			pstmt.setString(2, p.getProduct_category());
+			pstmt.setString(3, p.getProduct_name());
+			pstmt.setInt(4, p.getExpiration_date());
+			pstmt.setString(5, p.getProduct_detail());
+			pstmt.setInt(6, p.getProduct_price());
+			pstmt.setString(7, p.getProduct_img());
 			
 			
 			result = pstmt.executeUpdate();

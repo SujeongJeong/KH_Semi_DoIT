@@ -107,7 +107,7 @@
 	<!-- 제목조건, 폼 입력 조건 나중에 설정하기 -->
 	<div class="logo_area"><img class="logo" src="/Do_IT/resources/images/logo.png" onclick="window.close();" alt="logo"></div>
 	<div>
-	<form class="productUpdate"  method="post" action="${ contextPath }/productModify"
+	<form class="productUpdate"  method="post" action="${ contextPath }/ProductModify"
                enctype="multipart/form-data">
 		
 		<div class="product_content">		
@@ -148,7 +148,7 @@
 	
 		<script>
 			function detailView(product_no){
-				location.href = '${contextPath}/product/detail?product_no='+product_no;
+				location.href = '${contextPath}/ProductModifyView?product_no='+product_no;
 			}
 		</script>
 		
