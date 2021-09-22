@@ -50,7 +50,7 @@ public class NoticeInsertServlet extends HttpServlet {
 		System.out.println("content : " + content);
 		System.out.println(writer);
 		
-		Notice n = new Notice(title, content, writer);
+		Notice n = new Notice(writer, title, content);
 		
 		int result = new NoticeService().insertNotice(n);
 		

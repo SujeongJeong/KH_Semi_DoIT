@@ -6,22 +6,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import member.model.vo.Member;
 import qna.model.service.NoticeService;
 import qna.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeDetailServlet
+ * Servlet implementation class NoticeUpdateView
  */
-@WebServlet("/notice/detail")
-public class NoticeDetailServlet extends HttpServlet {
+@WebServlet("/notice/updateView")
+public class NoticeUpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeDetailServlet() {
+    public NoticeUpdateViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,32 +28,25 @@ public class NoticeDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("nav1", "qna");
-		int notice_no = Integer.parseInt(request.getParameter("notice_no"));
-		
-		Notice notice = new NoticeService().selectNotice(notice_no);
-		
-		// String writer = ((Member)request.getSession().getAttribute("loginUser")).getUserType();
-		
-		
-		String page = "";
-		if(notice != null) {
-			request.setAttribute("notice", notice);
-			page = "/WEB-INF/views/qna/noticeDetailView.jsp";
-		} else {
-			request.setAttribute("msg", "공지사항 상세 페이지를 불러오는데 실패하였습니다.");
-			page = "/WEB-INF/views/common/errorpage.jsp";
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		int notice_no = Integer.parseInt(request.getParameter("notice_no"));
+		
+		Notice n = new NoticeService().selectNotice(notice_no);
+		
+		if(n != null) {
+			request.setAttribute("notice", n);
+			request.getRequestDispatcher("/WEB-INF/views/qna/noticeUpdateView.jsp").forward(request, response);
+		} else {
+			request.setAttribute("msg", "수정한 게시글을 조회하는데 실패하였습니다.");
+			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
+		}
 	}
 
 }
