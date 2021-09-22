@@ -18,6 +18,7 @@ public class Product {
 	private String product_detail;
 	private String product_img;
 	
+	public Product(){}
 	
 	
 	
@@ -44,11 +45,26 @@ public class Product {
 		this.product_img = product_img;
 	}
 	
+	//인서트용
+	public Product(String product_category, String product_name, int product_price, int expiration_date, String product_detail,
+			String product_img) {
+		super();
+		this.product_category = product_category;
+		this.product_name = product_name;
+		this.product_price = product_price;
+		this.expiration_date = expiration_date;
+		this.product_detail = product_detail;
+		this.product_img = product_img;
+	}
+	
+	
+	
 	
 	public int getProduct_no() {
 		return product_no;
 	}
 	
+
 
 	public void setProduct_no(int product_no) {
 		this.product_no = product_no;
@@ -99,6 +115,8 @@ public class Product {
 				+ product_name + ", expiration_date=" + expiration_date + ", product_price=" + product_price
 				+ ", product_detail=" + product_detail + ", product_img=" + product_img + "]";
 	}
+	
+	
 	
 	
 	
