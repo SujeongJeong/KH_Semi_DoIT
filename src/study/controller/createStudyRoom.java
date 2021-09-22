@@ -2,10 +2,8 @@ package study.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -15,10 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
 import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import common.Attachment;
 import common.MyFileRenamePolicy;
@@ -57,14 +52,18 @@ public class createStudyRoom extends HttpServlet {
 		
 		// 파일 첨부 
 		int maxSize = 1024*1024*10;	// 파일 10mbyte 제한
-		String fileRoot = "";
 		String root = request.getSession().getServletContext().getRealPath("/");	// 웹서버 컨테이너 경로
-		String test = this.getClass().getResource("/").toString();
-		System.out.println("test: " + test);
-		System.out.println(root);
 		String savePath = root + "resources\\uploadFiles\\";		// 저장될 경로
-		System.out.println(savePath);
+//		System.out.println(request.getParameter("s_endPeriod"));	// => null
 		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+		
+		
+		Enumeration params = multiRequest.getParameterNames();
+		while (params.hasMoreElements()) {
+			String paramname = (String) params.nextElement();
+			System.out.println(paramname + ": " + multiRequest.getParameterValues(paramname)[0]);
+			System.out.println(paramname + ": " + multiRequest.getParameter(paramname));
+		}
 		
 		// DB의 Study,Attachment 데이터 저장
 		// Attachment 테이블에 값 삽입
@@ -103,6 +102,8 @@ public class createStudyRoom extends HttpServlet {
 //		String s_endPeriod = multiRequest.getParameter("s_endPeriod");
 //		String s_startTime = multiRequest.getParameter("s_startTime");
 //		String s_endTime = multiRequest.getParameter("s_endTime");
+		
+//		System.out.println(request.getParameter("s_endPeriod"));
 		
 		int cid = Integer.parseInt(multiRequest.getParameter("cid"));
 		String s_explain = multiRequest.getParameter("s_explain");
