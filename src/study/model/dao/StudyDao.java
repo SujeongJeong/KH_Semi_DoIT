@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 import common.Attachment;
+import study.model.vo.MemberJoinStudy;
 import study.model.vo.Study;
 import static common.JDBCTemplate.*;
 
@@ -32,7 +33,6 @@ public class StudyDao {
 	
 	// 스터디방 리스트 조회
 	public List<Study> selectStudyList(Connection conn) {
-		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Study> StudyList = new ArrayList<>();
@@ -41,7 +41,6 @@ public class StudyDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -60,19 +59,40 @@ public class StudyDao {
 										rset.getString("change_name"),
 										rset.getString("file_path")));
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
-			
 		}
-		
-		
 		return StudyList;
 	}
-
+	
+	// 스터디방별 가입된 회원수 조회
+	public List<Study> selectStudyMemberList(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset=null;
+		List<Study> StudyMemberList = new ArrayList<>();
+		
+		String sql = query.getProperty("selectStudyMemberList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset=pstmt.executeQuery();
+			
+			while(rset.next()) {
+				StudyMemberList.add(new Study(rset.getInt("s_no"),
+											  rset.getInt(2)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return StudyMemberList;
+	}
+	
 	// 스터디방 생성
 	public int insertStudy(Connection conn, Study s) {
 		PreparedStatement pstmt = null;
@@ -166,7 +186,7 @@ public class StudyDao {
 		
 		return s;
 	}
-
+	// 스터디방 삭제
 	public int deleteStudy(Connection conn, int s_no) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -200,7 +220,7 @@ public class StudyDao {
 			
 			rset=pstmt.executeQuery();
 			
-			if(rset.next()) {
+			while(rset.next()) {
 				studyListCount = rset.getInt(1);
 			}
 		} catch (SQLException e) {
@@ -212,6 +232,116 @@ public class StudyDao {
 		
 		return studyListCount;
 	}
+
+	// 스터디방 가입
+	public int insertMemberJoinStudy(Connection conn, MemberJoinStudy mjs) {
+		PreparedStatement pstmt=null;
+		int result = 0;
+		String sql = query.getProperty("insertMemberJoinStudy");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, mjs.getUserNo());
+			pstmt.setInt(2, mjs.getS_no());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	// 스터디방 가입 여부 조회
+	public MemberJoinStudy selectMemberJoinStudy(Connection conn, int userNo, int s_no) {
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		String sql = query.getProperty("selectMemberJoinStudy");
+		MemberJoinStudy mjs= null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, s_no);
+			
+			rset=pstmt.executeQuery();
+			
+			while(rset.next()) {
+				mjs = new MemberJoinStudy();
+				
+				mjs.setUserNo(userNo);
+				mjs.setS_no(s_no);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return mjs;
+	}
+
+	// 멤버별 가입된 스터디방의 수
+	public int memberJoinStudyNum(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset=null;
+		int result=0;
+		
+		String sql = query.getProperty("memberJoinStudyNum");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+
+			rset=pstmt.executeQuery();
+			
+			while(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	// 스터디방별 가입된 회원수
+	public int StudyMemberCount(Connection conn, int s_no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset=null;
+		int result=0;
+		
+		String sql = query.getProperty("StudyMemberCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, s_no);
+
+			rset=pstmt.executeQuery();
+			if (rset != null) {
+				while (rset.next()) {
+					result = rset.getInt(1);
+				}
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	
 
 	
 

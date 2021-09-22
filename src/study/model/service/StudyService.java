@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import study.model.dao.StudyDao;
+import study.model.vo.MemberJoinStudy;
 import study.model.vo.Study;
 
 import static common.JDBCTemplate.*;
@@ -22,6 +23,16 @@ public class StudyService {
 		close(conn);
 		
 		return StudyList;
+	}
+	// 스터디방별 가입된 회원 조회
+	public List<Study> selectStudyMemberList() {
+		Connection conn = getConnection();
+		
+		List<Study> StudyMemberList = sd.selectStudyMemberList(conn);
+		
+		close(conn);
+		
+		return StudyMemberList;
 	}
 
 	// 스터디방 생성
@@ -84,6 +95,57 @@ public class StudyService {
 		
 		return result;
 	}
+	
+	// 스터디방 가입
+	public int insertMemberJoinStudy(MemberJoinStudy mjs) {
+		Connection conn = getConnection();
+		
+		int result = sd.insertMemberJoinStudy(conn,mjs);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+	
+	// 스터디방 가입 여부 조회
+	public MemberJoinStudy selectMemberJoinStudy(int userNo,int s_no) {
+		Connection conn = getConnection();
+		
+		MemberJoinStudy mjs = sd.selectMemberJoinStudy(conn,userNo,s_no);
+		
+		close(conn);
+		
+		return mjs;
+	}
+
+	// 멤버별 가입한 스터디방 갯수 조회
+	public int memberJoinStudyNum(int userNo) {
+		Connection conn= getConnection();
+		
+		int result = sd.memberJoinStudyNum(conn,userNo);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	// 스터디방별 가입된 회원수
+	public int StudyMemberCount(int s_no) {
+		Connection conn= getConnection();
+		
+		int result = sd.StudyMemberCount(conn,s_no);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	
 
 
 	

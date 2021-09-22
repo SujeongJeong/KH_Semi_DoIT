@@ -25,6 +25,17 @@
 		WHERE S_STATUS = 'Y'
 		ORDER BY S_NO DESC
 	</entry>
+	
+	<entry key="selectStudyMemberList">
+		SELECT
+				S_NO,
+				COUNT(*) 
+		   FROM STUDY
+		   JOIN MEMBER_JOINSTUDY USING (S_NO) 
+           WHERE S_STATUS = 'Y'
+           GROUP BY S_NO
+	</entry>
+	
 	<entry key="insertStudyRoom">
 	INSERT 
 	INTO STUDY
@@ -121,10 +132,39 @@
 		   FROM STUDY
 		  WHERE S_STATUS ='Y'
 	</entry>
-	
-	
-	
-	
+	<entry key="insertMemberJoinStudy">
+		INSERT 
+		INTO MEMBER_JOINSTUDY
+		(
+				USER_NO
+			  , S_NO
+		)
+		VALUES
+		(
+				?
+			  , ?
+		)
+	</entry>
+	<entry key="selectMemberJoinStudy">
+		SELECT
+				USER_NO
+			  , S_NO
+		   FROM MEMBER_JOINSTUDY
+		  WHERE USER_NO=?
+		    AND S_NO=? 
+	</entry>
+	<entry key="memberJoinStudyNum">
+		SELECT
+				COUNT(*)
+		   FROM MEMBER_JOINSTUDY
+		  WHERE USER_NO=? 
+	</entry>
+	<entry key="StudyMemberCount">
+		SELECT
+				COUNT(*)
+		   FROM MEMBER_JOINSTUDY
+		  WHERE S_NO=? 
+	</entry>
 	
 	
 	
