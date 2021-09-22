@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 메뉴바의 로그인을 클릭했을 때 로그인 페이지로 이동
-		RequestDispatcher view= request.getRequestDispatcher("WEB-INF/views/member/form/loginForm.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/member/form/loginForm.jsp");
 		view.forward(request, response);
 	}
 
@@ -46,6 +46,7 @@ public class LoginServlet extends HttpServlet {
 		String userEmail = request.getParameter("userEmail");
 		String userPwd = request.getParameter("userPwd");
 
+		
 		Member loginUser = new MemberService().loginMember(userEmail, userPwd);
 		
 		if(loginUser != null) {
