@@ -23,6 +23,17 @@ public class Notice {
 //	user_no	NUMBER
 
 	public Notice() {}
+	
+	
+
+	public Notice(int notice_no, String notice_title, String notice_content) {
+	super();
+	this.notice_no = notice_no;
+	this.notice_title = notice_title;
+	this.notice_content = notice_content;
+	}
+
+
 
 	public Notice(int notice_no, String notice_title, String notice_content, int count, Date create_date,
 			Date modify_date, String status, int user_no) {
@@ -37,12 +48,12 @@ public class Notice {
 		this.user_no = user_no;
 	}
 
-	public Notice(String notice_title, String notice_content, int user_no) {
-		super();
-		this.notice_title = notice_title;
-		this.notice_content = notice_content;
-		this.user_no = user_no;
-	}
+//	public Notice(String notice_title, String notice_content, int user_no) {
+//		super();
+//		this.notice_title = notice_title;
+//		this.notice_content = notice_content;
+//		this.user_no = user_no;
+//	}
 
 	public int getNotice_no() {
 		return notice_no;

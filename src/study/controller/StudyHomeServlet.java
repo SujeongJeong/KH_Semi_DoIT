@@ -1,6 +1,7 @@
 package study.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import study.model.service.StudyService;
+import study.model.vo.Study;
 
 /**
  * Servlet implementation class StudyHomeServlet
@@ -28,9 +32,18 @@ public class StudyHomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 메뉴바 클릭했을 때 페이지로 이동
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/home.jsp");
 		request.setAttribute("nav1", "study");
+
+		// 스터디방 리스트
+		List<Study> StudyList = new StudyService().selectStudyList();
+		request.setAttribute("StudyList", StudyList);
+		
+		// 페이징 처리(기본 1P, 더보기 버튼 클릭시 추가 출력)하기 위해 스터디방 총 갯수 가져오기
+		int studyListNumber = new StudyService().selectStudyListNumber();
+		request.setAttribute("studyListNumber", studyListNumber);
+//		System.out.println("studyListNumber : "+studyListNumber);
+		
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/home.jsp");
 		view.forward(request, response);
 	}
 

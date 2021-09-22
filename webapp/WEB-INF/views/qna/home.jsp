@@ -17,12 +17,12 @@
 	<div class="content">
 		<div id="board_list_wrap">
          <div class="board-header">
-            <div class="del_btn">
-                <button type="button" onclick="boardDelete()">삭제</button>
-            </div>
-            <div class="search">
-                <button><img src="../resources/images/search_btn.png"></button><input type="text">
-            </div>
+       
+            <form method="get" action="<%= request.getContextPath() %>/qna/home">
+	            <div class="search">
+	                <button type="submit"><img src="../resources/images/search_btn.png"></button><input type="text"  name="searchValue" value="${ param.searchValue }">
+	            </div>
+            </form>
             <div class="newpost_btn">
                     <button type="button" onClick="location.href='<%= request.getContextPath() %>/qna/insert'">새 글 쓰기</button>
             </div>
@@ -55,225 +55,75 @@
 							<tr class = "manager"<%--  onclick="detailView(${ n.notice_no });" --%>>
 								<td></td>
 								<td></td>
-								<td class="tit" onclick="detailView(${n.notice_no})">${ n.notice_title }</td>
+								<td class="tit" onclick="noticeDetailView(${n.notice_no})">${ n.notice_title }</td>
 								<td>관리자</td>
 								<td>${ n.create_date }</td>
 								<td>${ n.count }</td>
 							</tr>
 						</c:forEach>
-
-				
-                  <!--   <tr class="manager">
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        <td></td>
-                        <td class="tit">
-                          [태그 잊지말고 달기] Q&A 좋은 답글 달리는 꿀팁! [24]
-                        </td>
-                        <td>관리자</td>
-                        <td>2021-08-29</td>
-                        <td>321</td>
-                    </tr> -->
-                    <tr>
-                        <td><input type="checkbox">1118</td>
-                        <td>Language</td>
-                        <td class="tit">
-                           web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-29</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">17</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-29</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">16</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-29</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">15</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-28</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">14</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-27</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">13</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-27</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">12</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-27</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">11</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-26</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">10</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-26</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">9</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-28</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">8</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-28</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">7</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-28</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">6</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-28</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">5</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-28</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">4</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-28</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">3</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-28</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">2</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-28</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox">1</td>
-                        <td>Language</td>
-                        <td class="tit">
-                             web server와 was의 차이점이 뭔가요?
-                        </td>
-                        <td>닉네임</td>
-                        <td>2021-08-28</td>
-                        <td>111</td>
-                    </tr>
+                    
+                    	<c:forEach var="b" items="${ boardList }">
+							<tr>
+								<td>${ b.board_no }</td>
+								<td>${ b.cname }</td>
+								<td class="tit" onclick="boardDetailView(${b.board_no})">${ b.board_title }</td>
+								<td>${ b.nickname }</td>
+								<td>${ b.create_date }</td>
+								<td>${ b.count }</td>
+							</tr>
+						</c:forEach>
+						
+                    
                     
                 </tbody>
             </table>
-            <div class="paging">
-                <a href="#" class="bt">&lt;&lt;</a>
-                <a href="#" class="bt">&lt;</a>
-                <a href="#" class="num on">1</a>
-                <a href="#" class="num">2</a>
-                <a href="#" class="num">3</a>
-                <a href="#" class="num">4</a>
-                <a href="#" class="num">5</a>
-                <a href="#" class="num">6</a>
-                <a href="#" class="num">7</a>
-                <a href="#" class="num">8</a>
-                <a href="#" class="num">9</a>
-                <a href="#" class="num">10</a>
-                <a href="#" class="bt">&gt;</a>
-                <a href="#" class="bt">&gt;&gt;</a>
-            </div>
+            
+            <!-- 맨 처음으로(<<) -->
+            	<ul class="board_paging">
+					<li><a href="${ contextPath }/qna/home?page=1${ searchParam }">&lt;&lt;</a></li>
+					
+					<!-- 이전 페이지로(<) -->
+					<li>
+					<c:choose>
+						<c:when test="${ pi.page > 1 }">
+						<a href="${ contextPath }/qna/home?page=${ pi.page - 1}${ searchParam }">&lt;</a>
+						</c:when>
+						<c:otherwise>
+						<a href="#">&lt;</a>
+						</c:otherwise>
+					</c:choose>
+					</li>
+					
+					<!-- 페이지 목록(최대 10개) -->
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<li>
+						<c:choose>
+							<c:when test="${ p eq pi.page }">
+								<a href="#" class="current_page">${ p }</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${ contextPath }/qna/home?page=${ p }${ searchParam }">${ p }</a>
+							</c:otherwise>
+						</c:choose>
+					</li>
+					</c:forEach>
+					
+					<!-- 다음 페이지로(>) -->
+					<li>
+					<c:choose>
+						<c:when test="${ pi.page < pi.maxPage }">
+						<a href="${ contextPath }/qna/home?page=${ pi.page + 1 }${ searchParam }">&gt;</a>
+						</c:when>
+						<c:otherwise>
+						<a href="#">&gt;</a>
+						</c:otherwise>
+					</c:choose>
+					</li>
+					
+					<!-- 맨  끝으로(>>) -->
+					<li><a href="${ contextPath }/qna/home?page=${ pi.maxPage }${ searchParam }">&gt;&gt;</a></li>
+				</ul>
+
         </div>
 
 	</div>
@@ -282,32 +132,38 @@
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
 	
-	<script>
-		function boardDelete(){
-			if(confirm("정말로 삭제하시겠습니까?"))
-				location.href = '<%= request.getContextPath() %>/boardDelete';
-		}
-	</script>
-	
-	<script>
-	
-	function detailView(){
-					location.href = '<%= request.getContextPath() %>/qna/detail';
-				}
-	</script>
+
 	
 	
 	<c:choose>
 		<c:when test="${ !empty loginUser }">
 			<script>
-				function detailView(notice_no){
+				function noticeDetailView(notice_no){
 					location.href = '<%= request.getContextPath() %>/notice/detail?notice_no=' + notice_no;
 				}
 			</script>
 		</c:when>
 		<c:otherwise>
 			<script>
-				function detailView(){
+				function noticeDetailView(){
+					alert('로그인 후 이용 가능합니다.');
+					location.href= '<%= request.getContextPath() %>/login';
+				}
+			</script>
+		</c:otherwise>
+	</c:choose>
+	
+		<c:choose>
+		<c:when test="${ !empty loginUser }">
+			<script>
+				function boardDetailView(board_no){
+					location.href = '<%= request.getContextPath() %>/qna/detail?board_no=' + board_no;
+				}
+			</script>
+		</c:when>
+		<c:otherwise>
+			<script>
+				function boardDetailView(){
 					alert('로그인 후 이용 가능합니다.');
 					location.href= '<%= request.getContextPath() %>/login';
 				}

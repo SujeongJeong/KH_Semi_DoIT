@@ -33,6 +33,7 @@
 	border: none;
 	width : 20px; height : 20px;
 }
+
 .product_addBtn:hover{
  	background: url("/Do_IT//resources/images/plus-hover.png");
 }
@@ -62,8 +63,6 @@
 	gap : 30px;
 }
 
-
-
 .product_name{
 	width:200px;
 	text-align:center;
@@ -76,6 +75,10 @@
 	color : #5FC5FF;
 }
 
+.premium_img{
+	width:240px;
+	heigh:240px;
+}
 
 
 </style>
@@ -87,7 +90,7 @@
   <div class="content">	
 	
 	<div class="product_area">
-	 <button class="coin_charge" onclick="openPopup('<%=request.getContextPath()%>/coin', 'coin_charge', 700, 900);">코인충전</button>
+	 <button class="coin_charge" onclick="openPopup('<%=request.getContextPath()%>/coin', 'coin_charge', 700, 900));">코인충전</button>
 	
 	<h3>| 프리미엄 이용권  <button class="product_addBtn" onclick="openPopup('<%=request.getContextPath()%>/productAdd', 'ProductAdd', 900, 1200);"></button>
 	<button class="product_deleteBtn" id="checkbox_btn" onclick="checkbox()"></button> </h3>
@@ -95,28 +98,30 @@
 	  <div class="product_premium">
 	   <c:forEach var="p" items="${ productList }">
 	   <c:if test="${ p.product_category == '세트' }">
-		<div class="premium_product"  onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
+		<div class="premium_product"  onclick="pnoSubmit(${p.product_no})">
             <input type="checkbox" name="product_check"  style="display:none">
-            <img class="premium_img" src="/Do_IT/resources/images/shop-study.png">
+           <img class="premium_img" src="${ contextPath }${ p.product_img}">
             <div class="product_name">${p.product_name}</div>
             <div class="product_price">${p.product_price} coin</div>
-     
+           
+    
          </div>
          </c:if>
 		</c:forEach>
       </div>
      
-      	<h3>| 이용권 단품  <button class="product_addBtn" onclick="openPopup('<%=request.getContextPath()%>/productAdd', 'ProductAdd', 900, 1200);"></button>
+      	<h3>| 이용권 단품  <button class="product_addBtn"  onclick="openPopup('<%=request.getContextPath()%>/productAdd', 'ProductAdd', 900, 1200);" ></button>
 	<button class="product_deleteBtn" id="checkbox_btn" onclick="checkbox()"></button></h3>
       <div class="product_single">
     
         <c:forEach var="p" items="${ productList }">
 	   <c:if test="${ p.product_category == '단품' }">
-		<div class="premium_product"  onclick="openPopup('<%=request.getContextPath()%>/productDetail', 'productDetail', 900, 1200);">
+		<div class="premium_product"  onclick="pnoSubmit(${p.product_no})">
             <input type="checkbox" name="product_check"  style="display:none">
             <img class="premium_img" src="/Do_IT/resources/images/shop-study.png">
             <div class="product_name">${p.product_name}</div>
             <div class="product_price">${p.product_price} coin</div>
+       
      
          </div>
          </c:if>
@@ -146,6 +151,13 @@
             $('input[name=product_check]').hide();
         }
       }
+		
+	 function pnoSubmit(product_no){
+		 openPopup('${contextPath}/productDetail?product_no='+product_no, 'productDetail', 900, 1200);
+		 
+	 }
+		
+	
 
 </script>
 

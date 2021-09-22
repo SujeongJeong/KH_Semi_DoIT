@@ -35,7 +35,7 @@ public class NoticeDetailServlet extends HttpServlet {
 		
 		Notice notice = new NoticeService().selectNotice(notice_no);
 		
-		String writer = ((Member)request.getSession().getAttribute("loginUser")).getUserType();
+		// String writer = ((Member)request.getSession().getAttribute("loginUser")).getUserType();
 		
 		
 		String page = "";

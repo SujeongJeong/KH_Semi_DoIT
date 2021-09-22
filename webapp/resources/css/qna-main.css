@@ -27,7 +27,7 @@ button{
     margin-bottom: 20px;
     height: 35px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
 .del_btn, .search, .newpost_btn{
@@ -38,11 +38,6 @@ button{
     margin-left: auto;
 }
 
-.board-header .del_btn button{
-    width: 80px;
-    height: 35px;
-    border-radius :5px;
-}
 
 .board-header .search button{
     width: 35px;
@@ -120,10 +115,45 @@ button{
 }
 
 /* 페이지 이동 */
+.board_paging {
+	height: 50px;
+	line-height: 50px;
+	display: flex;
+	justify-content: center;
+	list-style: none;
+	width: 480px;
+	margin: 30px auto;
+}
 
+.board_paging a {
+	text-decoration: none;
+	color: #282A35;
+	display: block;
+	text-align: center;
+	border: 1px solid #dae0e9;
+    margin-left: 10px;
+	width: 37px;
+	height: 37px;
+	line-height : 37px;
+    font-size: 12px;
+}
+
+.board_paging a.current_page {
+	border: 1px solid #293243;
+    background: #222;
+    color: #fff;
+}
+
+
+
+
+/* 
 #board_list_wrap .paging {
     margin-top: 40px;
     text-align: center;
+    display: flex;
+	justify-content: space-around;
+	list-style: none;
     
 }
 #board_list_wrap .paging a {
@@ -150,9 +180,9 @@ button{
     background: #fff;
 }
 
-/* 현재 페이지 일때 */
+현재 페이지 일때
 #board_list_wrap .paging a.num.on {
     border: 1px solid #293243;
     background: #222;
     color: #fff;
-}
+} */

@@ -110,29 +110,32 @@
 	<div>
 	<form class="productAddForm"  method="post" action="${ contextPath }/productAdd"
                enctype="multipart/form-data">
-
+		
 		<div class="product_content">		
 			
 			<h3>상품 이미지</h3>
 			<div class="image_area"></div>
 			<input type="file" name="file" id="productimg" accept="image/gif,image/jpeg,image/png" required>
 			
-			
 				<div class="inputarea"> 
-					<h3>상품명</h3>
-					<input type="text" class="title" required placeholder="상품명을 입력하세요.">
+					<div><h3>상품명</h3> 	
+					<select name="category">
+						<option value="세트">세트</option>
+						<option value="단품">단품</option>
+					</select></div>
+					<input type="text" class="title" name="title" required placeholder="상품명을 입력하세요.">
 				</div>
 		
 				<div class="inputarea"> 
 				<h3>상품 코인 | 기간</h3>
-					<input type="number" class="coin_count" min= 1 required placeholder="Coin 입력"> Coin / 
-					<input type="number" class="expirtion" min= 1 required> 일
+					<input type="number" class="coin_count" name="price" min= 1 required placeholder="Coin 입력"> Coin / 
+					<input type="number" class="expirtion" name="expirtion" min= 1 required placeholder="숫자만 입력하세요"> 일
 				</div>
 		
 			<h3>상품 설명</h3>
 			<textarea class="textarea" rows="15" cols="80" name="content" placeholder="상품설명을 입력하세요."></textarea>
 			<div class="btn_area">
-			<button class=enrollbtn type="submit" onclick="enroll();">등록</button>
+			<button class=enrollbtn type="submit">등록</button>
 			<button class=canclebtn type="button" onclick="window.close();">취소</button>
 		    </div>
 		
@@ -141,27 +144,12 @@
 			</div>
 		</div>	
 		
+		
 		<script src="${ contextPath }/resources/js/imagePreview.js"></script>
 		
-		<c:choose>
-		<c:when test="${ !empty loginUser }">
-		<script>
-			function detailView(bid){
-				location.href = '${contextPath}/product/detail?bid=' = bid;
-			}
-		</script>
-		</c:when>
-		</c:choose>	
 		
-	<script>
-	
-	
-		function enroll(){
-			if(confirm("등록하시겠습니까? "))
-			//코인금액이 가격보다 작으면 코인창으로 가기.	
-		}
 		
-	 </script>
+	
 
 
 </body>

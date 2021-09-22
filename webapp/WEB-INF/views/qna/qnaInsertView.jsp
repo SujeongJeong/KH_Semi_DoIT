@@ -33,16 +33,17 @@
 							</span>
 							<span class="input_area"> 
 							<select name="category">
-								<option value="10">language</option>
-								<option value="20">embedded</option>
-								<option value="30">ai</option>
-								<option value="40">backend</option>
-								<option value="50">project</option>
-								<option value="60">game</option>
-								<option value="70">android</option>
-								<option value="80">bigdata</option>
-								<option value="90">blockchain</option>
-								<option value="100">devops</option>
+								<option value="1" <c:if test="${ board.cid == 1 }">selected</c:if>>language</option>
+								<option value="2" <c:if test="${ board.cid == 2 }">selected</c:if>>embedded</option>
+								<option value="3" <c:if test="${ board.cid == 3 }">selected</c:if>>ai</option>
+								<option value="4" <c:if test="${ board.cid == 4 }">selected</c:if>>back-end</option>
+								<option value="5" <c:if test="${ board.cid == 5 }">selected</c:if>>front-end</option>
+								<option value="6" <c:if test="${ board.cid == 6 }">selected</c:if>>game</option>
+								<option value="7" <c:if test="${ board.cid == 7 }">selected</c:if>>app</option>
+								<option value="8" <c:if test="${ board.cid == 8 }">selected</c:if>>bigdata</option>
+								<option value="9" <c:if test="${ board.cid == 9 }">selected</c:if>>blockchain</option>
+								<option value="10" <c:if test="${ board.cid == 10 }">selected</c:if>>devops</option>
+								<option value="11" <c:if test="${ board.cid == 11 }">selected</c:if>>project</option>
 							</select>
 							</span>
 							<span class="title_span">

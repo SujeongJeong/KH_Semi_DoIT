@@ -16,7 +16,7 @@ public class NoticeDao {
 	private Properties query = new Properties();
 	
 	public NoticeDao() {
-		String fileName = NoticeDao.class.getResource("/sql/notice/notice-query.xml").getPath();
+		String fileName = NoticeDao.class.getResource("/sql/board/notice-query.xml").getPath();
 		try {
 			query.loadFromXML(new FileInputStream(fileName));
 		} catch (IOException e) {
@@ -24,6 +24,8 @@ public class NoticeDao {
 		}
 		
 	}
+	
+	
 
 	// 1. 공지사항 목록 조회
 	public List<Notice> selectList(Connection conn) {
@@ -56,7 +58,7 @@ public class NoticeDao {
 			close(pstmt);
 		}
 		
-		System.out.println(noticeList);
+//		System.out.println(noticeList);
 		return noticeList;
 	}
 	
@@ -72,6 +74,7 @@ public class NoticeDao {
 			pstmt.setString(1, n.getNotice_title());
 			pstmt.setString(2, n.getNotice_content());
 			pstmt.setInt(3, n.getUser_no());
+			
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
