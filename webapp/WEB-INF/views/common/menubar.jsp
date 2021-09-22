@@ -42,7 +42,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:if test="${ loginUser.userType =='U'  }">
-					<a href="${ contextPath }/my/home"><img class="user" src="${ loginUser.profileImg }" alt="user"></a>
+					<a href="${ contextPath }/my/home"><img class="user" src="${ contextPath }${ loginUser.profileImg }" alt="user"></a>
 					</c:if>
 					<c:if  test="${ loginUser.userType =='A'  }">
 					<a href="${ contextPath }/my/home"><img class="user" src="${ contextPath }/resources/images/admin.png" alt="admin"></a>
@@ -67,17 +67,24 @@
 			<li><a href="${ contextPath }/shop/home"<% if ("shop".equals(nav1)) { %>class="current"<%}%>>Shop</a></li>
 			<li><a href="${ contextPath }/qna/home"<% if ("qna".equals(nav1)) { %>class="current"<%}%>>Q&amp;A</a></li>
 			<c:choose>
-			<c:when test="${ loginUser.userType == 'U' }">
-			<li><a href="${ contextPath }/my/home"<% if ("my".equals(nav1)) { %>class="current"<%}%>>마이페이지</a></li>
+			<c:when test="${ loginUser == null || loginUser.userType == 'U' }">
+			<li class="mypage"><a href="${ contextPath }/my/home"<% if ("my".equals(nav1)) { %>class="current"<%}%>>마이페이지</a></li>
 			</c:when>
-			<c:when  test="${ loginUser.userType =='A'  }">
+			<c:when  test="${ loginUser != null && loginUser.userType =='A'  }">
 			<li><a href="${ contextPath }/admin/home"<% if ("admin".equals(nav1)) { %>class="current"<%}%>>관리페이지</a></li>
 			</c:when>
 			</c:choose>
 		</ul>
 		</nav>	
-		
 	</div>
-
+	<c:if test="${ loginUser == null }">
+	<script>
+		$(".mypage").click(function(){
+			 if(confirm("로그인 하시겠습니까?")){
+				 location.href="${ contextPath}/login";
+			 }
+		  });
+	</script>
+	</c:if>
 </body>
 </html>
