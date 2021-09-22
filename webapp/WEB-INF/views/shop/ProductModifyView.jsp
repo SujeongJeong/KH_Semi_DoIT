@@ -115,6 +115,7 @@
 			<h3>상품 이미지</h3>
 			<img class="image_area" name="fileimg" src="${ contextPath }${ p.product_img}">
 			수정 파일 <input type="file" name="file" id="productimg" accept="image/gif,image/jpeg,image/png" required>
+			
 			<input type="hidden" name="product_no" value="${p.product_no }">
 				<div class="inputarea"> 
 					<div><h3>상품명</h3> 	
