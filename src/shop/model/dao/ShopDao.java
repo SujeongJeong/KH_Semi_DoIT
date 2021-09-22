@@ -25,7 +25,7 @@ public class ShopDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}  
 	
 	//1. 리스트 조회
 	public List<Product> selectList(Connection conn) {
