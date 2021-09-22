@@ -52,38 +52,30 @@ public class ProductModifyServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
 		}
 		
-		//최대용량제한
 		int maxSize = 1024*1024*10;
-		
 		String root = request.getSession().getServletContext().getRealPath("/");
 		String savePath = root + "resources\\uploadFiles\\shop\\";
 		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 		
-	
 		String files = "/resources/uploadFiles/shop/"+multiRequest.getFilesystemName("file");
 		
-		Product p = new Product();
-		
 		int product_no = Integer.parseInt(multiRequest.getParameter("product_no"));
-	
-		p.setProduct_no(product_no);
-		
-		p.setProduct_category(multiRequest.getParameter("product_category"));
-		p.setProduct_name(multiRequest.getParameter("title"));
-		p.setProduct_price(Integer.parseInt(multiRequest.getParameter("price")));
-		p.setExpiration_date(Integer.parseInt(multiRequest.getParameter("expirtion")));
-		p.setProduct_detail(multiRequest.getParameter("product_category"));
-		p.setProduct_img(multiRequest.getFilesystemName("files"));
+		String category = multiRequest.getParameter("category");
+		String title = multiRequest.getParameter("title");
+		int price =  Integer.parseInt(multiRequest.getParameter("price"));
+		int expirtion = Integer.parseInt(multiRequest.getParameter("expirtion"));
+		String content = multiRequest.getParameter("content");
 
 		
-	
+		Product p = new Product(product_no, category, title, price, expirtion, content, files);
+
 		int result = new ShopService().modifyProduct(p);
-		System.out.println(result);
+		
 		
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/product/detail?product_no=" + product_no);
+			response.sendRedirect(request.getContextPath() + "/productDetail?product_no=" + product_no);
 		} else {
-			request.setAttribute("msg", "게시글 수정에 실패했습니다.");
+			request.setAttribute("msg", "상품 수정에 실패했습니다.");
 			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
 		}
 	}

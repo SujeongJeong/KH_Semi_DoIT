@@ -14,7 +14,7 @@
 	
 } 
 
-.productAddForm {
+.productModifyForm {
 	width: 600px;
 	height: auto;
 	margin: 50px auto;
@@ -107,23 +107,22 @@
 	<!-- 제목조건, 폼 입력 조건 나중에 설정하기 -->
 	<div class="logo_area"><img class="logo" src="/Do_IT/resources/images/logo.png" onclick="window.close();" alt="logo"></div>
 	<div>
-	<form class="productUpdate"  method="post" action="${ contextPath }/ProductModify"
-               enctype="multipart/form-data">
-		
+
+	<form class="productModifyForm"  method="post" action="${ contextPath }/productModify"  enctype="multipart/form-data">
 		<div class="product_content">		
+			<input type="hidden" name="product_no" value="${p.product_no }">
 			
 			<h3>상품 이미지</h3>
 			<img class="image_area" name="fileimg" src="${ contextPath }${ p.product_img}">
-			수정 파일 <input type="file" name="file" id="productimg" accept="image/gif,image/jpeg,image/png" required>
+			수정 파일 <input type="file" name="file" id="productimg" accept="image/gif,image/jpeg,image/png">
 			
-			<input type="hidden" name="product_no" value="${p.product_no }">
 				<div class="inputarea"> 
 					<div><h3>상품명</h3> 	
 					<select name="category">
-						<option value="세트" <c:if test="${ p.category == '세트'}"> selected</c:if>>세트</option>
-						<option value="단품" <c:if test="${ p.category == '단품'}"> selected</c:if>>단품</option>
+						<option value="세트" <c:if test="${ p.product_category == '세트'}" selected</c:if>>세트</option>
+						<option value="단품" <c:if test="${ p.product_category == '단품'}" selected</c:if>>단품</option>
 					</select></div>
-					<input type="text" class="title" name="title" readonly value="${ p.product_name }">	
+					<input type="text" class="title" name="title" value="${ p.product_name }">	
 				</div>
 		
 				<div class="inputarea"> 
@@ -135,7 +134,7 @@
 			<h3>상품 설명</h3>
 			<textarea class="textarea" rows="15" cols="80" name="content">${ p.product_detail }</textarea>
 			<div class="btn_area">
-			<button class=enrollbtn type="submit">등록</button>
+			<button class=enrollbtn type="submit" onclick="detailView();">수정</button>
 			<button class=canclebtn type="button" onclick="window.close();">취소</button>
 		    </div>
 			</div>
@@ -148,6 +147,7 @@
 	
 		<script>
 			function detailView(product_no){
+				alert('수정이 완료되었습니다.');
 				location.href = '${contextPath}/ProductModifyView?product_no='+product_no;
 			}
 		</script>

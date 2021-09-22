@@ -58,8 +58,6 @@ public class ShopService {
 			
 			int result = sd.modifyProduct(conn, p);
 			
-			System.out.println(p);
-			
 			if(result > 0) {
 				commit(conn);
 			}else {
