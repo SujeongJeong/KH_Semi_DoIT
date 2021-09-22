@@ -124,18 +124,16 @@ public class ShopDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, p.getProduct_no());
-			pstmt.setString(2, p.getProduct_category());
-			pstmt.setString(3, p.getProduct_name());
-			pstmt.setInt(4, p.getExpiration_date());
-			pstmt.setString(5, p.getProduct_detail());
-			pstmt.setInt(6, p.getProduct_price());
-			pstmt.setString(7, p.getProduct_img());
-			
+			pstmt.setString(1, p.getProduct_category());
+			pstmt.setString(2, p.getProduct_name());
+			pstmt.setInt(3, p.getExpiration_date());
+			pstmt.setString(4, p.getProduct_detail());
+			pstmt.setInt(5, p.getProduct_price());
+			pstmt.setString(6, p.getProduct_img());
+			pstmt.setInt(7, p.getProduct_no());
 			
 			result = pstmt.executeUpdate();
 			
-			System.out.println(result);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

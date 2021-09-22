@@ -118,7 +118,7 @@
 	   <c:if test="${ p.product_category == '단품' }">
 		<div class="premium_product"  onclick="pnoSubmit(${p.product_no})">
             <input type="checkbox" name="product_check"  style="display:none">
-            <img class="premium_img" src="/Do_IT/resources/images/shop-study.png">
+            <img class="premium_img" src="${ contextPath }${ p.product_img}">
             <div class="product_name">${p.product_name}</div>
             <div class="product_price">${p.product_price} coin</div>
        

@@ -50,9 +50,11 @@
 		  WHERE PRODUCT_NO = ?
 	  </entry>
 	  
+	  
 	  <entry key="modifyProduct">
-	   UPDATE BOARD
-   	  	SET 	PRODUCT_CATEGORY = ?
+	   UPDATE PRODUCT
+   	  	SET 	
+   	  		  PRODUCT_CATEGORY = ?
 			  , PRODUCT_NAME = ?
 			  , EXPIRATION_DATE = ?
 			  , PRODUCT_DETAIL = ?
