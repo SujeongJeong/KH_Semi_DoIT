@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,7 +67,9 @@
 						<li><span class="todayhours point-c">0시간 00분</span><span class="goalhours lightgray-c">/ 0시간 00분</span></li>
 						</c:when>
 						<c:otherwise>
-						<li><span class="todayhours point-c">3시간 00분</span><span class="goalhours lightgray-c">/ 5시간 00분</span></li>
+						<li><span class="todayhours point-c">3시간 00분</span><span class="goalhours lightgray-c">/ 
+						<c:set var="targetHour" value="${ loginUser.targetHour }"/><c:set var ="hours" value="${fn:split(targetHour, '/') }"/>
+						 ${ hours[0] }시간 ${ hours[1] }분</span></li>
 						</c:otherwise>
 						</c:choose>
 					</ul>
@@ -97,14 +100,14 @@
 					<div class="hiddenScroll">
 					<div class="scrollBlind">
 						<c:choose>
-						<c:when test="${ loginUser == null || Todolist == null}">
+						<c:when test="${ loginUser == null || Todolist == null }">
 							 <label class="nolist">오늘의 할일을 추가하세요.</label>
 						</c:when>
 						<c:otherwise>
 							<ul class="list">
 							<c:if test="${ loginUser.userNo == Todolist.user_No }">							
 							<c:forEach var="todo" items="${ Todolist.todo_content }">
-								<li>${ todo }<button class="edit"></button><button class="delete"></button></li>
+								<li><span>${ todo }</span><button class="edit"></button><button class="delete"></button></li>
 							</c:forEach>
 							</c:if>
 							</ul>
@@ -122,10 +125,10 @@
 	<%-- 로그인 하지 않았을 시 --%>
 	<c:if test="${ loginUser == null }">
 	<script>
-		<%-- 로그아웃 후 뒤로가기로 로그인된 페이지 접속 못하게 막기 --%>
+		// 로그아웃 후 뒤로가기로 로그인된 페이지 접속 못하게 막기 
 		history.pushState(null, null, location.href); 
 		window.onpopstate = function(event) { history.go(1); };	
-		<%-- 로그인 안했을 때 리스트 추가 시 로그인 페이지로 이동여부묻기 --%>
+		// 로그인 안했을 때 리스트 추가 시 로그인 페이지로 이동여부묻기 
 		$(".add").click(function(){
 			 if(confirm("로그인 하시겠습니까?")){
 				 location.href="${ contextPath}/login";
@@ -135,8 +138,9 @@
 	</c:if>
 	<c:if test="${ loginUser != null }">
 	<script>
-	<%-- todolist 추가 --%>
+	 // todolist 추가 
 		$(".add").click(function(){
+			console.log(this);
 			if( $(".scrollBlind ul").hasClass("list")){
 				$(".list").append("<li><textarea maxlength='48'></textarea></li>");
 			}else{
@@ -152,27 +156,119 @@
 			});
 			
 			$(".list:last-child textarea").blur(function(){
-				console.log(blur);
-				/*$.ajax({
+				var text = this.value;
+				$(".list:last-child").innerHTML = text;
+
+				$.ajax({
 					url : "${ contextPath }/main/todolistAdd",
-					data : { addList : lastText.value() },
 					type : "post",
-					success : function(result){
-						if(result > 0 ){
-							lastLi.innerHTML(lastText);
+					data : { addList : text },
+					dataType : "json",
+					success : function(data){
+						if( data != null ){
+							var html ='';
+							for(var key in data){
+								html += '<li><span>'+ data[key].todo_content + '</span><button class="edit"></button><button class="delete"></button></li>';
+							}
+							$(".list").html(html);
 						}else{
-							alert("리스트 추가 실패")
+							alert("오늘의 할일 추가에 실패하셨습니다.");
 						}
 					},
 					error : function(e){
 						console.log(e);
 					}
 				});
-				*/
+				
 			});
-		});
+		}); 
+		// todolist 수정
+	 	$(".edit").click(function(){
+	 		var current = this.prev();
+			console.log(this);
+			console.log(current);
+		/*	
+			$.ajax({
+				url : "${contextPath}/main/todolistUpdate",
+				type : "post",
+				data : { old : , update : }, --> 바꾸기전, 바꾸고 난 후 값 저장
+				dataType : "json",
+				success : function(data){
+					if( data != null ){
+						var html ='';
+						for(var key in data){
+							html += '<li><span>'+ data[key].todo_content + '</span><button class="edit"></button><button class="delete"></button></li>';
+						}
+						$(".list").html(html);
+					}else{
+						alert("오늘의 할일 수정에 실패하셨습니다.");
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+				
+			});
+			*/
+			
+
+			 });
 		
+	 // todolist 삭제
+	 	$(".delete").click(function(){
+	 		var current = this.prev();
+			console.log(this);
+			console.log(current);
+		/*	
+			$.ajax({
+				url : "${contextPath}/main/todolistDelete",
+				type : "post",
+				data : { content : }, 
+				dataType : "json",
+				success : function(data){
+					if( data != null ){
+						var html ='';
+						for(var key in data){
+							html += '<li><span>'+ data[key].todo_content + '</span><button class="edit"></button><button class="delete"></button></li>';
+						}
+						$(".list").html(html);
+					}else{
+						alert("오늘의 할일 삭제에 실패하셨습니다.");
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+				
+			});
+			*/
+			
+
+			 });
 	</script>
 	</c:if>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
