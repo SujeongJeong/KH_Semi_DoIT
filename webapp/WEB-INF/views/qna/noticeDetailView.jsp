@@ -40,10 +40,13 @@
         
         <c:if test="${ !empty loginUser && loginUser.userType == 'A' }">
 	    <div class="board_btn btn">
-	        <button class="del_btn" onclick="boardDelete()">삭제</button>
-	        <button class="modify_btn">수정</button>
+	        <button class="del_btn" onclick="noticeDelete()">삭제</button>
+	        <button class="modify_btn" onclick="updateNoticeView();">수정</button>
 	    </div>
-        
+        <!--  form 태그를 post 방식으로 submit -->
+		<form name ="noticeForm" method="post">
+			<input type="hidden" name="notice_no" value="${ notice.notice_no }">
+		</form>
         </c:if>
 </div>
     
@@ -123,6 +126,30 @@
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
 	
+	
+
+		<script>
+			function updateNoticeView(){
+				document.forms.noticeForm.action = "${contextPath}/notice/updateView";
+				document.forms.noticeForm.submit();
+			}
+			
+			function noticeDelete(){
+				if(confirm("이 공지사항을 삭제하시겠습니까?")){
+					document.forms.noticeForm.action = "${contextPath}/notice/delete";
+					document.forms.noticeForm.submit();
+				}
+			}
+		</script>
+
+	
+	
+	
+	
+	
+	
+	
+	
 	<script>
 	 	// 팝업창 호출
 		function openPopup(url, title, width, height){
@@ -141,10 +168,7 @@
 			window.open(url, title, options);
 		}
 	 	
-		function boardDelete(){
-			if(confirm("정말로 삭제하시겠습니까?"))
-				location.href = '<%= request.getContextPath() %>/boardDelete';
-		}
+		
 		
 		function commentDelete(){
 			if(confirm("정말로 삭제하시겠습니까?"))
