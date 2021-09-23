@@ -51,7 +51,7 @@ public class ShopService {
 	}
 	
 	
- //수정할 상품보기
+	//상품 수정 
 	public int modifyProduct(Product p) {
 		
 			Connection conn = getConnection();
@@ -67,6 +67,29 @@ public class ShopService {
 			
 			return result;
 		}
+	
+	//상품삭제
+	public int deleteProduct(int[] deleteProductArrInt) {
+		Connection conn = getConnection();
+		int resultSum = 0;
+		for(int i=0; i<deleteProductArrInt.length; i++) {
+		int result = sd.deleteProduct(conn, deleteProductArrInt[i]);
+		resultSum += result;
+	}
+		
+		
+		
+		if(resultSum > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return resultSum;
+
+	}
 
 	
 	

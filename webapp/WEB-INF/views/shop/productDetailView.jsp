@@ -82,6 +82,7 @@
 	margin-top: 25px;
 	margin-bottom: 30px;
 	resize: none;
+	border: 0;
 }
 
 .btn_area {
@@ -124,7 +125,7 @@
 	
 		<div class="product_content">	
 		
-			<div class="image_area"  src="${ contextPath }${ p.product_img }"></div>
+			<img class="image_area"  src="${ contextPath }${ p.product_img }">
 			
 				<div class="inputarea"> 
 					<h2 class="title" >${ p.product_name }</h2> <hr>
@@ -156,7 +157,7 @@
 			
 	
 			function parchase(){
-				if(confirm("구매하시겠습니까? "))
+				if(confirm("구매 하시겠습니까?"))
 					window.close();
 				//코인금액이 가격보다 작으면 코인창으로 가기.
 			}

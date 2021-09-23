@@ -55,7 +55,7 @@ public class ShopDao {
 		}
 
 	
-
+	//상품등록	
 	public int insertProduct(Connection conn, Product p) {
 		
 		PreparedStatement pstmt = null;
@@ -83,7 +83,7 @@ public class ShopDao {
 		return result;
 	}
 	
-//상세게시글조회
+	//상세게시글조회
 	public Product selectProduct(Connection conn, int product_no) {
 		
 		PreparedStatement pstmt = null;
@@ -115,7 +115,7 @@ public class ShopDao {
 				return p;
 			}
 
-	//수정할 게시글 조회 
+	//수정
 	public int modifyProduct(Connection conn, Product p) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -142,7 +142,28 @@ public class ShopDao {
 		}
 		return result;
 	}
+
+	public int deleteProduct(Connection conn, int product_no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("deleteProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
 			
+			pstmt.setInt(1, product_no);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+				
 	
 	
 	
