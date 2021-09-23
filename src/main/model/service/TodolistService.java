@@ -62,6 +62,19 @@ public class TodolistService {
 		close(conn);
 		return resultList;
 	}
-
+	
+	// 4. 나의 todolist 조회
+		public List<Todolist> selectMyList(int userNo) {
+			Connection conn = getConnection();
+			List<Todolist> resultList = td.selecTodolist(conn, userNo);
+			
+			if(resultList != null) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+			return resultList;
+		}
 	
 }
