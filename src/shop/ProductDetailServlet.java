@@ -33,9 +33,17 @@ public class ProductDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/shop/productDetailView.jsp");
 		//request.setAttribute("nav1", "shop");
-		//view.forward(request, response);
-		int pno = Integer.parseInt(request.getParameter("product_no"));
+		view.forward(request, response);
+		
 	
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int pno = Integer.parseInt(request.getParameter("product_no"));
+		
 		Product p = new ShopService().selectGallery(pno);
 		
 		
@@ -47,14 +55,6 @@ public class ProductDetailServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
 		}
 		
-	
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 	}
 
 }

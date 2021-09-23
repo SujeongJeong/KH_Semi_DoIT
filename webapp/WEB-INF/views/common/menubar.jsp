@@ -78,6 +78,5 @@
 		</nav>	
 		
 	</div>
-	<script src="${ contextPath }/resources/js/imagePreview.js"></script>
 </body>
 </html>

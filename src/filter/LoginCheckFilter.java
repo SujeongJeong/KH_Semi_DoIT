@@ -95,7 +95,7 @@ public class LoginCheckFilter implements Filter {
       permitList.add("/Do_IT/pp");
       
       // 랭킹
-      permitList.add("/Do_IT/ranking/home");
+      permitList.add("/Do_IT/ranking");
       
       // 샵
       permitList.add("/Do_IT/shop/home");

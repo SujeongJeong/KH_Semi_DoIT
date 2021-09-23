@@ -39,20 +39,24 @@ public class ImgModifyServlet extends HttpServlet {
 		
 		// 2. 웹  서버 컨테이너 경로 추출
 		String root = request.getSession().getServletContext().getRealPath("/");
-		System.out.println("root : " + root);
+	
 		// 3. 파일 실제 저장 경로 
 		String savePath = root + "resources\\uploadFiles\\my\\";
-		System.out.println("savePath : " + savePath);
 		
 		// HttpServletRequest => MultipartRequest 변경
 		// MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 		
-		String current_img = ((Member)request.getSession().getAttribute("loginUser")).getProfileImg();
-		File deleteFile = new File(current_img);
+		String[] current_img = ((Member)request.getSession().getAttribute("loginUser")).getProfileImg().split("/");
+	
+		File deleteFile = new File(savePath+current_img[4]);
+		System.out.println(savePath+current_img[4]);
 		deleteFile.delete();
 		
-		String profile_img = savePath + multiRequest.getFilesystemName("modify_img");
+		Member member = ((Member)request.getSession().getAttribute("loginUser"));
+		
+		String profile_img = "/resources/uploadFiles/my/" + multiRequest.getFilesystemName("modify_img");
+		System.out.println("profile_img : " + profile_img);
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		// 2. 비지니스 로직 수행		
