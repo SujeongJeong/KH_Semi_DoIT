@@ -34,8 +34,8 @@ public class Product {
 		this.product_img = product_img;
 	}
 	
-	//상품리스트 조회용  구매shop 홈 리스트.
 	
+	//상품리스트 조회용  구매shop 홈 상품 리스트.
 	public Product(int product_no, String product_category, String product_name, int product_price, String product_img) {
 		super();
 		this.product_no = product_no;

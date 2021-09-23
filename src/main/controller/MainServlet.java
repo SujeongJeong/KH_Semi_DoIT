@@ -1,29 +1,29 @@
-package shop.controller;
+package main.controller;
 
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import shop.model.service.ShopService;
-import shop.model.vo.Product;
+import main.model.service.TodolistService;
+import main.model.vo.Todolist;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class ShopHomeServlet
+ * Servlet implementation class MainServlet
  */
-@WebServlet("/shop/home")
-public class ShopHomeServlet extends HttpServlet {
+@WebServlet("/MainServlet")
+public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShopHomeServlet() {
+    public MainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,21 +32,20 @@ public class ShopHomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int userNo = 0;
+		if((Member)request.getSession().getAttribute("loginUser") != null){
+			userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		}
 		
-		  List<Product> productList = new ShopService().selectList();
-		  //System.out.println("공지사항 목록 : " + productList);  리스트 출력테스트
-		  //리스트 가져오고, 네비css도 가져오기.
-		  request.setAttribute("productList", productList);
-		  request.setAttribute("nav1", "shop");
-		  request.getRequestDispatcher("/WEB-INF/views/shop/home.jsp").forward(request,response);
-		
+		List<Todolist> myList = new TodolistService().selectMyList(userNo);
+		request.setAttribute("Todolist", myList);
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

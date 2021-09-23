@@ -92,12 +92,12 @@ public class BoardService {
 		// 게시글 조회수
 		int result = bd.increaseCount(conn, bid);
 		
-		// 해당 게시글에 대한 댓글 리스트 조회 로직 추가
-		//b.setReplyList(bd.selectReplyList(conn, bid));
 		
 		Board b = null;
 		if(result > 0) {
 			b = bd.selectBoard(conn, bid);
+			// 해당 게시글에 대한 댓글 리스트 조회 로직 추가
+			b.setReplyList(bd.selectReplyList(conn, bid));
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -152,6 +152,24 @@ public class BoardService {
 		close(conn);
 		
 		return boardList;
+	}
+	
+	// 댓글 추가 + 새로 생신 된 댓글 리스트 조회
+	public List<Reply> insertReply(Reply r) {
+		Connection conn = getConnection();
+		
+		int result = bd.insertReply(conn, r);
+		
+		List<Reply> replyList = null;
+		
+		if(result > 0) {
+			commit(conn);
+			replyList = bd.selectReplyList(conn, r.getBoard_no());
+		} else {
+			rollback(conn);
+		}
+		
+		return replyList;
 	}
 
 }

@@ -1,7 +1,6 @@
-package shop.controller;
+package study.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import shop.model.service.ShopService;
-import shop.model.vo.Product;
+import study.model.service.StudyService;
+import study.model.vo.MemberJoinStudy;
 
 /**
- * Servlet implementation class ShopHomeServlet
+ * Servlet implementation class joinStudyRoom
  */
-@WebServlet("/shop/home")
-public class ShopHomeServlet extends HttpServlet {
+@WebServlet("/study/joinStudy")
+public class joinStudyRoom extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShopHomeServlet() {
+    public joinStudyRoom() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +32,35 @@ public class ShopHomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		  List<Product> productList = new ShopService().selectList();
-		  //System.out.println("공지사항 목록 : " + productList);  리스트 출력테스트
-		  //리스트 가져오고, 네비css도 가져오기.
-		  request.setAttribute("productList", productList);
-		  request.setAttribute("nav1", "shop");
-		  request.getRequestDispatcher("/WEB-INF/views/shop/home.jsp").forward(request,response);
+		//int user_no = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
+		//response.sendRedirect(request.getContextPath() + "/study/studyInfo");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		int s_no = Integer.parseInt(request.getParameter("s_no"));
+		
+		MemberJoinStudy mjs = new MemberJoinStudy(userNo,s_no);
+
+		int result = new StudyService().insertMemberJoinStudy(mjs);
+		
+		if(result>0) {
+			response.sendRedirect(request.getContextPath()+"/study/studyInfo?s_no="+mjs.getS_no());
+			
+		}
 	}
 
 }
+
+
+
+
+
+
+

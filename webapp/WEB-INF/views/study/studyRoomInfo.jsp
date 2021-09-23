@@ -25,7 +25,7 @@
 	width: 300px;
 	height: 75px;
 	top: 10px;
-	left: 200px;
+	left: 30%;
 	font-size: 1.2em;
 }
 
@@ -41,7 +41,7 @@
 	width: 135px;
 	height: 100px;
 	top: 115px;
-	left: 525px;
+	left: 600px;
 }
 
 #backImage {
@@ -61,15 +61,19 @@
 	justify-content: center;
 }
 
+.sTime{
+	margin-bottom: 40px;
+}
+
 .category {
 	margin-top: 15px;
-	color:#C4C4C4;
+	color:#5886fb;
 }
 
 .studyExplain, .studyNotice {
 	display: inline-block;
 	width: 90%;
-	height: 175px;
+	height: 195px;
 	border: 1px solid black;
 	border-color : #E5E5E5; 
 	border-radius:5px;
@@ -133,7 +137,8 @@ h2, h3 {
 			</div>
 			<div id="studyTO">
 				<h3>
-					스터디 정원<br>n / ${ studyRoom.s_to } 명
+					<%-- 방장도 스터디방의 참가자중 1명이므로 현재정원 +1 --%>
+					스터디 정원<br>${ StudyMemberCount + 1 } / ${ studyRoom.s_to } 명
 				</h3>
 			</div>
 			
@@ -148,12 +153,13 @@ h2, h3 {
 
 			<div>
 				<h3>스터디 기간</h3>
-				<div class="sPeriod">시작 날짜 ~ 종료 날짜</div>
+				<div class="sPeriod">
+				${ ssp } ~ ${ sep }</div>
 			</div>
 
 			<div>
 				<h3>공부 시간</h3>
-				<div class="sTime">시작 시간 ~ 종료 시간</div>
+				<div class="sTime">${ sst } ~ ${ set }</div>
 			</div>
 
 			<div class="category">
@@ -178,36 +184,76 @@ h2, h3 {
 			</div>
 		</div>
 		<br>
-		<div class="bottom">
-			<button id="studyRoomBtn"
-				onclick="studyBtn()">
-				
-				<c:choose>
-					<c:when test="${ !empty loginUser }">
-						<c:out value="입장하기/가입하기"/>
+			
+			<form name="joinStudyValues" method="post">
+				<input type="hidden" name="userNo" value="${loginUser.userNo}"></input>
+				<input type="hidden" name="s_no" value="${studyRoom.s_no}"></input>
+			</form>
+
+		<button id="studyRoomBtn" onclick="studyBtn()">
+			<c:choose>
+				<c:when test="${ !empty loginUser }">
+
+					<%-- 스터디방 가입하기 --%>
+					<c:if test="${ selectMemberJoinStudy == null }">
+						<c:out value="가입하기" />
+						
+						<c:if test="${ memberJoinStudyNum < 3}">
+							<c:if test="${ StudyMemberCount +1 < studyRoom.s_to }">
+								<script>
+									function studyBtn() {
+										let cResult = confirm("가입하시겠습니까?");
+										if (cResult == true) {
+											document.forms.joinStudyValues.action = "${contextPath}/study/joinStudy";
+											document.forms.joinStudyValues.submit();
+										}
+									}
+								</script>
+							</c:if>
+							<c:if test="${ StudyMemberCount +1 == studyRoom.s_to }">
+								<script>
+									function studyBtn() {
+										alert("정원이 초과되어 가입하실 수 없습니다.");
+									}
+								</script>
+							</c:if>
+						</c:if>
+						<c:if test="${ memberJoinStudyNum >= 3}">
 							<script>
+								function studyBtn() {
+									alert("가입 한도를 초과하셨습니다.");
+								}
+							</script>
+						</c:if>
+					</c:if>
+					<%-- 스터디방 입장하기 --%>
+					<c:if test="${ selectMemberJoinStudy != null }">
+						<c:out value="입장하기" />
+						<script>
 								function studyBtn(){
-									opener.location.href='<%=request.getContextPath()%>/study/home';window.close();
+									opener.location.href='<%=request.getContextPath()%>/study/enterStudy';window.close();
 									
 								}
 							</script>
-					</c:when>
-					<c:otherwise>
-						<c:out value="로그인"/>
-							<script>
+					</c:if>
+				</c:when>
+				<c:otherwise>
+					<c:out value="로그인" />
+					<script>
 								function studyBtn(){
-									opener.location.href='<%=request.getContextPath()%>/login';window.close();
-									
-								}
-							</script>
-					</c:otherwise>
-				</c:choose>
-				
-				</button>
-			<button id="report">신고하기</button>
+									opener.location.href='<%=request.getContextPath()%>/login';
+									window.close();
+
+						}
+					</script>
+				</c:otherwise>
+			</c:choose>
+		</button>
+
+		<button id="report">신고하기</button>
 		</div>
 
-	</div>
+
 
 </body>
 </html>

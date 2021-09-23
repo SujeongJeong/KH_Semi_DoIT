@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM
+"http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="addTodolist">
+	INSERT 
+	INTO TODOLIST 
+	(
+		TODO_NO
+	  ,	TODO_DATE
+	  , TODO_CONTENT
+      , USER_NO
+	)
+   	VALUES
+   	(
+   		SEQ_TNO.NEXTVAL
+      , DEFAULT
+      , ?
+      , ?
+   	)
+	</entry>
+	<entry key="selectTodolist">
+	SELECT 
+		   TODO_NO
+		 , TODO_CONTENT  
+	  FROM TODOLIST
+	 WHERE USER_NO = ?
+	 ORDER BY TODO_DATE   
+	</entry>
+	<entry key="updateTodolist">
+	UPDATE TODOLIST
+	   SET
+		   TODO_CONTENT = ?
+	 WHERE USER_NO = ?
+	   AND TODO_CONTENT = ?	   
+	</entry>
+	<entry key="deleteTodolist">
+	DELETE 
+	  FROM TODOLIST
+	 WHERE TODO_CONTENT = ?
+	   AND USER_NO = ?  
+	</entry>
+</properties>

@@ -111,6 +111,7 @@
 				<label for="sunday">일</label>
 			</span>
 			<hr>
+			
 			<span class="span1"><label class="title">기간 설정</label></span>
 			시작일 : <input type="date" name="s_startPeriod" class="s_startPeriod"> 
 			종료일 : <input type="date" name="s_endPeriod" class="s_endPeriod">
@@ -119,6 +120,7 @@
 			시작 시간 :	<input type="time" id="studyStartTime" name="s_startTime"> 
 			<label class="endTime"> 종료 시간 :</label> 
 			<input type="time" id="studyEndTime" name="s_endTime">
+			
 			<hr>
 			<span class="span1"><label class="title">카테고리</label></span> <span
 				class="studyCategory"> 

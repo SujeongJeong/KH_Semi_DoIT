@@ -15,39 +15,68 @@
 	crossorigin="anonymous"></script>
 <style>
 #content {
-	margin: 50px auto;
-	height: auto;
-	min-height: 100%;
-	width: 800px;
-	position : relative;
+    margin: 50px auto;
+    height: auto;
+    min-height: 100%;
+    width: calc(100% - 140px);
+    min-width: 800px;
+    max-width: 1000px;
+    position: relative;
 }
 
 .search {
 	display: inline-block;
 }
+
+.search1{
+	display: relative;
+}
+
+.searchText{
+    width: 200px;
+    height: 25px;
+    border-radius:10px;
+}
+
+.searchTextSubmit{
+	height: 30px;
+    width: 75px;
+    border-radius:10px;
+}
+
 .deleteStudyRoom{
-	position : absolute;
-	left : 718px;
-	top : 25px;
+	position: absolute;
+    left: 860px;
+    top: 17px;
 }
 
 .createStudy {
-	margin-left: 185px;
+	margin-left: 388px;
 	margin-right: 20px;
 }
 .deleteStudyRoomBtn{
-	background-color: #E5E5E5;
-	border : 0; 
-    outline :0;
-    border-radius:5px;
-    color:red;
-    border : 1px solid red;
+    background-color: #E5E5E5;
+    outline: 0;
+    border-radius: 5px;
+    color: red;
+    border: 1px solid red;
+    width: 100px;
+    height: 33px;
+    
 }
-.studyCreateBtn, .plusBtn {
+.studyCreateBtn, .plusBtn{
 	background-color: #5FC5FF;
-	border : 0; 
-    outline :0;
-    border-radius:5px;
+    border: 0;
+    outline: 0;
+    border-radius: 5px;
+    width: 140px;
+    height: 30px;
+    font-size: 1.05em;
+    font-weight: bold;
+}
+
+.plusBtn{
+	border: 1px solid black;
 }
 
 .category {
@@ -55,8 +84,12 @@
 }
 
 .studyCategory {
-	margin-right: 15px;
-	background-color: white;
+	margin-left: 15px;
+    margin-right: 15px;
+    background-color: white;
+    width: 110px;
+    height: 30px;
+    border-radius: 10px;
 }
 
 .studyList {
@@ -67,32 +100,84 @@
 }
 
 .sCategory{
-	color:#C4C4C4;
+    border: 1px solid #5886fb;
+    border-radius: 10px;
+    padding: 1px 10px;
+    background: #5886fb;
+    color: white;
 }
+
+.canJoinStudy{
+	position: absolute;
+    top: 70px;
+}
+
+
+.canJoinStudyBtn{
+	width: 22px;
+    height: 16px;
+}
+
+.canJoinStudyText{
+	display: inline-block;
+    font-size: 1.1em;
+}
+
 
 .studyRoom {
 	position: relative;
 }
+
+.sub_wrapper {
+	width: 100%;
+    margin-bottom: 5px;
+}
+
 #deleteStudy{
 	position: absolute;
-	top:185px;
-	left:130px;
+    top: 125px;
+    left: 123px;
+    width: 22px;
+    height: 19px;
 }
+
+.img_wrapper {
+	position: relative;
+	transition: 0.3s all;
+}
+
+.img_wrapper:hover > .studyImage{
+	border-color: #f5ff10;
+}
+
 .studyTO {
 	position: absolute;
-	top:100px;
+	top:125px;
 	left:10px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 0px 8px;
+    background: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.sName {
+    font-weight: bold;
+    margin-left: 2px;
 }
 
 .studyImage {
 	width: 150px;
 	height: 150px;
-	border:1px solid black;
+	border:1px solid #ddd;
+	border-radius: 10px;
+	padding: 2px;
 }
 
 .plusBtn {
 	display: inline-block;
-	left: 48.5%;
+	left: 43.5%;
 	bottom: 22px;
 	position: relative;
 	
@@ -118,17 +203,12 @@
 
 		<div class="search search1">
 			<form>
-				<input type="text" size="15px" name="search"
-					placeholder="검색할 내용을 입력하세요"> <input type="submit"
-					value="검색하기">
+				<input type="text" class="searchText" size="15px" name="search"
+					placeholder="검색할 내용을 입력하세요"> 
+					<input type="submit" class="searchTextSubmit" value="검색하기">
 			</form>
 		</div>
 		
-		<div class="search createStudy">
-			<button class="studyCreateBtn"
-				onclick="location.href='<%=request.getContextPath()%>/study/createStudy'">스터디
-				만들기</button>
-		</div>
 		<div class="search category">
 			<form>
 				<select class="studyCategory">
@@ -150,8 +230,29 @@
 
 		</div>
 		<div class="search canJoinStudy">
-			<input type="checkbox" name="canJoinStudy">바로 참여 가능한 방
+			<input type="checkbox" id="canJoinStudyBtn" class="canJoinStudyBtn" name="canJoinStudyBtn">
+			<label for="canJoinStudyBtn" class="canJoinStudyText">바로 참여 가능한 방</label>
 		</div>
+		
+		<div class="search createStudy">
+			<button class="studyCreateBtn"
+				onclick="createBtnEvent()">스터디	만들기</button>
+			<c:if test="${ loginUser != null }">
+				<script>
+					function createBtnEvent(){
+						location.href='<%=request.getContextPath()%>/study/createStudy';
+					}
+				</script>
+			</c:if>
+			<c:if test="${ loginUser == null }">
+				<script>
+					function createBtnEvent(){
+						location.href='<%=request.getContextPath()%>/login';
+					}
+				</script>
+			</c:if>
+		</div>
+		
 		<br> <br>
 
 		<form id="deleteStudyForm" method="get" action="<%=request.getContextPath()%>/study/deleteStudy">
@@ -159,19 +260,31 @@
 		<div class="studyList">
 		
 		<%-- 스터디방 리스트 조회 --%>
-		<%-- begin="1" end="${ StudyListSize }" --%>
-		
-		<c:if test=""></c:if>
+
 		<c:forEach var="g" items="${ StudyList }" begin="0" end="${ StudyList.size() }">
 
-
 				<div class="studyRoom">
-					<img class="studyImage"
-						src="${ contextPath }${ g.sImgList.get(0).file_path }${ g.sImgList.get(0).change_name }"
-						onclick="studyInfo(${ g.s_no })"> <span class="sName">${ g.s_name }
-					</span><br> <span class="sCategory">#${ g.cname }</span>
-					<h4 class="studyTO">n/ ${ g.s_to }</h4>
-					
+					<div class="img_wrapper">
+						<img class="studyImage"
+							src="${ contextPath }${ g.sImgList.get(0).file_path }${ g.sImgList.get(0).change_name }"
+							onclick="studyInfo(${ g.s_no })">
+
+						<c:forEach var="i" items="${ StudyMemberList }" begin="0" end="${ StudyMemberList.size() }">
+						<c:set var="studyMem" value="1"/>
+							<c:if test="${ i.s_no == g.s_no }">
+								<%-- <c:set var="studyMem" value="${ i.studyMemberNum }"/> --%>
+							</c:if>
+						</c:forEach>
+						
+						<div class="studyTO">
+						${ studyMemo } / ${ g.s_to }</div>
+					</div>
+					<div class="sub_wrapper">
+						<div class="sName">${ g.s_name }</div>
+					</div>
+					<div class="sub_wrapper">
+						<span class="sCategory">#${ g.cname }</span>
+					</div>
 					<c:if test="${ loginUser.userType == 'A' }">
 					<input type="checkbox" name="deleteStudy" id="deleteStudy" value="${ g.s_no }">
 					</c:if>
@@ -180,9 +293,7 @@
 			</c:forEach>
 			<c:if test="${ loginUser.userType == 'A' }">
 			<div class="deleteStudyRoom">
-				<button type="submit" class="deleteStudyRoomBtn"
-					onclick="location.href='<%=request.getContextPath()%>/study/createStudy'">
-					스터디 삭제</button>
+				<button type="submit" class="deleteStudyRoomBtn">스터디 삭제</button>
 			</div>
 			</c:if>
 		</div>
@@ -191,7 +302,7 @@
 		<br>
 		<div class="studyRoomPlus">
 			<hr class="plusLine">
-			<button class="plusBtn" onclick="plusBtn()">더보기</button>
+			<button class="plusBtn" onclick="plusBtnEvent(     )">더보기</button>
 		</div>
 	</div>
 
@@ -204,18 +315,18 @@
 		
 		studyList.addEventListener('mouseover', function(){
 			
-			if(event.target.classList.contains('studyImage'))
+			if(event.target.classList.contains('img_wrapper'))
 				event.target.classList.add('onmouseover');
-			else if(event.target.parentNode.classList.contains('studyImage'))
+			else if(event.target.parentNode.classList.contains('img_wrapper'))
 				event.target.parentNode.classList.add('onmouseover');
 		});
 		
 		studyList.addEventListener('mouseout', function(){
 			
-			if(event.target.classList.contains('studyImage'))
+			if(event.target.classList.contains('img_wrapper'))
 				event.target.classList.remove('onmouseover');
-			else if(event.target.parentNode.classList.contains('studyImage'))
-				event.target.parentNode.classList.add('onmouseover');
+			else if(event.target.parentNode.classList.contains('img_wrapper'))
+				event.target.parentNode.classList.remove('onmouseover');
 		})
 		
 	
@@ -239,17 +350,13 @@ function openPopup(url, title, width, height){
 }
 
 function studyInfo(s_no){
-	
 	openPopup('${contextPath}/study/studyInfo?s_no='+s_no, 'studyInfo', 700, 1000);
 	
 	
 }
 
-function plusBtn(){
-	let sCount=10;
-	
-	sCount += 10;
-	
+function plusBtnEvent(){
+
 }
 
 

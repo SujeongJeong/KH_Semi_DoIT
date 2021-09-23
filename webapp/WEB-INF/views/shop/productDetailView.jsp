@@ -147,10 +147,7 @@
 	
 		
 	<script>
-			function productModify(){
-				document.forms.productModifyForm.action = '${contextPath}/productModify';
-				document.forms.productModifyForm.submit();
-			}
+			
 	
 			function detailView(){
 				alert('로그인 후 이용 가능 합니다.');

@@ -42,10 +42,10 @@ public class ProductModifyViewServlet extends HttpServlet {
 		int product_no = Integer.parseInt(request.getParameter("product_no"));
 		
 		Product p = new ShopService().selectProduct(product_no);
-		System.out.println(p);
+		
 		
 		if(p != null) {
-			request.setAttribute("Product", p);
+			request.setAttribute("p", p);
 			request.getRequestDispatcher("/WEB-INF/views/shop/productModifyView.jsp").forward(request, response);
 		} else {
 			request.setAttribute("msg", "수정할 게시글을 불러오는데 실패했습니다.");

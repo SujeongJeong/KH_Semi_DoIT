@@ -1,29 +1,32 @@
-package shop.controller;
+package main.controller;
 
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import shop.model.service.ShopService;
-import shop.model.vo.Product;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import main.model.service.TodolistService;
+import main.model.vo.Todolist;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class ShopHomeServlet
+ * Servlet implementation class TodolistDelete
  */
-@WebServlet("/shop/home")
-public class ShopHomeServlet extends HttpServlet {
+@WebServlet("/main/todolistDelete")
+public class TodolistDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShopHomeServlet() {
+    public TodolistDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,21 +35,25 @@ public class ShopHomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String content = request.getParameter("content");
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+	
+		Todolist addTodo = new Todolist();
+		addTodo.setTodo_content(content);
+		addTodo.setUser_no(userNo);
+
+		// insert 후 todolist 리턴
+		List<Todolist> resultList = new TodolistService().deleteTodolist(addTodo);
 		
-		  List<Product> productList = new ShopService().selectList();
-		  //System.out.println("공지사항 목록 : " + productList);  리스트 출력테스트
-		  //리스트 가져오고, 네비css도 가져오기.
-		  request.setAttribute("productList", productList);
-		  request.setAttribute("nav1", "shop");
-		  request.getRequestDispatcher("/WEB-INF/views/shop/home.jsp").forward(request,response);
-		
+		response.setContentType("application/json; charset=utf-8");
+		Gson gson = new GsonBuilder().create();
+		gson.toJson(resultList, response.getWriter());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
