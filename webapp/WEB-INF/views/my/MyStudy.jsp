@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>마이페이지 - 내 스터디</title>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
+<link href='<%= request.getContextPath() %>/resources/css/qna-main.css?after' rel='stylesheet'>
 <style>
 	/* 전체 감싸는 div */
 	.my_wrap {
@@ -40,32 +41,6 @@
 		font-weight : bold;
 	}
 	
-	/* 콘텐츠 영역 */
-	div[class$=list] {
-		border: 1px solid black;
-		width: 100%;
-		height: 350px;
-	}
-	.list_header {
-		background: #5FC5FF;
-		color: white;
-		font-weight: bold;
-		margin: 0;
-		padding: 0;
-		display: flex;
-		justify-content: space-around;
-		list-style: none;
-		height: 50px;
-	}
-	.list_header li {
-		font-size: 18px;
-		padding: 10px 0;
-	}
-	div[class$=study] p {
-		color: lightgray;
-		margin-top: 15%;
-		text-align: center;
-	}
 </style>
 </head>
 <body>
@@ -82,27 +57,109 @@
 	<div class="content">
 			<div class="open_study">
 				<h1>내가 개설한 스터디</h1>
-				<div class="open_list">
-					<ul class="list_header">
-						<li>스터디명</li>
-						<li>공부 시간</li>
-						<li>현재 인원</li>
-						<li>개설일</li>
-					</ul>
-					<p>개설한 스터디가 없습니다</p>
-				</div>
+				<table class="board_list">
+	                <thead>
+	                    <tr>
+	                        <th>스터디 번호</th>
+	                        <th>카테고리</th>
+	                        <th>스터디명</th>
+	                        <th>현재 인원수</th>
+	                        <th>개설자</th>
+	                        <th>개설일</th>
+	                        <th>종료일</th>
+	                        <th></th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+						<c:forEach var="mos" items="${ MyOpenStudyList }">
+							<tr>
+								<td>${ mos.s_no }</td>
+								<td>${ mos.cname }</td>
+								<td>${ mos.s_name }</td>
+								<td>${ mos.s_to }</td>
+								<td>${ mos.user_nkname }</td>
+								<td>${ mos.s_startPeriod }</td>
+								<td>${ mos.s_EndPeriod }</td>
+								<td><button type="button">삭제하기</button></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+	            </table>
+	            <ul class="board_paging">
+					<li><a href="${ contextPath }/my/study?page=1${ searchParam }">&lt;&lt;</a></li>
+					
+					<!-- 이전 페이지로(<) -->
+					<li>
+					<c:choose>
+						<c:when test="${ pi.page > 1 }">
+						<a href="${ contextPath }/my/study?page=${ pi.page - 1}${ searchParam }">&lt;</a>
+						</c:when>
+						<c:otherwise>
+						<a href="#">&lt;</a>
+						</c:otherwise>
+					</c:choose>
+					</li>
+					
+					<!-- 페이지 목록(최대 10개) -->
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<li>
+						<c:choose>
+							<c:when test="${ p eq pi.page }">
+								<a href="#" class="current_page">${ p }</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${ contextPath }/my/q&a?page=${ p }${ searchParam }">${ p }</a>
+							</c:otherwise>
+						</c:choose>
+					</li>
+					</c:forEach>
+					
+					<!-- 다음 페이지로(>) -->
+					<li>
+					<c:choose>
+						<c:when test="${ pi.page < pi.maxPage }">
+						<a href="${ contextPath }/my/study?page=${ pi.page + 1 }${ searchParam }">&gt;</a>
+						</c:when>
+						<c:otherwise>
+						<a href="#">&gt;</a>
+						</c:otherwise>
+					</c:choose>
+					</li>
+					
+					<!-- 맨  끝으로(>>) -->
+					<li><a href="${ contextPath }/my/study?page=${ pi.maxPage }${ searchParam }">&gt;&gt;</a></li>
+				</ul>
 			</div>
 			<div class="join_study">
 				<h1>내가 참여중인 스터디</h1>
-				<div class="join_list">
-					<ul class="list_header">
-						<li>스터디명</li>
-						<li>공부 시간</li>
-						<li>현재 인원</li>
-						<li>개설일</li>
-					</ul>
-					<p>참여중인 스터디가 없습니다</p>
-				</div>
+				<table class="board_list">
+	                <thead>
+	                    <tr>
+	                        <th>스터디 번호</th>
+	                        <th>카테고리</th>
+	                        <th>스터디명</th>
+	                        <th>현재 인원수</th>
+	                        <th>개설자</th>
+	                        <th>개설일</th>
+	                        <th>종료일</th>
+	                        <th></th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+						<c:forEach var="mjs" items="${ MyJoinStudyList }">
+							<tr>
+								<td>${ mjs.s_no }</td>
+								<td>${ mjs.cname }</td>
+								<td>${ mjs.s_name }</td>
+								<td>${ mjs.s_to }</td>
+								<td>${ mjs.user_nkname }</td>
+								<td>${ mjs.s_startPeriod }</td>
+								<td>${ mjs.s_EndPeriod }</td>
+								<td><button type="button">나가기</button></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+	            </table>
 			</div>
 		</div>
 	</div>

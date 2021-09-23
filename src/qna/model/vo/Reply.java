@@ -3,92 +3,136 @@ package qna.model.vo;
 import java.util.Date;
 
 public class Reply {
-	private int rid;
-	private String rcontent;
-	private int refBid;
-	private int rwriter;
-	private String userName;
-	private Date createDate;
-	private Date modifyDate;
+	private int reply_no;
+	private String reply_content;
+	private Date create_date;
+	private Date modify_date;
+	private String reply_secret;
 	private String status;
-//	RID	NUMBER
-//	RCONTENT	VARCHAR2(400 BYTE)
-//	REF_BID	NUMBER
-//	RWRITER	NUMBER
+	private int board_no;
+	private int user_no;
+	private int notice_no;
+	private String nickName;
+
+//	REPLY_NO	NUMBER
+//	REPLY_CONTENT	VARCHAR2(4000 CHAR)
 //	CREATE_DATE	DATE
 //	MODIFY_DATE	DATE
-//	STATUS	VARCHAR2(1 BYTE)
-	public Reply() {}
+//	REPLY_SECRET	VARCHAR2(1 CHAR)
+//	STATUS	VARCHAR2(1 CHAR)
+//	BOARD_NO	NUMBER
+//	USER_NO	NUMBER
+//	NOTICE_NO	NUMBER
 	
-	public Reply(int rid, String rcontent, int refBid, int rwriter, String userName, Date createDate) {
+	public Reply() {}
+
+
+public Reply(int reply_no, String reply_content, Date create_date, Date modify_date, int board_no, int user_no,
+		String nickName) {
 	super();
-	this.rid = rid;
-	this.rcontent = rcontent;
-	this.refBid = refBid;
-	this.rwriter = rwriter;
-	this.userName = userName;
-	this.createDate = createDate;
+	this.reply_no = reply_no;
+	this.reply_content = reply_content;
+	this.create_date = create_date;
+	this.modify_date = modify_date;
+	this.board_no = board_no;
+	this.user_no = user_no;
+	this.nickName = nickName;
 }
 
 
 
-	public int getRid() {
-		return rid;
-	}
-	public void setRid(int rid) {
-		this.rid = rid;
-	}
-	public String getRcontent() {
-		return rcontent;
-	}
-	public void setRcontent(String rcontent) {
-		this.rcontent = rcontent;
-	}
-	public int getRefBid() {
-		return refBid;
-	}
-	public void setRefBid(int refBid) {
-		this.refBid = refBid;
-	}
-	public int getRwriter() {
-		return rwriter;
-	}
-	public void setRwriter(int rwriter) {
-		this.rwriter = rwriter;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public Date getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-	public Date getModifyDate() {
-		return modifyDate;
-	}
-	public void setModifyDate(Date modifyDate) {
-		this.modifyDate = modifyDate;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+public int getReply_no() {
+	return reply_no;
+}
+
+public void setReply_no(int reply_no) {
+	this.reply_no = reply_no;
+}
+
+public String getReply_content() {
+	return reply_content;
+}
+
+public void setReply_content(String reply_content) {
+	this.reply_content = reply_content;
+}
+
+public Date getCreate_date() {
+	return create_date;
+}
+
+
+public void setCreate_date(Date create_date) {
+	this.create_date = create_date;
+}
+
+
+public Date getModify_date() {
+	return modify_date;
+}
+
+
+public void setModify_date(Date modify_date) {
+	this.modify_date = modify_date;
+}
+
+
+public String getReply_secret() {
+	return reply_secret;
+}
+
+public void setReply_secret(String reply_secret) {
+	this.reply_secret = reply_secret;
+}
+
+public String getStatus() {
+	return status;
+}
+
+public void setStatus(String status) {
+	this.status = status;
+}
+
+public int getBoard_no() {
+	return board_no;
+}
+
+public void setBoard_no(int board_no) {
+	this.board_no = board_no;
+}
+
+public int getUser_no() {
+	return user_no;
+}
+
+public void setUser_no(int user_no) {
+	this.user_no = user_no;
+}
+
+public int getNotice_no() {
+	return notice_no;
+}
+
+public void setNotice_no(int notice_no) {
+	this.notice_no = notice_no;
+}
+
+public String getNickName() {
+	return nickName;
+}
+
+
+public void setNickName(String nickName) {
+	this.nickName = nickName;
+}
+
+
+@Override
+public String toString() {
+	return "Reply [reply_no=" + reply_no + ", reply_content=" + reply_content + ", create_date=" + create_date
+			+ ", modify_date=" + modify_date + ", reply_secret=" + reply_secret + ", status=" + status + ", board_no="
+			+ board_no + ", user_no=" + user_no + ", notice_no=" + notice_no + ", nickName=" + nickName + "]";
+}
+
 	
-	
-	@Override
-	public String toString() {
-		return "Reply [rid=" + rid + ", rcontent=" + rcontent + ", refBid=" + refBid + ", rwriter=" + rwriter
-				+ ", userName=" + userName + ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", status="
-				+ status + "]";
-	}
-
-
-
 }

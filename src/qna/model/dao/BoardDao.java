@@ -327,12 +327,13 @@ public class BoardDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				replyList.add(new Reply(rset.getInt("rid"),
-										rset.getString("rcontent"),
-										rset.getInt("ref_bid"),
-										rset.getInt("rwriter"),
-										rset.getString("user_name"),
-										rset.getTimestamp("create_date")));
+				replyList.add(new Reply(rset.getInt("reply_no"),
+										rset.getString("reply_content"),
+										rset.getTimestamp("create_date"),
+										rset.getTimestamp("modify_date"),
+										rset.getInt("board_no"),
+										rset.getInt("user_no"),
+										rset.getString("nickName")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -352,9 +353,9 @@ public class BoardDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, r.getRcontent());
-			pstmt.setInt(2, r.getRefBid());
-			pstmt.setInt(3, r.getRwriter());
+			pstmt.setString(1, r.getReply_content());
+			pstmt.setInt(2, r.getBoard_no());
+			pstmt.setInt(3, r.getUser_no());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {

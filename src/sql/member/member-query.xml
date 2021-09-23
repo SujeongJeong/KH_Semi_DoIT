@@ -89,7 +89,8 @@
 		UPDATE
 			MEMBER
 		  SET
-			USER_PWD = ?
+			  USER_PWD = ?
+			, MODIFY_DATE = SYSDATE
 		WHERE
 			  USER_NO = ?
 		  AND USER_PWD = ?
@@ -98,7 +99,8 @@
 		UPDATE
 			MEMBER
 		  SET
-			STATUS = 'N'
+			  STATUS = 'N'
+			, MODIFY_DATE = SYSDATE
 		WHERE USER_NO = ?
 		  AND USER_PWD = ?
 	</entry>
@@ -118,24 +120,28 @@
 	<entry key="rsetPwd">
 		UPDATE MEMBER
 		SET USER_PWD = ?
+		  , MODIFY_DATE = SYSDATE
 		WHERE USER_EMAIL = ?
 	</entry>
 	<entry key="updateNickName">
 		UPDATE
 			MEMBER
 		  SET
-			  NICKNAME = ?
+			    NICKNAME = ?
+			  , MODIFY_DATE = SYSDATE
 		WHERE
 			  USER_NO = ?
 	</entry>
 	<entry key="setHour">
 		UPDATE MEMBER
 			SET TARGET_HOUR = ?
+			  , MODIFY_DATE = SYSDATE
 		 WHERE USER_NO = ?
 	</entry>
 	<entry key="modifyImg">
 		UPDATE MEMBER
 			SET PROFILE_IMG = ?
+			  , MODIFY_DATE = SYSDATE
 		 WHERE USER_NO = ?
 	</entry>
 </properties>

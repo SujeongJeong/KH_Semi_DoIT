@@ -289,7 +289,7 @@
 					<div class="change_area">
 						<div class="left_box">
 							<form class="img_area" name="imgForm" method="post" enctype="multipart/form-data">
-								<img id="profile_img" src="${ loginUser.profileImg }" alt="프로필 이미지">
+								<img id="profile_img" src="${ contextPath }${ loginUser.profileImg }" alt="프로필 이미지">
 								<input type="file" id="modify_img" name="modify_img" accept="image/gif, image/jpeg, image/png">
 								<button id="camera_btn" type="button"><img id="camera_img" src="<%= request.getContextPath() %>/resources/images/camera.png" alt="카메라 이미지"></button>
 							</form>
@@ -462,5 +462,6 @@
 		document.forms.imgForm.submit();
 	});
 	</script>
+	<script src="${ contextPath }/resources/js/imagePreview.js"></script>
 </body>
 </html>

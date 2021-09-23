@@ -3,9 +3,12 @@ package study.model.dao;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -36,7 +39,8 @@ public class StudyDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Study> StudyList = new ArrayList<>();
-		
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 		String sql = query.getProperty("selectStudyList");
 		
 		try {
@@ -82,7 +86,7 @@ public class StudyDao {
 			
 			while(rset.next()) {
 				StudyMemberList.add(new Study(rset.getInt("s_no"),
-											  rset.getInt(2)));
+											  rset.getInt("s_memberCount")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -105,10 +109,16 @@ public class StudyDao {
 			pstmt.setString(1, s.getS_name());
 			pstmt.setInt(2, s.getS_to());
 			pstmt.setString(3, s.getS_day());
-			pstmt.setString(4, s.getS_explain());
-			pstmt.setString(5, s.getS_notice());
-			pstmt.setInt(6, s.getUser_no());
-			pstmt.setInt(7, s.getCid());
+			
+			pstmt.setTimestamp(4, new Timestamp(s.getS_startPeriod().getTime()));
+			pstmt.setTimestamp(5, new Timestamp(s.gets_endPeriod().getTime()));
+			pstmt.setTimestamp(6, new Timestamp(s.getS_startTime().getTime()));
+			pstmt.setTimestamp(7, new Timestamp(s.gets_endTime().getTime()));
+					
+			pstmt.setString(8, s.getS_explain());
+			pstmt.setString(9, s.getS_notice());
+			pstmt.setInt(10, s.getUser_no());
+			pstmt.setInt(11, s.getCid());
 			
 			result = pstmt.executeUpdate();
 			
@@ -170,7 +180,10 @@ public class StudyDao {
 					s.setS_name(rset.getString("s_name"));
 					s.setS_to(rset.getInt("s_to"));
 					s.setS_day(rset.getString("s_day"));
-					// date,time 저장하기
+					s.setS_startPeriod(rset.getTimestamp("s_startPeriod"));
+					s.sets_endPeriod(rset.getTimestamp("s_endPeriod"));
+					s.setS_startTime(rset.getTimestamp("s_startTime"));
+					s.sets_endTime(rset.getTimestamp("s_endTime"));
 					s.setS_explain(rset.getString("s_explain"));
 					s.setS_notice(rset.getString("s_notice"));
 					s.setCname(rset.getString("cname"));

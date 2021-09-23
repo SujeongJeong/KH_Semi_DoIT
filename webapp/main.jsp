@@ -29,7 +29,8 @@
 </head>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
-	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
+	<jsp:include page='/WEB-INF/views/common/menubar.jsp'/>
+	
 	<div class="content">
 		<div class="outer">
 			<div class="study-area">
@@ -39,19 +40,17 @@
 				</span>
 				<div class="study-list">
 					<c:choose>
-					<c:when test="${ loginUser == null }">
+					<c:when test="${ loginUser == null || Study == null}">
 					 <label class="nolist">스터디를 만들거나 추가해보세요.</label>
 					</c:when>
 					<c:otherwise>
 					<div class="study-info">
+					<c:forEach var="s" items="${ study }">
+					
 					<img src="resources/images/study-background1.jpg" alt="스터디배경사진"><br>
-					<label class="study-name">스터디방 이름</label><br>
-					<label class="study-category darkgray-c">#category</label>
-					</div>
-					<div class="study-info">
-					<img src="resources/images/study-background1.jpg" alt="스터디배경사진"><br>
-					<label class="study-name">스터디방 이름</label><br>
-					<label class="study-category darkgray-c">#category</label>
+					<label class="study-name">${ s.s_name }</label><br>
+					<label class="study-category darkgray-c">#${ s.cname }</label>
+					</c:forEach>
 					</div>
 					</c:otherwise>
 					</c:choose>
@@ -104,12 +103,10 @@
 							 <label class="nolist">오늘의 할일을 추가하세요.</label>
 						</c:when>
 						<c:otherwise>
-							<ul class="list">
-							<c:if test="${ loginUser.userNo == Todolist.user_No }">							
-							<c:forEach var="todo" items="${ Todolist.todo_content }">
-								<li><span>${ todo }</span><button class="edit"></button><button class="delete"></button></li>
+							<ul class="list">							
+							<c:forEach var="todo" items="${ Todolist }">
+								<li><span>${ todo.todo_content }</span><button class="edit"></button><button class="delete"></button></li>
 							</c:forEach>
-							</c:if>
 							</ul>
 						</c:otherwise>
 						</c:choose>
@@ -138,13 +135,13 @@
 	</c:if>
 	<c:if test="${ loginUser != null }">
 	<script>
+	
 	 // todolist 추가 
 		$(".add").click(function(){
-			console.log(this);
 			if( $(".scrollBlind ul").hasClass("list")){
 				$(".list").append("<li><textarea maxlength='48'></textarea></li>");
 			}else{
-				$(".scrollBlind label").replaceWith("<ul class='list'><li><textarea maxlength='48'></textarea></li></ul>")
+				$(".scrollBlind label").replaceWith("<ul class='list'><li><textarea maxlength='48'></textarea></li></ul>");
 			}
 			
 			$(".list:last-child textarea").focus();
@@ -182,16 +179,26 @@
 				
 			});
 		}); 
-		// todolist 수정
-	 	$(".edit").click(function(){
-	 		var current = this.prev();
-			console.log(this);
-			console.log(current);
-		/*	
+	
+	// todolist 수정
+	 	$(document).on('click', '.edit', function(){
+	 		var current = this.previousSibling;
+	 		var old = $(current).text();
+			$(current).replaceWith('<textarea>'+old+'</textarea>');
+			var textarea = document.getElementsByTagName("textarea");
+			
+			$(textarea).keydown(function(event){
+				if(event.key == "Enter"){
+					this.blur();
+				}
+			});
+			
+			$(textarea).blur(function(){
+				var update = textarea[0].value;
 			$.ajax({
 				url : "${contextPath}/main/todolistUpdate",
 				type : "post",
-				data : { old : , update : }, --> 바꾸기전, 바꾸고 난 후 값 저장
+				data : { old : old, update : update}, 
 				dataType : "json",
 				success : function(data){
 					if( data != null ){
@@ -209,21 +216,19 @@
 				}
 				
 			});
-			*/
-			
-
+		
 			 });
+	 	});
 		
 	 // todolist 삭제
-	 	$(".delete").click(function(){
-	 		var current = this.prev();
-			console.log(this);
-			console.log(current);
-		/*	
+	 	$(document).on('click', '.delete', function(){
+	 		var current = this.previousSibling.previousSibling;
+	 		var content = $(current).text();
+			console.log(content);
 			$.ajax({
 				url : "${contextPath}/main/todolistDelete",
 				type : "post",
-				data : { content : }, 
+				data : { content : content}, 
 				dataType : "json",
 				success : function(data){
 					if( data != null ){
@@ -241,10 +246,10 @@
 				}
 				
 			});
-			*/
 			
+	 	});	
 
-			 });
+			
 	</script>
 	</c:if>
 

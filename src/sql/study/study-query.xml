@@ -29,7 +29,7 @@
 	<entry key="selectStudyMemberList">
 		SELECT
 				S_NO,
-				COUNT(*) 
+				COUNT(*) "s_memberCount"
 		   FROM STUDY
 		   JOIN MEMBER_JOINSTUDY USING (S_NO) 
            WHERE S_STATUS = 'Y'
@@ -60,10 +60,10 @@
 	  , ?
 	  , ?
 	  , ?
-	  , SYSDATE
-	  , SYSDATE
-	  , SYSDATE
-	  , SYSDATE
+	  , ?
+	  , ?
+	  , ?
+	  , ?
 	  , ?
 	  , ?
 	  , DEFAULT
