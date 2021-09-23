@@ -157,7 +157,7 @@
 			
 	
 			function parchase(){
-				if(confirm("구매하시겠습니까? "))
+				if(confirm("구매 하시겠습니까?"))
 					window.close();
 				//코인금액이 가격보다 작으면 코인창으로 가기.
 			}
