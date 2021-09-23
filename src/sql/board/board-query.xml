@@ -187,39 +187,42 @@
 	
 	<entry key="selectReplyList">
 		SELECT
-		        RID
-		      , RCONTENT
-		      , REF_BID
-		      , RWRITER
-		      , USER_NAME
-		      , CREATE_DATE
+		        REPLY_NO
+		      , REPLY_CONTENT
+		      , R.CREATE_DATE
+		      , R.MODIFY_DATE
+		      , BOARD_NO
+		      , USER_NO
+		      , NICKNAME
 		   FROM REPLY R
-		   JOIN MEMBER M ON (RWRITER = USER_NO)
-		  WHERE REF_BID = ?
+		   JOIN MEMBER USING (USER_NO)
+		  WHERE BOARD_NO = ?
 		    AND R.STATUS = 'Y'
-		  ORDER BY RID DESC
+		  ORDER BY REPLY_NO DESC
 	</entry>
 	<entry key="insertReply">
 		INSERT
 		INTO REPLY
 		(
-			RID
-		  , RCONTENT
-		  , REF_BID
-		  , RWRITER
+			REPLY_NO
+		  , REPLY_CONTENT
 		  , CREATE_DATE
 		  , MODIFY_DATE
+		  , REPLY_SECRET
 		  , STATUS
+		  , BOARD_NO
+		  , USER_NO
 		)
 		VALUES
 		(
 			SEQ_RID.NEXTVAL
 		  , ?
-		  , ?
-		  , ?
 		  , SYSDATE
 		  , SYSDATE
 		  , DEFAULT
+		  , DEFAULT
+		  , ?
+		  , ?
 		)
 	</entry>
 </properties>

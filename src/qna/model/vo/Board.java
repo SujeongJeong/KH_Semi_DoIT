@@ -1,6 +1,8 @@
 package qna.model.vo;
 
 import java.util.Date;
+import java.util.List;
+
 
 public class Board {
 	
@@ -16,6 +18,8 @@ public class Board {
 	private String board_secret;
 	private int user_no;
 	private int count;
+	private List<Reply> replyList;
+	
 	
 	public Board() {}
 	
@@ -82,8 +86,10 @@ public class Board {
 		this.count = count;
 	}
 
+	
 	public Board(int board_no, int cid, String cname, String board_title, String nickname, String board_content,
-			Date create_date, Date modify_date, String status, String board_secret, int user_no, int count) {
+			Date create_date, Date modify_date, String status, String board_secret, int user_no, int count,
+			List<Reply> replyList) {
 		super();
 		this.board_no = board_no;
 		this.cid = cid;
@@ -97,7 +103,10 @@ public class Board {
 		this.board_secret = board_secret;
 		this.user_no = user_no;
 		this.count = count;
+		this.replyList = replyList;
 	}
+
+
 
 	public int getBoard_no() {
 		return board_no;
@@ -195,12 +204,22 @@ public class Board {
 		this.count = count;
 	}
 
+	public List<Reply> getReplyList() {
+		return replyList;
+	}
+
+	public void setReplyList(List<Reply> replyList) {
+		this.replyList = replyList;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Board [board_no=" + board_no + ", cid=" + cid + ", cname=" + cname + ", board_title=" + board_title
 				+ ", nickname=" + nickname + ", board_content=" + board_content + ", create_date=" + create_date
 				+ ", modify_date=" + modify_date + ", status=" + status + ", board_secret=" + board_secret
-				+ ", user_no=" + user_no + ", count=" + count + "]";
+				+ ", user_no=" + user_no + ", count=" + count + ", replyList=" + replyList + "]";
 	}
 
 

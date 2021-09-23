@@ -9,7 +9,7 @@
 <title>Q&A - Do IT</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-	<link href='<%= request.getContextPath() %>/resources/css/qna-boardDetail.css?afters' rel='stylesheet'>
+	<link href='<%= request.getContextPath() %>/resources/css/qna-boardDetail.css' rel='stylesheet'>
 </head>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
@@ -54,9 +54,23 @@
         <div class="comment_header">Comment</div>
         <div class="new_comment comment">
             <img class="user_img" src='<%= request.getContextPath() %>/resources/images/user.png' alt="게시글 유저">
-            <pre><a href="<%= request.getContextPath() %>/login">로그인</a>이 필요합니다.</pre>
-            <button>등록</button>
+			<textarea class="reply_content"></textarea>
+            <button onclick="addReply(${ notice.notice_no });">등록</button>
         </div>
+    
+        
+        
+        <div class="reply_list">
+			<c:forEach items="${ board.replyList }" var="r">
+				<ul class="reply_ul">
+					<li class="rwriter">${ r.userName }</li>
+					<li class="rcontent">${ r.rcontent }</li>
+					<li class="rdate"><fmt:formatDate value="${ r.createDate }"
+					type="both" pattern="yyyy.MM.dd HH:mm:ss"/></li>
+				</ul>
+			</c:forEach>
+		</div>
+        
         <!-- 댓글 -->
         <div class="comment_wrapper">
             <div class="writer_info">
@@ -128,30 +142,24 @@
 	
 	
 
-		<script>
-			function updateNoticeView(){
-				document.forms.noticeForm.action = "${contextPath}/notice/updateView";
+	<script>
+		function updateNoticeView(){
+			document.forms.noticeForm.action = "${contextPath}/notice/updateView";
+			document.forms.noticeForm.submit();
+		}
+		
+		function noticeDelete(){
+			if(confirm("이 공지사항을 삭제하시겠습니까?")){
+				document.forms.noticeForm.action = "${contextPath}/notice/delete";
 				document.forms.noticeForm.submit();
 			}
-			
-			function noticeDelete(){
-				if(confirm("이 공지사항을 삭제하시겠습니까?")){
-					document.forms.noticeForm.action = "${contextPath}/notice/delete";
-					document.forms.noticeForm.submit();
-				}
-			}
-		</script>
+		}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	<script>
-	 	// 팝업창 호출
+		function commentDelete(){
+			if(confirm("정말로 삭제하시겠습니까?"))
+				location.href = '<%= request.getContextPath() %>/commentDelete';
+		}
+		
 		function openPopup(url, title, width, height){
 			// 왼쪽으로 부터 거리(가운데 맞추기)
 			let left = (document.body.clientWidth/2) - (width/2);
@@ -161,19 +169,46 @@
 			
 			let options = "width="+width+",height="+height+",left="+left+",top="+top;
 			
-			/* console.log(window.screenLeft);
-			console.log(options); */
-			
 			// 새창 열기
 			window.open(url, title, options);
 		}
 	 	
-		
-		
-		function commentDelete(){
-			if(confirm("정말로 삭제하시겠습니까?"))
-				location.href = '<%= request.getContextPath() %>/commentDelete';
+		// 댓글 달기
+		function addReply(notice_no){
+			$.ajax({
+				url : "${contextPath}/board/insertReply",
+				type : "post",
+				data : { notice_no : notice_no, content : $(".reply_content").val() },
+				dataType : "json",
+				success : function(data){
+					if(data != null){
+						console.log(data);
+						
+						var html = '';
+						
+						// 새로 받아온 갱신 된 댓글 목록을 for문을 통해 html에 저장
+						for(var key in data){
+							html += '<ul class="reply_ul"><li class="rwriter">'
+								  + data[key].userName + '</li><li class="rcontent">'
+								  + data[key].rcontent + '</li><li class="rdate">'
+								  + data[key].createDate + '</li></ul>';
+						}
+						
+						// 갱신 된 댓글 목록을 다시 적용
+						$(".reply_list").html(html);
+						// 댓글 작성 부분 리셋
+						$(".reply_content").val("");
+						
+					} else{
+						alert('댓글 입력 실패!');
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
 		}
+		
 		
 	</script>
 	
