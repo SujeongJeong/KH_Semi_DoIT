@@ -37,7 +37,7 @@
 			)
 	
 	</entry>
-	 <entry key="selectProduct">
+	<entry key="selectProduct">
 	   SELECT
 			    PRODUCT_NO
 			  ,	PRODUCT_CATEGORY
@@ -48,10 +48,10 @@
 			  ,	PRODUCT_IMG
 		   FROM PRODUCT
 		  WHERE PRODUCT_NO = ?
-	  </entry>
+	 </entry>
 	  
 	  
-	  <entry key="modifyProduct">
+	 <entry key="modifyProduct">
 	   UPDATE PRODUCT
    	  	SET 	
    	  		  PRODUCT_CATEGORY = ?
@@ -61,8 +61,14 @@
 			  , PRODUCT_PRICE = ?
 			  , PRODUCT_IMG = ?	
    	  	
-   	WHERE PRODUCT_NO = ?
-	  </entry>
+   		WHERE PRODUCT_NO = ?
+	 </entry>
+	 
+	 <entry key="deleteProduct">
+	 	DELETE FROM PRODUCT
+  		 WHERE PRODUCT_NO = ?
+	 
+	 </entry>
 
 
 
