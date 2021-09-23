@@ -42,11 +42,9 @@ public class StudyHomeServlet extends HttpServlet {
 		
 		// 스터디방별 가입된 회원수
 		List<Study> StudyMemberList = new StudyService().selectStudyMemberList();
-		
+		request.setAttribute("StudyMemberList", StudyMemberList);
 //		System.out.println("StudyMemberList : "+StudyMemberList);
 //		System.out.println("StudyMemberList.size() : "+StudyMemberList.size());
-		
-		request.setAttribute("StudyMemberList", StudyMemberList);
 		
 		// 페이징 처리(기본 1P, 더보기 버튼 클릭시 추가 출력)하기 위해 스터디방 총 갯수 가져오기
 		int studyListNumber = new StudyService().selectStudyListNumber();

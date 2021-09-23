@@ -44,13 +44,37 @@ public class studyRoomInfo extends HttpServlet {
 	
 		// 스터디방 조회
 		Study s = new StudyService().selectStudyRoom(s_no);
+		int ssp_year = s.getS_startPeriod().getYear()-100;
+		int ssp_month = s.getS_startPeriod().getMonth();
+		int ssp_date = s.getS_startPeriod().getDate();
+		String ssp = "20" + ssp_year + "년 "+ ssp_month + "월 "+ssp_date + "일";
+		
+		int sep_year = s.gets_endPeriod().getYear()-100;
+		int sep_month = s.gets_endPeriod().getMonth();
+		int sep_date = s.gets_endPeriod().getDate();
+		String sep = "20" + sep_year + "년 "+ sep_month + "월 "+sep_date + "일";
+		
+		int sst_time = s.getS_startTime().getHours();
+		int sst_min = s.getS_startTime().getMinutes();
+		String sst = sst_time + "시 " + sst_min + "분";
+		
+		int set_time = s.gets_endTime().getHours();
+		int set_min = s.gets_endTime().getMinutes();
+		String set = set_time + "시 " + set_min + "분";
+		
+		request.setAttribute("ssp", ssp);
+		request.setAttribute("sep", sep);
+		request.setAttribute("sst", sst);
+		request.setAttribute("set", set);
+		
+		
 		request.setAttribute("studyRoom", s);
 		
 		// 스터디방 번호로 해당 스터디방의 정원수 조회
 		int StudyMemberCount = new StudyService().StudyMemberCount(s_no);
-		
 		request.setAttribute("StudyMemberCount", StudyMemberCount);
 //		System.out.println("StudyMemberCount : "+StudyMemberCount);
+		
 		//클릭한 스터디방 번호와 로그인 되어있는 유저번호로 스터디방 가입유무 조회
 		if(loginUser != null) {
 			int userNo = loginUser.getUserNo();

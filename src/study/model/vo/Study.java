@@ -1,7 +1,7 @@
 package study.model.vo;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import common.Attachment;
@@ -12,9 +12,9 @@ public class Study {
 	private int s_to; 										 // 스터디방 정원
 	private String s_day;									 // 스터디방 여는 요일
 	private Date s_startPeriod;								 // 시작일
-	private Date s_EndPeriod;								 // 종료일
+	private Date s_endPeriod;								 // 종료일
 	private Date s_startTime;								 // 시작시간
-	private Date s_EndTime;									 // 종료시간
+	private Date s_endTime;									 // 종료시간
 	private String s_explain;								 // 스터디방 설명
 	private String s_notice;								 // 스터디방 공지
 	private String s_status;								 // 스터디방 상태
@@ -27,15 +27,11 @@ public class Study {
 	
 	public Study() {}
 	
-	
-	
 	public Study(int s_no, int studyMemberNum) {
 		super();
 		this.s_no = s_no;
 		this.studyMemberNum = studyMemberNum;
 	}
-
-
 
 	public Study(String s_name, int s_to, String s_day, String s_explain, String s_notice, int user_no, int cid,
 			List<Attachment> sImgList) {
@@ -50,8 +46,25 @@ public class Study {
 		this.sImgList = sImgList;
 	}
 
-	public Study(int s_no, String s_name, int s_to, String s_day, Date s_startPeriod, Date s_EndPeriod,
-			Date s_startTime, Date s_EndTime, String s_explain, String s_notice, String cname, String user_nkname,
+	public Study(String s_name, int s_to, String s_day, Date s_startPeriod, Date s_endPeriod, Date s_startTime,
+			Date s_endTime, String s_explain, String s_notice, int user_no, int cid, List<Attachment> sImgList) {
+		super();
+		this.s_name = s_name;
+		this.s_to = s_to;
+		this.s_day = s_day;
+		this.s_startPeriod = s_startPeriod;
+		this.s_endPeriod = s_endPeriod;
+		this.s_startTime = s_startTime;
+		this.s_endTime = s_endTime;
+		this.s_explain = s_explain;
+		this.s_notice = s_notice;
+		this.user_no = user_no;
+		this.cid = cid;
+		this.sImgList = sImgList;
+	}
+
+	public Study(int s_no, String s_name, int s_to, String s_day, Date s_startPeriod, Date s_endPeriod,
+			Date s_startTime, Date s_endTime, String s_explain, String s_notice, String cname, String user_nkname,
 			String change_name, String file_path) {
 		super();
 		this.s_no = s_no;
@@ -59,20 +72,29 @@ public class Study {
 		this.s_to = s_to;
 		this.s_day = s_day;
 		this.s_startPeriod = s_startPeriod;
-		this.s_EndPeriod = s_EndPeriod;
+		this.s_endPeriod = s_endPeriod;
 		this.s_startTime = s_startTime;
-		this.s_EndTime = s_EndTime;
+		this.s_endTime = s_endTime;
 		this.s_explain = s_explain;
 		this.s_notice = s_notice;
 		this.cname = cname;
 		this.user_nkname = user_nkname;
 		this.sImgList.add(new Attachment(change_name, file_path));
-		
 	}
 
-
-	public Study(int s_no, String s_name, int s_to, String s_day, Date s_startPeriod, Date s_EndPeriod,
-			Date s_startTime, Date s_EndTime, String s_explain, String s_notice, String s_status, int user_no, int cid,
+	public Study(int s_no, String cname, String s_name, int s_to, String user_nkname, Date s_startPeriod, Date s_endPeriod) {
+	      super();
+	      this.s_no = s_no;
+	      this.s_name = s_name;
+	      this.s_to = s_to;
+	      this.s_startPeriod = s_startPeriod;
+	      this.s_endPeriod = s_endPeriod;
+	      this.cname = cname;
+	      this.user_nkname = user_nkname;
+	   }
+	
+	public Study(int s_no, String s_name, int s_to, String s_day, Date s_startPeriod, Date s_endPeriod,
+			Date s_startTime, Date s_endTime, String s_explain, String s_notice, String s_status, int user_no, int cid,
 			String cname, String user_nkname, List<Attachment> sImgList, int studyMemberNum) {
 		super();
 		this.s_no = s_no;
@@ -80,9 +102,9 @@ public class Study {
 		this.s_to = s_to;
 		this.s_day = s_day;
 		this.s_startPeriod = s_startPeriod;
-		this.s_EndPeriod = s_EndPeriod;
+		this.s_endPeriod = s_endPeriod;
 		this.s_startTime = s_startTime;
-		this.s_EndTime = s_EndTime;
+		this.s_endTime = s_endTime;
 		this.s_explain = s_explain;
 		this.s_notice = s_notice;
 		this.s_status = s_status;
@@ -134,12 +156,12 @@ public class Study {
 		this.s_startPeriod = s_startPeriod;
 	}
 
-	public Date getS_EndPeriod() {
-		return s_EndPeriod;
+	public Date gets_endPeriod() {
+		return s_endPeriod;
 	}
 
-	public void setS_EndPeriod(Date s_EndPeriod) {
-		this.s_EndPeriod = s_EndPeriod;
+	public void sets_endPeriod(Date s_endPeriod) {
+		this.s_endPeriod = s_endPeriod;
 	}
 
 	public Date getS_startTime() {
@@ -150,12 +172,12 @@ public class Study {
 		this.s_startTime = s_startTime;
 	}
 
-	public Date getS_EndTime() {
-		return s_EndTime;
+	public Date gets_endTime() {
+		return s_endTime;
 	}
 
-	public void setS_EndTime(Date s_EndTime) {
-		this.s_EndTime = s_EndTime;
+	public void sets_endTime(Date s_endTime) {
+		this.s_endTime = s_endTime;
 	}
 
 	public String getS_explain() {
@@ -227,8 +249,8 @@ public class Study {
 	@Override
 	public String toString() {
 		return "Study [s_no=" + s_no + ", s_name=" + s_name + ", s_to=" + s_to + ", s_day=" + s_day + ", s_startPeriod="
-				+ s_startPeriod + ", s_EndPeriod=" + s_EndPeriod + ", s_startTime=" + s_startTime + ", s_EndTime="
-				+ s_EndTime + ", s_explain=" + s_explain + ", s_notice=" + s_notice + ", s_status=" + s_status
+				+ s_startPeriod + ", s_endPeriod=" + s_endPeriod + ", s_startTime=" + s_startTime + ", s_endTime="
+				+ s_endTime + ", s_explain=" + s_explain + ", s_notice=" + s_notice + ", s_status=" + s_status
 				+ ", user_no=" + user_no + ", cid=" + cid + ", cname=" + cname + ", user_nkname=" + user_nkname
 				+ ", sImgList=" + sImgList + ", studyMemberNum=" + studyMemberNum + "]";
 	}

@@ -2,7 +2,12 @@ package study.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import java.util.Date;
+
 import java.util.Enumeration;
 import java.util.List;
 
@@ -53,17 +58,8 @@ public class createStudyRoom extends HttpServlet {
 		// 파일 첨부 
 		int maxSize = 1024*1024*10;	// 파일 10mbyte 제한
 		String root = request.getSession().getServletContext().getRealPath("/");	// 웹서버 컨테이너 경로
-		String savePath = root + "resources\\uploadFiles\\";		// 저장될 경로
-//		System.out.println(request.getParameter("s_endPeriod"));	// => null
+		String savePath = root + "resources\\uploadFiles\\study";		// 저장될 경로
 		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-		
-		
-		Enumeration params = multiRequest.getParameterNames();
-		while (params.hasMoreElements()) {
-			String paramname = (String) params.nextElement();
-			System.out.println(paramname + ": " + multiRequest.getParameterValues(paramname)[0]);
-			System.out.println(paramname + ": " + multiRequest.getParameter(paramname));
-		}
 		
 		// DB의 Study,Attachment 데이터 저장
 		// Attachment 테이블에 값 삽입
@@ -73,7 +69,7 @@ public class createStudyRoom extends HttpServlet {
 		if (multiRequest.getFilesystemName(fileName) != null) {
 			Attachment at = new Attachment();
 
-			at.setFile_path("/resources/uploadFiles/"); // 경로 저장
+			at.setFile_path("/resources/uploadFiles/study"); // 경로 저장
 			at.setOrigin_name(multiRequest.getOriginalFileName(fileName)); // 원본이름 저장
 			at.setChange_name(multiRequest.getFilesystemName(fileName)); // 바뀐이름 저장
 
@@ -87,37 +83,53 @@ public class createStudyRoom extends HttpServlet {
 		String s_day="";
 		if(!s_dayArr[0].equals(""))
 			s_day = String.join(",", s_dayArr);
-
-
-//		String ssp = multiRequest.getParameter("s_startPeriod");
-//		System.out.println("dateString : "+ ssp);
-//		try {
-//			Date s_startPeriod = new SimpleDateFormat("yyyy/mm/dd").parse(ssp);
-//			System.out.println("date : "+ s_startPeriod);
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		
-//		String s_endPeriod = multiRequest.getParameter("s_endPeriod");
-//		String s_startTime = multiRequest.getParameter("s_startTime");
-//		String s_endTime = multiRequest.getParameter("s_endTime");
-		
-//		System.out.println(request.getParameter("s_endPeriod"));
-		
 		int cid = Integer.parseInt(multiRequest.getParameter("cid"));
 		String s_explain = multiRequest.getParameter("s_explain");
 		String s_notice = multiRequest.getParameter("s_notice");
 		int user_no = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();		
+
+		//날짜시간
+		String ssp = multiRequest.getParameter("s_startPeriod");
+		String sep = multiRequest.getParameter("s_endPeriod");
+		String sst = multiRequest.getParameter("s_startTime");
+		String set = multiRequest.getParameter("s_endTime");
+//		System.out.println("dateString : "+ ssp);
+//		System.out.println("dateString : "+ sep);
+//		System.out.println("dateString : "+ sst);
+//		System.out.println("dateString : "+ set);
 		
-//		Study s = new Study(s_name,s_to,s_day,s_startPeriod,s_endPeriod,s_startTime,s_endTime,
-//							s_explain,s_notice,user_no,cid,photo);
-		Study s = new Study(s_name,s_to,s_day,s_explain,s_notice,user_no,cid,photo);
+		Date s_startPeriod = null;
+		Date s_endPeriod = null;
+		Date s_startTime = null;
+		Date s_endTime = null;
 		
-//		System.out.println(s); 		//양호
-		
-		int result = new StudyService().insertStudyRoom(s);
-		
+		try {
+				s_startPeriod = new SimpleDateFormat("yyyy-MM-dd").parse(ssp);
+				s_endPeriod = new SimpleDateFormat("yyyy-MM-dd").parse(sep);
+				s_startTime = new SimpleDateFormat("HH:mm").parse(sst);
+				s_endTime = new SimpleDateFormat("HH:mm").parse(set);
+				
+//				System.out.println("date : "+ s_startPeriod);
+//				System.out.println("date : "+ s_endPeriod);
+//				System.out.println("date : "+ s_startTime);
+//				System.out.println("date : "+ s_endTime);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			int result = 0;
+			if (s_startPeriod != null && s_endPeriod != null && s_startTime != null && s_endTime != null) {
+				Study s = new Study(s_name, s_to, s_day, s_startPeriod, s_endPeriod, s_startTime, s_endTime, s_explain,
+						s_notice, user_no, cid, photo);
+//				System.out.println(s);
+				result = new StudyService().insertStudyRoom(s);
+			} else {
+				
+				// 에러페이지 이동
+		}
+		// 임시로 date/time 제외하고 나머지 되는지 확인용(양호)
+//		Study s = new Study(s_name,s_to,s_day,s_explain,s_notice,user_no,cid,photo);
+			
 		if(result>0) {
 			// 스터디방 생성 후 목록으로 재요청
 			response.sendRedirect(request.getContextPath() + "/study/home");
