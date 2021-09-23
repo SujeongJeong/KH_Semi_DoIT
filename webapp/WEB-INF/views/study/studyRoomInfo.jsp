@@ -153,12 +153,13 @@ h2, h3 {
 
 			<div>
 				<h3>스터디 기간</h3>
-				<div class="sPeriod">시작 날짜 ~ 종료 날짜</div>
+				<div class="sPeriod">
+				${ ssp } ~ ${ sep }</div>
 			</div>
 
 			<div>
 				<h3>공부 시간</h3>
-				<div class="sTime">시작 시간 ~ 종료 시간</div>
+				<div class="sTime">${ sst } ~ ${ set }</div>
 			</div>
 
 			<div class="category">
