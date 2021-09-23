@@ -224,7 +224,6 @@
 	 	$(document).on('click', '.delete', function(){
 	 		var current = this.previousSibling.previousSibling;
 	 		var content = $(current).text();
-			console.log(content);
 			$.ajax({
 				url : "${contextPath}/main/todolistDelete",
 				type : "post",

@@ -13,6 +13,8 @@
 <title>menubar</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/menubar-style.css?after' rel='stylesheet'>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- 구글웹폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,8 +79,6 @@
 		</ul>
 		</nav>	
 	</div>
-<<<<<<< HEAD
-=======
 
 	<c:if test="${ loginUser == null }">
 	<script>
@@ -90,8 +90,5 @@
 	</script>
 	</c:if>
 
-	<script src="${ contextPath }/resources/js/imagePreview.js"></script>
-
->>>>>>> refs/heads/master
 </body>
 </html>

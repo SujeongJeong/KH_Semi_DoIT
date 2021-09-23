@@ -48,10 +48,10 @@ select { padding : 3px;}
 			
 		<div class="standard">
 			<span>yyyy년 MM월 d일(E요일) 오전0시 기준
-			<%-- <c:if test="${ period eq 'yesterday' }">yyyy년 MM월 d일(E요일) 오전0시 기준</c:if>
-			<c:if test="${ period eq 'week' }">yyyy년 MM월 d일(월요일) 오전0시 기준</c:if>
-			<c:if test="${ period eq 'month' }">yyyy년 MM월 1일(E요일) 오전0시 기준</c:if>
-			--%>
+			 <c:if test="${ period eq 'yesterday' }">yyyy년 MM월 d일(E요일) 오전0시 기준</c:if>
+			 <c:if test="${ period eq 'week' }">yyyy년 MM월 d일(월요일) 오전0시 기준</c:if>
+			 <c:if test="${ period eq 'month' }">yyyy년 MM월 1일(E요일) 오전0시 기준</c:if>
+			
 			</span>
 		</div>	
 		<ul class="ranking-wrapper" >
@@ -65,7 +65,7 @@ select { padding : 3px;}
 		<li class="ranking"><img src="resources/images/flag.png" alt="8위"><span>8위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
 		<li class="ranking"><img src="resources/images/flag.png" alt="9위"><span>9위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
 		<li class="last"><img src="resources/images/flag.png" alt="10위"><span>10위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
-		<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>?위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>			
+		<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>?위</span><span class="nickname">${ loginUser.nickName }</span><span class='hours'>00:00:00</span></li>			
 		</ul>
 
 	</div>
