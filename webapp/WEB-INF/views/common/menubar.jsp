@@ -77,6 +77,8 @@
 		</ul>
 		</nav>	
 	</div>
+<<<<<<< HEAD
+=======
 
 	<c:if test="${ loginUser == null }">
 	<script>
@@ -90,5 +92,6 @@
 
 	<script src="${ contextPath }/resources/js/imagePreview.js"></script>
 
+>>>>>>> refs/heads/master
 </body>
 </html>
