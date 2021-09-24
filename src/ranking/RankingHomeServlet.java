@@ -1,6 +1,7 @@
 package ranking;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import member.model.vo.Member;
+import study.model.service.StudyService;
+import study.model.vo.Study;
 
 /**
  * Servlet implementation class RankingHomeServlet
@@ -29,8 +34,15 @@ public class RankingHomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 메뉴바 클릭했을 때 페이지로 이동
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/ranking.jsp");
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/ranking/ranking.jsp");
+		if((Member)request.getSession().getAttribute("loginUser") != null) {
+			int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		}
+		//List<Study> myStudy = new StudyService().selectMyStudy(userNo);
+		
 		request.setAttribute("nav1", "ranking");
+		//request.setAttribute("Study", myStudy);
+		//System.out.println(myStudy);
 		view.forward(request, response);
 	}
 
