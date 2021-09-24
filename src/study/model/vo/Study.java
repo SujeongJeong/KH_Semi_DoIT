@@ -25,6 +25,30 @@ public class Study {
 	private List<Attachment> sImgList = new ArrayList<>();	 // 설정된 스터디방 파일(배경이미지)정보 리스트
 	private int studyMemberNum;								 // 스터디방에 가입된 회원 숫자(member_joinstudy 조인)
 	
+	public Date getS_endPeriod() {
+		return s_endPeriod;
+	}
+
+	public void setS_endPeriod(Date s_endPeriod) {
+		this.s_endPeriod = s_endPeriod;
+	}
+
+	public Date getS_endTime() {
+		return s_endTime;
+	}
+
+	public void setS_endTime(Date s_endTime) {
+		this.s_endTime = s_endTime;
+	}
+
+	public int getStudyMemberNum() {
+		return studyMemberNum;
+	}
+
+	public void setStudyMemberNum(int studyMemberNum) {
+		this.studyMemberNum = studyMemberNum;
+	}
+
 	public Study() {}
 	
 	public Study(int s_no, int studyMemberNum) {
@@ -49,7 +73,26 @@ public class Study {
 	      this.cname = cname;
 	      this.sImgList.add(new Attachment(change_name, file_path));
 	   }
-	
+   
+	public Study(int s_no, String s_name, int s_to, String s_day, Date s_startPeriod, Date s_endPeriod, Date s_startTime,
+		Date s_endTime, String s_explain, String s_notice, String cname, String user_nkname, String change_name, String file_path, int studyMemberNum) {
+	super();
+	this.s_no = s_no;
+	this.s_name = s_name;
+	this.s_to = s_to;
+	this.s_day = s_day;
+	this.s_startPeriod = s_startPeriod;
+	this.s_endPeriod = s_endPeriod;
+	this.s_startTime = s_startTime;
+	this.s_endTime = s_endTime;
+	this.s_explain = s_explain;
+	this.s_notice = s_notice;
+	this.cname = cname;
+	this.user_nkname = user_nkname;
+	this.studyMemberNum = studyMemberNum;
+	this.sImgList.add(new Attachment(change_name, file_path));
+}
+
 	public Study(String s_name, int s_to, String s_day, String s_explain, String s_notice, int user_no, int cid,
 			List<Attachment> sImgList) {
 		super();
@@ -134,6 +177,8 @@ public class Study {
 		this.sImgList = sImgList;
 		this.studyMemberNum = studyMemberNum;
 	}
+	
+	
 
 	public int getS_no() {
 		return s_no;

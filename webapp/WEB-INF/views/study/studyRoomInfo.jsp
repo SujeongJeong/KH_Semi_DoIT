@@ -137,8 +137,7 @@ h2, h3 {
 			</div>
 			<div id="studyTO">
 				<h3>
-					<%-- 방장도 스터디방의 참가자중 1명이므로 현재정원 +1 --%>
-					스터디 정원<br>${ StudyMemberCount + 1 } / ${ studyRoom.s_to } 명
+					스터디 정원<br>${ StudyMemberCount } / ${ studyRoom.s_to } 명
 				</h3>
 			</div>
 			
