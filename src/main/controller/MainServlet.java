@@ -16,7 +16,7 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class MainServlet
  */
-@WebServlet("/MainServlet")
+@WebServlet("/main")
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,10 +36,12 @@ public class MainServlet extends HttpServlet {
 		if((Member)request.getSession().getAttribute("loginUser") != null){
 			userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		}
-		
 		List<Todolist> myList = new TodolistService().selectMyList(userNo);
+		//List<Study> myStudy = new StudyService().selectMyStudy(userNo);
+		
 		request.setAttribute("Todolist", myList);
-
+		//request.setAttribute("Study", myStudy);
+		request.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(request, response);
 	}
 
 	/**

@@ -45,6 +45,7 @@ public class StudyDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -354,7 +355,35 @@ public class StudyDao {
 		return result;
 	}
 
-	
+	// 회원별 가입한 스터디방 제목, 인원수, 정원, 카테고리 조회
+	   public List<Study> selectMyStudy(Connection conn, int userNo) {
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      List<Study> resultList = new ArrayList<>();
+	      String sql = query.getProperty("selectMyStudy");
+	      
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setInt(1, userNo);
+	         
+	         rset = pstmt.executeQuery();
+	         while(rset.next()) {
+	            resultList.add(new Study(rset.getInt("s.s_no"),
+	                               rset.getString("s_name"),
+	                               rset.getInt("s_to"),
+	                               rset.getString("cname")));
+	         }
+	         
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      return resultList;
+	   }
+
 
 	
 

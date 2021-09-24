@@ -165,6 +165,18 @@
 		   FROM MEMBER_JOINSTUDY
 		  WHERE S_NO=? 
 	</entry>
+	<entry key="selectMyStudy">
+      SELECT
+             S.S_NO
+           , S_NAME
+           , S_TO
+           , CNAME
+        FROM STUDY S
+        JOIN MEMBER_JOINSTUDY M ON(S.S_NO = M.S_NO)
+        JOIN CATEGORY USING(CID)
+        WHERE S_STATUS = 'Y'
+           AND M.USER_NO = ?    
+   </entry>
 	
 	
 	
