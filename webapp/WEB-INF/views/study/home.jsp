@@ -260,21 +260,14 @@
 		<div class="studyList">
 		
 		<%-- 스터디방 리스트 조회 --%>
-
 		<c:forEach var="g" items="${ StudyList }" begin="0" end="${ StudyList.size() }">
-
 				<div class="studyRoom">
 					<div class="img_wrapper">
 						<img class="studyImage"
 							src="${ contextPath }${ g.sImgList.get(0).file_path }${ g.sImgList.get(0).change_name }"
 							onclick="studyInfo(${ g.s_no })">
 
-						<c:forEach var="i" items="${ StudyMemberList }" begin="0" end="${ StudyMemberList.size() }">
-						<c:set var="studyMem" value="1"/>
-							<c:if test="${ i.s_no == g.s_no }">
-								<%-- <c:set var="studyMem" value="${ i.studyMemberNum }"/> --%>
-							</c:if>
-						</c:forEach>
+						<c:set var="studyMemo" value="1"/>
 						
 						<div class="studyTO">
 						${ studyMemo } / ${ g.s_to }</div>
@@ -289,8 +282,8 @@
 					<input type="checkbox" name="deleteStudy" id="deleteStudy" value="${ g.s_no }">
 					</c:if>
 				</div>
-	
 			</c:forEach>
+			
 			<c:if test="${ loginUser.userType == 'A' }">
 			<div class="deleteStudyRoom">
 				<button type="submit" class="deleteStudyRoomBtn">스터디 삭제</button>
