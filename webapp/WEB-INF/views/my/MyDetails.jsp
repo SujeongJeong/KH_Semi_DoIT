@@ -8,6 +8,25 @@
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <link href='<%= request.getContextPath() %>/resources/css/qna-main.css?after' rel='stylesheet'>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<%
+	if(request.getAttribute("result") != null) {
+		if(request.getAttribute("result").equals("success")) {
+%>
+<script>
+	alert('코인 환불 신청을 완료하였습니다.');
+	window.close();
+</script>
+<%
+	} else {
+%>
+<script>
+	alert(' 코인 환불 신청에 실패하였습니다.');
+	window.close();
+</script>
+<%
+		}
+	}
+%>
 <style>
 	/* 전체 감싸는 div */
 	.my_wrap {
@@ -46,7 +65,7 @@
 	.coin_area {
 		height: 100px;
 		margin-bottom: 10px;
-		border: 1px solid black;
+		border-bottom: solid 1px #dadada;
 	}
 	.coin_box {
 		display: flex;
@@ -59,9 +78,12 @@
 	button[id$=btn] {
 		width: 100px;
 		height: 50px;
-		margin-left: 20px;
+		margin-left: 10px;
+		border: 0px;
+		border-radius : 5px; 
 	}
 	#charge_btn {
+		margin-left: 0px;
 		background: #5FC5FF;
 		color: white;
 	}
@@ -115,7 +137,7 @@
 					<span id="coin"><h1>${ loginUser.userCoin } 코인</h1></span>
 					<span class="btn_area">
 						<button id="charge_btn" onclick="openPopup('<%=request.getContextPath()%>/coin', 'coin_charge', 700, 900);">충전</button>
-						<button id="refund_btn" onclick="openPopup('<%=request.getContextPath()%>/my/refundView', 'refund', 700, 900);">환불</button>
+						<button id="refund_btn" onclick="openPopup('<%=request.getContextPath()%>/my/refund', 'refund', 700, 900);">환불</button>
 					</span>
 				</div>
 			</div>

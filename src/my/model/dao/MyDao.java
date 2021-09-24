@@ -15,6 +15,7 @@ import java.util.Properties;
 import qna.model.vo.Board;
 import qna.model.vo.PageInfo;
 import shop.model.vo.Purchase;
+import shop.model.vo.Refund;
 import study.model.vo.Study;
 
 public class MyDao {
@@ -156,6 +157,7 @@ public class MyDao {
 		return MyReplyList;
 	}
 	
+	// 개설한 스터디 개수 가져오기
 	public int getOpenStudyCount(Connection conn, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -181,6 +183,7 @@ public class MyDao {
 		return openStudyCount;
 	}
 	
+	// 개설한 스터디 리스트 가져오기
 	public List<Study> selectMyOpenStudyList(Connection conn, PageInfo pi, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -219,6 +222,7 @@ public class MyDao {
 		return MyOpenStudyList;
 	}
 
+	// 참여한 스터디 리스트 가져오기
 	public List<Study> selectMyJoinStudyList(Connection conn, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -250,6 +254,8 @@ public class MyDao {
 		}
 		return MyJoinStudyList;
 	}
+	
+	// 개설한 스터디 삭제
 	public int deleteOpenStudy(Connection conn, int deleteSNo, int userNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -271,6 +277,8 @@ public class MyDao {
 		
 		return result;
 	}
+	
+	// 참여한 스터디 나가기
 	public int exitJoinStudy(Connection conn, int exitSNo, int userNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -292,6 +300,8 @@ public class MyDao {
 		
 		return result;
 	}
+	
+	// 구매한 아이템 리스트 가져오기
 	public List<Purchase> selectItemList(Connection conn, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -319,5 +329,33 @@ public class MyDao {
 			close(pstmt);
 		}
 		return ItemList;
+	}
+	
+	// 환불 신청
+	public int insertRefundCoin(Connection conn, Refund r) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("insertRefundCoin");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, r.getRefundCoin());
+			pstmt.setString(2, r.getBank_account());
+			pstmt.setString(3, r.getBankName());
+			pstmt.setString(4, r.getAccountName());
+			pstmt.setInt(5, r.getUserNo());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }
