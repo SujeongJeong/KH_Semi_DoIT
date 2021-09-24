@@ -77,6 +77,7 @@ public class ProductAddServlet extends HttpServlet {
 
 		int result = new ShopService().insertProduct(p);
 		
+	
 		if(result > 0) {
 			request.getSession().setAttribute("msg", "상품이 등록되었습니다.");
 			response.sendRedirect(request.getContextPath()+"/shop/home");
@@ -85,13 +86,15 @@ public class ProductAddServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
 		}
 		
-		
 	}
-	
-	
-	
-	
-	
-	
-	
+		
+		
 }
+	
+	
+	
+	
+	
+	
+	
+

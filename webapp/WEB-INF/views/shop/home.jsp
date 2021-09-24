@@ -9,6 +9,11 @@
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css?after' rel='stylesheet'>
 <script src="<%= request.getContextPath() %>/resources/js/jquery-3.6.0.min.js"></script>
+<script>
+//자식창닫고 부모창열기
+ opener.parent.location.reload();
+ window.close();
+</script>
 
 <style>
 

@@ -110,6 +110,10 @@
 
 </style>
 </head>
+<script>
+opener.parent.location.reload();
+
+</script>
 <body>
 
 <div class="wrapper">
