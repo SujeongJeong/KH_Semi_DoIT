@@ -1,11 +1,17 @@
 package my.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import member.model.vo.Member;
+import my.model.service.MyService;
+import shop.model.vo.Refund;
 
 /**
  * Servlet implementation class RefundServlet
@@ -26,16 +32,33 @@ public class RefundServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/refundView.jsp");
+		view.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		int refund_coin = Integer.parseInt(request.getParameter("refund_coin")); // 환불 신청 코인
+		String bank_account = request.getParameter("bank_account"); // 계좌번호
+		String bank_name = request.getParameter("bank_name");
+		String account_name = request.getParameter("account_name");
+		
+		int userNo = ((Member)(request.getSession().getAttribute("loginUser"))).getUserNo();
+		
+		Refund r = new Refund(refund_coin, bank_account, bank_name, account_name, userNo);
+		
+		int result = new MyService().insertRefundCoin(r);
+		
+		if(result > 0) {
+			request.setAttribute("result", "success");
+		} else {
+			request.setAttribute("result", "fail");
+		}
+		
+		request.getRequestDispatcher("/WEB-INF/views/my/MyDetails.jsp").forward(request, response);
+		
 	}
 
 }

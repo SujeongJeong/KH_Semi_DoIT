@@ -15,6 +15,7 @@ import java.util.Properties;
 import qna.model.vo.Board;
 import qna.model.vo.PageInfo;
 import shop.model.vo.Purchase;
+import shop.model.vo.Refund;
 import study.model.vo.Study;
 
 public class MyDao {
@@ -319,5 +320,31 @@ public class MyDao {
 			close(pstmt);
 		}
 		return ItemList;
+	}
+	public int insertRefundCoin(Connection conn, Refund r) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("insertRefundCoin");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, r.getRefundCoin());
+			pstmt.setString(2, r.getBank_account());
+			pstmt.setString(3, r.getBankName());
+			pstmt.setString(4, r.getAccountName());
+			pstmt.setInt(5, r.getUserNo());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }
