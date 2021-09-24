@@ -91,7 +91,7 @@
 	.left_box {
 		width: 150px;
 	}
-	.profile_area h1 {
+	.profile_area h2 {
 		text-align: right;
 		padding-right: 10px;
 	}
@@ -163,7 +163,7 @@
 		width: 400px;
 		height: 300px;
 	}
-	.target_area h1 {
+	.target_area h2 {
 		padding-left: 10px;
 	}
 	.target_area h4 {
@@ -188,7 +188,7 @@
 	.recode_area {
 		padding-top: 10px;
 	}
-	#nick > h1 {
+	#nick > h2 {
 		display: inline;
 		padding-left: 10px;
 		color : #5FC5FF;
@@ -285,7 +285,7 @@
 		<div class="content">
 			<div class="areas">
 				<div class="profile_area">
-					<h1>${ loginUser.userEmail }</h1>
+					<h2>${ loginUser.userEmail }</h2>
 					<div class="change_area">
 						<div class="left_box">
 							<form class="img_area" name="imgForm" method="post" enctype="multipart/form-data">
@@ -309,7 +309,7 @@
 					</div>
 				</div> 
 				<div class="target_area">
-					<h1>하루 목표 공부 시간</h1>
+					<h2>하루 목표 공부 시간</h2>
 					<div class="set_area">
 						<form id="setHourForm" class="setHour_area" action="<%= request.getContextPath() %>/my/setHour" method="post">
 							<c:set var="TargetHour" value="${ fn:split(loginUser.targetHour, '/') }"/>
@@ -324,7 +324,7 @@
 				</div>
 			</div>
 			<div class="recode_area">
-				<div id="nick"><h1>${ loginUser.nickName }</h1> <span>님의 공부 기록</span></div>
+				<div id="nick"><h2>${ loginUser.nickName }</h2> <span>님의 공부 기록</span></div>
 				<div class="recode_box">
 					<div class="rec_box1">
 						<p>오늘 공부 시간</p>
@@ -462,6 +462,5 @@
 		document.forms.imgForm.submit();
 	});
 	</script>
-	<script src="${ contextPath }/resources/js/imagePreview.js"></script>
 </body>
 </html>

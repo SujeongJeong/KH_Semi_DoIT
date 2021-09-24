@@ -3,7 +3,7 @@ package my.controller;
 import java.io.IOException;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,12 +42,9 @@ public class MyStudyServlet extends HttpServlet {
 		}
 		
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
-		System.out.println("userNo : " + userNo);
 		
-		// 나의 게시글 리스트
 		Map<String, Object> map = new MyService().selectMyOpenStudyList(page, userNo);
 		
-		// 내가 댓글을 쓴 게시글 리스트
 		Map<String, Object> map2 = new MyService().selectMyJoinStudyList(userNo);
 		
 		// 응답 페이지 구성 시 사용할 데이터 설정
@@ -63,8 +60,47 @@ public class MyStudyServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String deleteSNo = request.getParameter("deleteSNo");
+		String exitSNo = request.getParameter("exitSNo");
+		
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		
+		int page = 1;
+		
+		if(deleteSNo != null && exitSNo == null) {
+			int result = new MyService().deleteOpenStudy(Integer.parseInt(deleteSNo), userNo);
+			
+			if(result > 0) {
+				Map<String, Object> map = new MyService().selectMyOpenStudyList(page, userNo);
+				request.setAttribute("msg", "개설 스터디 삭제 성공");
+				request.setAttribute("pi", map.get("pi"));
+				request.setAttribute("MyOpenStudyList", map.get("MyOpenStudyList"));
+			} else {
+				request.setAttribute("msg", "개설 스터디 삭제 실패");
+			}
+			
+			Map<String, Object> map2 = new MyService().selectMyJoinStudyList(userNo);
+			request.setAttribute("MyJoinStudyList", map2.get("MyJoinStudyList"));
+			
+		} else if(deleteSNo == null && exitSNo != null) {
+			
+			int result = new MyService().exitJoinStudy(Integer.parseInt(exitSNo), userNo);
+			if(result > 0) {
+				request.setAttribute("msg", "참여 스터디 삭제 성공");
+				Map<String, Object> map2 = new MyService().selectMyJoinStudyList(userNo);
+				
+				request.setAttribute("MyJoinStudyList", map2.get("MyJoinStudyList"));
+			} else {
+				request.setAttribute("msg", "개설 스터디 삭제 실패");
+			}
+			
+			Map<String, Object> map = new MyService().selectMyOpenStudyList(page, userNo);
+	
+			request.setAttribute("pi", map.get("pi"));
+			request.setAttribute("MyOpenStudyList", map.get("MyOpenStudyList"));
+		}
+		
+		request.getRequestDispatcher("/WEB-INF/views/my/MyStudy.jsp").forward(request, response);
 	}
 
 }
