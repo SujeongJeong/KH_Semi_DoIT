@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import member.model.vo.Member;
 import study.model.service.StudyService;
+import study.model.vo.MemberTimerCast;
 import study.model.vo.Study;
 
 /**

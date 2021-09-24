@@ -39,8 +39,6 @@ public class StudyDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Study> StudyList = new ArrayList<>();
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 		String sql = query.getProperty("selectStudyList");
 		
 		try {
@@ -116,6 +114,11 @@ public class StudyDao {
 			pstmt.setTimestamp(6, new Timestamp(s.getS_startTime().getTime()));
 			pstmt.setTimestamp(7, new Timestamp(s.gets_endTime().getTime()));
 					
+//			System.out.println("new Timestamp(s.getS_startTime().getTime())"+new Timestamp(s.getS_startTime().getTime()));
+//			System.out.println("new Timestamp(s.getS_startTime().getHours())"+new Timestamp(s.getS_startTime().getHours()));
+//			System.out.println("new Timestamp(s.getS_startTime().getMinutes())"+new Timestamp(s.getS_startTime().getMinutes()));
+//			System.out.println("new Timestamp(s.getS_startTime().getHours()+s.getS_startTime().getMinutes())"+new Timestamp(s.getS_startTime().getHours()+s.getS_startTime().getMinutes()));
+			
 			pstmt.setString(8, s.getS_explain());
 			pstmt.setString(9, s.getS_notice());
 			pstmt.setInt(10, s.getUser_no());
@@ -356,33 +359,36 @@ public class StudyDao {
 	}
 
 	// 회원별 가입한 스터디방 제목, 인원수, 정원, 카테고리 조회
-	   public List<Study> selectMyStudy(Connection conn, int userNo) {
-	      PreparedStatement pstmt = null;
-	      ResultSet rset = null;
-	      List<Study> resultList = new ArrayList<>();
-	      String sql = query.getProperty("selectMyStudy");
-	      
-	      try {
-	         pstmt = conn.prepareStatement(sql);
-	         
-	         pstmt.setInt(1, userNo);
-	         
-	         rset = pstmt.executeQuery();
-	         while(rset.next()) {
-	            resultList.add(new Study(rset.getInt("s.s_no"),
-	                               rset.getString("s_name"),
-	                               rset.getInt("s_to"),
-	                               rset.getString("cname")));
-	         }
-	         
-	      } catch (SQLException e) {
-	         e.printStackTrace();
-	      } finally {
-	         close(rset);
-	         close(pstmt);
-	      }
-	      return resultList;
-	   }
+    public List<Study> selectMyStudy(Connection conn, int userNo) {
+       PreparedStatement pstmt = null;
+       ResultSet rset = null;
+       List<Study> resultList = new ArrayList<>();
+       String sql = query.getProperty("selectMyStudy");
+       
+       try {
+          pstmt = conn.prepareStatement(sql);
+          
+          pstmt.setInt(1, userNo);
+          
+          rset = pstmt.executeQuery();
+          while(rset.next()) {
+             resultList.add(new Study(rset.getInt("s_no"),
+                                rset.getString("s_name"),
+                                rset.getInt("s_to"),
+                                rset.getString("cname"),
+                                rset.getString("file_path"),
+                                rset.getString("change_name")));
+          }
+          
+       } catch (SQLException e) {
+          e.printStackTrace();
+       } finally {
+          close(rset);
+          close(pstmt);
+       }
+       return resultList;
+    }
+
 
 
 	

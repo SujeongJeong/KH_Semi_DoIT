@@ -60,6 +60,7 @@ public class createStudyRoom extends HttpServlet {
 		String root = request.getSession().getServletContext().getRealPath("/");	// 웹서버 컨테이너 경로
 		String savePath = root + "resources\\uploadFiles\\study";		// 저장될 경로
 		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+		System.out.println(savePath);
 		
 		// DB의 Study,Attachment 데이터 저장
 		// Attachment 테이블에 값 삽입
@@ -69,10 +70,10 @@ public class createStudyRoom extends HttpServlet {
 		if (multiRequest.getFilesystemName(fileName) != null) {
 			Attachment at = new Attachment();
 
-			at.setFile_path("/resources/uploadFiles/study"); // 경로 저장
+			at.setFile_path("/resources/uploadFiles/study/"); // 경로 저장
 			at.setOrigin_name(multiRequest.getOriginalFileName(fileName)); // 원본이름 저장
 			at.setChange_name(multiRequest.getFilesystemName(fileName)); // 바뀐이름 저장
-
+			
 			photo.add(at);
 		}
 		
@@ -104,19 +105,19 @@ public class createStudyRoom extends HttpServlet {
 		Date s_endTime = null;
 		
 		try {
+				
 				s_startPeriod = new SimpleDateFormat("yyyy-MM-dd").parse(ssp);
 				s_endPeriod = new SimpleDateFormat("yyyy-MM-dd").parse(sep);
 				s_startTime = new SimpleDateFormat("HH:mm").parse(sst);
 				s_endTime = new SimpleDateFormat("HH:mm").parse(set);
 				
-//				System.out.println("date : "+ s_startPeriod);
-//				System.out.println("date : "+ s_endPeriod);
-//				System.out.println("date : "+ s_startTime);
-//				System.out.println("date : "+ s_endTime);
+//				System.out.println("s_startPeriod : "+ s_startPeriod);
+//				System.out.println("s_endPeriod : "+ s_endPeriod);
+//				System.out.println("s_startTime : "+ s_startTime);
+//				System.out.println("s_endTime : "+ s_endTime);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			
 			int result = 0;
 			if (s_startPeriod != null && s_endPeriod != null && s_startTime != null && s_endTime != null) {
 				Study s = new Study(s_name, s_to, s_day, s_startPeriod, s_endPeriod, s_startTime, s_endTime, s_explain,
@@ -124,11 +125,8 @@ public class createStudyRoom extends HttpServlet {
 //				System.out.println(s);
 				result = new StudyService().insertStudyRoom(s);
 			} else {
-				
 				// 에러페이지 이동
 		}
-		// 임시로 date/time 제외하고 나머지 되는지 확인용(양호)
-//		Study s = new Study(s_name,s_to,s_day,s_explain,s_notice,user_no,cid,photo);
 			
 		if(result>0) {
 			// 스터디방 생성 후 목록으로 재요청

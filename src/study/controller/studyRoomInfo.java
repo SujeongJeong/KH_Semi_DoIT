@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import member.model.vo.Member;
 import study.model.service.StudyService;
 import study.model.vo.MemberJoinStudy;
+import study.model.vo.MemberTimerCast;
 import study.model.vo.Study;
 
 /**
@@ -34,6 +35,7 @@ public class studyRoomInfo extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// 클릭한 스터디방의 스터디방 번호 넘긴거 받아오기
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		
