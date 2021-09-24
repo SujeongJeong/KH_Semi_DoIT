@@ -157,6 +157,7 @@ public class MyDao {
 		return MyReplyList;
 	}
 	
+	// 개설한 스터디 개수 가져오기
 	public int getOpenStudyCount(Connection conn, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -182,6 +183,7 @@ public class MyDao {
 		return openStudyCount;
 	}
 	
+	// 개설한 스터디 리스트 가져오기
 	public List<Study> selectMyOpenStudyList(Connection conn, PageInfo pi, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -220,6 +222,7 @@ public class MyDao {
 		return MyOpenStudyList;
 	}
 
+	// 참여한 스터디 리스트 가져오기
 	public List<Study> selectMyJoinStudyList(Connection conn, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -251,6 +254,8 @@ public class MyDao {
 		}
 		return MyJoinStudyList;
 	}
+	
+	// 개설한 스터디 삭제
 	public int deleteOpenStudy(Connection conn, int deleteSNo, int userNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -272,6 +277,8 @@ public class MyDao {
 		
 		return result;
 	}
+	
+	// 참여한 스터디 나가기
 	public int exitJoinStudy(Connection conn, int exitSNo, int userNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -293,6 +300,8 @@ public class MyDao {
 		
 		return result;
 	}
+	
+	// 구매한 아이템 리스트 가져오기
 	public List<Purchase> selectItemList(Connection conn, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -321,6 +330,8 @@ public class MyDao {
 		}
 		return ItemList;
 	}
+	
+	// 환불 신청
 	public int insertRefundCoin(Connection conn, Refund r) {
 		PreparedStatement pstmt = null;
 		int result = 0;
