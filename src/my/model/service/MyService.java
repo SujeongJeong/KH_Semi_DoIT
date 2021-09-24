@@ -14,6 +14,7 @@ import my.model.dao.MyDao;
 import qna.model.vo.Board;
 import qna.model.vo.PageInfo;
 import shop.model.vo.Purchase;
+import shop.model.vo.Refund;
 import study.model.vo.Study;
 
 public class MyService {
@@ -165,6 +166,22 @@ public class MyService {
 		 returnMap.put("ItemList", ItemList);
 		 
 		return returnMap;
+	}
+
+	public int insertRefundCoin(Refund r) {
+		Connection conn = getConnection();
+		
+		int result = md.insertRefundCoin(conn, r);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+
+		return result;
 	}
 
 }

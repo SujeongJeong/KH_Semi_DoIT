@@ -157,4 +157,28 @@
 			     WHERE USER_NO = ?
 			     ORDER BY PURCHASE_NO DESC) ILIST)
 	</entry>
+	<entry key="insertRefundCoin">
+		INSERT INTO REFUND 
+		(     
+			  REFUND_NO
+			, REFUND_COIN
+			, REFUND_DATE
+			, BANK_ACCOUNT
+			, BANK_NAME
+			, ACCOUNT_NAME
+			, COMPLETE_DATE
+			, USER_NO
+		)
+		VALUES
+		(
+			  SEQ_RNO.NEXTVAL
+			, ?
+			, SYSDATE
+			, ?
+			, ?
+			, ?
+			, NULL
+			, ?
+		)
+	</entry>
 </properties>
