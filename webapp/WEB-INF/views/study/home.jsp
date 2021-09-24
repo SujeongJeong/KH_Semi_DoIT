@@ -266,7 +266,7 @@
 						<img class="studyImage"
 							src="${ contextPath }${ g.sImgList.get(0).file_path }${ g.sImgList.get(0).change_name }"
 							onclick="studyInfo(${ g.s_no })">
-
+					
 						<c:set var="studyMemo" value="1"/>
 						
 						<div class="studyTO">

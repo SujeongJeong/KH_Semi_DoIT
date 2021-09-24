@@ -60,6 +60,7 @@ public class createStudyRoom extends HttpServlet {
 		String root = request.getSession().getServletContext().getRealPath("/");	// 웹서버 컨테이너 경로
 		String savePath = root + "resources\\uploadFiles\\study";		// 저장될 경로
 		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+		System.out.println(savePath);
 		
 		// DB의 Study,Attachment 데이터 저장
 		// Attachment 테이블에 값 삽입
@@ -69,10 +70,10 @@ public class createStudyRoom extends HttpServlet {
 		if (multiRequest.getFilesystemName(fileName) != null) {
 			Attachment at = new Attachment();
 
-			at.setFile_path("/resources/uploadFiles/study"); // 경로 저장
+			at.setFile_path("/resources/uploadFiles/study/"); // 경로 저장
 			at.setOrigin_name(multiRequest.getOriginalFileName(fileName)); // 원본이름 저장
 			at.setChange_name(multiRequest.getFilesystemName(fileName)); // 바뀐이름 저장
-
+			
 			photo.add(at);
 		}
 		
@@ -104,15 +105,16 @@ public class createStudyRoom extends HttpServlet {
 		Date s_endTime = null;
 		
 		try {
+				
 				s_startPeriod = new SimpleDateFormat("yyyy-MM-dd").parse(ssp);
 				s_endPeriod = new SimpleDateFormat("yyyy-MM-dd").parse(sep);
 				s_startTime = new SimpleDateFormat("HH:mm").parse(sst);
 				s_endTime = new SimpleDateFormat("HH:mm").parse(set);
 				
-//				System.out.println("date : "+ s_startPeriod);
-//				System.out.println("date : "+ s_endPeriod);
-//				System.out.println("date : "+ s_startTime);
-//				System.out.println("date : "+ s_endTime);
+//				System.out.println("s_startPeriod : "+ s_startPeriod);
+//				System.out.println("s_endPeriod : "+ s_endPeriod);
+//				System.out.println("s_startTime : "+ s_startTime);
+//				System.out.println("s_endTime : "+ s_endTime);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
