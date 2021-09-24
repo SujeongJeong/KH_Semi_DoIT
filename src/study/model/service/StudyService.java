@@ -145,7 +145,21 @@ public class StudyService {
 		return result;
 	}
 
-	
+	// 회원별 가입한 스터디방 제목, 인원수, 정원, 카테고리 조회
+	   public List<Study> selectMyStudy(int userNo) {
+	      Connection conn = getConnection();
+	      
+	      List<Study> resultList = sd.selectMyStudy(conn, userNo);
+	      
+	      if(resultList != null) {
+	         commit(conn);
+	      }else {
+	         rollback(conn);
+	      }
+	      close(conn);
+	      return resultList;
+	   }
+
 
 
 	
