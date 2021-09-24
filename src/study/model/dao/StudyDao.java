@@ -39,8 +39,6 @@ public class StudyDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Study> StudyList = new ArrayList<>();
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 		String sql = query.getProperty("selectStudyList");
 		
 		try {
