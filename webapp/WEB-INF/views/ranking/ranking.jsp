@@ -83,34 +83,43 @@ select { padding : 3px;}
 	<%-- 기간 라디오 버튼 누를때마다 기준 날짜 다르게 출력 --%>
 	<script>
 	$(document).on('change', '.period', function(){
-		period = $(".period:checked").val();
-		var span = document.getElementById("standard").value;
+		var period = $(".period:checked").val();
+		var span = document.getElementById("standard");
 		var today = new Date();
-		var period = null;
 		var standard = null;
 	
 		// 월요일 구하는 함수
 		function getMondayDate(d) {
-		    var paramDate = new Date(d);
+		    var paramDate = d;
 		    var day = paramDate.getDay();
 		    var diff = paramDate.getDate() - day + (day == 0 ? -6 : 1);
-		    return new Date(paramDate.setDate(diff)).toISOString().substring(0, 10);
+		    return new Date(paramDate.setDate(diff));
 		}
 		
-		if(period = "yesterday"){
+		if(period == "yesterday"){
 			standard = new Date(today.setDate(today.getDate() -1 ));
-		}else if(period = "week"){
+		}else if(period == "week"){
 			standard = getMondayDate(today);
-		}else if(period = "month"){
-			standard = new Date(date.getFullYear(), date.getMonth(),1);
+		}else if(period == "month"){
+			standard = new Date(today.getFullYear(), today.getMonth(),1);
 		}
 		// 날짜 포맷 변경
 		var days = ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'];
-		console.log(span);
-		console.log(standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 기준");
-		span= standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 기준";
+		span.innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 기준";
 		
 
+	});
+	
+	// standard 기본 값 함수
+	$(function(){
+		var period = $(".period:checked").val();
+		var today = new Date();
+		var span = document.getElementById("standard");
+		if(period == "yesterday"){
+			standard = new Date(today.setDate(today.getDate() -1 ));
+		}
+		var days = ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'];
+		span.innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 기준";
 	});
 	</script>
 	

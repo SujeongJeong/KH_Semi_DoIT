@@ -37,8 +37,11 @@ public class MainServlet extends HttpServlet {
 			userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		}
 		List<Todolist> myList = new TodolistService().selectMyList(userNo);
+		//List<Study> myStudy = new StudyService().selectMyStudy(userNo);
+		
 		request.setAttribute("Todolist", myList);
-		request.getRequestDispatcher("/WEB-INF/main.jsp").forward(request, response);
+		//request.setAttribute("Study", myStudy);
+		request.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(request, response);
 	}
 
 	/**
