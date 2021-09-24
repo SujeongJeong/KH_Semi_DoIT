@@ -37,7 +37,6 @@ public class MyPaymentDetailServlet extends HttpServlet {
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		Map<String, Object> map = new MyService().selectItemList(userNo);
-		
 		request.setAttribute("ItemList", map.get("ItemList"));
 		
 		request.getRequestDispatcher("/WEB-INF/views/my/MyDetails.jsp").forward(request, response);
