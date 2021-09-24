@@ -30,7 +30,7 @@ public class ShopDao {
 	//1. 리스트 조회
 	public List<Product> selectList(Connection conn) {
 			PreparedStatement pstmt = null;
-			ResultSet rset = null;
+			ResultSet rset = null; 
 			List<Product> productList = new ArrayList<>();
 			String sql = query.getProperty("productList");
 			

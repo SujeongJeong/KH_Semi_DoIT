@@ -147,8 +147,7 @@
 		
 		<script src="${ contextPath }/resources/js/imagePreview.js"></script>
 		
-		
-		
+	
 	
 
 
