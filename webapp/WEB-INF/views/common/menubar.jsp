@@ -86,6 +86,7 @@
 			if(confirm("로그인 하시겠습니까?")){
 				 location.href="${ contextPath}/login";
 			 }
+			return false;
 		  });
 	</script>
 	</c:if>

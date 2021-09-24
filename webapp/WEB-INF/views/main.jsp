@@ -45,7 +45,7 @@
 					</c:when>
 					<c:otherwise>
 					<div class="study-info">
-					<c:forEach var="s" items="${ study }">
+					<c:forEach var="s" items="${ Study }">
 					
 					<img src="resources/images/study-background1.jpg" alt="스터디배경사진"><br>
 					<label class="study-name">${ s.s_name }</label><br>
@@ -93,13 +93,13 @@
 			</div>
 			<div class="todo-area">
 				<div class="todo-title">
-					<label class="title">오늘의 할일</label><button class="add"></button>
+					<label class="title">오늘의 할일 </label><button class="add"></button>
 				</div>
 				<div class="todo-list">
 					<div class="hiddenScroll">
 					<div class="scrollBlind">
 						<c:choose>
-						<c:when test="${ loginUser == null || Todolist == null }">
+						<c:when test="${ loginUser == null or empty Todolist }">
 							 <label class="nolist">오늘의 할일을 추가하세요.</label>
 						</c:when>
 						<c:otherwise>
@@ -208,8 +208,9 @@
 						}
 						$(".list").html(html);
 					}else{
-						alert("오늘의 할일 수정에 실패하셨습니다.");
+						alert('게시글 수정에 실패하셨습니다.');
 					}
+					
 				},
 				error : function(e){
 					console.log(e);
@@ -232,12 +233,17 @@
 				success : function(data){
 					if( data != null ){
 						var html ='';
-						for(var key in data){
-							html += '<li><span>'+ data[key].todo_content + '</span><button class="edit"></button><button class="delete"></button></li>';
+						if(data.length == 0){
+							html += '<label class="nolist">오늘의 할일을 추가하세요.</label>';
+							$(".scrollBlind").html(html);
+						}else{
+							for(var key in data){
+								html += '<li><span>'+ data[key].todo_content + '</span><button class="edit"></button><button class="delete"></button></li>';
+							}
+							$(".list").html(html);
 						}
-						$(".list").html(html);
 					}else{
-						alert("오늘의 할일 삭제에 실패하셨습니다.");
+						alert('게시글 수정에 실패하셨습니다.');
 					}
 				},
 				error : function(e){
