@@ -419,6 +419,34 @@ public class StudyDao {
 		}
 		return s;
 	}
+	
+	// 로그인한 유저넘버로 가입한 스터디방 갯수 가져오기
+	public MemberJoinStudy userJoinStudyNum(Connection conn, int user_no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset= null;
+		MemberJoinStudy mjs = null;
+		
+		String sql = query.getProperty("userJoinStudyNum");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, user_no);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				mjs = new MemberJoinStudy();
+				mjs.setUserJoinStudyNum(rset.getInt("userJoinStudyNum"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return mjs;
+	}
 
 
 

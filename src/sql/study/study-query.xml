@@ -190,11 +190,13 @@
  		   AND S_STATUS = 'Y'
  	  ORDER BY S_NO DESC
    </entry>
-	
-	
-	
-	
-	
+   <entry key="userJoinStudyNum">
+   		  SELECT
+       			 COUNT(*) AS "userJoinStudyNum"
+   			FROM MEMBER_JOINSTUDY
+ 		   WHERE USER_NO = ?
+   </entry>
+   
 </properties>
 
 
