@@ -285,14 +285,22 @@
 		</div>
 		
 		<div class="search createStudy">
-			<button class="studyCreateBtn"
-				onclick="createBtnEvent()">스터디	만들기</button>
+			<button class="studyCreateBtn" onclick="createBtnEvent()">스터디 만들기</button>
 			<c:if test="${ loginUser != null }">
-				<script>
+				<c:if test="${ userJoinStudyNum.userJoinStudyNum <= 3 }">
+					<script>
 					function createBtnEvent(){
 						location.href='<%=request.getContextPath()%>/study/createStudy';
 					}
 				</script>
+				</c:if>
+				<c:if test="${ userJoinStudyNum.userJoinStudyNum > 3 }">
+					<script>
+					function createBtnEvent(){
+						alert("가입 한도가 초과되어 스터디방에 가입/생성 하실 수 없습니다.");
+					}
+				</script>
+				</c:if>
 			</c:if>
 			<c:if test="${ loginUser == null }">
 				<script>

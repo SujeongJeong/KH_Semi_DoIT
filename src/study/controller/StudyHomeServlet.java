@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import member.model.vo.Member;
 import study.model.service.StudyService;
+import study.model.vo.MemberJoinStudy;
 import study.model.vo.MemberTimerCast;
 import study.model.vo.Study;
 
@@ -48,6 +49,17 @@ public class StudyHomeServlet extends HttpServlet {
 		request.setAttribute("StudyMemberList", StudyMemberList);
 //		System.out.println("StudyMemberList : "+StudyMemberList);
 //		System.out.println("StudyMemberList.size() : "+StudyMemberList.size());
+		
+		// 로그인된 유저의 회원번호로 스터디방 몇개 참가하고 있는지 가져오기
+		HttpSession session = request.getSession();
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		
+		if(loginUser != null) {
+			int user_no = loginUser.getUserNo();
+			MemberJoinStudy userJoinStudyNum = new StudyService().userJoinStudyNum(user_no);
+//			System.out.println("userJoinStudyNum : "+ userJoinStudyNum);
+			request.setAttribute("userJoinStudyNum", userJoinStudyNum);
+		}
 		
 		// 페이징 처리(기본 1P, 더보기 버튼 클릭시 추가 출력)하기 위해 스터디방 총 갯수 가져오기
 		int studyListNumber = new StudyService().selectStudyListNumber();

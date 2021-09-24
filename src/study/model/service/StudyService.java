@@ -5,6 +5,7 @@ import static common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
+import member.model.vo.Member;
 import study.model.dao.StudyDao;
 import study.model.vo.MemberJoinStudy;
 import study.model.vo.Study;
@@ -170,6 +171,15 @@ public class StudyService {
 		close(conn);
 		
 		return s;
+	}
+	
+	// 로그인한 유저넘버로 가입한 스터디방 갯수 가져오기
+	public MemberJoinStudy userJoinStudyNum(int user_no) {
+		Connection conn = getConnection();
+		
+		MemberJoinStudy mjs = sd.userJoinStudyNum(conn,user_no);
+		
+		return mjs;
 	}
 	
 	
