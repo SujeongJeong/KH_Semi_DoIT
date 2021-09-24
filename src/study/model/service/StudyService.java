@@ -49,6 +49,7 @@ public class StudyService {
 		}else {
 			rollback(conn);
 		}
+		
 		close(conn);
 		return result1 > 0 && result2 > 0 ? 1 : 0;
 	}
@@ -159,6 +160,19 @@ public class StudyService {
 	      close(conn);
 	      return resultList;
 	   }
+	   
+	// 회원번호로 만든 스터디방 찾아오기(가장최근에만든 1개)
+	public Study selectStudyRoomOnlySNo(int user_no) {
+		Connection conn = getConnection();
+		
+		Study s = sd.selectStudyRoomOnlySNo(conn,user_no);
+		
+		close(conn);
+		
+		return s;
+	}
+	
+	
 
 
 

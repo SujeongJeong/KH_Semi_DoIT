@@ -40,6 +40,8 @@ public class StudyHomeServlet extends HttpServlet {
 		// 스터디방 리스트
 		List<Study> StudyList = new StudyService().selectStudyList();
 		request.setAttribute("StudyList", StudyList);
+//		System.out.println("StudyList : "+StudyList);
+//		System.out.println("StudyList.size() : "+StudyList.size());
 		
 		// 스터디방별 가입된 회원수
 		List<Study> StudyMemberList = new StudyService().selectStudyMemberList();
