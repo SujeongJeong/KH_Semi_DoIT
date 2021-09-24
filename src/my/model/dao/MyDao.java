@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import qna.model.vo.Board;
 import qna.model.vo.PageInfo;
+import shop.model.vo.Purchase;
 import study.model.vo.Study;
 
 public class MyDao {
@@ -76,7 +77,6 @@ public class MyDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println(ReplyListCount);
 		return ReplyListCount;
 	}
 	
@@ -249,5 +249,75 @@ public class MyDao {
 			close(pstmt);
 		}
 		return MyJoinStudyList;
+	}
+	public int deleteOpenStudy(Connection conn, int deleteSNo, int userNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("deleteOpenStudy");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, deleteSNo);
+			pstmt.setInt(2, userNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	public int exitJoinStudy(Connection conn, int exitSNo, int userNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("exitJoinStudy");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, exitSNo);
+			pstmt.setInt(2, userNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	public List<Purchase> selectItemList(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Purchase> ItemList = new ArrayList<>();
+		String sql = query.getProperty("selectItemList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		
+			// 검색 조건과 검색 값이 넘어온 경우
+			pstmt.setInt(1, userNo);
+		
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				ItemList.add(new Purchase(rset.getString("PRODUCT_NAME"),
+										rset.getDate("START_DATE"),
+										rset.getDate("EXPIRATION_DATE"),
+										rset.getInt("PRODUCT_PRICE")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return ItemList;
 	}
 }

@@ -13,6 +13,7 @@ import java.util.Map;
 import my.model.dao.MyDao;
 import qna.model.vo.Board;
 import qna.model.vo.PageInfo;
+import shop.model.vo.Purchase;
 import study.model.vo.Study;
 
 public class MyService {
@@ -73,7 +74,6 @@ public class MyService {
 		Connection conn = getConnection();
 		
 		int openStudyCount = md.getOpenStudyCount(conn, userNo);
-		System.out.println("openStudyCount : " + openStudyCount);
 	
 		PageInfo pi = new PageInfo(page, openStudyCount, 10, 10);
 		
@@ -111,6 +111,58 @@ public class MyService {
 		Map<String, Object> returnMap = new HashMap<>();
 	
 		 returnMap.put("MyJoinStudyList", MyJoinStudyList);
+		 
+		return returnMap;
+	}
+
+	public int deleteOpenStudy(int deleteSNo, int userNo) {
+		Connection conn = getConnection();
+		
+		int result = md.deleteOpenStudy(conn, deleteSNo, userNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int exitJoinStudy(int exitSNo, int userNo) {
+		Connection conn = getConnection();
+		
+		int result = md.exitJoinStudy(conn, exitSNo, userNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public Map<String, Object> selectItemList(int userNo) {
+		Connection conn = getConnection();
+		
+		List<Purchase> ItemList = md.selectItemList(conn, userNo);
+		
+		if(!ItemList.isEmpty()) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		Map<String, Object> returnMap = new HashMap<>();
+	
+		 returnMap.put("ItemList", ItemList);
 		 
 		return returnMap;
 	}

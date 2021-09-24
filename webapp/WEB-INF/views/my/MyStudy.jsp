@@ -7,6 +7,7 @@
 <title>마이페이지 - 내 스터디</title>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <link href='<%= request.getContextPath() %>/resources/css/qna-main.css?after' rel='stylesheet'>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <style>
 	/* 전체 감싸는 div */
 	.my_wrap {
@@ -56,7 +57,7 @@
 		</nav>
 	<div class="content">
 			<div class="open_study">
-				<h1>내가 개설한 스터디</h1>
+				<h2>내가 개설한 스터디</h2>
 				<table class="board_list">
 	                <thead>
 	                    <tr>
@@ -79,8 +80,13 @@
 								<td>${ mos.s_to }</td>
 								<td>${ mos.user_nkname }</td>
 								<td>${ mos.s_startPeriod }</td>
-								<td>${ mos.s_EndPeriod }</td>
-								<td><button type="button">삭제하기</button></td>
+								<td>${ mos.s_endPeriod }</td>
+								<td>
+									<form name="deleteOpenStudy" method="post">
+										<input type="hidden" name="deleteSNo" value="${ mos.s_no }">
+									</form>
+									<button id="deleteStudy" onclick="checkDelete()">삭제하기</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -131,7 +137,7 @@
 				</ul>
 			</div>
 			<div class="join_study">
-				<h1>내가 참여중인 스터디</h1>
+				<h2>내가 참여중인 스터디</h2>
 				<table class="board_list">
 	                <thead>
 	                    <tr>
@@ -154,8 +160,13 @@
 								<td>${ mjs.s_to }</td>
 								<td>${ mjs.user_nkname }</td>
 								<td>${ mjs.s_startPeriod }</td>
-								<td>${ mjs.s_EndPeriod }</td>
-								<td><button type="button">나가기</button></td>
+								<td>${ mjs.s_endPeriod }</td>
+								<td>
+									<form name="exitJoinStudy" method="post">
+										<input type="hidden" name="exitSNo" value="${ mjs.s_no }">
+									</form>
+									<button type="button" onclick="checkExit()">나가기</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -166,5 +177,26 @@
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
+	<script>
+		function checkDelete(){
+			if(confirm('스터디를 삭제하시면 복구가 불가능하며 기존의 사용자 모두 참여할 수 없습니다. 정말 삭제하시겠습니까?')){
+				document.forms.deleteOpenStudy.action = '${contextPath}/my/study';
+				document.forms.deleteOpenStudy.submit();
+			} else {
+				return false;
+			}
+			
+		}
+		
+		function checkExit(){
+			if(confirm('스터디를 나가시면 복구가 불가능합니다. 정말 나가시겠습니까?')){
+				document.forms.exitJoinStudy.action = '${contextPath}/my/study';
+				document.forms.exitJoinStudy.submit();
+			} else {
+				return false;
+			}
+			
+		}
+	</script>
 </body>
 </html>

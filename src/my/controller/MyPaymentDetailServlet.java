@@ -1,6 +1,7 @@
 package my.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import member.model.vo.Member;
+import my.model.service.MyService;
 
 /**
  * Servlet implementation class MyPaymentDetail
@@ -28,9 +32,14 @@ public class MyPaymentDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/MyDetails.jsp");
 		request.setAttribute("nav1", "my");
-		view.forward(request, response);
+		
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		
+		Map<String, Object> map = new MyService().selectItemList(userNo);
+		request.setAttribute("ItemList", map.get("ItemList"));
+		
+		request.getRequestDispatcher("/WEB-INF/views/my/MyDetails.jsp").forward(request, response);
 	}
 
 	/**

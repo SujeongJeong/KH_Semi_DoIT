@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>마이페이지 - 구매내역</title>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
+<link href='<%= request.getContextPath() %>/resources/css/qna-main.css?after' rel='stylesheet'>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <style>
 	/* 전체 감싸는 div */
 	.my_wrap {
@@ -110,34 +112,60 @@
 			<div class="coin_area">
 				<div class="coin_box">
 					<h2>보유 코인</h2>
-					<span id="coin"><h1>445코인</h1></span>
+					<span id="coin"><h1>${ loginUser.userCoin } 코인</h1></span>
 					<span class="btn_area">
 						<button id="charge_btn" onclick="openPopup('<%=request.getContextPath()%>/coin', 'coin_charge', 700, 900);">충전</button>
 						<button id="refund_btn" onclick="openPopup('<%=request.getContextPath()%>/my/refundView', 'refund', 700, 900);">환불</button>
 					</span>
 				</div>
-				
 			</div>
-			<div class="detail_list">
-				<ul class="list_header">
-					<li>날짜</li>
-					<li>구매/충전/환불</li>
-					<li>코인</li>
-					<li>총 코인</li>
-				</ul>
-				<p>구매/충전/환불 기록이 없습니다</p>
+			<div class="details_area">
+				<h2>구매/충전/환불 내역</h2>
+				<table class="board_list">
+	                <thead>
+	                    <tr>
+	                        <th>날짜</th>
+	                        <th>구매/충전/환불</th>
+	                        <th>코인</th>
+	                        <th>총코인</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+						<c:forEach var="mb" items="${ MyboardList }">
+							<tr>
+								<td>${ mb.board_no }</td>
+								<td>${ mb.cname }</td>
+								<td class="tit" onclick="boardDetailView(${mb.board_no})">${ mb.board_title }</td>
+								<td>${ mb.nickname }</td>
+								<td>${ mb.create_date }</td>
+								<td>${ mb.count }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+	            </table>	
 			</div>
 			<div class="my_item">
-				<h1>내 아이템</h1>
-				<div class="item_list">
-					<ul class="list_header">
-						<li>아이템명</li>
-						<li>코인</li>
-						<li>구매일</li>
-						<li>유효기간</li>
-					</ul>
-					<p>구매하신 아이템이 없습니다</p>
-				</div>
+				<h2>내 아이템</h2>
+				<table class="board_list">
+	                <thead>
+	                    <tr>
+	                        <th>아이템명</th>
+	                        <th>코인</th>
+	                        <th>사용 시작일자</th>
+	                        <th>유효기간</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+						<c:forEach var="il" items="${ ItemList }">
+							<tr>
+								<td>${ il.productName }</td>
+								<td>${ il.productPrice }</td>
+								<td>${ il.startDate }</td>
+								<td>${ il.expirationDate }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+	            </table>
 			</div>
 		</div>
 	</div>

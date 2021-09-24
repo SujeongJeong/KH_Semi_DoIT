@@ -58,7 +58,7 @@
 		</nav>
 		<div class="content">
 			<div class="my_board">
-				<h1>내가 작성한 게시글</h1>
+				<h2>내가 작성한 게시글</h2>
 				<table class="board_list">
 	                <thead>
 	                    <tr>
@@ -129,7 +129,7 @@
 				</ul>
 			</div>
 			<div class="my_comment">
-				<h1>내가 댓글을 작성한 게시글</h1>
+				<h2>내가 댓글을 작성한 게시글</h2>
 				<table class="board_list">
 	                <thead>
 	                    <tr>
