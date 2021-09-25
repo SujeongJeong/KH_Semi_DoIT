@@ -104,7 +104,7 @@
 				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹">로그인하여 나의 랭킹을 확인해보세요.</li>
 				</c:when>
 				<c:otherwise>
-				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹"><span class="nickname">?위 ${ loginUser.nickName }</span><span class="hours">5:03:00</span></li>
+				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹"><span class="nickname">?위 ${ loginUser.nickName }</span><img src="${ contextPath }${ loginUser.profileImg }" alt="profile"><span class="hours">5:03:00</span></li>
 				</c:otherwise>
 				</c:choose>
 				</ul>

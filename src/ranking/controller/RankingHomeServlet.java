@@ -1,4 +1,4 @@
-package ranking;
+package ranking.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import member.model.vo.Member;
+import ranking.model.service.RankingService;
+import ranking.model.vo.Ranking;
 import study.model.service.StudyService;
 import study.model.vo.Study;
 
@@ -39,12 +41,20 @@ public class RankingHomeServlet extends HttpServlet {
 		if((Member)request.getSession().getAttribute("loginUser") != null) {
 			userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		}
+		// 나의 스터디방 리스트
 		List<Study> myStudy = new StudyService().selectMyStudy(userNo);
+		// 나의 랭킹 가져오기
+		Ranking myRanking = new RankingService().selectMyRanking(userNo);
+		// 기본값인 전체, 어제 랭킹 불러오기
+		//List<Ranking> ranking = new RankingService().selectYesterday();
 		
 		request.setAttribute("nav1", "ranking");
 		request.setAttribute("Study", myStudy);
-		System.out.println(myStudy);
-		view.forward(request, response);
+		//request.setAttribute("Ranking", ranking);
+		request.setAttribute("myRanking", myRanking);
+		//System.out.println(ranking);
+		System.out.println(myRanking);
+		request.getRequestDispatcher("/WEB-INF/views/ranking/ranking.jsp").forward(request, response);
 	}
 
 	/**

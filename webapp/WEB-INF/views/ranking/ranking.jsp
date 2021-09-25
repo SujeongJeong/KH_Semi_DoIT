@@ -48,21 +48,31 @@ select { padding : 3px;}
 		</div>	
 			
 		<div class="standard-wrapper">
-			<span id="standard">나나</span>			
+			<span id="standard"></span>			
 		</div>	
 		
 		<ul class="ranking-wrapper" >
-			<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>1위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag-second.png" alt="2위"><span>2위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag-third.png" alt="3위"><span>3위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag.png" alt="4위"><span>4위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag.png" alt="5위"><span>5위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag.png" alt="6위"><span>6위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag.png" alt="7위"><span>7위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag.png" alt="8위"><span>8위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag.png" alt="9위"><span>9위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
+		 <c:forEach var="r" items="${ Ranking }">
+		 	<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>${ Ranking.ranking }위</span><span class="nickname">nickname</span><img src="${contextPath }${ Ranking.profile_img}" alt="profile"><span class='hours'>${ Ranking.s_time }</span></li>
+		 </c:forEach>
+		 <%-- 
+			<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>1위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
+			<li class="ranking"><img src="resources/images/flag-second.png" alt="2위"><span>2위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
+			<li class="ranking"><img src="resources/images/flag-third.png" alt="3위"><span>3위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
+			<li class="ranking"><img src="resources/images/flag.png" alt="4위"><span>4위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
+			<li class="ranking"><img src="resources/images/flag.png" alt="5위"><span>5위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
+			<li class="ranking"><img src="resources/images/flag.png" alt="6위"><span>6위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
+			<li class="ranking"><img src="resources/images/flag.png" alt="7위"><span>7위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
+			<li class="ranking"><img src="resources/images/flag.png" alt="8위"><span>8위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
+			<li class="ranking"><img src="resources/images/flag.png" alt="9위"><span>9위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
 			<li class="last"><img src="resources/images/flag.png" alt="10위"><span>10위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
-			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>?위</span><span class="nickname">${ loginUser.nickName }</span><span class='hours'>00:00:00</span></li>			
+		--%>	
+			<c:if test="${ loginUser == null }">
+			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span class="nickname">로그인하여 나의 랭킹을 확인해보세요.</span></li>			
+			</c:if>
+			<c:if test="${ loginUser != null }">
+			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>${ myRanking.ranking }위</span><span class="nickname">${ myRanking.nickName }</span><img src="${ contextPath }${ myRanking.profile_img }" alt="profile"><span class='hours'>${ myRanking.s_time }</span></li>			
+			</c:if>
 		</ul>
 
 	</div>
