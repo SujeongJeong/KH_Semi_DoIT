@@ -78,26 +78,22 @@
 	INTO ATTACHMENT
 	(
 			FILE_NO
-		  , BOARD_NO
-		  , NOTICE_NO	
-		  , S_NO
 		  , ORIGIN_NAME
 		  , CHANGE_NAME
 		  , FILE_PATH
 		  , UPLOAD_DATE
 		  , STATUS
+		  , S_NO
 	)
 	VALUES
 	(
 			SEQ_ANO.NEXTVAL
-		  , SEQ_SNO.CURRVAL
-		  , SEQ_SNO.CURRVAL
-		  , SEQ_SNO.CURRVAL
 		  , ?
 		  , ?
 		  , ?
 		  , SYSDATE
 		  , DEFAULT
+		  , SEQ_SNO.CURRVAL
 	)
 	</entry>
 	<entry key="selectStudyRoom">
