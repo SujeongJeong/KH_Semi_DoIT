@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM
+"http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectYesterday">
+	SELECT
+		      TO_CHAR(ROWNUM, '0') "RANKING"
+		    , NICKNAME 
+		    , "SUMTIME"
+		    , PROFILE_IMG
+		  FROM (  SELECT
+		                NICKNAME
+		              , RANK() OVER (ORDER BY SUM(S_TIME) DESC)
+		              , SUM(S_TIME) "SUMTIME"
+		              , PROFILE_IMG
+		           FROM MEMBER_TIMER
+		           JOIN MEMBER USING(USER_NO)
+		          WHERE TO_CHAR(S_DAY, 'yyyymmdd') = TO_CHAR(SYSDATE-1, 'yyyymmdd') 
+		          GROUP BY USER_NO, PROFILE_IMG, NICKNAME
+		          ORDER BY RANK() OVER (ORDER BY SUM(S_TIME) DESC))
+		 <![CDATA[where rownum <= 10]]>
+	</entry>
+	<entry key="selectMyRanking">
+	SELECT
+		      "ranking"
+		    , NICKNAME 
+		    , "SUMTIME"
+		    , PROFILE_IMG
+		  FROM (  SELECT
+		                NICKNAME
+		              , TO_CHAR(RANK() OVER (ORDER BY SUM(S_TIME) DESC)) "ranking"
+		              , SUM(S_TIME) "SUMTIME"
+		              , PROFILE_IMG
+		              , USER_NO
+		           FROM MEMBER_TIMER
+		           JOIN MEMBER USING(USER_NO)
+		          WHERE TO_CHAR(S_DAY,'yyyymmdd') = TO_CHAR(SYSDATE-1,'yyyymmdd') 
+		          GROUP BY USER_NO, PROFILE_IMG, NICKNAME
+		          ORDER BY RANK() OVER (ORDER BY SUM(S_TIME) DESC))
+		  WHERE USER_NO = ?
+	</entry>
+</properties>
