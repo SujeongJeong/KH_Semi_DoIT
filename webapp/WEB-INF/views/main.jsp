@@ -25,6 +25,18 @@
 	.outer:nth-child(2){	grid-area : 1/2/2/3;    }
 	.outer:nth-child(3){	grid-area : 2/1/3/2;	}
 	.outer:nth-child(4){	grid-area : 2/2/3/3;	}
+	#left{
+		background : url("/Do_IT/resources/images/left-arrow-list.png");
+		border: none;
+		width : 20px; height : 20px;
+		margin-right : 5px;
+	}
+	#right{
+		background : url("/Do_IT/resources/images/right-arrow-list.png");
+		border: none;
+		width : 20px; height : 20px;
+	}
+	.slide-wrapper { display :flex; }
 </style>
 </head>
 <body>
@@ -36,20 +48,26 @@
 			<div class="study-area">
 				<span class="title">내 스터디</span>
 				<span class = "icon">
+				<c:if test="${ loginUser == null }">
 				<img src="resources/images/left-arrow-nolist.png" alt="넘김"><img src="resources/images/right-arrow-nolist.png" alt="넘김">
+				</c:if>
+				<c:if test="${ loginUser != null }">
+				<button id="left"></button><button id="right"></button>
+				</c:if>
 				</span>
 				<div class="study-list">
 					<c:choose>
-					<c:when test="${ loginUser == null || Study == null}">
+					<c:when test="${ loginUser == null or empty Study}">
 					 <label class="nolist">스터디를 만들거나 추가해보세요.</label>
 					</c:when>
 					<c:otherwise>
-					<div class="study-info">
+					<div class="slide-wrapper">
 					<c:forEach var="s" items="${ Study }">
-					
-					<img src="resources/images/study-background1.jpg" alt="스터디배경사진"><br>
-					<label class="study-name">${ s.s_name }</label><br>
+					<div class="study-info">
+					<img src="${ contextPath }${ s.sImgList.get(0).file_path }${ s.sImgList.get(0).change_name }" alt="스터디배경사진"> 
+					<label class="study-name">${ s.s_name }</label>
 					<label class="study-category darkgray-c">#${ s.cname }</label>
+					</div>
 					</c:forEach>
 					</div>
 					</c:otherwise>
@@ -133,9 +151,47 @@
 		  });
 	</script>
 	</c:if>
+	
+	<%-- studylist --%>
+	<c:if test="${ loginUser !=null}">
+	<script>
+		var slides = document.querySelector(".slide-wrapper");
+		var slideDiv = document.querySelectorAll(".study-info");
+		var curIndex= 0;
+		var slideLeng = slideDiv.length;
+		var slideSpeed = 300;
+		var slideWidth = 220;
+		
+		slides.style.width = slideWidth * slideLeng +"px";
+		
+		$("#left").click(function(){
+			if( curIndex > 0 || curIndex == (slideLeng/2) ) {
+				curIndex--;
+				slides.style.transition = slideSpeed +"ms";
+				slides.style.transform = "translate3d(-" + (slideWidth * curIndex) +"px, 0px, 0px)";
+			}else if(curIndex == 0){
+				curIndex = 0;
+				slides.style.transition = "0ms";
+				slides.style.transform = "translate3d(-" + (slideWidth * curIndex) +"px, 0px, 0px)";
+			}
+			
+		});
+		
+		$("#right").click(function(){
+			if( curIndex < (slideLeng/2)-1 ) {
+				curIndex++;
+				slides.style.transition = slideSpeed +"ms";
+				slides.style.transform = "translate3d(-" + (slideWidth * (curIndex + 1)) +"px, 0px, 0px)";
+				
+			}
+			
+		});
+		
+	</script>
+	</c:if>
+	<%-- todolist --%>
 	<c:if test="${ loginUser != null }">
 	<script>
-	
 	 // todolist 추가 
 		$(".add").click(function(){
 			if( $(".scrollBlind ul").hasClass("list")){
@@ -257,7 +313,8 @@
 			
 	</script>
 	</c:if>
-
+	
+	
 </body>
 </html>
 

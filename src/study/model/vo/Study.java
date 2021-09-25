@@ -33,13 +33,15 @@ public class Study {
 		this.studyMemberNum = studyMemberNum;
 	}
 
-   public Study(int s_no, String s_name, int s_to, String cname) {
-	      super();
-	      this.s_no = s_no;
-	      this.s_name = s_name;
-	      this.s_to = s_to;
-	      this.cname = cname;
-	   }
+	
+	public Study(int s_no, String s_name, int s_to, String cname, String file_path, String change_name) {
+		super();
+		this.s_no = s_no;
+		this.s_name = s_name;
+		this.s_to = s_to;
+		this.cname = cname;
+		this.sImgList.add(new Attachment(change_name, file_path));
+	}
 	
 	public Study(String s_name, int s_to, String s_day, String s_explain, String s_notice, int user_no, int cid,
 			List<Attachment> sImgList) {

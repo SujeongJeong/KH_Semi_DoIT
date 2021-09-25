@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import main.model.service.TodolistService;
 import main.model.vo.Todolist;
 import member.model.vo.Member;
+import study.model.service.StudyService;
+import study.model.vo.Study;
 
 /**
  * Servlet implementation class MainServlet
@@ -37,10 +39,11 @@ public class MainServlet extends HttpServlet {
 			userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		}
 		List<Todolist> myList = new TodolistService().selectMyList(userNo);
-		//List<Study> myStudy = new StudyService().selectMyStudy(userNo);
+		List<Study> myStudy = new StudyService().selectMyStudy(userNo);
 		
 		request.setAttribute("Todolist", myList);
-		//request.setAttribute("Study", myStudy);
+		request.setAttribute("Study", myStudy);
+		//System.out.println(myStudy);
 		request.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(request, response);
 	}
 

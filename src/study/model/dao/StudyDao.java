@@ -369,10 +369,12 @@ public class StudyDao {
 	         
 	         rset = pstmt.executeQuery();
 	         while(rset.next()) {
-	            resultList.add(new Study(rset.getInt("s.s_no"),
+	            resultList.add(new Study(rset.getInt("s_no"),
 	                               rset.getString("s_name"),
 	                               rset.getInt("s_to"),
-	                               rset.getString("cname")));
+	                               rset.getString("cname"),
+	                               rset.getString("file_path"),
+	                               rset.getString("change_name")));
 	         }
 	         
 	      } catch (SQLException e) {
