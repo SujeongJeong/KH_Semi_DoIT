@@ -35,14 +35,15 @@ public class RankingHomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 메뉴바 클릭했을 때 페이지로 이동
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/ranking/ranking.jsp");
+		int userNo = 0;
 		if((Member)request.getSession().getAttribute("loginUser") != null) {
-			int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+			userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		}
-		//List<Study> myStudy = new StudyService().selectMyStudy(userNo);
+		List<Study> myStudy = new StudyService().selectMyStudy(userNo);
 		
 		request.setAttribute("nav1", "ranking");
-		//request.setAttribute("Study", myStudy);
-		//System.out.println(myStudy);
+		request.setAttribute("Study", myStudy);
+		System.out.println(myStudy);
 		view.forward(request, response);
 	}
 
