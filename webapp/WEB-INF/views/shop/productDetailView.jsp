@@ -8,7 +8,26 @@
 <meta charset="UTF-8">
 <title>상품 상세 보기</title>
 <!-- 외부 스타일 시트 -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
+<%
+	if(request.getAttribute("result") != null) {
+		if(request.getAttribute("result").equals("success")) {
+%>
+<script>
+	alert("구매 성공");
+	window.close();
+</script>
+<%
+	} else {
+%>
+<script>
+	alert('구매 실패');
+</script>
+<%
+		}
+	}
+%>
 <style>
  
  .wrapper{
@@ -125,7 +144,7 @@ opener.parent.location.reload();
 		<input type="hidden" name="product_no" value="${p.product_no}">
 		<input type="hidden" name="expirtion" value="${p.expiration_date}">
 		<input type="hidden" name="category" value="${p.product_category}">
-		<button class="modifybtn" >수정</button>
+		<c:if test="${ loginUser.userType =='A' }"><button class="modifybtn" >수정</button></c:if>
 	
 		<div class="product_content">	
 		
@@ -140,12 +159,17 @@ opener.parent.location.reload();
 				</div>
 		
 			<textarea class="textarea" rows="15" cols="80" name="content" readonly>${ p.product_detail } </textarea>
+			
+			</form>
 			<div class="btn_area">
-			<button class=paymentbtn type="button" onclick="parchase();">구매</button>
-			<button class=canclebtn type="button" onclick="window.close();">취소</button>
+			<form name="orderForm" method="post" action='<%= request.getContextPath() %>/productOrder'>
+			<input type="hidden" name="product_no" value="${p.product_no}">
+			<button class="paymentbtn" type="submit" onclick="return purchase()">구매</button>
+			</form>
+			<button class="canclebtn" type="button" onclick="window.close();">취소</button>
 		    </div>
 		    </div>
-		</form>
+
 			</div>
 			</div>
 		
@@ -153,17 +177,21 @@ opener.parent.location.reload();
 		
 	<script>
 			
-	
 			function detailView(){
 				alert('로그인 후 이용 가능 합니다.');
 				location.href='${contextPath}/login';
 			}
 			
-	
-			function parchase(){
-				if(confirm("구매 하시겠습니까?"))
-					window.close();
-				//코인금액이 가격보다 작으면 코인창으로 가기.
+			
+			function purchase(){
+				let userCoin = ${ loginUser.userCoin };
+				let pPrice = ${ p.product_price };
+				
+				if(userCoin < pPrice){
+					if(confirm("코인이 부족합니다. 충전하시겠습니까?"))
+					  location.href='${contextPath}/coin';
+					  return false;
+				}
 			}
 	</script>
 

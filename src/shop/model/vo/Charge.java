@@ -23,9 +23,21 @@ public class Charge {
 		this.chargeCoin = chargeCoin;
 	}
 	
+	
+	//충전완료시 필요한 값
+	public Charge(int chargeCoin, String paymentMethod, int userNo) {
+		super();
+		this.chargeCoin = chargeCoin;
+		this.paymentMethod = paymentMethod;
+		this.userNo = userNo;
+	}
+	
+	
 	public int getChargeNo() {
 		return chargeNo;
 	}
+
+
 	public void setChargeNo(int chargeNo) {
 		this.chargeNo = chargeNo;
 	}

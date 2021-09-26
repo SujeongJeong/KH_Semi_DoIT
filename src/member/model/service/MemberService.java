@@ -192,4 +192,11 @@ public class MemberService {
 		
 		return updateMember;
 	}
+	public Member selectMember(int userNo) {
+		Connection conn = getConnection();
+		
+		Member member = md.selectMember(conn, userNo);
+		
+		return member;
+	}
 }
