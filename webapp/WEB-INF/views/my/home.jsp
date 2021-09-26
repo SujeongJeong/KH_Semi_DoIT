@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>마이페이지 - 내 정보</title>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
+<link href='<%= request.getContextPath() %>/resources/css/qna-main.css?after' rel='stylesheet'>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <%
 	if(request.getAttribute("result") != null) {
@@ -240,31 +241,6 @@
 	.recode_span > span {
 		font-size: 1.2em;
 	}
-	.list_header {
-		background: #5FC5FF;
-		color: white;
-		font-weight: bold;
-		margin: 0;
-		padding: 0;
-		display: flex;
-		justify-content: space-around;
-		list-style: none;
-		height: 50px;
-	}
-	.list_header li {
-		font-size: 18px;
-		padding: 10px 0;
-	}
-	.recode_list {
-		border: 1px solid black;
-		width: 100%;
-		height: 350px;
-	}
-	.recode_list p {
-		color: lightgray;
-		margin-top: 15%;
-		text-align: center;
-	}
 	#modify_img {
 		display: none;
 	}
@@ -340,25 +316,35 @@
 					</div>
 				</div>
 			</div>
+			<div class="recode_btn">
+				<input type="radio" name="study_recode" id="days" value="days"><label for="days">일별</label>
+				<input type="radio" name="study_recode" id="weeks" value="weeks"><label for="weeks">주별</label>
+				<input type="radio" name="study_recode" id="months" value="months"><label for="months">월별</label>
+			</div>
 			<div class="recode_box1">
-				<div class="recode_btn">
-					<button>일별</button> | 
-					<button>주별</button> |
-					<button>월별</button> 
-					<div><span>2021/09</span> <button><</button> <button>></button></div>
-				</div>
+				<div><span>2021/09</span> <button><</button> <button>></button></div>
 				<div class="recode_span">
 					<span>월 평균 공부시간 : </span><span>00:00:00</span>
 				</div>
 			</div>
-				<div class="recode_list">
-	               <ul class="list_header">
-	                  <li class="date">날짜</li>
-	                  <li class="study_hour">공부 시간</li>
-	                  <li class="target_hour">목표 시간</li>
-	               </ul>
-	               <p>공부 기록이 없습니다</p>
-	            </div>
+				<table class="board_list">
+	                <thead>
+	                    <tr>
+	                        <th>날짜</th>
+	                        <th>공부 시간</th>
+	                        <th>목표 시간</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+						<c:forEach var="sl" items="${ studyList }">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+	            </table>
 			</div>
 		</div>
 	</div>

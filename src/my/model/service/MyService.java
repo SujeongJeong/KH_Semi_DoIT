@@ -1,9 +1,6 @@
 package my.model.service;
 
-import static common.JDBCTemplate.close;
-import static common.JDBCTemplate.commit;
-import static common.JDBCTemplate.getConnection;
-import static common.JDBCTemplate.rollback;
+import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.HashMap;
@@ -13,6 +10,7 @@ import java.util.Map;
 import my.model.dao.MyDao;
 import qna.model.vo.Board;
 import qna.model.vo.PageInfo;
+import shop.model.vo.Charge;
 import shop.model.vo.Purchase;
 import shop.model.vo.Refund;
 import study.model.vo.Study;
@@ -30,22 +28,15 @@ public class MyService {
 		
 		List<Board> MyboardList = md.selectMyBoardList(conn, pi, userNo);
 		
-		if(!MyboardList.isEmpty()) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
 		Map<String, Object> returnMap = new HashMap<>();
 		 
-		 returnMap.put("pi", pi);
-		 returnMap.put("MyboardList", MyboardList);
+		returnMap.put("pi", pi);
+		returnMap.put("MyboardList", MyboardList);
 		 
 		return returnMap;
 	}
-
+	
+	// 댓글을 단 게시글 리스트
 	public Map<String, Object> selectMyReplyList(int page, int userNo) {
 		Connection conn = getConnection();
 		
@@ -55,22 +46,15 @@ public class MyService {
 		
 		List<Board> MyReplyList = md.selectMyReplyList(conn, pi2, userNo);
 		
-		if(!MyReplyList.isEmpty()) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
 		Map<String, Object> returnMap = new HashMap<>();
 		 
-		 returnMap.put("pi2", pi2);
-		 returnMap.put("MyReplyList", MyReplyList);
+		returnMap.put("pi2", pi2);
+		returnMap.put("MyReplyList", MyReplyList);
 		 
 		return returnMap;
 	}
 
+	// 개설한 스터디 리스트 가져오기
 	public Map<String, Object> selectMyOpenStudyList(int page, int userNo) {
 		Connection conn = getConnection();
 		
@@ -80,42 +64,26 @@ public class MyService {
 		
 		List<Study> MyOpenStudyList = md.selectMyOpenStudyList(conn, pi, userNo);
 		
-		if(!MyOpenStudyList.isEmpty()) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
 		Map<String, Object> returnMap = new HashMap<>();
-		 
-		 returnMap.put("pi", pi);
-		 returnMap.put("MyOpenStudyList", MyOpenStudyList);
+		returnMap.put("pi", pi);
+		returnMap.put("MyOpenStudyList", MyOpenStudyList);
 		 
 		return returnMap;
 	}
 
+	// 참여한 스터디 리스트 가져오기
 	public Map<String, Object> selectMyJoinStudyList(int userNo) {
 		Connection conn = getConnection();
 		
 		List<Study> MyJoinStudyList = md.selectMyJoinStudyList(conn, userNo);
 		
-		if(!MyJoinStudyList.isEmpty()) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
 		Map<String, Object> returnMap = new HashMap<>();
-	
-		 returnMap.put("MyJoinStudyList", MyJoinStudyList);
+		returnMap.put("MyJoinStudyList", MyJoinStudyList);
 		 
 		return returnMap;
 	}
 
+	// 개설한 스터디 삭제
 	public int deleteOpenStudy(int deleteSNo, int userNo) {
 		Connection conn = getConnection();
 		
@@ -132,6 +100,7 @@ public class MyService {
 		return result;
 	}
 
+	// 참여한 스터디 나가기
 	public int exitJoinStudy(int exitSNo, int userNo) {
 		Connection conn = getConnection();
 		
@@ -148,26 +117,19 @@ public class MyService {
 		return result;
 	}
 
+	// 구매한 아이템 리스트 가져오기
 	public Map<String, Object> selectItemList(int userNo) {
 		Connection conn = getConnection();
 		
 		List<Purchase> ItemList = md.selectItemList(conn, userNo);
 		
-		if(!ItemList.isEmpty()) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
 		Map<String, Object> returnMap = new HashMap<>();
-	
-		 returnMap.put("ItemList", ItemList);
+		returnMap.put("ItemList", ItemList);
 		 
 		return returnMap;
 	}
 
+	// 환불 신청
 	public int insertRefundCoin(Refund r) {
 		Connection conn = getConnection();
 		
@@ -182,6 +144,62 @@ public class MyService {
 		close(conn);
 
 		return result;
+	}
+
+	public Map<String, Object> selectPurchaseList(int page, int userNo) {
+		Connection conn = getConnection();
+		
+		int RefundCount = md.getPurchaseCount(conn, userNo);
+		
+		PageInfo pi = new PageInfo(page, RefundCount, 10, 10);
+		
+		List<Purchase> PurchaseList = md.selectPurchaseList(conn, pi, userNo);
+	
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		returnMap.put("pi", pi);
+		returnMap.put("PurchaseList", PurchaseList);
+		 
+		return returnMap;
+	}
+
+	public Map<String, Object> selectChargeList(int page, int userNo) {
+		Connection conn = getConnection();
+		
+		int RefundCount = md.getChargeCount(conn, userNo);
+		
+		PageInfo pi = new PageInfo(page, RefundCount, 10, 10);
+		
+		List<Charge> ChargeList = md.selectChargeList(conn, pi, userNo);
+	
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		returnMap.put("pi", pi);
+		returnMap.put("ChargeList", ChargeList);
+		 
+		return returnMap;
+	}
+
+	public Map<String, Object> selectRefundList(int page, int userNo) {
+		Connection conn = getConnection();
+		
+		int RefundCount = md.getRefundCount(conn, userNo);
+		
+		PageInfo pi = new PageInfo(page, RefundCount, 10, 10);
+		
+		List<Refund> RefundList = md.selectUserRefundList(conn, pi, userNo);
+	
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		returnMap.put("pi", pi);
+		returnMap.put("RefundList", RefundList);
+		 
+		return returnMap;
+	}
+
+	public int selectUser() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

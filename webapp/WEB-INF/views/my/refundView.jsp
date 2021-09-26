@@ -99,23 +99,23 @@ button[id$=Btn]:hover {
 				<h4>계좌번호 : <input type="text" name="bank_account" id="bank_account" required></h4>
 				<h4>은행명 : 
 					<select id="bank_name" name="bank_name" required>
-						<option value="kakao">카카오뱅크</option>
-						<option value="kookmin">국민은행</option>
-						<option value="gieob">기업은행</option>
-						<option value="nonghyeob">농협은행</option>
-						<option value="shinhan">신한은행</option>
-						<option value="saneob">산업은행</option>
-						<option value="woori">우리은행</option>
-						<option value="city">한국씨티은행</option>
-						<option value="hana">하나은행</option>
-						<option value="sc">SC제일은행</option>
-						<option value="gyeongnam">경남은행</option>
-						<option value="gwangju">광주은행</option>
-						<option value="daegu">대구은행</option>
-						<option value="busan">부산은행</option>
-						<option value="saemaeul">새마을금고</option>
-						<option value="jeonbug">전북은행</option>
-						<option value="jeju">제주은행</option>
+						<option value="카카오뱅크">카카오뱅크</option>
+						<option value="국민은행">국민은행</option>
+						<option value="기업은행">기업은행</option>
+						<option value="농협은행">농협은행</option>
+						<option value="신한은행">신한은행</option>
+						<option value="산업은행">산업은행</option>
+						<option value="우리은행">우리은행</option>
+						<option value="한국씨티은행">한국씨티은행</option>
+						<option value="하나은행">하나은행</option>
+						<option value="SC제일은행">SC제일은행</option>
+						<option value="경남은행">경남은행</option>
+						<option value="광주은행">광주은행</option>
+						<option value="대구은행">대구은행</option>
+						<option value="부산은행">부산은행</option>
+						<option value="새마을금고">새마을금고</option>
+						<option value="전북은행">전북은행</option>
+						<option value="제주은행">제주은행</option>
 					</select>
 				</h4>
 				<h4>예금주 : <input type="text" name="account_name" id="account_name" min=1 required></h4>

@@ -35,6 +35,16 @@ public class Purchase {
 		this.productPrice = productPrice;
 	}
 
+	
+	public Purchase(Date purchaseDate, String productName, int productCount, int productPrice) {
+		super();
+		this.purchaseDate = purchaseDate;
+		this.productPrice = productPrice;
+		this.productName = productName;
+		this.productCount = productCount;
+	}
+
+
 	public int getPurchaseNo() {
 		return purchaseNo;
 	}

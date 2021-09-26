@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM
+"http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="getRefundCount">
+		SELECT
+			   COUNT(*)
+		  FROM REFUND
+	</entry>
+	<entry key="selectRefundList">
+		SELECT	  
+				  REFUND_NO	
+				, REFUND_DATE
+			    , REFUND_COIN
+			    , BANK_ACCOUNT
+			    , BANK_NAME
+			    , ACCOUNT_NAME
+			    , USER_EMAIL
+			    , USER_NO
+		FROM (SELECT 
+					ROWNUM RNUM
+				  , RLIST.*
+	    FROM(SELECT
+	              REFUND_NO	
+				, REFUND_DATE
+			    , REFUND_COIN
+			    , BANK_ACCOUNT
+			    , BANK_NAME
+			    , ACCOUNT_NAME
+			    , USER_EMAIL
+			    , USER_NO
+			      FROM REFUND 
+			      JOIN MEMBER USING(USER_NO)
+                 WHERE COMPLETE_DATE IS NULL
+			    ORDER BY REFUND_NO) RLIST)
+			  WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="modifyCompleteDate">
+		UPDATE REFUND 
+		SET COMPLETE_DATE = SYSDATE
+		WHERE REFUND_NO = ?
+	</entry>
+	<entry key="modifyUserCoin">
+		UPDATE MEMBER
+		    SET USER_COIN = USER_COIN - (SELECT REFUND_COIN
+		                                    FROM REFUND
+		                                    WHERE REFUND_NO = ?)
+		     , MODIFY_DATE = SYSDATE
+		    WHERE USER_NO = (SELECT USER_NO
+		                        FROM REFUND
+		                        WHERE REFUND_NO = ?)
+	</entry>
+	<entry key="selectUserCoin">
+		SELECT
+			USER_COIN
+		 FROM MEMBER
+		 WHERE USER_NO = ?
+	</entry>
+	
+</properties>
