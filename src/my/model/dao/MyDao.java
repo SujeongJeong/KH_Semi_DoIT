@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import qna.model.vo.Board;
 import qna.model.vo.PageInfo;
+import shop.model.vo.Charge;
 import shop.model.vo.Purchase;
 import shop.model.vo.Refund;
 import study.model.vo.Study;
@@ -341,7 +342,7 @@ public class MyDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, r.getRefundCoin());
-			pstmt.setString(2, r.getBank_account());
+			pstmt.setString(2, r.getBankAccount());
 			pstmt.setString(3, r.getBankName());
 			pstmt.setString(4, r.getAccountName());
 			pstmt.setInt(5, r.getUserNo());
@@ -358,4 +359,176 @@ public class MyDao {
 		
 		return result;
 	}
+	
+	public int getPurchaseCount(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int PurchaseCount = 0;
+		String sql = query.getProperty("getPurchaseCount");
+			
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+				
+			if(rset.next()) {
+				PurchaseCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return PurchaseCount;
+	}
+	
+	public int getChargeCount(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int ChargeCount = 0;
+		String sql = query.getProperty("getChargeCount");
+			
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+				
+			if(rset.next()) {
+				ChargeCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return ChargeCount;
+	}
+	
+	public int getRefundCount(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int RefundCount = 0;
+		String sql = query.getProperty("getUserRefundCount");
+			
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+				
+			if(rset.next()) {
+				RefundCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return RefundCount;
+	}
+	
+	public List<Purchase> selectPurchaseList(Connection conn, PageInfo pi, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Purchase> PurchaseList = new ArrayList<>();
+		String sql = query.getProperty("selectPurchaseList");
+		
+		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		int paramIndex = 2;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(paramIndex++, startRow);
+			pstmt.setInt(paramIndex++, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				PurchaseList.add(new Purchase(rset.getTimestamp("PURCHASE_DATE"),
+												rset.getString("PRODUCT_NAME"),
+												rset.getInt("PRODUCT_COUNT"),
+												rset.getInt("PRODUCT_PRICE")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return PurchaseList;
+	}
+	
+	public List<Charge> selectChargeList(Connection conn, PageInfo pi, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Charge> ChargeList = new ArrayList<>();
+		String sql = query.getProperty("selectChargeList");
+		
+		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		int paramIndex = 2;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(paramIndex++, startRow);
+			pstmt.setInt(paramIndex++, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				ChargeList.add(new Charge(rset.getTimestamp("CHARGE_DATE"),
+											rset.getInt("CHARGE_COIN")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return ChargeList;
+	}
+	
+	public List<Refund> selectUserRefundList(Connection conn, PageInfo pi, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Refund> RefundList = new ArrayList<>();
+		String sql = query.getProperty("selectUserRefundList");
+		
+		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		int paramIndex = 2;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(paramIndex++, startRow);
+			pstmt.setInt(paramIndex++, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				RefundList.add(new Refund(rset.getTimestamp("REFUND_DATE"),
+											 rset.getInt("REFUND_COIN"),
+											 rset.getTimestamp("COMPLETE_DATE")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return RefundList;
+	}
+	
 }

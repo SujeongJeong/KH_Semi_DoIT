@@ -69,7 +69,6 @@ public class studyRoomInfo extends HttpServlet {
 		request.setAttribute("sst", sst);
 		request.setAttribute("set", set);
 		
-		
 		request.setAttribute("studyRoom", s);
 		
 		// 스터디방 번호로 해당 스터디방의 정원수 조회

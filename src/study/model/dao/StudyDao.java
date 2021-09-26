@@ -60,7 +60,8 @@ public class StudyDao {
 										rset.getString("cname"),
 										rset.getString("nickname"),
 										rset.getString("change_name"),
-										rset.getString("file_path")));
+										rset.getString("file_path"),
+										rset.getInt("studyMemberNum")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -180,7 +181,7 @@ public class StudyDao {
 				if (count++ < 1) {
 					//스터디방 정보는 첫번째 반복에서만 처리(중복)
 					s = new Study();
-					s.setS_no(s_no);
+					s.setS_no(rset.getInt("s_no"));
 					s.setS_name(rset.getString("s_name"));
 					s.setS_to(rset.getInt("s_to"));
 					s.setS_day(rset.getString("s_day"));
@@ -388,6 +389,64 @@ public class StudyDao {
        }
        return resultList;
     }
+
+    // 유저번호로 만든 스터디방 가져오기(가장최근에 만든 1개)
+	public Study selectStudyRoomOnlySNo(Connection conn, int user_no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Study s = null;
+		int count = 0;
+		
+		String sql = query.getProperty("selectStudyRoomOnlySNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, user_no);
+			rset=pstmt.executeQuery();
+			
+			while(rset.next()) {
+				if(count++ < 1) {
+					s = new Study();
+					s.setS_no(rset.getInt("s_no"));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return s;
+	}
+	
+	// 로그인한 유저넘버로 가입한 스터디방 갯수 가져오기
+	public MemberJoinStudy userJoinStudyNum(Connection conn, int user_no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset= null;
+		MemberJoinStudy mjs = null;
+		
+		String sql = query.getProperty("userJoinStudyNum");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, user_no);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				mjs = new MemberJoinStudy();
+				mjs.setUserJoinStudyNum(rset.getInt("userJoinStudyNum"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return mjs;
+	}
 
 
 
