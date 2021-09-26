@@ -104,4 +104,6 @@
 	.hours { 	font-size : 18px; padding : 10px;	}
 	.myranking { 	background-color : #E5E5E5; border-radius : 5px; margin-top : 20px;	}
 	.icon img{ width : 20px; height : 20px; margin-5px;}
+	.img-wrapper { width: 30px; height: 30px; }
+	.img-wrapper img{ max-width: 100%; max-height:100%;}
 	

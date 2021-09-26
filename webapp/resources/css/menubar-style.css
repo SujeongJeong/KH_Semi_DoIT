@@ -30,9 +30,10 @@
 	border-radius :5px; 
 	text-align : center;
 	padding-top : 3px; 
-	height : 25px;
+	height : 30px;
 }
 
+.user-wrapper{ width : 30px; }
 .login {
 	background-color : #C8EBFF;
 	width : 60px;
