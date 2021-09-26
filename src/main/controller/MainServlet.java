@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import main.model.service.TodolistService;
 import main.model.vo.Todolist;
 import member.model.vo.Member;
+import ranking.model.service.RankingService;
+import ranking.model.vo.Ranking;
 import study.model.service.StudyService;
 import study.model.vo.Study;
 
@@ -40,10 +42,13 @@ public class MainServlet extends HttpServlet {
 		}
 		List<Todolist> myList = new TodolistService().selectMyList(userNo);
 		List<Study> myStudy = new StudyService().selectMyStudy(userNo);
+		Ranking myRanking = new RankingService().selectMyRanking(userNo);
+		List<Ranking> rankingList = new RankingService().selectThirdRanking();
 		
 		request.setAttribute("Todolist", myList);
 		request.setAttribute("Study", myStudy);
-		//System.out.println(myStudy);
+		request.setAttribute("myRanking", myRanking);
+		request.setAttribute("rankingList", rankingList);
 		request.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(request, response);
 	}
 

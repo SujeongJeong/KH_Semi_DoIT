@@ -19,6 +19,7 @@ public class RankingService {
 		List<Ranking> resultList = rd.selectYesterday(conn);
 		
 		if(resultList != null) {
+
 			close(conn);
 		} 
 		return resultList;
@@ -32,6 +33,19 @@ public class RankingService {
 		
 		if(my != null) close(conn);
 		return my;
+	}
+
+	// 메인화면 3위까지 랭킹 불러오기
+	public List<Ranking> selectThirdRanking() {
+		Connection conn = getConnection();
+		
+		List<Ranking> resultList = rd.selectThirdRanking(conn);
+		
+		if(resultList != null) {
+			close(conn);
+		}
+			
+		return resultList;
 	}
 
 }

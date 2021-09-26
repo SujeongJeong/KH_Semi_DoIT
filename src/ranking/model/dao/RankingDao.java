@@ -36,10 +36,11 @@ public class RankingDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 10);
 			
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				resultList.add(new Ranking(rset.getString("ranking"),
+				resultList.add(new Ranking(rset.getInt("to_number(rownum)"),
 						                   rset.getString("nickname"),
 						                   rset.getInt("sumtime"),
 						                   rset.getString("profile_img")));
@@ -68,7 +69,7 @@ public class RankingDao {
 			rset= pstmt.executeQuery();
 			
 			if(rset.next()) {
-				my = new Ranking(rset.getString("ranking"),
+				my = new Ranking(rset.getInt("ranking"),
 								 rset.getString("nickname"),
 								 rset.getInt("sumtime"),
 								 rset.getString("profile_img"));
@@ -80,6 +81,38 @@ public class RankingDao {
 			close(pstmt);
 		}
 		return my;
+	}
+	
+	// 전 날 3위까지 랭킹 불러오기
+	public List<Ranking> selectThirdRanking(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Ranking> resultList = new ArrayList<>();
+		String sql = query.getProperty("selectYesterday");
+		String[] rImg = {"/resources/images/flag1.png","/resources/images/flag2.png","/resources/images/flag3.png"};
+		int i=0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 3);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				resultList.add(new Ranking(rset.getInt("to_number(rownum)"),
+						                   rset.getString("nickname"),
+						                   rset.getInt("sumtime"),
+						                   rset.getString("profile_img"),
+						                   rImg[i]));
+					i++;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return resultList;
 	}
 
 }

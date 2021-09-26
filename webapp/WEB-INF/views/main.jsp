@@ -84,7 +84,7 @@
 						<li><span class="todayhours point-c">0시간 00분</span><span class="goalhours lightgray-c">/ 0시간 00분</span></li>
 						</c:when>
 						<c:otherwise>
-						<li><span class="todayhours point-c">3시간 00분</span><span class="goalhours lightgray-c">/ 
+						<li><span class="todayhours point-c">${ myRanking.s_time  }</span><span class="goalhours lightgray-c">/ 
 						<c:set var="targetHour" value="${ loginUser.targetHour }"/><c:set var ="hours" value="${fn:split(targetHour, '/') }"/>
 						 ${ hours[0] }시간 ${ hours[1] }분</span></li>
 						</c:otherwise>
@@ -96,15 +96,15 @@
 				<span class="title">누적 공부 시간 랭킹 </span><span class="point-c yesterday">하루 전</span>
 				<span class="lightgray-c date">yyyy.MM.dd(E요일) 오전 0시 기준</span>
 				<ul class="rankikgUl">
-				<li class="first"><img src="resources/images/flag-first.png" alt="1위"><span class="nickname">1위 user01</span><span class="hours">22:59:59</span></li>
-				<li class="second"><img src="resources/images/flag-second.png" alt="2위"><span class="nickname">2위 user02</span><span class="hours">18:33:33</span></li>
-				<li class="third"><img src="resources/images/flag-third.png" alt="3위"><span class="nickname">3위 user03</span><span class="hours">10:00:00</span></li>
+				<c:forEach var="r" items="${ rankingList }">
+				<li class="first"><img src="${ contextPath }${ r.rank_img}" alt="1위"><span>${ r.rank }위</span><span class="nickname">${ r.nickName }</span><img src="${ contextPath }${ r.profile_img }" alt="profile"><span class='hours'>${ r.s_time }</span></li>
+				</c:forEach>
 				<c:choose>
 				<c:when test="${ loginUser == null }">
 				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹">로그인하여 나의 랭킹을 확인해보세요.</li>
 				</c:when>
 				<c:otherwise>
-				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹"><span class="nickname">?위 ${ loginUser.nickName }</span><img src="${ contextPath }${ loginUser.profileImg }" alt="profile"><span class="hours">5:03:00</span></li>
+				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹"><span>${ myRanking.rank }위</span><span class="nickname">${ myRanking.nickName }</span><img src="${ contextPath }${ myRanking.profile_img }" alt="profile"><span class='hours'>${ myRanking.s_time }</span></li>
 				</c:otherwise>
 				</c:choose>
 				</ul>
