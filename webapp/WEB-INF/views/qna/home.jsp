@@ -8,7 +8,7 @@
 <title>Q&A - Do IT</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-	<link href='<%= request.getContextPath() %>/resources/css/qna-main.css?after' rel='stylesheet'>
+	<link href='<%= request.getContextPath() %>/resources/css/qna-main.css' rel='stylesheet'>
 </head>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
