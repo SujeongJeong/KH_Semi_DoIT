@@ -43,7 +43,6 @@ public class AdminRefundListServlet extends HttpServlet {
 		request.setAttribute("pi", map.get("pi"));
 		request.setAttribute("PurchaseList", map.get("PurchaseList"));
 		
-	
 		request.getRequestDispatcher("/WEB-INF/views/admin/refundListForm.jsp").forward(request, response);
 	}
 
