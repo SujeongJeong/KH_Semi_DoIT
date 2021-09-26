@@ -1,6 +1,7 @@
 package qna.model.vo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Notice {
 
@@ -12,6 +13,7 @@ public class Notice {
 	private Date modify_date;
 	private String status;
 	private int user_no;
+	private List<Reply> replyList;
 	
 //	notice_no	NUMBER
 //	notice_title	VARCHAR2(100 CHAR)
@@ -119,11 +121,24 @@ public class Notice {
 		this.user_no = user_no;
 	}
 
+	
+	public List<Reply> getReplyList() {
+		return replyList;
+	}
+	
+
+	public void setReplyList(List<Reply> replyList) {
+		this.replyList = replyList;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Notice [notice_no=" + notice_no + ", notice_title=" + notice_title + ", notice_content="
 				+ notice_content + ", count=" + count + ", create_date=" + create_date + ", modify_date=" + modify_date
-				+ ", status=" + status + ", user_no=" + user_no + "]";
+				+ ", status=" + status + ", user_no=" + user_no + ", replyList=" + replyList + "]";
 	}
+
 
 }

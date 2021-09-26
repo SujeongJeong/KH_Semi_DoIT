@@ -57,7 +57,7 @@
 		     ORDER BY BOARD_NO DESC) BLIST)
 	WHERE RNUM BETWEEN ? AND ?
 	</entry>
-	<entry key="selectContentList">
+<!-- 	<entry key="selectContentList">
 	SELECT
 		      BID
 		    , CNAME
@@ -100,7 +100,7 @@
 		       AND USER_NAME LIKE '%' || ? || '%'
 		     ORDER BY BID DESC) BLIST)
 	WHERE RNUM BETWEEN ? AND ?
-	</entry>
+	</entry> -->
 	<entry key="insertBoard">
 		INSERT
 		INTO BOARD
@@ -223,6 +223,49 @@
 		  , DEFAULT
 		  , ?
 		  , ?
+		)
+	</entry>
+	<entry key="updateReply">
+	UPDATE REPLY
+			   SET
+			       REPLY_CONTENT = ?
+			     , MODIFY_DATE = DEFAULT
+			 WHERE REPLY_NO = ?
+             AND BOARD_NO = ?
+	</entry>
+		<entry key="deleteReply">
+		UPDATE REPLY
+		   SET STATUS = 'N'
+		 WHERE REPLY_NO = ?
+	</entry>
+	<entry key="report">
+	INSERT
+		INTO REPORT
+		(
+			REPORT_NO
+		  , REPORT_CONTENT
+		  , REPORT_DATE
+		  , USER_NO
+		)
+		VALUES
+		(
+			SEQ_RPID.NEXTVAL
+		  , ?
+		  , DEFAULT
+		  , ?
+		)
+	</entry>
+	<entry key="reportBoard">
+	INSERT
+		INTO BOARDREPORT
+		(
+			BOARD_NO
+		  , REPORT_NO
+		)
+		VALUES
+		(
+			?
+		  , SEQ_RPID.CURRVAL
 		)
 	</entry>
 </properties>

@@ -167,43 +167,67 @@
 		UPDATE NOTICE
 		   SET NOTICE_TITLE = ?
 		     , NOTICE_CONTENT = ?
+		     , MODIFY_DATE = DEFAULT
 		 WHERE NOTICE_NO = ?
 	</entry>
 	
-	<entry key="selectTitleList">
-		SELECT
-				  NOTICE_NO
-				, NOTICE_TITLE
-				, NOTICE_CONTENT
-				, COUNT
-				, CREATE_DATE
-				, MODIFY_DATE
-				, STATUS
-				, USER_NO
-		 FROM NOTICE
-		WHERE NOTICE_TITLE LIKE '%' || ? || '%'
-		  AND STATUS = 'Y'
-		ORDER BY NOTICE_NO DESC
-	</entry>
-	
-	<entry key="selectContentList">
-		SELECT
-				  NOTICE_NO
-				, NOTICE_TITLE
-				, NOTICE_CONTENT
-				, COUNT
-				, CREATE_DATE
-				, MODIFY_DATE
-				, STATUS
-				, USER_NO
-		 FROM NOTICE
-		WHERE NOTICE_CONTENT LIKE '%' || ? || '%'
-		  AND STATUS = 'Y'
-		ORDER BY NOTICE_NO DESC
-	</entry>
 	<entry key="deleteNotice">
 		UPDATE NOTICE
 		   SET STATUS = 'N'
 		 WHERE NOTICE_NO = ?
+	</entry>
+	
+		<entry key="selectReplyList">
+		SELECT
+		        REPLY_NO
+		      , REPLY_CONTENT
+		      , R.CREATE_DATE
+		      , R.MODIFY_DATE
+		      , USER_NO
+		      , NOTICE_NO
+		      , NICKNAME
+		   FROM REPLY R
+		   JOIN MEMBER USING (USER_NO)
+		  WHERE NOTICE_NO = ?
+		    AND R.STATUS = 'Y'
+		  ORDER BY REPLY_NO DESC
+	</entry>
+	<entry key="insertReply">
+		INSERT
+		INTO REPLY
+		(
+			REPLY_NO
+		  , REPLY_CONTENT
+		  , CREATE_DATE
+		  , MODIFY_DATE
+		  , REPLY_SECRET
+		  , STATUS
+		  , USER_NO
+		  , NOTICE_NO
+		)
+		VALUES
+		(
+			SEQ_RID.NEXTVAL
+		  , ?
+		  , SYSDATE
+		  , SYSDATE
+		  , DEFAULT
+		  , DEFAULT
+		  , ?
+		  , ?
+		)
+	</entry>
+	<entry key="updateReply">
+		UPDATE REPLY
+				   SET
+				       REPLY_CONTENT = ?
+				     , MODIFY_DATE = DEFAULT
+				 WHERE REPLY_NO = ?
+		           AND NOTICE_NO = ?
+	</entry>
+	<entry key="deleteReply">
+		UPDATE REPLY
+		   SET STATUS = 'N'
+		 WHERE REPLY_NO = ?
 	</entry>
 </properties>
