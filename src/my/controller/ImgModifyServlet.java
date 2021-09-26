@@ -53,8 +53,6 @@ public class ImgModifyServlet extends HttpServlet {
 		System.out.println(savePath+current_img[4]);
 		deleteFile.delete();
 		
-		Member member = ((Member)request.getSession().getAttribute("loginUser"));
-		
 		String profile_img = "/resources/uploadFiles/my/" + multiRequest.getFilesystemName("modify_img");
 		System.out.println("profile_img : " + profile_img);
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();

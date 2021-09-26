@@ -3,7 +3,6 @@ package my.controller;
 import java.io.IOException;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,6 +53,8 @@ public class MyPaymentDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("nav1", "my");
+		
 		String radioValue = request.getParameter("details_history");
 		int userNo = ((Member)(request.getSession().getAttribute("loginUser"))).getUserNo();
 		

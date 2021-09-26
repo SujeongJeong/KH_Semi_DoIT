@@ -33,8 +33,9 @@ public class MyHomeServlet extends HttpServlet {
 			request.setAttribute("msg", "로그인 후 이용 가능합니다.");
 			response.sendRedirect(request.getContextPath()+"/login");
 		}
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/home.jsp");
+		
 		request.setAttribute("nav1", "my");
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/home.jsp");
 		view.forward(request, response);
 	}
 
@@ -42,7 +43,6 @@ public class MyHomeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
