@@ -112,6 +112,7 @@ button{
 
 .board_list .tit:hover {
     text-decoration: underline;
+    cursor: pointer;
 }
 
 /* 페이지 이동 */
