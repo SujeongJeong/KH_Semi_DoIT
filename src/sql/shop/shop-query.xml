@@ -69,6 +69,7 @@
   		 WHERE PRODUCT_NO = ?
 	 
 	 </entry>
+	 
 	<entry key="insertCharge">
 		INSERT
 			INTO CHARGE
@@ -87,6 +88,44 @@
 			  , ?
 			  , ?	
 			)
+	
+	</entry>
+	
+	<entry key="insertOrder">
+		INSERT
+			INTO PURCHASE
+			(
+				PURCHASE_NO
+			  , PURCHASE_DATE
+			  , START_DATE
+		  	  , EXPIRATION_DATE
+		 	  , USER_NO
+			  , PRODUCT_NO
+			)
+			VALUES
+			(
+				SEQ_ONO.NEXTVAL
+			  , SYSDATE
+			  , SYSDATE
+			  , SYSDATE + (SELECT 
+                            EXPIRATION_DATE
+                            FROM PRODUCT
+                            WHERE PRODUCT_NO = ?)
+			  , ?
+			  , ?	
+			)
+	
+	</entry>
+	<entry key="updateCoin">
+	UPDATE MEMBER
+   	  	SET USER_COIN = USER_COIN - (SELECT
+   	  									PRODUCT_PRICE
+   	  									FROM PRODUCT
+   	  								WHERE PRODUCT_NO = ?
+   	  								)
+   	  	
+   		WHERE USER_NO = ?
+	
 	
 	</entry>
 

@@ -110,6 +110,37 @@ public class ShopService {
 		
 	}
 
+	//purcahse등록
+	public int insertOrder(int product_no, int userNo) {
+		Connection conn = getConnection();
+		int result = sd.insertOrder(conn, product_no, userNo );
+	
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	//잔여코인
+	public int updateCoin(int product_no, int userNo) {
+		Connection conn = getConnection();
+		int result = sd.updateCoin(conn, product_no, userNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
 	
 	
 	

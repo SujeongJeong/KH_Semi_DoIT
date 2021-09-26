@@ -192,6 +192,52 @@ public class ShopDao {
 		}
 		return result;
 	}
+
+	public int insertOrder(Connection conn, int product_no, int userNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("insertOrder");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, product_no);
+			pstmt.setInt(2, userNo);
+			pstmt.setInt(3, product_no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	//잔여코인 dao
+	public int updateCoin(Connection conn, int product_no, int userNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("updateCoin");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, product_no);
+			pstmt.setInt(2, userNo);
+			
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 				
 	
 	

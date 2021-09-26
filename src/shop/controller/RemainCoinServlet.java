@@ -1,28 +1,28 @@
 package shop.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.model.service.MemberService;
 import member.model.vo.Member;
 import shop.model.service.ShopService;
-import shop.model.vo.Charge;
-import shop.model.vo.Product;
 
 /**
- * Servlet implementation class ChargeSucessServlet
+ * Servlet implementation class RemainCoinServlet
  */
-@WebServlet("/shop/chargeSucess")
-public class ChargeSucessServlet extends HttpServlet {
+@WebServlet("/remainCoin")
+public class RemainCoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChargeSucessServlet() {
+    public RemainCoinServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,29 +39,24 @@ public class ChargeSucessServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int charge_coin = Integer.parseInt(request.getParameter("amount"));
-		String pay_method = request.getParameter("pay_method");
+
+		int product_no = Integer.parseInt(request.getParameter("product_no"));
 		int userNo = ((Member)(request.getSession().getAttribute("loginUser"))).getUserNo();
+		System.out.println("product_no : " +product_no);
+		System.out.println("userNo : " +userNo);
 		
-		System.out.println(charge_coin);
-		System.out.println(pay_method);
-		System.out.println(userNo);
+		int result = new ShopService().updateCoin(product_no, userNo);
+		System.out.println("잔여코인서블렛 : " +result);
 		
-		Charge c = new Charge(charge_coin, pay_method, userNo);
-		
-		int result = new ShopService().insertCharge(c);
-		System.out.println("서블릿 : " + result);
 
 		if(result > 0) {
-			request.getSession().setAttribute("msg", "충전이 완료되었습니다.");
+			Member loginUser = new MemberService().selectMember(userNo);
+			request.getSession().setAttribute("loginUser", loginUser);
+			request.getSession().setAttribute("msg", "구매가 완료되었습니다.");
 			response.sendRedirect(request.getContextPath()+"/shop/home");
 		}else {
-			request.setAttribute("msg", "상품 등록에 실패하였습니다.");
+			request.setAttribute("msg", "코인이 부족하여 구매에 실패하였습니다. 코인충전으로 이동합니다.");
 			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
-		}	
+		}
 	}
-		
-		
-	}
-
-
+}
