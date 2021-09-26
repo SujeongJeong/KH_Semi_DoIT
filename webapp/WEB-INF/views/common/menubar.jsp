@@ -14,7 +14,7 @@
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/menubar-style.css?after' rel='stylesheet'>
 <!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<%-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>--%>
 <!-- 구글웹폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,7 +75,7 @@
 			<li><a href="${ contextPath }/qna/home"<% if ("qna".equals(nav1)) { %>class="current"<%}%>>Q&amp;A</a></li>
 			<c:choose>
 			<c:when test="${ loginUser == null || loginUser.userType == 'U' }">
-			<li><a class="mypage" href="${ contextPath }/my/home"<% if ("my".equals(nav1)) { %>class="current"<%}%>>마이페이지</a></li>
+			<li><a class="mypage" onclick="login();" href="${ contextPath }/my/home"<% if ("my".equals(nav1)) { %>class="current"<%}%>>마이페이지</a></li>
 			</c:when>
 			<c:when  test="${ loginUser != null && loginUser.userType =='A'  }">
 			<li><a href="${ contextPath }/admin/home"<% if ("admin".equals(nav1)) { %>class="current"<%}%>>관리페이지</a></li>
@@ -87,12 +87,12 @@
 
 	<c:if test="${ loginUser == null }">
 	<script>
-		$(".mypage").click(function(){
+		function login(){
 			if(confirm("로그인 하시겠습니까?")){
 				 location.href="${ contextPath}/login";
 			 }
 			return false;
-		  });
+		  };
 	</script>
 	</c:if>
 
