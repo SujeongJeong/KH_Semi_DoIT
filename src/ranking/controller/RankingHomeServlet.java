@@ -50,7 +50,6 @@ public class RankingHomeServlet extends HttpServlet {
 		request.setAttribute("Study", myStudy);
 		request.setAttribute("Ranking", rankinglist);
 		request.setAttribute("myRanking", myRanking);
-		System.out.println(rankinglist);
 
 		request.getRequestDispatcher("/WEB-INF/views/ranking/ranking.jsp").forward(request, response);
 	}

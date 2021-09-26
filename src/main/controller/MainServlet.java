@@ -49,6 +49,7 @@ public class MainServlet extends HttpServlet {
 		request.setAttribute("Study", myStudy);
 		request.setAttribute("myRanking", myRanking);
 		request.setAttribute("rankingList", rankingList);
+		System.out.println(myStudy);
 		request.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(request, response);
 	}
 
