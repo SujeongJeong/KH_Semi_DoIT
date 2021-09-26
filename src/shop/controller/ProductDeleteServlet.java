@@ -31,11 +31,9 @@ public class ProductDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] deleteProductArr = request.getParameterValues("product_check");
-		System.out.println("deleteProductArr : " + deleteProductArr);
 		
 		int[] deleteProductArrInt = new int[deleteProductArr.length];
-		System.out.println("deleteProductArrInt : " + deleteProductArrInt);
-		
+	
 		
 		for(int i=0; i<deleteProductArr.length; i++){
 		    deleteProductArrInt[i] = Integer.parseInt(deleteProductArr[i]);

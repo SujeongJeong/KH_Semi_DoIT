@@ -53,7 +53,7 @@ select { padding : 3px;}
 		
 		<ul class="ranking-wrapper" >
 		 <c:forEach var="r" items="${ Ranking }">
-		 	<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>${ Ranking.ranking }위</span><span class="nickname">nickname</span><img src="${contextPath }${ Ranking.profile_img}" alt="profile"><span class='hours'>${ Ranking.s_time }</span></li>
+		 	<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>${ Ranking.rank }위</span><span class="nickname">${ Ranking.nickName }</span><img src="${contextPath }${ Ranking.profile_img}" alt="profile"><span class='hours'>${ Ranking.s_time }</span></li>
 		 </c:forEach>
 		 <%-- 
 			<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>1위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
@@ -71,7 +71,7 @@ select { padding : 3px;}
 			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span class="nickname">로그인하여 나의 랭킹을 확인해보세요.</span></li>			
 			</c:if>
 			<c:if test="${ loginUser != null }">
-			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>${ myRanking.ranking }위</span><span class="nickname">${ myRanking.nickName }</span><img src="${ contextPath }${ myRanking.profile_img }" alt="profile"><span class='hours'>${ myRanking.s_time }</span></li>			
+			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>${ myRanking.rank }위</span><span class="nickname">${ myRanking.nickName }</span><img src="${ contextPath }${ myRanking.profile_img }" alt="profile"><span class='hours'>${ myRanking.s_time }</span></li>			
 			</c:if>
 		</ul>
 

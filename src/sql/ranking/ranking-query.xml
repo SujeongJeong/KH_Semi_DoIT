@@ -4,13 +4,13 @@
 <properties>
 	<entry key="selectYesterday">
 	SELECT
-		      TO_CHAR(ROWNUM, '0') "RANKING"
+		      TO_NUMBER(ROWNUM)
 		    , NICKNAME 
 		    , "SUMTIME"
 		    , PROFILE_IMG
 		  FROM (  SELECT
 		                NICKNAME
-		              , RANK() OVER (ORDER BY SUM(S_TIME) DESC)
+		              , TO_NUMBER(RANK() OVER (ORDER BY SUM(S_TIME) DESC)) "RANKING"
 		              , SUM(S_TIME) "SUMTIME"
 		              , PROFILE_IMG
 		           FROM MEMBER_TIMER
@@ -18,17 +18,17 @@
 		          WHERE TO_CHAR(S_DAY, 'yyyymmdd') = TO_CHAR(SYSDATE-1, 'yyyymmdd') 
 		          GROUP BY USER_NO, PROFILE_IMG, NICKNAME
 		          ORDER BY RANK() OVER (ORDER BY SUM(S_TIME) DESC))
-		 <![CDATA[where rownum <= 10]]>
+	 <![CDATA[WHERE TO_NUMBER(ROWNUM) <= ?]]>
 	</entry>
 	<entry key="selectMyRanking">
 	SELECT
-		      "ranking"
+		      "RANKING"
 		    , NICKNAME 
 		    , "SUMTIME"
 		    , PROFILE_IMG
 		  FROM (  SELECT
 		                NICKNAME
-		              , TO_CHAR(RANK() OVER (ORDER BY SUM(S_TIME) DESC)) "ranking"
+		              , TO_NUMBER(RANK() OVER (ORDER BY SUM(S_TIME) DESC)) "RANKING"
 		              , SUM(S_TIME) "SUMTIME"
 		              , PROFILE_IMG
 		              , USER_NO

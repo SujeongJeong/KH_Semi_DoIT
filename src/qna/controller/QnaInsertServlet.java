@@ -39,8 +39,6 @@ public class QnaInsertServlet extends HttpServlet {
 		
 		  String usertype =((Member)request.getSession().getAttribute("loginUser")).getUserType();
 		  
-		  System.out.println("usertype = " + usertype);
-		  
 		  if(usertype.equals("A")) {
 			  	request.getRequestDispatcher("/WEB-INF/views/qna/noticeInsertView.jsp").forward(request, response); 
 			}else if(usertype.equals("U")) {
@@ -64,7 +62,8 @@ public class QnaInsertServlet extends HttpServlet {
 		 String title = request.getParameter("title");
 		 String content = request.getParameter("content");
 		int writer = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
-		 
+		
+		
 //		 System.out.println(cid);
 //		 System.out.println("제목:"+title);
 //		 System.out.println("내용:"+content);

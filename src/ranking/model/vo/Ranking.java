@@ -2,28 +2,38 @@ package ranking.model.vo;
 
 public class Ranking {
 
-	private String ranking;
-	private String nickName;
-	private int s_no;
-	private int s_time;
-	private String profile_img;
+	private int rank;		// 랭킹
+	private String nickName;	// 닉네임
+	private int s_no;			// 스터디방 번호
+	private int s_time;			// 총 공부시간
+	private String profile_img;	// 프로필 이미지 경로
+	private String rank_img;	// 랭킹 아이콘 이미지
 	
 	public Ranking() {}
 
-	public Ranking(String ranking, String nickName, int s_time, String profile_img) {
+	public Ranking(int rank, String nickName, int s_time, String profile_img) {
 		super();
-		this.ranking = ranking;
+		this.rank = rank;
 		this.nickName = nickName;
 		this.s_time = s_time;
 		this.profile_img = profile_img;
 	}
 
-	public String getRanking() {
-		return ranking;
+	public Ranking(int rank, String nickName, int s_time, String profile_img, String rank_img) {
+		super();
+		this.rank = rank;
+		this.nickName = nickName;
+		this.s_time = s_time;
+		this.profile_img = profile_img;
+		this.rank_img = rank_img;
 	}
 
-	public void setRanking(String ranking) {
-		this.ranking = ranking;
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
 	}
 
 	public String getNickName() {
@@ -58,12 +68,21 @@ public class Ranking {
 		this.profile_img = profile_img;
 	}
 
-	@Override
-	public String toString() {
-		return "Ranking [ranking=" + ranking + ", nickName=" + nickName + ", s_no=" + s_no + ", s_time=" + s_time
-				+ ", profile_img=" + profile_img + "]";
+	public String getRank_img() {
+		return rank_img;
 	}
 
+	public void setRank_img(String rank_img) {
+		this.rank_img = rank_img;
+	}
+
+	@Override
+	public String toString() {
+		return "Ranking [rank=" + rank + ", nickName=" + nickName + ", s_no=" + s_no + ", s_time=" + s_time
+				+ ", profile_img=" + profile_img + ", rank_img=" + rank_img + "]";
+	}
+
+	
 }
 
 

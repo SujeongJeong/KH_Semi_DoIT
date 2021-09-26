@@ -52,7 +52,14 @@
 	</footer>
 
 	 <script>
+		// 작성하기 버튼 눌렀을때 content 내용 비어있을때
+			$('#save').click(function(){
+				if($('#summernote').val() == ''){
+					alert('내용을 입력해주세요.');
+				} 
+			});
 	  
+		// 글쓰기 api
 	        $('#summernote').summernote({
 	                placeholder: '내용을 입력해주세요.',
 	                tabsize: 2,

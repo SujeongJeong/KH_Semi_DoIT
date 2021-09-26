@@ -35,8 +35,6 @@ public class RankingHomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 메뉴바 클릭했을 때 페이지로 이동
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/ranking/ranking.jsp");
 		int userNo = 0;
 		if((Member)request.getSession().getAttribute("loginUser") != null) {
 			userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
@@ -46,14 +44,14 @@ public class RankingHomeServlet extends HttpServlet {
 		// 나의 랭킹 가져오기
 		Ranking myRanking = new RankingService().selectMyRanking(userNo);
 		// 기본값인 전체, 어제 랭킹 불러오기
-		//List<Ranking> ranking = new RankingService().selectYesterday();
+		//List<Ranking> rankinglist = new RankingService().selectYesterday();
 		
 		request.setAttribute("nav1", "ranking");
 		request.setAttribute("Study", myStudy);
-		//request.setAttribute("Ranking", ranking);
+		//request.setAttribute("Ranking", rankinglist);
 		request.setAttribute("myRanking", myRanking);
-		//System.out.println(ranking);
-		System.out.println(myRanking);
+		//System.out.println(rankinglist);
+
 		request.getRequestDispatcher("/WEB-INF/views/ranking/ranking.jsp").forward(request, response);
 	}
 

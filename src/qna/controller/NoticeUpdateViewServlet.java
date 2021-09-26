@@ -36,6 +36,7 @@ public class NoticeUpdateViewServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("nav1", "qna");
 		int notice_no = Integer.parseInt(request.getParameter("notice_no"));
 		
 		Notice n = new NoticeService().selectNotice(notice_no);
