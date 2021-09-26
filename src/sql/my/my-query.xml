@@ -2,255 +2,252 @@
 <!DOCTYPE properties SYSTEM
 "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="getListCount">
-		SELECT
-			   COUNT(*)
-		  FROM BOARD
-		 WHERE STATUS = 'Y'
-		 AND USER_NO = ?
-	</entry>
-	<entry key="getReplyListCount">
-		SELECT 
-        	COUNT(DISTINCT BOARD_NO)
-		  FROM REPLY 
-		 WHERE STATUS = 'Y'
-		 AND USER_NO = ?
-	</entry>
-	<entry key="selectMyBoardList">
-		SELECT
-			      BOARD_NO
-			    , CNAME
-			    , BOARD_TITLE
-			    , NICKNAME
-			    , CREATE_DATE
-			    , COUNT
-		FROM (SELECT 
-					ROWNUM RNUM
-				  , BLIST.*
-	    FROM(SELECT
-	            *
-			      FROM BOARD B
-			      JOIN CATEGORY USING(CID)
-			      JOIN MEMBER M USING (USER_NO)
-			     WHERE B.STATUS = 'Y'
-			     AND USER_NO = ?
-			     ORDER BY BOARD_NO DESC) BLIST)
-		WHERE RNUM BETWEEN ? AND ?
-	</entry>
-	<entry key="selectMyReplyList">
-		SELECT
-			      BOARD_NO
-			    , CNAME
-			    , BOARD_TITLE
-			    , NICKNAME
-			    , CREATE_DATE
-			    , COUNT
-		FROM (SELECT 
-					ROWNUM RNUM
-				  , BLIST.*
-	    FROM(SELECT
-	             DISTINCT BOARD_NO
-			    , CNAME
-			    , BOARD_TITLE
-			    , M.NICKNAME
-			    , B.CREATE_DATE
-			    , COUNT
-			      FROM BOARD B
-			      JOIN CATEGORY USING(CID)
-			      JOIN MEMBER M USING (USER_NO)
-	              JOIN REPLY R USING(BOARD_NO)
-			    WHERE B.STATUS = 'Y'
-	            AND R.STATUS = 'Y'
-			    AND R.USER_NO = ?
-			    ORDER BY BOARD_NO DESC) BLIST)
-			  WHERE RNUM BETWEEN ? AND ?
-	</entry>
-	<entry key="getOpenStudyCount">
-			SELECT
-				   COUNT(S_NO)
-			  FROM STUDY
-			 WHERE S_STATUS = 'Y'
-			 AND USER_NO = ?
-	</entry>
-	<entry key="selectMyOpenStudyList">
-		SELECT
-			      S_NO
-			    , CNAME
-			    , S_NAME
-			    , S_TO
-			    , NICKNAME
-			    , S_STARTPERIOD
+   <entry key="getListCount">
+      SELECT
+            COUNT(*)
+        FROM BOARD
+       WHERE STATUS = 'Y'
+       AND USER_NO = ?
+   </entry>
+   <entry key="getReplyListCount">
+      SELECT 
+           COUNT(DISTINCT BOARD_NO)
+        FROM REPLY 
+       WHERE STATUS = 'Y'
+       AND USER_NO = ?
+   </entry>
+   <entry key="selectMyBoardList">
+      SELECT
+               BOARD_NO
+             , CNAME
+             , BOARD_TITLE
+             , NICKNAME
+             , CREATE_DATE
+             , COUNT
+      FROM (SELECT 
+               ROWNUM RNUM
+              , BLIST.*
+       FROM(SELECT
+               *
+               FROM BOARD B
+               JOIN CATEGORY USING(CID)
+               JOIN MEMBER M USING (USER_NO)
+              WHERE B.STATUS = 'Y'
+              AND USER_NO = ?
+              ORDER BY BOARD_NO DESC) BLIST)
+      WHERE RNUM BETWEEN ? AND ?
+   </entry>
+   <entry key="selectMyReplyList">
+      SELECT
+               BOARD_NO
+             , CNAME
+             , BOARD_TITLE
+             , NICKNAME
+             , CREATE_DATE
+             , COUNT
+      FROM (SELECT 
+               ROWNUM RNUM
+              , BLIST.*
+       FROM(SELECT
+                DISTINCT BOARD_NO
+             , CNAME
+             , BOARD_TITLE
+             , M.NICKNAME
+             , B.CREATE_DATE
+             , COUNT
+               FROM BOARD B
+               JOIN CATEGORY USING(CID)
+               JOIN MEMBER M USING (USER_NO)
+                 JOIN REPLY R USING(BOARD_NO)
+             WHERE B.STATUS = 'Y'
+               AND R.STATUS = 'Y'
+             AND R.USER_NO = ?
+             ORDER BY BOARD_NO DESC) BLIST)
+           WHERE RNUM BETWEEN ? AND ?
+   </entry>
+   <entry key="getOpenStudyCount">
+         SELECT
+               COUNT(S_NO)
+           FROM STUDY
+          WHERE S_STATUS = 'Y'
+          AND USER_NO = ?
+   </entry>
+   <entry key="selectMyOpenStudyList">
+      SELECT
+               S_NO
+             , CNAME
+             , S_NAME
+             , S_TO
+             , NICKNAME
+             , S_STARTPERIOD
                 , S_ENDPERIOD
-		FROM (SELECT 
-					ROWNUM RNUM
-				  , SLIST.*
-	    FROM(SELECT
-	              S_NO
-			    , CNAME
-			    , S_NAME
-			    , S_TO
-			    , NICKNAME
-			    , S_STARTPERIOD
+      FROM (SELECT 
+               ROWNUM RNUM
+              , SLIST.*
+       FROM(SELECT
+                 S_NO
+             , CNAME
+             , S_NAME
+             , S_TO
+             , NICKNAME
+             , S_STARTPERIOD
                 , S_ENDPERIOD
-			      FROM STUDY S
-			      JOIN CATEGORY USING(CID)
-			      JOIN MEMBER M USING (USER_NO)
-			     WHERE S_STATUS = 'Y'
-			     AND USER_NO = ?
-			     ORDER BY S_NO DESC) SLIST)
-		WHERE RNUM BETWEEN ? AND ?
-	</entry>
-	<entry key="selectMyJoinStudyList">
+               FROM STUDY S
+               JOIN CATEGORY USING(CID)
+               JOIN MEMBER M USING (USER_NO)
+              WHERE S_STATUS = 'Y'
+              AND USER_NO = ?
+              ORDER BY S_NO DESC) SLIST)
+      WHERE RNUM BETWEEN ? AND ?
+   </entry>
+   <entry key="selectMyJoinStudyList">
             SELECT
-			      S_NO
-			    , CNAME
-			    , S_NAME
-			    , S_TO
-			    , NICKNAME
-			    , S_STARTPERIOD
+               S_NO
+             , CNAME
+             , S_NAME
+             , S_TO
+             , NICKNAME
+             , S_STARTPERIOD
                 , S_ENDPERIOD
-		FROM (SELECT 
-				  SLIST.*
-	    FROM(SELECT
-	              S_NO
-			    , CNAME
-			    , S_NAME
-			    , S_TO
-			    , NICKNAME
-			    , S_STARTPERIOD
+      FROM (SELECT 
+              SLIST.*
+       FROM(SELECT
+                 S_NO
+             , CNAME
+             , S_NAME
+             , S_TO
+             , NICKNAME
+             , S_STARTPERIOD
                 , S_ENDPERIOD
-			      FROM STUDY S
-			      JOIN CATEGORY USING(CID)
-			      JOIN MEMBER M USING (USER_NO)
+               FROM STUDY S
+               JOIN CATEGORY USING(CID)
+               JOIN MEMBER M USING (USER_NO)
                   JOIN MEMBER_JOINSTUDY MJ USING(S_NO)
-			     WHERE S_STATUS = 'Y'
-			     AND MJ.USER_NO = ?
-			     ORDER BY S_NO DESC) SLIST)
-	</entry>
-	<entry key="deleteOpenStudy">
-		UPDATE STUDY
-			SET S_STATUS = 'N'
-		WHERE S_NO = ?
-		AND USER_NO = ?
-	</entry>
-	<entry key="exitJoinStudy">
-		DELETE FROM MEMBER_JOINSTUDY
-			WHERE S_NO = ?
-			AND USER_NO = ?
-	</entry>
-	<entry key="selectItemList">
-		SELECT
-			     PRODUCT_NAME
+              WHERE S_STATUS = 'Y'
+              AND MJ.USER_NO = ?
+              ORDER BY S_NO DESC) SLIST)
+   </entry>
+   <entry key="deleteOpenStudy">
+      UPDATE STUDY
+         SET S_STATUS = 'N'
+      WHERE S_NO = ?
+      AND USER_NO = ?
+   </entry>
+   <entry key="exitJoinStudy">
+      DELETE FROM MEMBER_JOINSTUDY
+         WHERE S_NO = ?
+         AND USER_NO = ?
+   </entry>
+   <entry key="selectItemList">
+      SELECT
+              PRODUCT_NAME
                , START_DATE
                , EXPIRATION_DATE
                , PRODUCT_PRICE
-		FROM (SELECT 
-				  ILIST.*
-	    FROM(SELECT
-	             PRODUCT_NAME
+      FROM (SELECT 
+              ILIST.*
+       FROM(SELECT
+                PRODUCT_NAME
                , START_DATE
                , P.EXPIRATION_DATE
                , PRODUCT_PRICE
-			      FROM PURCHASE P
-			      JOIN PRODUCT USING(PRODUCT_NO)
-			      JOIN MEMBER M USING (USER_NO)
-			     WHERE USER_NO = ?
-			     ORDER BY PURCHASE_NO DESC) ILIST)
-	</entry>
-	<entry key="insertRefundCoin">
-		INSERT INTO REFUND 
-		(     
-			  REFUND_NO
-			, REFUND_COIN
-			, REFUND_DATE
-			, BANK_ACCOUNT
-			, BANK_NAME
-			, ACCOUNT_NAME
-			, COMPLETE_DATE
-			, USER_NO
-		)
-		VALUES
-		(
-			  SEQ_RNO.NEXTVAL
-			, ?
-			, SYSDATE
-			, ?
-			, ?
-			, ?
-			, NULL
-			, ?
-		)
-	</entry>
-	<entry key="getPurchaseCount">
-		SELECT
-			   COUNT(*)
-		  FROM PURCHASE
-		 WHERE USER_NO = ?
-	</entry>
-	<entry key="getChargeCount">
-		SELECT
-			   COUNT(*)
-		  FROM CHARGE
-		 WHERE USER_NO = ?
-	</entry>
-	<entry key="getUserRefundCount">
-		SELECT
-			   COUNT(*)
-		  FROM REFUND
-		  WHERE COMPLETE_DATE IS NOT NULL
-		  AND USER_NO = ?
-	</entry>
-	<entry key="selectPurchaseList">
+               FROM PURCHASE P
+               JOIN PRODUCT USING(PRODUCT_NO)
+               JOIN MEMBER M USING (USER_NO)
+              WHERE USER_NO = ?
+              ORDER BY PURCHASE_NO DESC) ILIST)
+   </entry>
+   <entry key="insertRefundCoin">
+      INSERT INTO REFUND 
+      (     
+           REFUND_NO
+         , REFUND_COIN
+         , REFUND_DATE
+         , BANK_ACCOUNT
+         , BANK_NAME
+         , ACCOUNT_NAME
+         , COMPLETE_DATE
+         , USER_NO
+      )
+      VALUES
+      (
+           SEQ_RNO.NEXTVAL
+         , ?
+         , SYSDATE
+         , ?
+         , ?
+         , ?
+         , NULL
+         , ?
+      )
+   </entry>
+   <entry key="getPurchaseCount">
+      SELECT
+            COUNT(*)
+        FROM PURCHASE
+       WHERE USER_NO = ?
+   </entry>
+   <entry key="getChargeCount">
+      SELECT
+            COUNT(*)
+        FROM CHARGE
+       WHERE USER_NO = ?
+   </entry>
+   <entry key="getUserRefundCount">
+      SELECT
+            COUNT(*)
+        FROM REFUND
+        WHERE COMPLETE_DATE IS NOT NULL
+        AND USER_NO = ?
+   </entry>
+   <entry key="selectPurchaseList">
              SELECT
-			      PURCHASE_DATE
-			    , PRODUCT_NAME
-			    , PRODUCT_COUNT
-			    , PRODUCT_PRICE
-		FROM (SELECT 
+               PURCHASE_DATE
+             , PRODUCT_NAME
+             , PRODUCT_PRICE
+      FROM (SELECT 
                   ROWNUM RNUM
-				  , PLIST.*
-	    FROM(SELECT
-	              PURCHASE_DATE
-			    , PRODUCT_NAME
-			    , PRODUCT_COUNT
-			    , PRODUCT_PRICE
-			      FROM PURCHASE 
-			      JOIN PRODUCT USING(PRODUCT_NO)
-			     WHERE USER_NO = ?
-			     ORDER BY PURCHASE_NO DESC) PLIST)
+              , PLIST.*
+       FROM(SELECT
+                 PURCHASE_DATE
+             , PRODUCT_NAME
+             , PRODUCT_PRICE
+               FROM PURCHASE 
+               JOIN PRODUCT USING(PRODUCT_NO)
+              WHERE USER_NO = ?
+              ORDER BY PURCHASE_NO DESC) PLIST)
             WHERE RNUM BETWEEN ? AND ?
-	</entry>
-	<entry key="selectChargeList">
+   </entry>
+   <entry key="selectChargeList">
              SELECT
-			      CHARGE_DATE
-			    , CHARGE_COIN
-		FROM (SELECT 
+               CHARGE_DATE
+             , CHARGE_COIN
+      FROM (SELECT 
                     ROWNUM RNUM
-				  , CLIST.*
-	    FROM(SELECT
-	              CHARGE_DATE
-			    , CHARGE_COIN
-			      FROM CHARGE 
-			     WHERE USER_NO = ?
-			     ORDER BY CHARGE_NO DESC) CLIST)
+              , CLIST.*
+       FROM(SELECT
+                 CHARGE_DATE
+             , CHARGE_COIN
+               FROM CHARGE 
+              WHERE USER_NO = ?
+              ORDER BY CHARGE_NO DESC) CLIST)
             WHERE RNUM BETWEEN ? AND ?
-	</entry>
-	<entry key="selectUserRefundList">
+   </entry>
+   <entry key="selectUserRefundList">
              SELECT
-			      REFUND_DATE
-			    , REFUND_COIN
-			    , COMPLETE_DATE
-		FROM (SELECT 
+               REFUND_DATE
+             , REFUND_COIN
+             , COMPLETE_DATE
+      FROM (SELECT 
                     ROWNUM RNUM
-				  , RLIST.*
-	    FROM(SELECT
-	              REFUND_DATE
-			    , REFUND_COIN
-			    , COMPLETE_DATE
-			      FROM REFUND 
-			     WHERE USER_NO = ?
-                 AND COMPLETE_DATE IS NOT NULL
-			     ORDER BY REFUND_NO DESC) RLIST)
+              , RLIST.*
+       FROM(SELECT
+                 REFUND_DATE
+             , REFUND_COIN
+             , COMPLETE_DATE
+               FROM REFUND 
+              WHERE USER_NO = ?
+              ORDER BY REFUND_NO DESC) RLIST)
             WHERE RNUM BETWEEN ? AND ?
-	</entry>
+   </entry>
 </properties>
