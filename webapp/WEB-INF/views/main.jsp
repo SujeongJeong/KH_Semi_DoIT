@@ -37,6 +37,7 @@
 		width : 20px; height : 20px;
 	}
 	.slide-wrapper { display :flex; }
+	.rankikgUl img{ width : 20px; height: 20px;}
 </style>
 </head>
 <body>
