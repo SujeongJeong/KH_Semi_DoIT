@@ -82,6 +82,7 @@
 	width : 100px;
 	text-align : center;
 	font-size : 15pt;
+	cursor: pointer;
 }
 
 #nav a:hover:not(.current){
@@ -92,4 +93,5 @@
 	color : #5FC5FF;
 	font-weight : bold;
 }
+
 

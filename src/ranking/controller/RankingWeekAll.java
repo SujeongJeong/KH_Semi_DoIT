@@ -1,4 +1,4 @@
-package main.controller;
+package ranking.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,25 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.model.service.TodolistService;
-import main.model.vo.Todolist;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import member.model.vo.Member;
 import ranking.model.service.RankingService;
 import ranking.model.vo.Ranking;
-import study.model.service.StudyService;
-import study.model.vo.Study;
 
 /**
- * Servlet implementation class MainServlet
+ * Servlet implementation class RankingWeekAll
  */
-@WebServlet("/main")
-public class MainServlet extends HttpServlet {
+@WebServlet("/ranking/WeekAll")
+public class RankingWeekAll extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainServlet() {
+    public RankingWeekAll() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,25 +36,26 @@ public class MainServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userNo = 0;
-		if((Member)request.getSession().getAttribute("loginUser") != null){
+		if((Member)request.getSession().getAttribute("loginUser") != null) {
 			userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		}
-		List<Todolist> myList = new TodolistService().selectMyList(userNo);
-		List<Study> myStudy = new StudyService().selectMyStudy(userNo);
-		Ranking myRanking = new RankingService().selectMyRanking(userNo);
-		List<Ranking> rankingList = new RankingService().selectThirdRanking();
-		
-		request.setAttribute("Todolist", myList);
-		request.setAttribute("Study", myStudy);
-		request.setAttribute("myRanking", myRanking);
-		request.setAttribute("rankingList", rankingList);
-		request.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(request, response);
+		// 나의 스터디방 리스트
+		//List<Study> myStudy = new StudyService().selectMyStudy(userNo);
+		// 나의 랭킹 가져오기
+		//Ranking myRanking = new RankingService().selectMyRanking(userNo);
+		// 기본값인 전체, 어제 랭킹 불러오기
+		List<Ranking> rankinglist = new RankingService().selectWeekAll();
+		System.out.println(rankinglist);
+		response.setContentType("application/json; charset=utf-8");
+		Gson gson = new GsonBuilder().create();
+		gson.toJson(rankinglist, response.getWriter());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
