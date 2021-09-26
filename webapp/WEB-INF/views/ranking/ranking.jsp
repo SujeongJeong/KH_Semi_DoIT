@@ -12,17 +12,18 @@
 ul{	list-style: none;	}
 .ranking-wrapper li{ font-size : 20px; padding: 10px; }
 .ranking-wrapper li span{ margin-right : 10px; margin-left : 10px; }
-.ranking-wrapper { margin-top : 35px;}
+.ranking-wrapper{ margin-top : 35px;}
 .title{ font-weight : bold;  font-size : 18px;  }
-.standard-wrapper {  height: 20px; }
-.standard-wrapper span { float : right; height : 20px; font-size : 15px; color : #E5E5E5; padding : 10px;}
+.standard-wrapper{  height: 20px; }
+.standard-wrapper span{ float : right; height : 20px; font-size : 15px; color : #E5E5E5; padding : 10px;}
 .ranking { border-bottom: 1px solid #E5E5E5; }
-.me { background-color : #E5E5E5; border-radius : 5px; margin-top : 10px;}
+.me{ background-color : #E5E5E5; border-radius : 5px; margin-top : 10px;}
 .group-wrapper, .period-wrapper { margin-left : 10px; margin-bottom : 15px;}
 .group-wrapper *:not([type=radio],select), .period-wrapper *:not([type=radio]) { margin-right : 30px; }
-.outer { border : 1px solid #E5E5E5; border-radius : 5px; height : 80px; margin-left :25px; padding-left : 20px; padding-top:5px;  }
-select { padding : 3px;}
-.ranking img{ width:20px; height:20px;}
+.outer{ border : 1px solid #E5E5E5; border-radius : 5px; height : 80px; margin-left :25px; padding-left : 20px; padding-top:5px;  }
+select{ padding : 3px;}
+.img-wrapper img{ width:30px; height:30px;}
+.img-wrapper img{ width:30px; height:30px;}
 </style>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
@@ -54,8 +55,10 @@ select { padding : 3px;}
 		
 		<ul class="ranking-wrapper" >
 		 <c:forEach var="r" items="${ Ranking }">
-		 	<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>${ r.rank }위</span>
-		 	<span class="nickname">${ r.nickName }</span><img src="${contextPath }${ r.profile_img}" alt="profile">
+		 	<li class="ranking"><img src="resources/images/flag-first.png" alt="1위">
+		 	<span>${ r.rank }위</span>
+		 	<span class="nickname">${ r.nickName }</span>
+		 	<span class="img-wrapper"><img src="${contextPath }${ r.profile_img}" alt="profile"></span>
 		 	<span class='hours'>${ r.s_time }</span></li>
 		 </c:forEach>
 		 <%-- 
@@ -74,7 +77,10 @@ select { padding : 3px;}
 			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span class="nickname">로그인하여 나의 랭킹을 확인해보세요.</span></li>			
 			</c:if>
 			<c:if test="${ loginUser != null }">
-			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>${ myRanking.rank }위</span><span class="nickname">${ myRanking.nickName }</span><img src="${ contextPath }${ myRanking.profile_img }" alt="profile"><span class='hours'>${ myRanking.s_time }</span></li>			
+			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>${ myRanking.rank }위</span>
+			<span class="nickname">${ myRanking.nickName }</span>
+			<span class="img-wrapper"><img src="${ contextPath }${ myRanking.profile_img }" alt="profile"></span>
+			<span class='hours'>${ myRanking.s_time }</span></li>			
 			</c:if>
 		</ul>
 

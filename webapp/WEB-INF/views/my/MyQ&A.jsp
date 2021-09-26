@@ -40,10 +40,6 @@
 		color : #5FC5FF;
 		font-weight : bold;
 	}
-	 .board_list .tit {
-    	text-align: center;
-	}
-	/* 메인 콘텐츠 영역 */
 	
 </style>
 </head>

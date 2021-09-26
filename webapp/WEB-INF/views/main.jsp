@@ -37,7 +37,7 @@
 		width : 20px; height : 20px;
 	}
 	.slide-wrapper { display :flex; }
-	.rankikgUl img{ width : 20px; height: 20px;}
+	.img-wrapper img{ width : 30px; height: 30px;}
 </style>
 </head>
 <body>
@@ -98,14 +98,20 @@
 				<span class="lightgray-c date">yyyy.MM.dd(E요일) 오전 0시 기준</span>
 				<ul class="rankikgUl">
 				<c:forEach var="r" items="${ rankingList }">
-				<li class="first"><img src="${ contextPath }${ r.rank_img}" alt="1위"><span>${ r.rank }위</span><span class="nickname">${ r.nickName }</span><img src="${ contextPath }${ r.profile_img }" alt="profile"><span class='hours'>${ r.s_time }</span></li>
+				<li class="first"><img src="${ contextPath }${ r.rank_img}" alt="1위"><span>${ r.rank }위</span>
+				<span class="nickname">${ r.nickName }</span>
+				<span class="img-wrapper"><img src="${ contextPath }${ r.profile_img }" alt="profile"></span>
+				<span class='hours'>${ r.s_time }</span></li>
 				</c:forEach>
 				<c:choose>
 				<c:when test="${ loginUser == null }">
 				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹">로그인하여 나의 랭킹을 확인해보세요.</li>
 				</c:when>
 				<c:otherwise>
-				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹"><span>${ myRanking.rank }위</span><span class="nickname">${ myRanking.nickName }</span><img src="${ contextPath }${ myRanking.profile_img }" alt="profile"><span class='hours'>${ myRanking.s_time }</span></li>
+				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹"><span>${ myRanking.rank }위</span>
+				<span class="nickname">${ myRanking.nickName }</span>
+				<span class="img-wrapper"><img src="${ contextPath }${ myRanking.profile_img }" alt="profile"></span>
+				<span class='hours'>${ myRanking.s_time }</span></li>
 				</c:otherwise>
 				</c:choose>
 				</ul>
