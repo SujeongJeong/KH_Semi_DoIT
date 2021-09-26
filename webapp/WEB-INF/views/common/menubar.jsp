@@ -49,7 +49,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:if test="${ loginUser.userType =='U'  }">
-					<a href="${ contextPath }/my/home"><img class="user" src="${ contextPath }${ loginUser.profileImg }" alt="user"></a>
+					<a class="user-wrapper" href="${ contextPath }/my/home"><img class="user" src="${ contextPath }${ loginUser.profileImg }" alt="user"></a>
 					</c:if>
 					<c:if  test="${ loginUser.userType =='A'  }">
 					<a href="${ contextPath }/my/home"><img class="user" src="${ contextPath }/resources/images/admin.png" alt="admin"></a>
