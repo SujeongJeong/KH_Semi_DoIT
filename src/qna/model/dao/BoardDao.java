@@ -366,4 +366,49 @@ public class BoardDao {
 		
 		return result;
 	}
+
+	// 댓글 수정
+	public int updateReply(Connection conn, Reply r) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("updateReply");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, r.getReply_content());
+			pstmt.setInt(2, r.getReply_no());
+			pstmt.setInt(3, r.getBoard_no());
+
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	// 댓글 삭제
+	public int deleteReply(Connection conn, int reply_no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("deleteReply");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, reply_no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

@@ -36,15 +36,12 @@ public class NoticeUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		int notice_no = Integer.parseInt(request.getParameter("notice_no"));
 		String notice_title = request.getParameter("notice_title");
 		String notice_content = request.getParameter("notice_content");
 		
 		Notice n = new Notice(notice_no, notice_title, notice_content);
-		
-//		System.out.println(notice_no);
-//		System.out.println(notice_title);
-//		System.out.println(notice_content);
 		
 		int result = new NoticeService().updateNotice(n);
 		

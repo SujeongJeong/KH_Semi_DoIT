@@ -69,40 +69,53 @@ public class BoardService {
 	}
 
 	// 조회수 증가
-//	public int increaseCount(int bid) {
-//		Connection conn = getConnection();
-//		
-//		int result = bd.increaseCount(conn, bid);
-//		
-//		if(result > 0) {
-//			commit(conn);
-//		} else {
-//			rollback(conn);
-//		}
-//		
-//		close(conn);
-//		
-//		return result;
-//	}
-
-	// 게시글 1개 조회
-	public Board selectBoard(int bid) {
+	public int increaseCount(int bid) {
 		Connection conn = getConnection();
 		
-		// 게시글 조회수
 		int result = bd.increaseCount(conn, bid);
 		
-		
-		Board b = null;
 		if(result > 0) {
-			b = bd.selectBoard(conn, bid);
-			// 해당 게시글에 대한 댓글 리스트 조회 로직 추가
-			b.setReplyList(bd.selectReplyList(conn, bid));
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
 		
+		close(conn);
+		
+		return result;
+	}
+
+//	// 게시글 1개 조회
+//	public Board selectBoard(int bid) {
+//		Connection conn = getConnection();
+//		
+//		// 게시글 조회수
+//		int result = bd.increaseCount(conn, bid);
+//		
+//		
+//		Board b = null;
+//		if(result > 0) {
+//			b = bd.selectBoard(conn, bid);
+//			// 해당 게시글에 대한 댓글 리스트 조회 로직 추가
+//			b.setReplyList(bd.selectReplyList(conn, bid));
+//			commit(conn);
+//		} else {
+//			rollback(conn);
+//		}
+//		
+//		
+//		close(conn);
+//		
+//		return b;
+//	}
+	
+	// 게시글 1개 조회
+	public Board selectBoard(int bid) {
+		Connection conn = getConnection();
+		
+		Board b = bd.selectBoard(conn, bid);
+		// 해당 게시글에 대한 댓글 리스트 조회 로직 추가
+		b.setReplyList(bd.selectReplyList(conn, bid));
 		
 		close(conn);
 		
@@ -170,6 +183,43 @@ public class BoardService {
 		}
 		
 		return replyList;
+	}
+
+	// 댓글 수정
+	public List<Reply> updateReply(Reply r) {
+		Connection conn = getConnection();
+		
+		int result = bd.updateReply(conn, r);
+		
+		List<Reply> replyList = null;
+		
+		if(result > 0) {
+			commit(conn);
+			replyList = bd.selectReplyList(conn, r.getBoard_no());
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return replyList;
+	}
+
+	// 댓글 삭제
+	public int deleteReply(int reply_no) {
+		Connection conn = getConnection();
+		
+		int result = bd.deleteReply(conn, reply_no);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 	}
 
 }

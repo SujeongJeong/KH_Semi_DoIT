@@ -58,8 +58,6 @@ public class QnaHomeServlet extends HttpServlet {
 
 		String searchValue = request.getParameter("searchValue");
 		
-		System.out.println("seachvalue : " + searchValue);
-		
 		
 //		조회를 할때 리턴받아야 할 값이 곱에 대한 리스트값, 페이지에 대해서 페이징바에서
 //		몇번부터 몇번까지 있어야 할지에 대한 값 여러개의 값을 가져와야한다.  map안에다가 담아서 가져오려한다.
@@ -69,7 +67,6 @@ public class QnaHomeServlet extends HttpServlet {
 		// 응답 페이지 구성 시 사용할 데이터 설정
 		request.setAttribute("pi", map.get("pi"));
 		request.setAttribute("boardList", map.get("boardList"));
-		System.out.println(map.get("boardList"));
 		
 		request.getRequestDispatcher("/WEB-INF/views/qna/home.jsp").forward(request, response);
 	}

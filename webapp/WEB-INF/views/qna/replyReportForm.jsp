@@ -64,11 +64,11 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 <body>
 <%    
 	request.setCharacterEncoding("UTF-8");
-    int bid = Integer.parseInt(request.getParameter("board_no"));
+    int rid = Integer.parseInt(request.getParameter("reply_no"));
  
 %>
     <div class="outer">
-	    <form id="reportForm" action="<%= request.getContextPath() %>/qnaReport"
+	    <form id="reportForm" action="<%= request.getContextPath() %>/replyReport"
 	    method="post" onsubmit="return checkReport();">
 	        <h1>신고 사유</h1>
 	        <div class="report_radio">
@@ -86,7 +86,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 	        <div class="btn_area">
 				<button id="updatePwdBtn">등록</button>
 			</div>
-			 <input type="hidden" name="board_no" value=<%= bid %> >
+			 <input type="hidden" name="reply_no" value=<%= rid %> >
 	    </form>
     </div>
 	

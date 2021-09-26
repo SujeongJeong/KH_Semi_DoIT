@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import qna.model.service.BoardService;
-import qna.model.vo.Board;
-
 /**
- * Servlet implementation class QnaUpdateViewServlet
+ * Servlet implementation class NoticeReplyUpdateServlet
  */
-@WebServlet("/qna/updateView")
-public class QnaUpdateViewServlet extends HttpServlet {
+@WebServlet("/noticeReply/update")
+public class NoticeReplyUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaUpdateViewServlet() {
+    public NoticeReplyUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,26 +26,21 @@ public class QnaUpdateViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int notice_no = Integer.parseInt(request.getParameter("notice_no"));
+		int reply_no = Integer.parseInt(request.getParameter("reply_no"));
 		
+
+		
+		response.sendRedirect(request.getContextPath() + "/notice/detail?notice_no=" + notice_no + "&flag=u&reply_no=" + reply_no);
+	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("nav1", "qna");
-		
-		int board_no = Integer.parseInt(request.getParameter("board_no"));
-		
-		Board b = new BoardService().selectBoard(board_no);
-		
-		if(b != null) {
-			request.setAttribute("board", b);
-			request.getRequestDispatcher("/WEB-INF/views/qna/qnaUpdateView.jsp").forward(request, response);
-		} else {
-			request.setAttribute("msg", "수정한 게시글을 조회하는데 실패하였습니다.");
-			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
-		}
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

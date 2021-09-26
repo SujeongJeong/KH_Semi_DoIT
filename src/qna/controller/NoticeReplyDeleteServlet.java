@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import qna.model.service.BoardService;
-import qna.model.vo.Board;
 
 /**
- * Servlet implementation class QnaUpdateViewServlet
+ * Servlet implementation class NoticeReplyDeleteServlet
  */
-@WebServlet("/qna/updateView")
-public class QnaUpdateViewServlet extends HttpServlet {
+@WebServlet("/noticeReply/delete")
+public class NoticeReplyDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaUpdateViewServlet() {
+    public NoticeReplyDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,26 +28,26 @@ public class QnaUpdateViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int reply_no = Integer.parseInt(request.getParameter("reply_no"));
+		int notice_no = Integer.parseInt(request.getParameter("notice_no"));
 		
+		int result = new BoardService().deleteReply(reply_no);
+		
+		if(result > 0) {
+			request.getSession().setAttribute("msg", "댓글이 삭제되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/notice/detail?notice_no=" + notice_no);
+		} else {
+			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
+			request.getSession().setAttribute("msg", "댓글 삭제에 실패하였습니다.");
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("nav1", "qna");
+
 		
-		int board_no = Integer.parseInt(request.getParameter("board_no"));
-		
-		Board b = new BoardService().selectBoard(board_no);
-		
-		if(b != null) {
-			request.setAttribute("board", b);
-			request.getRequestDispatcher("/WEB-INF/views/qna/qnaUpdateView.jsp").forward(request, response);
-		} else {
-			request.setAttribute("msg", "수정한 게시글을 조회하는데 실패하였습니다.");
-			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
-		}
 	}
 
 }

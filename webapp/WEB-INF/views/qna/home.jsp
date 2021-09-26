@@ -40,16 +40,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="manager">
-                        <td></td>
-                        <td></td>
-                        <td class="tit" onclick="detailView(<%-- ${b.bid} --%>)">
-                           Q_A 게시판 사용시 주의사항!! [12]
-                        </td>
-                        <td>관리자</td>
-                        <td>2021-08-29</td>
-                        <td>211</td>
-                    </tr>
                     
 						<c:forEach var="n" items="${ noticeList }">
 							<tr class = "manager"<%--  onclick="detailView(${ n.notice_no });" --%>>
