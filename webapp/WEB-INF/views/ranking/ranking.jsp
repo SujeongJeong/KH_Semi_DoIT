@@ -8,6 +8,7 @@
 <title>랭킹 - Do IT</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css?after' rel='stylesheet'>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <style>
 ul{	list-style: none;	}
 .ranking-wrapper li{ font-size : 20px; padding: 10px; }
@@ -15,7 +16,7 @@ ul{	list-style: none;	}
 .ranking-wrapper{ margin-top : 35px;}
 .title{ font-weight : bold;  font-size : 18px;  }
 .standard-wrapper{  height: 20px; }
-.standard-wrapper span{ float : right; height : 20px; font-size : 15px; color : #E5E5E5; padding : 10px;}
+.standard-wrapper span{ float : right; height : 20px; font-size : 15px; color : #c4c4c4; padding : 10px;}
 .ranking { border-bottom: 1px solid #E5E5E5; }
 .me{ background-color : #E5E5E5; border-radius : 5px; margin-top : 10px;}
 .group-wrapper, .period-wrapper { margin-left : 10px; margin-bottom : 15px;}
@@ -44,8 +45,8 @@ select{ padding : 3px;}
 			<div class="period-wrapper">
 			<span class="title">기간  </span>
 			<input type="radio" class="period" name="period" value="yesterday" checked><label for="yesterday">어제</label>
-			<input type="radio" class="period" name="period" value="week"><label for="week">이번주</label>
-			<input type="radio" class="period" name="period" value="month"><label for="month">이번달</label>		
+			<input type="radio" class="period" name="period" value="week"><label for="week">최근 7일</label>
+			<input type="radio" class="period" name="period" value="month"><label for="month">최근 30일</label>		
 			</div>
 		</div>	
 			
@@ -55,24 +56,12 @@ select{ padding : 3px;}
 		
 		<ul class="ranking-wrapper" >
 		 <c:forEach var="r" items="${ Ranking }">
-		 	<li class="ranking"><img src="resources/images/flag-first.png" alt="1위">
+		 	<li class="ranking"><img src="${ contextPath }${ r.rank_img }" alt="1위">
 		 	<span>${ r.rank }위</span>
 		 	<span class="nickname">${ r.nickName }</span>
 		 	<span class="img-wrapper"><img src="${contextPath }${ r.profile_img}" alt="profile"></span>
 		 	<span class='hours'>${ r.s_time }</span></li>
 		 </c:forEach>
-		 <%-- 
-			<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>1위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag-second.png" alt="2위"><span>2위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag-third.png" alt="3위"><span>3위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag.png" alt="4위"><span>4위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag.png" alt="5위"><span>5위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag.png" alt="6위"><span>6위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag.png" alt="7위"><span>7위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag.png" alt="8위"><span>8위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
-			<li class="ranking"><img src="resources/images/flag.png" alt="9위"><span>9위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
-			<li class="last"><img src="resources/images/flag.png" alt="10위"><span>10위</span><span class="nickname">nickname</span><span class='hours'>00:00:00</span></li>
-		--%>	
 			<c:if test="${ loginUser == null }">
 			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span class="nickname">로그인하여 나의 랭킹을 확인해보세요.</span></li>			
 			</c:if>
@@ -99,48 +88,147 @@ select{ padding : 3px;}
 		});
 	</script>
 	</c:if>
-	<%-- 기간 라디오 버튼 누를때마다 기준 날짜 다르게 출력 --%>
+	<%-- 기간 라디오 버튼 누를때마다 기준 날짜, 랭킹 다르게 출력 --%>
 	<script>
-	$(document).on('change', '.period', function(){
-		var period = $(".period:checked").val();
-		var span = document.getElementById("standard");
-		var today = new Date();
-		var standard = null;
-	
-		// 월요일 구하는 함수
-		function getMondayDate(d) {
-		    var paramDate = d;
-		    var day = paramDate.getDay();
-		    var diff = paramDate.getDate() - day + (day == 0 ? -6 : 1);
-		    return new Date(paramDate.setDate(diff));
-		}
-		
-		if(period == "yesterday"){
-			standard = new Date(today.setDate(today.getDate() -1 ));
-		}else if(period == "week"){
-			standard = getMondayDate(today);
-		}else if(period == "month"){
-			standard = new Date(today.getFullYear(), today.getMonth(),1);
-		}
-		// 날짜 포맷 변경
-		var days = ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'];
-		span.innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 기준";
-		
+	var span = document.getElementById("standard");
+	var days = ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'];
 
-	});
-	
 	// standard 기본 값 함수
 	$(function(){
-		var period = $(".period:checked").val();
 		var today = new Date();
-		var span = document.getElementById("standard");
+		var period = $(".period:checked").val();
+		var standard = null;
 		if(period == "yesterday"){
 			standard = new Date(today.setDate(today.getDate() -1 ));
 		}
 		var days = ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'];
 		span.innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 기준";
 	});
-	</script>
 	
+		// yesterday
+		$(".period[value='yesterday']").click(function(){
+			// 기준날짜
+			console.log("yesterday");
+			var standard = null;
+			var today = new Date();
+			standard = new Date(today.setDate(today.getDate() -1 ));
+			span.innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 기준";
+			// 랭킹
+			$.ajax({
+				url : "${ contextPath }/ranking/YesterdayAll",
+				type : "post",
+				dataType : "json",
+				success : function(list){
+					if( list != null){
+						var list ='';
+						// var my = '';
+						for(var key in list){
+							html += '<li class="ranking"><img src=\"/Do_IT'+ list[key].rank_img +'\" alt="1위">'+
+						 			'<span>'+list[key].rank +'위</span>'+
+						 			'<span class="nickname">'+ list[key].nickName +'</span>'+
+						 			'<span class="img-wrapper"><img src=\"/Do_IT'+ list[key].profile_img +'\" alt="profile"></span>'+
+						 			'<span class="hours">'+ list[key].s_time +'</span></li>';
+						}
+						/*my += '<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>'+${ myrank.rank }위+'</span>'+
+							  '<span class="nickname">'+${ myrank.nickName }+'</span>'+
+							  '<span class="img-wrapper"><img src="'+${ contextPath }${ myrank.profile_img }+'" alt="profile"></span>'+
+							  '<span class="hours">'+ ${ myrank.s_time }+'</span></li>';*/
+						
+						$(".ranking-wrapper").html(list);
+						/*$(".ranking-wrapper").append(my);*/
+					}else{
+						alert("랭킹을 불러오는데 실패하였습니다.");
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+		});
+	
+		// week
+		$(".period[value='week']").click(function(){
+			// 기준 날짜
+			console.log("week");
+			var standard = null;
+			var today = new Date();
+			standard = new Date(today.setDate(today.getDate() -7 ));
+			span.innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 ~ 어제 기준";
+			// 랭킹
+			$.ajax({
+				url : "${ contextPath }/ranking/WeekAll",
+				type : "post",
+				dataType : "json",
+				success : function(list){
+					if( list != null){
+						var list ='';
+						// var my = '';
+						for(var key in list){
+							html += '<li class="ranking"><img src=\"/Do_IT'+ list[key].rank_img +'\" alt="1위">'+
+						 			'<span>'+list[key].rank +'위</span>'+
+						 			'<span class="nickname">'+ list[key].nickName +'</span>'+
+						 			'<span class="img-wrapper"><img src=\"/Do_IT'+ list[key].profile_img +'\" alt="profile"></span>'+
+						 			'<span class="hours">'+ list[key].s_time +'</span></li>';
+						}
+						/*my += '<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>'+${ myrank.rank }위+'</span>'+
+							  '<span class="nickname">'+${ myrank.nickName }+'</span>'+
+							  '<span class="img-wrapper"><img src="'+${ contextPath }${ myrank.profile_img }+'" alt="profile"></span>'+
+							  '<span class="hours">'+ ${ myrank.s_time }+'</span></li>';*/
+						
+						$(".ranking-wrapper").html(list);
+						/*$(".ranking-wrapper").append(my);*/
+					}else{
+						alert("랭킹을 불러오는데 실패하였습니다.");
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+		
+		});
+		
+		// month
+		$(".period[value='month']").click(function(){
+			// 기준 날짜
+			console.log("month");
+			var standard = null;
+			var today = new Date();
+			standard = new Date(today.setDate(today.getDate() -30 ));
+			span.innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 ~ 어제 기준";
+			// 랭킹
+			$.ajax({
+				url : "${ contextPath }/ranking/MonthAll",
+				type : "post",
+				dataType : "json",
+				success : function(list){
+					if( list != null){
+						var list ='';
+						// var my = '';
+						for(var key in list){
+							html += '<li class="ranking"><img src=\"/Do_IT'+ list[key].rank_img +'\" alt="1위">'+
+						 			'<span>'+list[key].rank +'위</span>'+
+						 			'<span class="nickname">'+ list[key].nickName +'</span>'+
+						 			'<span class="img-wrapper"><img src=\"/Do_IT'+ list[key].profile_img +'\" alt="profile"></span>'+
+						 			'<span class="hours">'+ list[key].s_time +'</span></li>';
+						}
+						/*my += '<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>'+${ myrank.rank }위+'</span>'+
+							  '<span class="nickname">'+${ myrank.nickName }+'</span>'+
+							  '<span class="img-wrapper"><img src="'+${ contextPath }${ myrank.profile_img }+'" alt="profile"></span>'+
+							  '<span class="hours">'+ ${ myrank.s_time }+'</span></li>';*/
+						
+						$(".ranking-wrapper").html(list);
+						/*$(".ranking-wrapper").append(my);*/
+					}else{
+						alert("랭킹을 불러오는데 실패하였습니다.");
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+		
+		});
+	</script>
 </body>
 </html>

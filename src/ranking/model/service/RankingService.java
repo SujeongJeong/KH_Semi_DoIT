@@ -47,5 +47,50 @@ public class RankingService {
 			
 		return resultList;
 	}
-
+	
+	// 최근 7일 랭킹 불러오기(전체)
+	public List<Ranking> selectWeekAll() {
+		Connection conn = getConnection();
+		
+		List<Ranking> resultList = rd.selectWeekAll(conn);
+		
+		if(resultList != null) {
+			close(conn);
+		}
+			
+		return resultList;
+	}
+	
+	// 최근 30일 랭킹 불러오기(전체)
+		public List<Ranking> selectMonthAll() {
+			Connection conn = getConnection();
+			
+			List<Ranking> resultList = rd.selectMonthAll(conn);
+			
+			if(resultList != null) {
+				close(conn);
+			}
+				
+			return resultList;
+		}
+		
+	// 나의 랭킹 최근 7일
+	public Ranking selectMyWeekAll(int userNo) {
+		Connection conn = getConnection();
+		
+		Ranking my = rd.selectMyWeekAll(conn, userNo);
+		
+		if(my != null) close(conn);
+		return my;
+	}
+	
+	// 나의 랭킹 최근 30일
+		public Ranking selectMyMonthAll(int userNo) {
+			Connection conn = getConnection();
+			
+			Ranking my = rd.selectMyWeekAll(conn, userNo);
+			
+			if(my != null) close(conn);
+			return my;
+		}
 }

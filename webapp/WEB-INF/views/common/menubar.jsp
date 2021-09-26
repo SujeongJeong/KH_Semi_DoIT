@@ -75,7 +75,7 @@
 			<li><a href="${ contextPath }/qna/home"<% if ("qna".equals(nav1)) { %>class="current"<%}%>>Q&amp;A</a></li>
 			<c:choose>
 			<c:when test="${ loginUser == null || loginUser.userType == 'U' }">
-			<li><a class="mypage" onclick="login();" href="${ contextPath }/my/home"<% if ("my".equals(nav1)) { %>class="current"<%}%>>마이페이지</a></li>
+			<li><a class="mypage" onclick="login();" <% if ("my".equals(nav1)) { %>class="current"<%}%>>마이페이지</a></li>
 			</c:when>
 			<c:when  test="${ loginUser != null && loginUser.userType =='A'  }">
 			<li><a href="${ contextPath }/admin/home"<% if ("admin".equals(nav1)) { %>class="current"<%}%>>관리페이지</a></li>
@@ -88,11 +88,18 @@
 	<c:if test="${ loginUser == null }">
 	<script>
 		function login(){
-			if(confirm("로그인 하시겠습니까?")){
-				 location.href="${ contextPath}/login";
-			 }
-			return false;
+				if(confirm("로그인 하시겠습니까?")){
+					 location.href="${ contextPath}/login";
+					 return false;
+				 }
 		  };
+	</script>
+	</c:if>
+	<c:if test="${ loginUser != null }">
+	<script>
+		function login(){
+			location.href="${ contextPath }/my/home";
+		}
 	</script>
 	</c:if>
 
