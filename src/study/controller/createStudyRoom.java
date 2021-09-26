@@ -24,6 +24,7 @@ import common.Attachment;
 import common.MyFileRenamePolicy;
 import member.model.vo.Member;
 import study.model.service.StudyService;
+import study.model.vo.MemberJoinStudy;
 import study.model.vo.Study;
 
 /**
@@ -119,18 +120,27 @@ public class createStudyRoom extends HttpServlet {
 				e.printStackTrace();
 			}
 			int result = 0;
-			if (s_startPeriod != null && s_endPeriod != null && s_startTime != null && s_endTime != null) {
-				Study s = new Study(s_name, s_to, s_day, s_startPeriod, s_endPeriod, s_startTime, s_endTime, s_explain,
-						s_notice, user_no, cid, photo);
-//				System.out.println(s);
-				result = new StudyService().insertStudyRoom(s);
-			} else {
-				// 에러페이지 이동
-		}
 			
-		if(result>0) {
-			// 스터디방 생성 후 목록으로 재요청
-			response.sendRedirect(request.getContextPath() + "/study/home");
+			Study s = new Study(s_name, s_to, s_day, s_startPeriod, s_endPeriod, s_startTime, s_endTime, s_explain,
+					s_notice, user_no, cid, photo);
+			result = new StudyService().insertStudyRoom(s);
+			
+			
+			// 스터디방 생성 성공시, 방장도 정원수에 포함되므로 db에 저장하기 위해 회원이 방금 만든 스터디방의 s_no 가져오는 처리
+			Study s2 = new StudyService().selectStudyRoomOnlySNo(user_no);
+			int s_no = s2.getS_no();
+				
+		if (result > 0) {
+			//스터디방 생성 성공시, 방장도 정원수에 포함되므로 db에 저장처리
+			MemberJoinStudy mjs = new MemberJoinStudy(user_no,s_no);
+			int result2 = new StudyService().insertMemberJoinStudy(mjs);
+			
+			if(result2 > 0) {
+				response.sendRedirect(request.getContextPath() + "/study/home");
+			} else {
+//				request.setAttribute("msg", "스터디방 생성을 실패하였습니다.");
+//				request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
+			}
 		} else {
 			// 로직 실패시 저장된 파일 삭제
 			// 서버에 저장된 이름으로 파일 가져와서 삭제

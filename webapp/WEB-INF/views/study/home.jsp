@@ -99,6 +99,27 @@
 	gap: 20px 15px;
 }
 
+.studyList2 {
+    display: grid;
+    grid-template-columns: 168PX 168PX 168PX 168PX 168PX;
+    grid-auto-rows: minmax(229px, auto);
+    gap: 17px 35px;
+    width: 1000px;
+}
+
+.studyList3{
+	display: grid;
+    grid-template-columns: 168PX 168PX 168PX 166PX 168PX;
+    grid-auto-rows: minmax(229px, auto);
+    gap: 17px 35px;
+    width: 1000px;
+}
+
+
+.studyList_wrapper{
+	position : absolute;
+}
+
 .sCategory{
     border: 1px solid #5886fb;
     border-radius: 10px;
@@ -128,6 +149,16 @@
 	position: relative;
 }
 
+.studyRoom2{
+	position: relative;
+    width: 165px
+}
+
+.studyRoom3{
+	position: relative;
+    width: 165px
+}
+
 .sub_wrapper {
 	width: 100%;
     margin-bottom: 5px;
@@ -152,14 +183,33 @@
 
 .studyTO {
 	position: absolute;
-	top:125px;
-	left:10px;
+    top: 127px;
+    left: 5px;
     border: 1px solid #eee;
     border-radius: 5px;
     padding: 0px 8px;
     background: #fff;
     font-size: 14px;
     font-weight: bold;
+    width: 40px;
+    text-align: center;
+}
+.studyTO2 {
+    position: absolute;
+    top: 128px;
+    left: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    width: 20px;
+}
+.studyTO3 {
+    position: absolute;
+    top: 128px;
+    left: 40px;
+    font-size: 14px;
+    font-weight: bold;
+    width: 20px;
+    text-align: center;
 }
 
 .sName {
@@ -235,14 +285,22 @@
 		</div>
 		
 		<div class="search createStudy">
-			<button class="studyCreateBtn"
-				onclick="createBtnEvent()">스터디	만들기</button>
+			<button class="studyCreateBtn" onclick="createBtnEvent()">스터디 만들기</button>
 			<c:if test="${ loginUser != null }">
-				<script>
+				<c:if test="${ userJoinStudyNum.userJoinStudyNum <= 3 }">
+					<script>
 					function createBtnEvent(){
 						location.href='<%=request.getContextPath()%>/study/createStudy';
 					}
 				</script>
+				</c:if>
+				<c:if test="${ userJoinStudyNum.userJoinStudyNum > 3 }">
+					<script>
+					function createBtnEvent(){
+						alert("가입 한도가 초과되어 스터디방에 가입/생성 하실 수 없습니다.");
+					}
+				</script>
+				</c:if>
 			</c:if>
 			<c:if test="${ loginUser == null }">
 				<script>
@@ -269,9 +327,9 @@
 					
 						<c:set var="studyMemo" value="1"/>
 						
-						<div class="studyTO">
-						${ studyMemo } / ${ g.s_to }</div>
+						<div class="studyTO">${ g.studyMemberNum } / ${ g.s_to } </div>
 					</div>
+					
 					<div class="sub_wrapper">
 						<div class="sName">${ g.s_name }</div>
 					</div>
@@ -283,8 +341,7 @@
 					</c:if>
 				</div>
 			</c:forEach>
-			
-			<c:if test="${ loginUser.userType == 'A' }">
+				<c:if test="${ loginUser.userType == 'A' }">
 			<div class="deleteStudyRoom">
 				<button type="submit" class="deleteStudyRoomBtn">스터디 삭제</button>
 			</div>

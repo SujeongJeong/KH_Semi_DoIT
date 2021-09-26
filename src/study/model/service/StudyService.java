@@ -5,6 +5,7 @@ import static common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
+import member.model.vo.Member;
 import study.model.dao.StudyDao;
 import study.model.vo.MemberJoinStudy;
 import study.model.vo.Study;
@@ -49,6 +50,7 @@ public class StudyService {
 		}else {
 			rollback(conn);
 		}
+		
 		close(conn);
 		return result1 > 0 && result2 > 0 ? 1 : 0;
 	}
@@ -159,6 +161,28 @@ public class StudyService {
 	      close(conn);
 	      return resultList;
 	   }
+	   
+	// 회원번호로 만든 스터디방 찾아오기(가장최근에만든 1개)
+	public Study selectStudyRoomOnlySNo(int user_no) {
+		Connection conn = getConnection();
+		
+		Study s = sd.selectStudyRoomOnlySNo(conn,user_no);
+		
+		close(conn);
+		
+		return s;
+	}
+	
+	// 로그인한 유저넘버로 가입한 스터디방 갯수 가져오기
+	public MemberJoinStudy userJoinStudyNum(int user_no) {
+		Connection conn = getConnection();
+		
+		MemberJoinStudy mjs = sd.userJoinStudyNum(conn,user_no);
+		
+		return mjs;
+	}
+	
+	
 
 
 

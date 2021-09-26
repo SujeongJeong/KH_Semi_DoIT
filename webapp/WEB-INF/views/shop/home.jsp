@@ -130,7 +130,7 @@
 			<div class="premium_product">
 	            <input type="checkbox"  id="product_check" name="product_check"  style="display:none" value="${p.product_no}">
 	            <div  onclick="pnoSubmit(${p.product_no})">
-	        		<div class="premium_img"><img src="${ contextPath }${ p.product_img}"></div>
+	        		<div class="premium_img"><img src="${ p.product_img}"></div>
 	           	 	<div class="product_name">${p.product_name}</div>
 	            	<div class="product_price">${p.product_price} coin</div>
 	    		</div>

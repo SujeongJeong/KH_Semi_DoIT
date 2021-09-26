@@ -162,6 +162,8 @@
 			<textarea name="s_notice" id="studyNotice" cols="80" rows="5"
 				placeholder="스터디 공지사항(주의사항/규칙 등)을 입력하세요(최대800자)"></textarea>
 			<br> <br>
+			<input type="hidden" name="userNo" value="${ loginUser.userNo }">
+			
 			<div class="submitBtn">
 				<button type="submit" id="createStudyBtn">스터디방 만들기</button>
 			</div>

@@ -3,27 +3,28 @@
 "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="selectStudyList">
-		SELECT
-		  S_NO
-		, S_NAME
-		, S_TO
-		, S_DAY
-		, S_STARTPERIOD
-		, S_ENDPERIOD
-		, S_STARTTIME
-		, S_ENDTIME
-		, S_EXPLAIN
-		, S_NOTICE
-		, CNAME
-		, NICKNAME
-		, FILE_PATH
-		, CHANGE_NAME
-		FROM STUDY
-		JOIN CATEGORY USING(CID)
-		JOIN MEMBER USING(USER_NO)
-		JOIN ATTACHMENT USING(S_NO)
-		WHERE S_STATUS = 'Y'
-		ORDER BY S_NO DESC
+ SELECT
+        S.S_NO
+      , S_NAME
+      , S_TO
+      , S_DAY
+      , S_STARTPERIOD
+      , S_ENDPERIOD
+      , S_STARTTIME
+      , S_ENDTIME
+      , S_EXPLAIN
+      , S_NOTICE
+      , CNAME
+      , NICKNAME
+      , FILE_PATH
+      , CHANGE_NAME
+      , ( SELECT COUNT(*) FROM MEMBER_JOINSTUDY M WHERE M.S_NO = S.S_NO) AS "studyMemberNum"
+      FROM STUDY S
+      JOIN CATEGORY USING(CID)
+      JOIN ATTACHMENT A ON A.S_NO = S.S_NO
+      JOIN MEMBER USING(USER_NO)
+      WHERE S_STATUS = 'Y'
+      ORDER BY S_NO DESC
 	</entry>
 	
 	<entry key="selectStudyMemberList">
@@ -34,6 +35,7 @@
 		   JOIN MEMBER_JOINSTUDY USING (S_NO) 
            WHERE S_STATUS = 'Y'
            GROUP BY S_NO
+           ORDER BY S_NO DESC
 	</entry>
 	
 	<entry key="insertStudyRoom">
@@ -180,12 +182,21 @@
         WHERE S_STATUS = 'Y'
            AND M.USER_NO = ?
    </entry>
-
-	
-	
-	
-	
-	
+   <entry key="selectStudyRoomOnlySNo">
+   		SELECT
+      		   S_NO
+  		  FROM STUDY
+ 		 WHERE USER_NO=?
+ 		   AND S_STATUS = 'Y'
+ 	  ORDER BY S_NO DESC
+   </entry>
+   <entry key="userJoinStudyNum">
+   		  SELECT
+       			 COUNT(*) AS "userJoinStudyNum"
+   			FROM MEMBER_JOINSTUDY
+ 		   WHERE USER_NO = ?
+   </entry>
+   
 </properties>
 
 
