@@ -48,13 +48,15 @@ public class ImgModifyServlet extends HttpServlet {
 		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 		
 		String[] current_img = ((Member)request.getSession().getAttribute("loginUser")).getProfileImg().split("/");
-	
-		File deleteFile = new File(savePath+current_img[4]);
-		System.out.println(savePath+current_img[4]);
-		deleteFile.delete();
+		
+		// 만약 유저 이미지가 기본이미지면 삭제 안하기!
+		if(!current_img[0].equals("")) {
+			File deleteFile = new File(savePath+current_img[4]);
+			System.out.println(savePath+current_img[4]);
+			deleteFile.delete();			
+		}
 		
 		String profile_img = "/resources/uploadFiles/my/" + multiRequest.getFilesystemName("modify_img");
-		System.out.println("profile_img : " + profile_img);
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		// 2. 비지니스 로직 수행		

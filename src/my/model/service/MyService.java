@@ -197,9 +197,4 @@ public class MyService {
 		return returnMap;
 	}
 
-	public int selectUser() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

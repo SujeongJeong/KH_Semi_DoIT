@@ -86,6 +86,7 @@ public class LoginCheckFilter implements Filter {
       
       // 로그인 & 회원가입
       permitList.add("/Do_IT/login");
+      permitList.add("/Do_IT/logout");
       permitList.add("/Do_IT/emailCheck");
       permitList.add("/Do_IT/nickCheck");
       permitList.add("/Do_IT/memberJoin");
