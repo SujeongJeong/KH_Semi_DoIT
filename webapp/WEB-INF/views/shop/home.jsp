@@ -9,6 +9,11 @@
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css?after' rel='stylesheet'>
 <script src="<%= request.getContextPath() %>/resources/js/jquery-3.6.0.min.js"></script>
+<script>
+//자식창닫고 부모창열기
+ opener.parent.location.reload();
+ window.close();
+</script>
 
 <style>
 
@@ -111,7 +116,7 @@
   
  <div class="content">	
 	<div class="product_area">
-	 <button class="coin_charge" onclick="openPopup('<%=request.getContextPath()%>/coin', 'coin_charge', 700, 900);">코인충전</button>
+	 <button class="coin_charge" onclick="openPopup('<%=request.getContextPath()%>/coin', 'coin_charge', 900, 900);">코인충전</button>
 	
 	
 	<h3>| 프리미엄 이용권  
@@ -130,7 +135,7 @@
 			<div class="premium_product">
 	            <input type="checkbox"  id="product_check" name="product_check"  style="display:none" value="${p.product_no}">
 	            <div  onclick="pnoSubmit(${p.product_no})">
-	        		<div class="premium_img"><img src="${ p.product_img}"></div>
+	        		<div class="premium_img"><img src="${ contextPath }${ p.product_img}"></div>
 	           	 	<div class="product_name">${p.product_name}</div>
 	            	<div class="product_price">${p.product_price} coin</div>
 	    		</div>
@@ -146,7 +151,7 @@
 		    <c:if test="${ p.product_category == '단품' }">
 				<div class="premium_product">
 		          	<input type="checkbox" id="product_check" name="product_check" value="${p.product_no}" style="display:none">
-			          	<div  onclick="pnoSubmit(${p.product_no})">
+			          	<div onclick="pnoSubmit(${p.product_no})">
 			          		<div class="premium_img"><img src="${ contextPath }${ p.product_img}"></div>
 			            	<div class="product_name">${p.product_name}</div>
 			            	<div class="product_price">${p.product_price} coin</div>
