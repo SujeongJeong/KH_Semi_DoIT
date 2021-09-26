@@ -212,19 +212,21 @@ button[id$=payment] {
               data: {
                   "amount" : money/110,
                   "pay_method" : pay_method
-              },
-          });
-		 window.close();
-		
-      } else {
-          var msg = '결제에 실패하였습니다. ';
-          msg += ' error : ' + rsp.error_msg;
-      }
-      alert(msg);
-      window.close();
-     
-  });
-});
+              },  
+		 });
+			
+			 window.close();
+			
+	     } else {
+	         var msg = '결제에 실패하였습니다. ';
+	         msg += ' error : ' + rsp.error_msg;
+	     }
+	     alert(msg);
+	     window.close();
+	    
+	 });
+	})
+  
 </script>
 
 
