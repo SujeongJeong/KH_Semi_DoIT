@@ -22,6 +22,7 @@ ul{	list-style: none;	}
 .group-wrapper *:not([type=radio],select), .period-wrapper *:not([type=radio]) { margin-right : 30px; }
 .outer { border : 1px solid #E5E5E5; border-radius : 5px; height : 80px; margin-left :25px; padding-left : 20px; padding-top:5px;  }
 select { padding : 3px;}
+.ranking img{ width:20px; height:20px;}
 </style>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
@@ -53,7 +54,9 @@ select { padding : 3px;}
 		
 		<ul class="ranking-wrapper" >
 		 <c:forEach var="r" items="${ Ranking }">
-		 	<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>${ Ranking.rank }위</span><span class="nickname">${ Ranking.nickName }</span><img src="${contextPath }${ Ranking.profile_img}" alt="profile"><span class='hours'>${ Ranking.s_time }</span></li>
+		 	<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>${ r.rank }위</span>
+		 	<span class="nickname">${ r.nickName }</span><img src="${contextPath }${ r.profile_img}" alt="profile">
+		 	<span class='hours'>${ r.s_time }</span></li>
 		 </c:forEach>
 		 <%-- 
 			<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>1위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>

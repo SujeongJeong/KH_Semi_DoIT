@@ -28,7 +28,12 @@
 		session.removeAttribute("msg");	
 	} 
 %>
-
+<style>
+.user {
+	max-width : 100%;
+	max-height : 100%;
+}
+</style>
 
 </head>
 <body>

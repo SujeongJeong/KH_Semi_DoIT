@@ -44,13 +44,13 @@ public class RankingHomeServlet extends HttpServlet {
 		// 나의 랭킹 가져오기
 		Ranking myRanking = new RankingService().selectMyRanking(userNo);
 		// 기본값인 전체, 어제 랭킹 불러오기
-		//List<Ranking> rankinglist = new RankingService().selectYesterday();
+		List<Ranking> rankinglist = new RankingService().selectYesterday();
 		
 		request.setAttribute("nav1", "ranking");
 		request.setAttribute("Study", myStudy);
-		//request.setAttribute("Ranking", rankinglist);
+		request.setAttribute("Ranking", rankinglist);
 		request.setAttribute("myRanking", myRanking);
-		//System.out.println(rankinglist);
+		System.out.println(rankinglist);
 
 		request.getRequestDispatcher("/WEB-INF/views/ranking/ranking.jsp").forward(request, response);
 	}
