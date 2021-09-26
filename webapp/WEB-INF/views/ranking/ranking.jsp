@@ -22,7 +22,8 @@ ul{	list-style: none;	}
 .group-wrapper *:not([type=radio],select), .period-wrapper *:not([type=radio]) { margin-right : 30px; }
 .outer { border : 1px solid #E5E5E5; border-radius : 5px; height : 80px; margin-left :25px; padding-left : 20px; padding-top:5px;  }
 select { padding : 3px;}
-.ranking img{ width:20px; height:20px;}
+.ranking img{ width:30px; height:30px;}
+.me img{ width:30px; height:30px;}
 </style>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
@@ -55,7 +56,8 @@ select { padding : 3px;}
 		<ul class="ranking-wrapper" >
 		 <c:forEach var="r" items="${ Ranking }">
 		 	<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>${ r.rank }위</span>
-		 	<span class="nickname">${ r.nickName }</span><img src="${contextPath }${ r.profile_img}" alt="profile">
+		 	<span class="nickname">${ r.nickName }</span>
+		 	<span class="img-wrapper"><img src="${contextPath }${ r.profile_img}" alt="profile"></span>
 		 	<span class='hours'>${ r.s_time }</span></li>
 		 </c:forEach>
 		 <%-- 
@@ -74,7 +76,10 @@ select { padding : 3px;}
 			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span class="nickname">로그인하여 나의 랭킹을 확인해보세요.</span></li>			
 			</c:if>
 			<c:if test="${ loginUser != null }">
-			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>${ myRanking.rank }위</span><span class="nickname">${ myRanking.nickName }</span><img src="${ contextPath }${ myRanking.profile_img }" alt="profile"><span class='hours'>${ myRanking.s_time }</span></li>			
+			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>${ myRanking.rank }위</span>
+			<span class="nickname">${ myRanking.nickName }</span>
+			<span class="img-wrapper"><img src="${ contextPath }${ myRanking.profile_img }" alt="profile"></span>
+			<span class='hours'>${ myRanking.s_time }</span></li>			
 			</c:if>
 		</ul>
 
