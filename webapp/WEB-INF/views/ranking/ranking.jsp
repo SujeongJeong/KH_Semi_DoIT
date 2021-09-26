@@ -53,7 +53,7 @@ select { padding : 3px;}
 		
 		<ul class="ranking-wrapper" >
 		 <c:forEach var="r" items="${ Ranking }">
-		 	<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>${ Ranking.ranking }위</span><span class="nickname">nickname</span><img src="${contextPath }${ Ranking.profile_img}" alt="profile"><span class='hours'>${ Ranking.s_time }</span></li>
+		 	<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>${ Ranking.ranking }위</span><span class="nickname">${ Ranking.nickName }</span><img src="${contextPath }${ Ranking.profile_img}" alt="profile"><span class='hours'>${ Ranking.s_time }</span></li>
 		 </c:forEach>
 		 <%-- 
 			<li class="ranking"><img src="resources/images/flag-first.png" alt="1위"><span>1위</span><span class="nickname">nickname</span><img src="" alt="profile"><span class='hours'>&nbsp;&nbsp;&nbsp;00:00:00</span></li>
