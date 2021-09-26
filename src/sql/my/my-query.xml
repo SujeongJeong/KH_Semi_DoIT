@@ -181,4 +181,76 @@
 			, ?
 		)
 	</entry>
+	<entry key="getPurchaseCount">
+		SELECT
+			   COUNT(*)
+		  FROM PURCHASE
+		 WHERE USER_NO = ?
+	</entry>
+	<entry key="getChargeCount">
+		SELECT
+			   COUNT(*)
+		  FROM CHARGE
+		 WHERE USER_NO = ?
+	</entry>
+	<entry key="getUserRefundCount">
+		SELECT
+			   COUNT(*)
+		  FROM REFUND
+		  WHERE COMPLETE_DATE IS NOT NULL
+		  AND USER_NO = ?
+	</entry>
+	<entry key="selectPurchaseList">
+             SELECT
+			      PURCHASE_DATE
+			    , PRODUCT_NAME
+			    , PRODUCT_COUNT
+			    , PRODUCT_PRICE
+		FROM (SELECT 
+                  ROWNUM RNUM
+				  , PLIST.*
+	    FROM(SELECT
+	              PURCHASE_DATE
+			    , PRODUCT_NAME
+			    , PRODUCT_COUNT
+			    , PRODUCT_PRICE
+			      FROM PURCHASE 
+			      JOIN PRODUCT USING(PRODUCT_NO)
+			     WHERE USER_NO = ?
+			     ORDER BY PURCHASE_NO DESC) PLIST)
+            WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectChargeList">
+             SELECT
+			      CHARGE_DATE
+			    , CHARGE_COIN
+		FROM (SELECT 
+                    ROWNUM RNUM
+				  , CLIST.*
+	    FROM(SELECT
+	              CHARGE_DATE
+			    , CHARGE_COIN
+			      FROM CHARGE 
+			     WHERE USER_NO = ?
+			     ORDER BY CHARGE_NO DESC) CLIST)
+            WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectUserRefundList">
+             SELECT
+			      REFUND_DATE
+			    , REFUND_COIN
+			    , COMPLETE_DATE
+		FROM (SELECT 
+                    ROWNUM RNUM
+				  , RLIST.*
+	    FROM(SELECT
+	              REFUND_DATE
+			    , REFUND_COIN
+			    , COMPLETE_DATE
+			      FROM REFUND 
+			     WHERE USER_NO = ?
+                 AND COMPLETE_DATE IS NOT NULL
+			     ORDER BY REFUND_NO DESC) RLIST)
+            WHERE RNUM BETWEEN ? AND ?
+	</entry>
 </properties>

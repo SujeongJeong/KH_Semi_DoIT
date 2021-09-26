@@ -34,10 +34,18 @@ public class MyPaymentDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("nav1", "my");
 		
+		int page = 1;
+		
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		Map<String, Object> map = new MyService().selectItemList(userNo);
 		request.setAttribute("ItemList", map.get("ItemList"));
+		
+		Map<String, Object> map2 = new MyService().selectPurchaseList(page, userNo);
+		
+		request.setAttribute("radioValue", "purchase");
+		request.setAttribute("pi", map2.get("pi"));
+		request.setAttribute("PurchaseList", map2.get("PurchaseList"));
 		
 		request.getRequestDispatcher("/WEB-INF/views/my/MyDetails.jsp").forward(request, response);
 	}
@@ -46,8 +54,39 @@ public class MyPaymentDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String radioValue = request.getParameter("details_history");
+		int userNo = ((Member)(request.getSession().getAttribute("loginUser"))).getUserNo();
+		
+		int page = 	1;
+		Map<String, Object> map = null;
+		
+		request.setAttribute("radioValue", radioValue);
+		
+		if(radioValue.equals("purchase")) {
+			map = new MyService().selectPurchaseList(page, userNo);
+			
+			request.setAttribute("pi", map.get("pi"));
+			request.setAttribute("PurchaseList", map.get("PurchaseList"));
+			
+		} else if(radioValue.equals("charge")) {
+			map = new MyService().selectChargeList(page, userNo);
+			
+			request.setAttribute("pi", map.get("pi"));
+			request.setAttribute("ChargeList", map.get("ChargeList"));
+			
+		} else {
+			map = new MyService().selectRefundList(page, userNo);
+			
+			request.setAttribute("pi", map.get("pi"));
+			request.setAttribute("RefundList", map.get("RefundList"));
+			
+		}
+		
+		Map<String, Object> map4 = new MyService().selectItemList(userNo);
+		request.setAttribute("ItemList", map4.get("ItemList"));
+		
+		/* response.sendRedirect(request.getContextPath()+"/my/details"); */
+		request.getRequestDispatcher("/WEB-INF/views/my/MyDetails.jsp").forward(request, response);
+		
 	}
-
 }

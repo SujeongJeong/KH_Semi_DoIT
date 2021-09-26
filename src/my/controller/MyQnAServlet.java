@@ -43,12 +43,10 @@ public class MyQnAServlet extends HttpServlet {
 		}
 		
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
-		System.out.println(userNo);
 		
 		// 나의 게시글 리스트
 		Map<String, Object> map = new MyService().selectMyBoardList(page, userNo);
 		
-		page = 1;
 		// 내가 댓글을 쓴 게시글 리스트
 		Map<String, Object> map2 = new MyService().selectMyReplyList(page, userNo);
 		
