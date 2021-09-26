@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Properties;
 
 import shop.model.dao.ShopDao;
+import shop.model.vo.Charge;
 import shop.model.vo.Product;
 
 
@@ -89,6 +90,24 @@ public class ShopService {
 		
 		return resultSum;
 
+	}
+
+	//충전 db등록
+	public int insertCharge(Charge c) {
+		
+			Connection conn = getConnection();
+			int result = sd.insertCharge(conn, c);
+		
+			System.out.println("서비스 : " + result);
+			if(result > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			close(conn);
+			
+			return result;
+		
 	}
 
 	

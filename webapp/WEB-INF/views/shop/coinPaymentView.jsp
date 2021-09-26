@@ -132,7 +132,7 @@ button[id$=payment] {
 				<div class="logo_area"><a href="/Do_IT"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo" onclick="window.close();"></a></div><br>
 				<div class="cerrent_coin">
 					<span id="cerrent_result"><h4>현재 보유 중인 코인 : ${ loginUser.userCoin } coin </h4></span>
-				<input type="text" id="result" disabled>원
+				<input type="text" name="result" id="result" disabled>원
 				<div id="charge_area">충전 할 코인 : <input type="text" id="charge_input"  onkeyup="calc(this.value)" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"   
 					min= 1 placeholder="충전 할 코인 수를 입력하세요."></div>
 				
@@ -185,7 +185,7 @@ button[id$=payment] {
 		https://docs.iamport.kr/implementation/payment
 		참고하기. 아직 못함.
 		*/
-		name: '주문명:Do_IT 코인 결제',
+		name: 'Do_IT 코인 결제',
 		//결제창에서 보여질 이름
 		amount: money,
 		//가격
@@ -196,8 +196,6 @@ button[id$=payment] {
 		buyer_postcode: '',
 		m_redirect_url: 'http://localhost:8800/Do_IT/shop/home'
 	}, 
-		
-		
 		function (rsp) {
 		console.log(rsp);
 		if (rsp.success) {
@@ -206,15 +204,18 @@ button[id$=payment] {
 		msg += '상점 거래ID : ' + rsp.merchant_uid;
 		msg += '결제 금액 : ' + rsp.paid_amount;
 		msg += '카드 승인번호 : ' + rsp.apply_num;
-		  
+		
+	
 		$.ajax({
-              type: "GET", 
-              url: "${ contextPath }/shop/charge", //충전 금액값을 보낼 url 설정
+              type: "POST", 
+              url: "${ contextPath }/shop/chargeSucess", //충전 금액값을 보낼 url 설정
               data: {
-                  "amount" : money/110
-                  //작성자는 세션에서 가져오기. 코인값, 결제수단, 
+                  "amount" : money/110,
+                  "pay_method" : pay_method
               },
           });
+		 window.close();
+		
       } else {
           var msg = '결제에 실패하였습니다. ';
           msg += ' error : ' + rsp.error_msg;

@@ -69,7 +69,26 @@
   		 WHERE PRODUCT_NO = ?
 	 
 	 </entry>
-
+	<entry key="insertCharge">
+		INSERT
+			INTO CHARGE
+			(
+				CHARGE_NO
+			  , CHARGE_DATE
+			  , CHARGE_COIN
+			  , PAYMENT_METHOD
+			  , USER_NO
+			)
+			VALUES
+			(
+				SEQ_CNO.NEXTVAL
+			  , SYSDATE
+			  , ?
+			  , ?
+			  , ?	
+			)
+	
+	</entry>
 
 
 
