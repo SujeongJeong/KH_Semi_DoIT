@@ -183,9 +183,7 @@ button[id$=payment] {
 		/*
 		merchant_uid에 경우
 		https://docs.iamport.kr/implementation/payment
-		위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-		참고하세요.
-		나중에 포스팅 해볼게요.
+		참고하기. 아직 못함.
 		*/
 		name: '주문명:Do_IT 코인 결제',
 		//결제창에서 보여질 이름
@@ -214,12 +212,12 @@ button[id$=payment] {
               url: "${ contextPath }/shop/charge", //충전 금액값을 보낼 url 설정
               data: {
                   "amount" : money/110
-                  //작성자는 세션에서 가져오기.충전값들 다 겨저오는거 방법궁리하기.
+                  //작성자는 세션에서 가져오기. 코인값, 결제수단, 
               },
           });
       } else {
-          var msg = '결제에 실패하였습니다.';
-          msg += '에러내용 : ' + rsp.error_msg;
+          var msg = '결제에 실패하였습니다. ';
+          msg += ' error : ' + rsp.error_msg;
       }
       alert(msg);
       window.close();
