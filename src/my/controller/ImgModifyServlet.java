@@ -70,8 +70,6 @@ public class ImgModifyServlet extends HttpServlet {
 		}
 		
 		response.sendRedirect(request.getContextPath()+"/my/home");
-		
-		
 	}
 
 }
