@@ -33,6 +33,7 @@ public class MyHomeServlet extends HttpServlet {
 			request.setAttribute("msg", "로그인 후 이용 가능합니다.");
 			response.sendRedirect(request.getContextPath()+"/login");
 		}
+		
 		request.setAttribute("nav1", "my");
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/home.jsp");
 		view.forward(request, response);
