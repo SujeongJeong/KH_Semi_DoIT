@@ -55,7 +55,7 @@
 								placeholder="제목을 입력해주세요." required>
 							</span> <br><br>
 						<textarea  rows="20" cols="136" name="content" id="summernote" required></textarea>
-						 <!--  <div id="summernote"><p>Hello Summernote</p></div> -->
+	
 						</div>
 						<div class="btn_area">
 							<button type="button" onclick="location.href='<%= request.getContextPath() %>/qna/home'">목록으로</button>
@@ -66,13 +66,25 @@
 			</div>
 		</div>
 	</div>	
-		<footer>
+	
+	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
+	
   <script>
-    $(document).ready(function() {
-        $('#summernote').summernote();
-    });
+	// 작성하기 버튼 눌렀을때 content 내용 비어있을때
+	$('#save').click(function(){
+		if($('#summernote').val() == ''){
+			alert('내용을 입력해주세요.');
+		} 
+	});
+
+// 글쓰기 api
+  $('#summernote').summernote({
+          placeholder: '내용을 입력해주세요.',
+          tabsize: 2,
+          height: 300
+  });
   </script>
 </body>
 </html>

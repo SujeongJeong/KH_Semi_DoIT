@@ -76,6 +76,8 @@ public class NoticeDao {
 			pstmt.setString(2, n.getNotice_content());
 			pstmt.setInt(3, n.getUser_no());
 			
+			System.out.println(n.getNotice_title() + n.getNotice_content()+n.getUser_no());
+			
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
