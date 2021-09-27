@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +37,7 @@
    /* 사이드메뉴 영역 */
    .side_menu{
        width: 160px;
+       padding-left : 5%;
    }
    .side_menu ul {
       padding-left: 40px;
@@ -165,7 +167,7 @@
                          <tbody>
                             <c:forEach var="pl" items="${ PurchaseList }">
                            <tr>
-                              <td>${ pl.purchaseDate }</td>
+                              <td><fmt:formatDate value="${ pl.purchaseDate }" type="both" pattern="yyyy.MM.dd HH:mm:ss"/></td>
                               <td>${ pl.productName }</td>
                               <td>${ pl.productPrice }</td>
                            </tr>
@@ -183,7 +185,7 @@
                          <tbody>
                             <c:forEach var="cl" items="${ ChargeList }">
                            <tr>
-                              <td>${ cl.chargeDate }</td>
+                              <td><fmt:formatDate value="${ cl.chargeDate }" type="both" pattern="yyyy.MM.dd HH:mm:ss"/></td>
                               <td>${ cl.chargeCoin }</td>
                            </tr>
                         </c:forEach>
@@ -200,7 +202,7 @@
                          <tbody>
                             <c:forEach var="rl" items="${ RefundList }">
                            <tr>
-                              <td>${ rl.refundDate }</td>
+                              <td><fmt:formatDate value="${ rl.refundDate }" type="both" pattern="yyyy.MM.dd HH:mm:ss"/></td>
                               <td>${ rl.refundCoin }</td>
                               <td>
                               	<c:choose>
@@ -208,7 +210,7 @@
 								    	환불 처리중
 								    </c:when>
 								    <c:otherwise>
-								    	${ rl.completeDate }
+										<fmt:formatDate value="${ rl.completeDate }" type="both" pattern="yyyy.MM.dd HH:mm:ss"/>
 								    </c:otherwise>
 								</c:choose>
                               </td>
@@ -295,17 +297,6 @@
    </footer>
    
    <script>
-   function openPopup(url, title, width, height) {
-      let left = (document.body.clientWidth/2) - (width/2);
-      // 듀얼모니터를 위한 계산
-      left += window.screenLeft;
-      let top = (screen.availHeight/2) - (height/2);
-      
-      let options = "width="+width+",height="+height+",left="+left+",top="+top;
-      
-      window.open(url, title, options);
-   }
-   
    $('input[type=radio]').change(function(){
       document.forms.detailsForm.action = '${contextPath}/my/details';
       document.forms.detailsForm.submit();

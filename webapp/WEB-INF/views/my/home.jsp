@@ -42,6 +42,7 @@
 	/* 사이드메뉴 영역 */
 	.side_menu{
 	    width: 160px;
+	    padding-left : 5%;
 	}
 	.side_menu ul {
 		padding-left: 40px;

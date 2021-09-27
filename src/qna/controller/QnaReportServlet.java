@@ -33,12 +33,12 @@ public class QnaReportServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int bid = Integer.parseInt(request.getParameter("board_no").trim());
 		//String bid = request.getParameter("board_no");
+		int bid = Integer.parseInt(request.getParameter("board_no"));
 		int user_no = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
-		System.out.println("bid222:"+bid);
-		System.out.println("userno:"+user_no);
+		System.out.println("bid:"+bid);
+		System.out.println("user_no:"+user_no);
 		Report r = new Report(user_no);
 		BoardReport br = new BoardReport(bid);
 		
@@ -48,7 +48,7 @@ public class QnaReportServlet extends HttpServlet {
 		
 		String view = "";
 		if(result > 0) {
-			System.out.println("Rrrr:"+result);
+			System.out.println("result:"+result);
 			view = "WEB-INF/views/qna/ReportForm.jsp";
 		} else {
 			view = "WEB-INF/views/qna/qnaReportForm.jsp?board_no="+ bid;
