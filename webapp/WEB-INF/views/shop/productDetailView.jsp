@@ -165,8 +165,8 @@ opener.parent.location.reload();
 			<form name="orderForm" method="post" action='<%= request.getContextPath() %>/productOrder'>
 			<input type="hidden" name="product_no" value="${p.product_no}">
 			<button class="paymentbtn" type="submit" onclick="return purchase()">구매</button>
-			</form>
 			<button class="canclebtn" type="button" onclick="window.close();">취소</button>
+			</form>
 		    </div>
 		    </div>
 

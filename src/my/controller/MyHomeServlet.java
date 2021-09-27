@@ -28,14 +28,16 @@ public class MyHomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		// 메뉴바 클릭했을 때 페이지로 이동
 		if(request.getSession().getAttribute("loginUser") == null) {
 			request.setAttribute("msg", "로그인 후 이용 가능합니다.");
 			response.sendRedirect(request.getContextPath()+"/login");
 		}
 		
-		request.setAttribute("nav1", "my");
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/home.jsp");
+		request.setAttribute("nav1", "my");
 		view.forward(request, response);
 	}
 
