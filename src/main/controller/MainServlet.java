@@ -45,6 +45,18 @@ public class MainServlet extends HttpServlet {
 		Ranking myRanking = new RankingService().selectMyRanking(userNo);
 		List<Ranking> rankingList = new RankingService().selectThirdRanking();
 		
+		if(rankingList != null) {
+			for(Ranking r : rankingList){
+			 String after = r.getS_time().replace("," , ":");
+			 r.setS_time(after.trim());
+			}
+		}
+		
+		if(myRanking != null) {
+			String afterM = myRanking.getS_time().replace(",", ":");
+			myRanking.setS_time(afterM.trim());
+		}
+	
 		request.setAttribute("Todolist", myList);
 		request.setAttribute("Study", myStudy);
 		request.setAttribute("myRanking", myRanking);
