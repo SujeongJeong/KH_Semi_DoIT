@@ -12,6 +12,13 @@ public class Report {
 
 	
 	
+	public Report(int user_no) {
+		super();
+		this.user_no = user_no;
+	}
+
+
+
 	public Report(String report_content, int user_no) {
 		super();
 		this.report_content = report_content;
