@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import common.Attachment;
 import study.model.vo.MemberJoinStudy;
+import study.model.vo.PageInfo;
 import study.model.vo.Study;
 import static common.JDBCTemplate.*;
 
@@ -446,6 +447,45 @@ public class StudyDao {
 			close(pstmt);
 		}
 		return mjs;
+	}
+
+	// 페이징
+	public List<Study> selectList1(Connection conn, PageInfo pi) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Study> StudyList = new ArrayList<>();
+		String sql = query.getProperty("selectList1");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pi.getStudyLimit());
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				StudyList.add(new Study(rset.getInt("s_no"),
+										rset.getString("s_name"),
+										rset.getInt("s_to"),
+										rset.getString("s_day"),
+										rset.getTimestamp("s_startPeriod"),
+										rset.getTimestamp("s_endPeriod"),
+										rset.getTimestamp("s_startTime"),
+										rset.getTimestamp("s_endTime"),
+										rset.getString("s_explain"),
+										rset.getString("s_notice"),
+										rset.getString("cname"),
+										rset.getString("nickname"),
+										rset.getString("change_name"),
+										rset.getString("file_path"),
+										rset.getInt("studyMemberNum")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return StudyList;
 	}
 
 

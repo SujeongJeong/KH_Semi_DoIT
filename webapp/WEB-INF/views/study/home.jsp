@@ -287,17 +287,17 @@
 		<div class="search createStudy">
 			<button class="studyCreateBtn" onclick="createBtnEvent()">스터디 만들기</button>
 			<c:if test="${ loginUser != null }">
-				<c:if test="${ userJoinStudyNum.userJoinStudyNum <= 3 }">
+				<c:if test="${ userJoinStudyNum.userJoinStudyNum < 3 }">
 					<script>
 					function createBtnEvent(){
 						location.href='<%=request.getContextPath()%>/study/createStudy';
 					}
 				</script>
 				</c:if>
-				<c:if test="${ userJoinStudyNum.userJoinStudyNum > 3 }">
+				<c:if test="${ userJoinStudyNum.userJoinStudyNum >= 3 }">
 					<script>
 					function createBtnEvent(){
-						alert("가입 한도가 초과되어 스터디방에 가입/생성 하실 수 없습니다.");
+						alert("가입 한도가 초과되어 스터디방에 가입/스터디방을 생성 하실 수 없습니다.");
 					}
 				</script>
 				</c:if>
@@ -352,7 +352,7 @@
 		<br>
 		<div class="studyRoomPlus">
 			<hr class="plusLine">
-			<button class="plusBtn" onclick="plusBtnEvent(     )">더보기</button>
+			<button class="plusBtn" id="plusBtn" onclick="plusBtnEvent()">더보기</button>
 		</div>
 	</div>
 
@@ -401,12 +401,12 @@ function openPopup(url, title, width, height){
 
 function studyInfo(s_no){
 	openPopup('${contextPath}/study/studyInfo?s_no='+s_no, 'studyInfo', 700, 1000);
-	
-	
 }
 
+	
 function plusBtnEvent(){
-
+	let page=1;
+	location.href='<%=request.getContextPath()%>/study/home?page='+page;
 }
 
 
