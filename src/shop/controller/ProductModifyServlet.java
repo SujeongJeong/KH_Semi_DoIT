@@ -1,5 +1,6 @@
 package shop.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 
@@ -57,7 +58,15 @@ public class ProductModifyServlet extends HttpServlet {
 		String savePath = root + "resources\\uploadFiles\\shop\\";
 		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 		
-		String files = "/resources/uploadFiles/shop/"+multiRequest.getFilesystemName("file");
+		String filesname = multiRequest.getFilesystemName("file");
+		String files = "/resources/uploadFiles/shop/"+ filesname;
+		
+		
+			/*if(!filesname.equals("")) {
+				File deleteFile = new File(savePath+filesname);
+				deleteFile.delete();
+			}*/
+			
 		
 		int product_no = Integer.parseInt(multiRequest.getParameter("product_no"));
 		String category = multiRequest.getParameter("category");
@@ -73,6 +82,7 @@ public class ProductModifyServlet extends HttpServlet {
 		
 		
 		if(result > 0) {
+			request.setAttribute("msg", "상품 수정에 성공했습니다.");
 			response.sendRedirect(request.getContextPath() + "/productDetail?product_no=" + product_no);
 		} else {
 			request.setAttribute("msg", "상품 수정에 실패했습니다.");
