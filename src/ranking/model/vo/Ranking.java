@@ -5,13 +5,13 @@ public class Ranking {
 	private int rank;		// 랭킹
 	private String nickName;	// 닉네임
 	private int s_no;			// 스터디방 번호
-	private int s_time;			// 총 공부시간
+	private String s_time;			// 총 공부시간
 	private String profile_img;	// 프로필 이미지 경로
 	private String rank_img;	// 랭킹 아이콘 이미지
 	
-	public Ranking() {}
+	public Ranking() {}	
 
-	public Ranking(int rank, String nickName, int s_time, String profile_img) {
+	public Ranking(int rank, String nickName, String s_time, String profile_img) {
 		super();
 		this.rank = rank;
 		this.nickName = nickName;
@@ -19,7 +19,7 @@ public class Ranking {
 		this.profile_img = profile_img;
 	}
 
-	public Ranking(int rank, String nickName, int s_time, String profile_img, String rank_img) {
+	public Ranking(int rank, String nickName, String s_time, String profile_img, String rank_img) {
 		super();
 		this.rank = rank;
 		this.nickName = nickName;
@@ -52,11 +52,11 @@ public class Ranking {
 		this.s_no = s_no;
 	}
 
-	public int getS_time() {
+	public String getS_time() {
 		return s_time;
 	}
 
-	public void setS_time(int s_time) {
+	public void setS_time(String s_time) {
 		this.s_time = s_time;
 	}
 
