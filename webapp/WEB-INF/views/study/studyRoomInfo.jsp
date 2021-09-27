@@ -8,6 +8,9 @@
 <meta charset="UTF-8">
 <title>스터디방 상세 – Do IT</title>
 <style>
+body{
+	margin:0px;
+}
 *{
 	text-align:center;
 }

@@ -28,7 +28,7 @@ public class EnterStudyRoom extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/innerStudyRoom.jsp");
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/enterStudyRoom.jsp");
 		view.forward(request, response);
 	}
 
