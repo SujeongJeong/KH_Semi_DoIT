@@ -81,22 +81,6 @@ button[id$=payment] {
 	
 }
 
-
-#phone_payment {
-	background: #C8EBFF;
-	color: black;
-}
-
-#card_payment {
-	background: lightgray;
-	color: white;
-}
-
-#kakao_payment {
-	background: #FFEA00;
-	color: #3A1D1D;
-}
-
 .textarea{
 	margin-bottom: 30px;
 }

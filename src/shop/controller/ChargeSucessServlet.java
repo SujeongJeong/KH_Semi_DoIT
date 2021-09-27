@@ -58,10 +58,18 @@ public class ChargeSucessServlet extends HttpServlet {
 		}else {
 			request.setAttribute("msg", "상품 등록에 실패하였습니다.");
 			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
-		}	
-	}
+		}
+	}	
 		
 		
-	}
+		
+		
+		
+		
+		
+	
+		
+		
+}
 
 
