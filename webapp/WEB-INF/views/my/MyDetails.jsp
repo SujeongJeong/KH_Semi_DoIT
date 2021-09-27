@@ -302,6 +302,16 @@
       document.forms.detailsForm.submit();
    });
    
+   function openPopup(url, title, width, height) {
+		let left = (document.body.clientWidth/2) - (width/2);
+		// 듀얼모니터를 위한 계산
+		left += window.screenLeft;
+		let top = (screen.availHeight/2) - (height/2);
+		
+		let options = "width="+width+",height="+height+",left="+left+",top="+top;
+		
+		window.open(url, title, options);
+	};
    </script>
 </body>
 </html>
