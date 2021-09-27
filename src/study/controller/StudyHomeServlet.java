@@ -46,6 +46,9 @@ public class StudyHomeServlet extends HttpServlet {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		
+		String search = request.getParameter("search");
+		
+		
 		Map<String, Object> map = new StudyService().selectList1(page);
 		
 		request.setAttribute("pi", map.get("pi"));

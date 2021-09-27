@@ -252,7 +252,7 @@
 		<span><h1>오픈 스터디</h1></span>
 
 		<div class="search search1">
-			<form>
+			<form action="${ contextPath }/study/home">
 				<input type="text" class="searchText" size="15px" name="search"
 					placeholder="검색할 내용을 입력하세요"> 
 					<input type="submit" class="searchTextSubmit" value="검색하기">
@@ -405,8 +405,10 @@ function studyInfo(s_no){
 
 	
 function plusBtnEvent(){
-	let page=1;
+	var page=1;
 	location.href='<%=request.getContextPath()%>/study/home?page='+page;
+	
+	
 }
 
 
