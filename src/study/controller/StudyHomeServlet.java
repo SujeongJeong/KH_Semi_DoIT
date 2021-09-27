@@ -2,6 +2,7 @@ package study.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,9 +39,23 @@ public class StudyHomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("nav1", "study");
 		
-		// 스터디방 리스트
-		List<Study> StudyList = new StudyService().selectStudyList();
-		request.setAttribute("StudyList", StudyList);
+		//페이징
+		int page = 1;
+		
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		Map<String, Object> map = new StudyService().selectList1(page);
+		
+		request.setAttribute("pi", map.get("pi"));
+		request.setAttribute("StudyList", map.get("StudyList"));
+		
+		
+		
+		// 스터디방 리스트(페이징x)
+//		List<Study> StudyList = new StudyService().selectStudyList();
+//		request.setAttribute("StudyList", StudyList);
 //		System.out.println("StudyList : "+StudyList);
 //		System.out.println("StudyList.size() : "+StudyList.size());
 		
@@ -61,9 +76,7 @@ public class StudyHomeServlet extends HttpServlet {
 			request.setAttribute("userJoinStudyNum", userJoinStudyNum);
 		}
 		
-		// 페이징 처리(기본 1P, 더보기 버튼 클릭시 추가 출력)하기 위해 스터디방 총 갯수 가져오기
-		int studyListNumber = new StudyService().selectStudyListNumber();
-		request.setAttribute("studyListNumber", studyListNumber);
+		
 		
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/home.jsp");
 		view.forward(request, response);

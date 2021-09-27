@@ -78,26 +78,22 @@
 	INTO ATTACHMENT
 	(
 			FILE_NO
-		  , BOARD_NO
-		  , NOTICE_NO	
-		  , S_NO
 		  , ORIGIN_NAME
 		  , CHANGE_NAME
 		  , FILE_PATH
 		  , UPLOAD_DATE
 		  , STATUS
+		  , S_NO
 	)
 	VALUES
 	(
 			SEQ_ANO.NEXTVAL
-		  , SEQ_SNO.CURRVAL
-		  , SEQ_SNO.CURRVAL
-		  , SEQ_SNO.CURRVAL
 		  , ?
 		  , ?
 		  , ?
 		  , SYSDATE
 		  , DEFAULT
+		  , SEQ_SNO.CURRVAL
 	)
 	</entry>
 	<entry key="selectStudyRoom">
@@ -195,6 +191,32 @@
        			 COUNT(*) AS "userJoinStudyNum"
    			FROM MEMBER_JOINSTUDY
  		   WHERE USER_NO = ?
+   </entry>
+   <entry key="selectList1">
+   		SELECT ROWNUM, SLIST.*
+FROM(SELECT
+        S.S_NO
+      , S_NAME
+      , S_TO
+      , S_DAY
+      , S_STARTPERIOD
+      , S_ENDPERIOD
+      , S_STARTTIME
+      , S_ENDTIME
+      , S_EXPLAIN
+      , S_NOTICE
+      , CNAME
+      , NICKNAME
+      , FILE_PATH
+      , CHANGE_NAME
+      , ( SELECT COUNT(*) FROM MEMBER_JOINSTUDY M WHERE M.S_NO = S.S_NO) AS "studyMemberNum"
+      FROM STUDY S
+      JOIN CATEGORY USING(CID)
+      JOIN ATTACHMENT A ON A.S_NO = S.S_NO
+      JOIN MEMBER USING(USER_NO)
+      WHERE S_STATUS = 'Y'
+      ORDER BY S_NO DESC) SLIST
+WHERE ROWNUM BETWEEN 1 AND ?
    </entry>
    
 </properties>

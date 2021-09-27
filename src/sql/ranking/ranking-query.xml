@@ -16,6 +16,7 @@
 		           FROM MEMBER_TIMER
 		           JOIN MEMBER USING(USER_NO)
 		          WHERE TO_CHAR(S_DAY, 'yyyymmdd') = TO_CHAR(SYSDATE-1, 'yyyymmdd') 
+		            AND USER_TYPE = 'U'
 		          GROUP BY USER_NO, PROFILE_IMG, NICKNAME
 		          ORDER BY RANK() OVER (ORDER BY SUM(S_TIME) DESC))
 	 <![CDATA[WHERE TO_NUMBER(ROWNUM) <= ?]]>
@@ -34,7 +35,47 @@
 		              , USER_NO
 		           FROM MEMBER_TIMER
 		           JOIN MEMBER USING(USER_NO)
-		          WHERE TO_CHAR(S_DAY,'yyyymmdd') = TO_CHAR(SYSDATE-1,'yyyymmdd') 
+		          WHERE TO_CHAR(S_DAY,'yyyymmdd') = TO_CHAR(SYSDATE-1,'yyyymmdd')
+		            AND USER_TYPE = 'U' 
+		          GROUP BY USER_NO, PROFILE_IMG, NICKNAME
+		          ORDER BY RANK() OVER (ORDER BY SUM(S_TIME) DESC))
+		  WHERE USER_NO = ?
+	</entry>
+	<entry key="selectWeekMonthAll">
+	SELECT
+		      TO_NUMBER(ROWNUM)
+		    , NICKNAME 
+		    , "SUMTIME"
+		    , PROFILE_IMG
+		  FROM (  SELECT
+		                NICKNAME
+		              , TO_NUMBER(RANK() OVER (ORDER BY SUM(S_TIME) DESC)) "RANKING"
+		              , SUM(S_TIME) "SUMTIME"
+		              , PROFILE_IMG
+		           FROM MEMBER_TIMER
+		           JOIN MEMBER USING(USER_NO)
+     	 <![CDATA[WHERE TO_CHAR(S_DAY, 'yyyymmdd') >= TO_CHAR(SYSDATE-?, 'yyyymmdd')]]> 
+		            AND USER_TYPE = 'U'
+		          GROUP BY USER_NO, PROFILE_IMG, NICKNAME
+		          ORDER BY RANK() OVER (ORDER BY SUM(S_TIME) DESC))
+	  <![CDATA[WHERE TO_NUMBER(ROWNUM) <= 10]]>
+	</entry>
+	<entry key="selectMyWeekMonthAll">
+	SELECT
+		      "RANKING"
+		    , NICKNAME 
+		    , "SUMTIME"
+		    , PROFILE_IMG
+		  FROM (  SELECT
+		                NICKNAME
+		              , TO_NUMBER(RANK() OVER (ORDER BY SUM(S_TIME) DESC)) "RANKING"
+		              , SUM(S_TIME) "SUMTIME"
+		              , PROFILE_IMG
+		              , USER_NO
+		           FROM MEMBER_TIMER
+		           JOIN MEMBER USING(USER_NO)
+		 <![CDATA[WHERE TO_CHAR(S_DAY, 'yyyymmdd') >= TO_CHAR(SYSDATE-?, 'yyyymmdd')]]> 
+		            AND USER_TYPE = 'U' 
 		          GROUP BY USER_NO, PROFILE_IMG, NICKNAME
 		          ORDER BY RANK() OVER (ORDER BY SUM(S_TIME) DESC))
 		  WHERE USER_NO = ?
