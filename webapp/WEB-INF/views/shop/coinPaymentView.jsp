@@ -131,10 +131,10 @@ button[id$=payment] {
 		</div>
 	</div>
 	<script>
-		function charge(){
+		/*function charge(){
 			if(confirm("충전이 완료되었습니다."))
 				window.close();
-		}
+		}*/
 		
 		function calc(val){ //수수료포함 코인가격 현금화.
 		    var charge = parseInt(val);
@@ -184,23 +184,21 @@ button[id$=payment] {
 		console.log(rsp);
 		if (rsp.success) {
 		var msg = '결제가 완료되었습니다.';
-		msg += '고유ID : ' + rsp.imp_uid;
-		msg += '상점 거래ID : ' + rsp.merchant_uid;
+		msg += '고유ID : ' + rsp.imp_uid+ ' ';
+		msg += '상점 거래ID : ' + "Do_IT"
 		msg += '결제 금액 : ' + rsp.paid_amount;
-		msg += '카드 승인번호 : ' + rsp.apply_num;
 		
 	
 		$.ajax({
               type: "POST", 
               url: "${ contextPath }/shop/chargeSucess", //충전 금액값을 보낼 url 설정
               data: {
-                  "amount" : money/110,
-                  "pay_method" : pay_method
-              },  
+                  "amount" : money,
+         
+      			    },
+      		
 		 });
-			
-			 window.close();
-			
+        window.close();
 	     } else {
 	         var msg = '결제에 실패하였습니다. ';
 	         msg += ' error : ' + rsp.error_msg;

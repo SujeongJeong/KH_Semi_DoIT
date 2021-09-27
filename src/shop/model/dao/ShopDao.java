@@ -183,8 +183,6 @@ public class ShopDao {
 			
 			result = pstmt.executeUpdate();
 			
-			System.out.println("dao : " + result);
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -216,16 +214,39 @@ public class ShopDao {
 	}
 
 	//잔여코인 dao
-	public int updateCoin(Connection conn, int product_no, int userNo) {
+	public int orderAfterCoin(Connection conn, int product_no, int userNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = query.getProperty("updateCoin");
+		String sql = query.getProperty("orderAfterCoin");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, product_no);
 			pstmt.setInt(2, userNo);
+			
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int chargeAfterCoin(Connection conn, Charge c) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("chargeAfterCoin");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, c.getChargeNo());
+			pstmt.setInt(2, c.getUserNo());
 			
 			
 			result = pstmt.executeUpdate();

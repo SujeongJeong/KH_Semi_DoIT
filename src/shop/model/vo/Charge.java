@@ -25,10 +25,9 @@ public class Charge {
 	
 	
 	//충전완료시 필요한 값
-	public Charge(int chargeCoin, String paymentMethod, int userNo) {
+	public Charge(int chargeCoin, int userNo) {
 		super();
 		this.chargeCoin = chargeCoin;
-		this.paymentMethod = paymentMethod;
 		this.userNo = userNo;
 	}
 	

@@ -98,7 +98,6 @@ public class ShopService {
 			Connection conn = getConnection();
 			int result = sd.insertCharge(conn, c);
 		
-			System.out.println("서비스 : " + result);
 			if(result > 0) {
 				commit(conn);
 			} else {
@@ -110,7 +109,7 @@ public class ShopService {
 		
 	}
 
-	//purcahse등록
+	//purcahse등록 (상품구매)
 	public int insertOrder(int product_no, int userNo) {
 		Connection conn = getConnection();
 		int result = sd.insertOrder(conn, product_no, userNo );
@@ -126,10 +125,10 @@ public class ShopService {
 		return result;
 	}
 
-	//잔여코인
-	public int updateCoin(int product_no, int userNo) {
+	//잔여코인(상품구매시 코인차감되는것)
+	public int orderAfterCoin(int product_no, int userNo) {
 		Connection conn = getConnection();
-		int result = sd.updateCoin(conn, product_no, userNo);
+		int result = sd.orderAfterCoin(conn, product_no, userNo);
 		
 		if(result > 0) {
 			commit(conn);
@@ -140,6 +139,21 @@ public class ShopService {
 		
 		return result;
 	}
+
+	public int chargeAfterCoin(Charge c) {
+		Connection conn = getConnection();
+		int result = sd.chargeAfterCoin(conn, c);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
 
 	
 	
