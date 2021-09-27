@@ -41,7 +41,7 @@
 	width: 135px;
 	height: 100px;
 	top: 115px;
-	left: 600px;
+	left: 530px;
 }
 
 #backImage {

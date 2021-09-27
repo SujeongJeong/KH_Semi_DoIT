@@ -50,12 +50,12 @@ public class Notice {
 		this.user_no = user_no;
 	}
 
-//	public Notice(String notice_title, String notice_content, int user_no) {
-//		super();
-//		this.notice_title = notice_title;
-//		this.notice_content = notice_content;
-//		this.user_no = user_no;
-//	}
+	public Notice(String notice_title, String notice_content, int user_no) {
+		super();
+		this.notice_title = notice_title;
+		this.notice_content = notice_content;
+		this.user_no = user_no;
+	}
 
 	public int getNotice_no() {
 		return notice_no;

@@ -13,6 +13,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" 
 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
+
+
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>

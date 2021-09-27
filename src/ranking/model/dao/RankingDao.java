@@ -16,6 +16,9 @@ import static common.JDBCTemplate.*;
 
 public class RankingDao {
 	private Properties query = new Properties();
+	private String r_img410 = "/resources/images/flag4.png";
+	private String[] rank_img = {"/resources/images/flag1.png","/resources/images/flag2.png","/resources/images/flag3.png",
+								 r_img410,r_img410,r_img410,r_img410,r_img410,r_img410,r_img410};
 	
 	public RankingDao() {
 		String fileName = MemberDao.class.getResource("/sql/ranking/ranking-query.xml").getPath();
@@ -33,7 +36,7 @@ public class RankingDao {
 		ResultSet rset = null;
 		List<Ranking> resultList = new ArrayList<>();
 		String sql = query.getProperty("selectYesterday");
-		
+		int i= 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, 10);
@@ -43,7 +46,9 @@ public class RankingDao {
 				resultList.add(new Ranking(rset.getInt("to_number(rownum)"),
 						                   rset.getString("nickname"),
 						                   rset.getInt("sumtime"),
-						                   rset.getString("profile_img")));
+						                   rset.getString("profile_img"),
+						                   rank_img[i]));
+				i++;
 			}
 
 		} catch (SQLException e) {
@@ -114,6 +119,124 @@ public class RankingDao {
 
 		return resultList;
 	}
+	
+	// 최근 7일 랭킹 불러오기(전체)
+	public List<Ranking> selectWeekAll(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Ranking> resultList = new ArrayList<>();
+		String sql = query.getProperty("selectWeekAll");
+		int i= 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 7);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				resultList.add(new Ranking(rset.getInt("to_number(rownum)"),
+						                   rset.getString("nickname"),
+						                   rset.getInt("sumtime"),
+						                   rset.getString("profile_img"),
+						                   rank_img[i]));
+				i++;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return resultList;
+	}
+	
+	// 최근 30일 랭킹 불러오기(전체)
+	public List<Ranking> selectMonthAll(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Ranking> resultList = new ArrayList<>();
+		String sql = query.getProperty("selectWeekAll");
+		int i= 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 30);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				resultList.add(new Ranking(rset.getInt("to_number(rownum)"),
+						                   rset.getString("nickname"),
+						                   rset.getInt("sumtime"),
+						                   rset.getString("profile_img"),
+						                   rank_img[i]));
+				i++;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return resultList;
+	}
+	
+	// 나의 랭킹 최근 7일
+	public Ranking selectMyWeekAll(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("selectMyWeekMonthAll");
+		Ranking my = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 7);
+			pstmt.setInt(2, userNo);
+			rset= pstmt.executeQuery();
+			
+			if(rset.next()) {
+				my = new Ranking(rset.getInt("ranking"),
+								 rset.getString("nickname"),
+								 rset.getInt("sumtime"),
+								 rset.getString("profile_img"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return my;
+	}
+	
+	// 나의 랭킹 최근 30일
+		public Ranking selectMyMonthAll(Connection conn, int userNo) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = query.getProperty("selectMyWeekMonthAll");
+			Ranking my = null;
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, 30);
+				pstmt.setInt(2, userNo);
+				rset= pstmt.executeQuery();
+				
+				if(rset.next()) {
+					my = new Ranking(rset.getInt("ranking"),
+									 rset.getString("nickname"),
+									 rset.getInt("sumtime"),
+									 rset.getString("profile_img"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			return my;
+		}
 
 }
 

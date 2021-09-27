@@ -238,7 +238,7 @@
 		   SET STATUS = 'N'
 		 WHERE REPLY_NO = ?
 	</entry>
-	<entry key="report">
+	<entry key="reportBoard">
 	INSERT
 		INTO REPORT
 		(
@@ -255,7 +255,7 @@
 		  , ?
 		)
 	</entry>
-	<entry key="reportBoard">
+	<entry key="reportBoardManager">
 	INSERT
 		INTO BOARDREPORT
 		(

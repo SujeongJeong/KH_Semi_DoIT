@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Properties;
 
 import static common.JDBCTemplate.*;
+
+import shop.model.vo.Charge;
 import shop.model.vo.Product;
 
 
@@ -142,6 +144,8 @@ public class ShopDao {
 		}
 		return result;
 	}
+	
+	//상품삭제
 
 	public int deleteProduct(Connection conn, int product_no) {
 		PreparedStatement pstmt = null;
@@ -159,6 +163,77 @@ public class ShopDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//충전 db등록
+	public int insertCharge(Connection conn, Charge c) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("insertCharge");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, c.getChargeCoin());
+			pstmt.setString(2, c.getPaymentMethod());
+			pstmt.setInt(3, c.getUserNo());
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println("dao : " + result);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertOrder(Connection conn, int product_no, int userNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("insertOrder");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, product_no);
+			pstmt.setInt(2, userNo);
+			pstmt.setInt(3, product_no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	//잔여코인 dao
+	public int updateCoin(Connection conn, int product_no, int userNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("updateCoin");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, product_no);
+			pstmt.setInt(2, userNo);
+			
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
 			close(pstmt);
 		}
 		return result;

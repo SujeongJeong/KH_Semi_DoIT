@@ -25,6 +25,7 @@ public class Purchase {
    private int productPrice; // Product 상품 코인가격 
    private String productName; //  Product 테이블 조인
    
+   
    public Purchase(String productName, Date startDate, Date expirationDate, int productPrice) {
       super();
       this.productName = productName;
@@ -41,6 +42,13 @@ public class Purchase {
       this.productName = productName;
       
    }
+
+  //Purchase db인서트
+	public Purchase(int purchaseNo, int userNo) {
+	super();
+	this.purchaseNo = purchaseNo;
+	this.userNo = userNo;
+}
 
 
 	public int getPurchaseNo() {

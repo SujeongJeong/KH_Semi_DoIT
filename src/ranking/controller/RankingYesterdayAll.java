@@ -3,12 +3,14 @@ package ranking.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import member.model.vo.Member;
 import ranking.model.service.RankingService;
@@ -17,16 +19,16 @@ import study.model.service.StudyService;
 import study.model.vo.Study;
 
 /**
- * Servlet implementation class RankingHomeServlet
+ * Servlet implementation class RankingYesterday
  */
-@WebServlet("/ranking")
-public class RankingHomeServlet extends HttpServlet {
+@WebServlet("/ranking/YesterdayAll")
+public class RankingYesterdayAll extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RankingHomeServlet() {
+    public RankingYesterdayAll() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,18 +42,16 @@ public class RankingHomeServlet extends HttpServlet {
 			userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		}
 		// 나의 스터디방 리스트
-		List<Study> myStudy = new StudyService().selectMyStudy(userNo);
+		//List<Study> myStudy = new StudyService().selectMyStudy(userNo);
 		// 나의 랭킹 가져오기
-		Ranking myRanking = new RankingService().selectMyRanking(userNo);
+		//Ranking myRanking = new RankingService().selectMyRanking(userNo);
 		// 기본값인 전체, 어제 랭킹 불러오기
 		List<Ranking> rankinglist = new RankingService().selectYesterday();
+		System.out.println(rankinglist);
+		response.setContentType("application/json; charset=utf-8");
+		Gson gson = new GsonBuilder().create();
+		gson.toJson(rankinglist, response.getWriter());
 		
-		request.setAttribute("nav1", "ranking");
-		request.setAttribute("Study", myStudy);
-		request.setAttribute("Ranking", rankinglist);
-		request.setAttribute("myRanking", myRanking);
-
-		request.getRequestDispatcher("/WEB-INF/views/ranking/ranking.jsp").forward(request, response);
 	}
 
 	/**

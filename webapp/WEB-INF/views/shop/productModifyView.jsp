@@ -115,7 +115,7 @@
 			
 			<h3>상품 이미지</h3>
 			<img class="image_area" name="fileimg" src="${ contextPath }${ p.product_img}">
-			수정 파일 <input type="file" name="file" id="productimg" accept="image/gif,image/jpeg,image/png">
+			수정 파일 <input type="file" name="file" id="productimg" accept="image/gif,image/jpeg,image/png" value="${ contextPath }${ p.product_img}" required>
 			
 				<div class="inputarea"> 
 					<div><h3>상품명</h3> 	
@@ -135,7 +135,7 @@
 			<h3>상품 설명</h3>
 			<textarea class="textarea" rows="15" cols="80" name="content">${ p.product_detail }</textarea>
 			<div class="btn_area">
-			<button class=enrollbtn type="submit" onclick="detailView();">수정</button>
+			<button class=enrollbtn type="submit" onclick="detailView(${p.product_no });">수정</button>
 			<button class=canclebtn type="button" onclick="window.close();">취소</button>
 		    </div>
 			</div>
@@ -148,7 +148,7 @@
 	
 		<script>
 			function detailView(product_no){
-				alert('수정이 완료되었습니다.');
+				alert('수정이 완료되었습니다. ');
 				location.href = '${contextPath}/ProductModifyView?product_no='+product_no;
 			}
 		</script>

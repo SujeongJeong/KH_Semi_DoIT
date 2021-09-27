@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import member.model.vo.Member;
-import qna.model.service.BoardReportService;
 import qna.model.service.ReportService;
 import qna.model.vo.BoardReport;
 import qna.model.vo.ReplyReport;
@@ -26,26 +25,35 @@ public class ReplyReportServlet extends HttpServlet {
      */
     public ReplyReportServlet() {
         super();
-        // TODO Auto-generated constructor stub
+   
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String view = "";
 
-		//int rid = Integer.parseInt(request.getParameter("reply_no"));
-		String rid = request.getParameter("reply_no");
+		int rid = Integer.parseInt(request.getParameter("reply_no"));
+		//String rid = request.getParameter("reply_no");
+		int user_no = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
-		if(request.getSession().getAttribute("loginUser") == null) {
-			request.setAttribute("msg", "올바르지 않은 요청입니다.");
-			view = "WEB-INF/views/common/errorpage.jsp";
-		} else {
+		
+		Report r = new Report(user_no);
+		ReplyReport rr = new ReplyReport(rid);
+		
+		int result =  new ReportService().replyReportRefer(r, rr);
+		
+		String view = "";
+		if(result > 0) {
+			view = "WEB-INF/views/qna/ReportForm.jsp";
+		}else {
 			view = "WEB-INF/views/qna/replyReportForm.jsp?reply_no="+ rid;
 		}
 		
-		request.getRequestDispatcher(view).forward(request, response);
+		request.getRequestDispatcher(view).forward(request, response);			
+		
+
+		
 	}
 
 	/**
@@ -62,8 +70,9 @@ public class ReplyReportServlet extends HttpServlet {
 
 	
 		Report r = new Report(report_content, user_no);
+		ReplyReport rr = new ReplyReport(reply_no);
 		
-		int result =  new ReportService().boardReport(r);
+		int result =  new ReportService().replyReport(r, rr);
 		
 		System.out.println("rc : " +report_content);
 		System.out.println("etcc : " + etc_comment);
