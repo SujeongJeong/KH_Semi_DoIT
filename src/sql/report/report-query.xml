@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM
+"http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="report">
+	INSERT
+		INTO REPORT
+		(
+			REPORT_NO
+		  , REPORT_CONTENT
+		  , REPORT_DATE
+		  , USER_NO
+		)
+		VALUES
+		(
+			SEQ_RPID.NEXTVAL
+		  , ?
+		  , DEFAULT
+		  , ?
+		)
+	</entry>
+	<entry key="reportBoardManager">
+	INSERT
+		INTO BOARDREPORT
+		(
+			BOARD_NO
+		  , REPORT_NO
+		)
+		VALUES
+		(
+			?
+		  , SEQ_RPID.CURRVAL
+		)
+	</entry>
+	<entry key="reportReplyManager">
+	INSERT
+		INTO REPLYREPORT
+		(
+			REPLY_NO
+		  , REPORT_NO
+		)
+		VALUES
+		(
+			?
+		  , SEQ_RPID.CURRVAL
+		)
+	</entry>
+	<entry key="replyReportRefer">
+	SELECT
+    	   *
+   	  FROM REPORT
+ 	  JOIN REPLYREPORT USING (REPORT_NO)
+ 	 WHERE USER_NO = ?
+       AND REPLY_NO = ?
+	</entry>
+	<entry key="boardReportRefer">
+	SELECT
+    	   *
+   	  FROM REPORT
+ 	  JOIN BOARDREPORT USING (REPORT_NO)
+ 	 WHERE USER_NO = ?
+       AND BOARD_NO = ?
+	</entry>
+</properties>
