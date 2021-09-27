@@ -148,7 +148,7 @@
 	
 		<script>
 			function detailView(product_no){
-				alert('수정이 완료되었습니다.');
+				alert('수정이 완료되었습니다. ');
 				location.href = '${contextPath}/ProductModifyView?product_no='+product_no;
 			}
 		</script>
