@@ -77,14 +77,12 @@
 				CHARGE_NO
 			  , CHARGE_DATE
 			  , CHARGE_COIN
-			  , PAYMENT_METHOD
 			  , USER_NO
 			)
 			VALUES
 			(
 				SEQ_CNO.NEXTVAL
 			  , SYSDATE
-			  , ?
 			  , ?
 			  , ?	
 			)
@@ -116,7 +114,9 @@
 			)
 	
 	</entry>
-	<entry key="updateCoin">
+	
+	
+	<entry key="orderAfterCoin">
 	UPDATE MEMBER
    	  	SET USER_COIN = USER_COIN - (SELECT
    	  									PRODUCT_PRICE
@@ -130,7 +130,20 @@
 	</entry>
 
 
-
+	<entry key="chargeAfterCoin">
+	UPDATE MEMBER
+   	  	SET USER_COIN = USER_COIN + (SELECT
+   	  									CHARGE_COIN
+   	  									FROM CHARGE
+   	  								WHERE CHARGE_NO = ?
+   	  								)
+   	  	
+   		WHERE USER_NO = ?
+	
+	
+	
+	
+	</entry>
 
 
 

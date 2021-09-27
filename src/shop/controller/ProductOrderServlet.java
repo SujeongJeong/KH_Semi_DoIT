@@ -51,7 +51,7 @@ public class ProductOrderServlet extends HttpServlet {
 			
 
 		if(result > 0) {
-			int result1 = new ShopService().updateCoin(product_no, userNo);
+			int result1 = new ShopService().orderAfterCoin(product_no, userNo);
 			if(result1 > 0) {
 				Member loginUser = new MemberService().selectMember(userNo);
 				request.getSession().setAttribute("loginUser", loginUser);
