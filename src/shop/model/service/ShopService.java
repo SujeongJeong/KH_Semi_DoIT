@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Properties;
 
+import member.model.vo.Member;
 import shop.model.dao.ShopDao;
 import shop.model.vo.Charge;
 import shop.model.vo.Product;
@@ -93,10 +94,10 @@ public class ShopService {
 	}
 
 	//충전 db등록
-	public int insertCharge(Charge c) {
+	public int insertCharge(int charge_coin, int userNo) {
 		
 			Connection conn = getConnection();
-			int result = sd.insertCharge(conn, c);
+			int result = sd.insertCharge(conn, charge_coin, userNo);
 		
 			if(result > 0) {
 				commit(conn);
@@ -140,9 +141,10 @@ public class ShopService {
 		return result;
 	}
 
-	public int chargeAfterCoin(Charge c) {
+	//충전 이후의 코인 값.
+	public int chargeAfterCoin(int charge_coin, int userNo, int userCoin) {
 		Connection conn = getConnection();
-		int result = sd.chargeAfterCoin(conn, c);
+		int result = sd.chargeAfterCoin(conn, charge_coin, userNo, userCoin);
 		
 		if(result > 0) {
 			commit(conn);
@@ -152,6 +154,25 @@ public class ShopService {
 		close(conn);
 		
 		return result;
+	}
+
+	public Product modifyImg(int product_no, String files) {
+		Connection conn = getConnection();
+
+		Product updateProduct = null;
+		
+		int result = sd.modifyImg(conn, product_no, files);
+	
+		if(result > 0) {
+			updateProduct = sd.selectProduct(conn, product_no);
+			commit(conn);
+		}
+		else
+			rollback(conn);
+		
+		close(conn);
+		
+		return updateProduct;
 	}
 
 

@@ -144,6 +144,7 @@ opener.parent.location.reload();
 		<input type="hidden" name="product_no" value="${p.product_no}">
 		<input type="hidden" name="expirtion" value="${p.expiration_date}">
 		<input type="hidden" name="category" value="${p.product_category}">
+		
 		<c:if test="${ loginUser.userType =='A' }"><button class="modifybtn" >수정</button></c:if>
 	
 		<div class="product_content">	

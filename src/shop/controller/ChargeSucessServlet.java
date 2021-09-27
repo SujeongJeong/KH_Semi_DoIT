@@ -42,38 +42,33 @@ public class ChargeSucessServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int charge_coin = Integer.parseInt(request.getParameter("amount"))/110;
 		int userNo = ((Member)(request.getSession().getAttribute("loginUser"))).getUserNo();
-		
+		int userCoin = Integer.parseInt(request.getParameter("user_coin"));
 		
 		Charge c = new Charge(charge_coin, userNo);
 		
-		int result = new ShopService().insertCharge(c);
+		int result = new ShopService().insertCharge(charge_coin, userNo);
+		//여기까지 잘 구동됨
 		
 
 		if(result > 0) {
-			int result1 = new ShopService().chargeAfterCoin(c);
+			System.out.println(userCoin);
+			int result1 = new ShopService().chargeAfterCoin(charge_coin, userNo, userCoin);
 			
 			if(result1 > 0) {
 				Member loginUser = new MemberService().selectMember(userNo);
 				request.getSession().setAttribute("loginUser", loginUser);
 				request.setAttribute("result", "success");
-				// 수정 된 객체 다시 loginUser에 저장
-			
+				
 			request.getSession().setAttribute("msg", "충전이 완료되었습니다.");
 			response.sendRedirect(request.getContextPath()+"/shop/home");
 		}else {
-			request.setAttribute("msg", "상품 등록에 실패하였습니다.");
+			request.setAttribute("msg", "충전에 실피해였습니다.");
 			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
 		 }
 	  }	
 		
-	}	
-		
-		
-		
-		
-		
 	
-		
+	}		
 }
 
 
