@@ -41,9 +41,7 @@ public class RankingSelect extends HttpServlet {
 		String group = request.getParameter("group");
 		String period = request.getParameter("period");
 		int s_no = Integer.parseInt(request.getParameter("sNum"));
-		System.out.println("g : " +group);
-		System.out.println("p : " +period);
-		System.out.println("s : " +s_no);
+
 		Ranking myRanking = new Ranking();
 		List<Ranking> rankinglist = new ArrayList<>();
 		
