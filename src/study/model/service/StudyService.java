@@ -3,11 +3,14 @@ package study.model.service;
 import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import member.model.vo.Member;
 import study.model.dao.StudyDao;
 import study.model.vo.MemberJoinStudy;
+import study.model.vo.PageInfo;
 import study.model.vo.Study;
 
 import static common.JDBCTemplate.*;
@@ -25,6 +28,20 @@ public class StudyService {
 		
 		return StudyList;
 	}
+	
+	// 스터디방 갯수 알아오기
+		public int selectStudyListNumber() {
+			Connection conn = getConnection();
+			
+			int result = sd.selectStudyListNumber(conn);
+			
+			close(conn);
+			
+			return result;
+		}
+	
+	
+	
 	// 스터디방별 가입된 회원 조회
 	public List<Study> selectStudyMemberList() {
 		Connection conn = getConnection();
@@ -87,16 +104,7 @@ public class StudyService {
 		return resultSum;
 	}
 
-	// 스터디방 갯수 알아오기
-	public int selectStudyListNumber() {
-		Connection conn = getConnection();
-		
-		int result = sd.selectStudyListNumber(conn);
-		
-		close(conn);
-		
-		return result;
-	}
+	
 	
 	// 스터디방 가입
 	public int insertMemberJoinStudy(MemberJoinStudy mjs) {
@@ -181,6 +189,24 @@ public class StudyService {
 		
 		return mjs;
 	}
+	
+	// 페이징처리
+		public Map<String, Object> selectList1(int page) {
+			Connection conn = getConnection();
+			
+			int result = sd.selectStudyListNumber(conn);
+			
+			PageInfo pi = new PageInfo(page);
+			
+			List<Study> StudyList = sd.selectList1(conn,pi);
+			
+			Map<String, Object> returnMap = new HashMap<>();
+			
+			returnMap.put("pi", pi);
+			returnMap.put("StudyList", StudyList);
+//			System.out.println(returnMap);
+			return returnMap;
+		}
 	
 	
 
