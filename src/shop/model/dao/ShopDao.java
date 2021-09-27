@@ -178,8 +178,7 @@ public class ShopDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, c.getChargeCoin());
-			pstmt.setString(2, c.getPaymentMethod());
-			pstmt.setInt(3, c.getUserNo());
+			pstmt.setInt(2, c.getUserNo());
 			
 			result = pstmt.executeUpdate();
 			
