@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,16 +85,12 @@
 										<td><input type="checkbox" class="cbx_chk" name="refundNo" value="${ rl.refundNo }">${ rl.refundNo }</td>
 										<td>${ rl.userNo }</td>
 										<td>${ rl.userEmail }</td>
-										<td class="refundPopup" onclick="">${ rl.refundCoin }</td>
+										<td>${ rl.refundCoin }</td>
 										<td>${ rl.bankAccount }</td>
 										<td>${ rl.bankName }</td>
 										<td>${ rl.accountName }</td>
-										<td>${ rl.refundDate }</td>
+										<td><fmt:formatDate value="${ rl.refundDate }" type="both" pattern="yyyy.MM.dd HH:mm:ss"/></td>
 									</tr>
-									<form name="refundListForm">
-										<input type="hidden" name="refund_no" value="${ rl.refundNo }">
-										<input type="hidden" name="user_no" value="${ rl.userNo }">
-									</form>
 								</c:forEach>
 							</tbody>
 						</table>
@@ -161,30 +159,6 @@
 			}
 			
 		};
-		
-		function refundList() {
-			openPopup('${contextPath}refundList', 'refundList', 800, 500);
-			
-			document.forms.refundListForm.action = '${contextPath}/refundList';
-			document.forms.refundListForm.submit();
-		}
-		
-		// 팝업창 호출
-		function openPopup(url, title, width, height){
-			// 왼쪽으로 부터 거리(가운데 맞추기)
-			let left = (document.body.clientWidth/2) - (width/2);
-			// 듀얼모니터를 위한 계산 (듀얼모니터를 쓰고 있을때 추가로 )
-			left += window.screenLeft;
-			let top = (screen.availHeight/2) - (height/2);
-			
-			let options = "width="+width+",height="+height+",left="+left+",top="+top;
-			
-			
-			// 새창 열기
-			window.open(url, title, options);
-		}
-		
-		
 	</script>
 </body>
 </html>
