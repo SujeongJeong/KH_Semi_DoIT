@@ -169,7 +169,7 @@ public class ShopDao {
 	}
 	
 	//충전 db등록
-	public int insertCharge(Connection conn, Charge c) {
+	public int insertCharge(Connection conn, int charge_coin, int userNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = query.getProperty("insertCharge");
@@ -177,13 +177,10 @@ public class ShopDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, c.getChargeCoin());
-			pstmt.setString(2, c.getPaymentMethod());
-			pstmt.setInt(3, c.getUserNo());
+			pstmt.setInt(1, charge_coin);
+			pstmt.setInt(2, userNo);
 			
 			result = pstmt.executeUpdate();
-			
-			System.out.println("dao : " + result);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -215,11 +212,11 @@ public class ShopDao {
 		return result;
 	}
 
-	//잔여코인 dao
-	public int updateCoin(Connection conn, int product_no, int userNo) {
+	//잔여코인(상품구매시 코인차감되는것)
+	public int orderAfterCoin(Connection conn, int product_no, int userNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = query.getProperty("updateCoin");
+		String sql = query.getProperty("orderAfterCoin");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -238,7 +235,54 @@ public class ShopDao {
 		}
 		return result;
 	}
-				
+
+	//충전 이후의 코인 값.
+	public int chargeAfterCoin(Connection conn, int charge_coin, int userNo, int userCoin) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("chargeAfterCoin");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, charge_coin);
+			pstmt.setInt(2, userNo);
+			pstmt.setInt(3, userNo);
+			
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int modifyImg(Connection conn, int product_no, String files) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("modifyImg");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, files);
+			pstmt.setInt(2, product_no);
+			
+			result = pstmt.executeUpdate();
+			 
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}		
 	
 	
 	

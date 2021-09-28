@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +68,7 @@
 					<div class="study-info">
 					<img src="${ contextPath }${ s.sImgList.get(0).file_path }${ s.sImgList.get(0).change_name }" alt="스터디배경사진"> 
 					<label class="study-name">${ s.s_name }</label>
-					<label class="study-category darkgray-c">#${ s.cname }</label>
+					<label class="study-category darkgray-c">#${ s.cname }</label> 
 					</div>
 					</c:forEach>
 					</div>
@@ -84,9 +85,22 @@
 						<c:when test="${ loginUser == null }">
 						<li><span class="todayhours point-c">0시간 00분</span><span class="goalhours lightgray-c">/ 0시간 00분</span></li>
 						</c:when>
+						<c:when test="${ loginUser != null and empty myRanking.s_time  }">
+						<li><span class="todayhours point-c">0시간 00분</span>
+						<span class="goalhours lightgray-c">/ 
+						<c:set var="targetHour" value="${ loginUser.targetHour }"/>
+						<c:set var ="hours" value="${fn:split(targetHour, '/') }"/>
+						 ${ hours[0] }시간 ${ hours[1] }분</span></li>
+						</c:when>
 						<c:otherwise>
-						<li><span class="todayhours point-c">${ myRanking.s_time  }</span><span class="goalhours lightgray-c">/ 
-						<c:set var="targetHour" value="${ loginUser.targetHour }"/><c:set var ="hours" value="${fn:split(targetHour, '/') }"/>
+						<li><span class="todayhours point-c">
+						<c:set var="stime" value="${ myRanking.s_time }"/>
+						<c:set var ="myHours" value="${fn:split(stime, ':') }"/> 
+						${ myHours[0] }시간 ${ myHours[1] }분
+						</span> 
+						<span class="goalhours lightgray-c">/ 
+						<c:set var="targetHour" value="${ loginUser.targetHour }"/>
+						<c:set var ="hours" value="${fn:split(targetHour, '/') }"/>
 						 ${ hours[0] }시간 ${ hours[1] }분</span></li>
 						</c:otherwise>
 						</c:choose>
@@ -95,7 +109,8 @@
 			</div>
 			<div class="ranking-area">
 				<span class="title">누적 공부 시간 랭킹 </span><span class="point-c yesterday">하루 전</span>
-				<span class="lightgray-c date">yyyy.MM.dd(E요일) 오전 0시 기준</span>
+				<span class="lightgray-c date">
+				<c:set var="now" value="<%=new java.util.Date()%>" /><fmt:formatDate value="${now}" pattern="yyyy년 M월 d일" />오전 0시 기준</span>
 				<ul class="rankikgUl">
 				<c:forEach var="r" items="${ rankingList }">
 				<li class="first"><img src="${ contextPath }${ r.rank_img}" alt="1위"><span>${ r.rank }위</span>

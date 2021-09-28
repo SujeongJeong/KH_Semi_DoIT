@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Properties;
 
+import member.model.vo.Member;
 import shop.model.dao.ShopDao;
 import shop.model.vo.Charge;
 import shop.model.vo.Product;
@@ -93,12 +94,11 @@ public class ShopService {
 	}
 
 	//충전 db등록
-	public int insertCharge(Charge c) {
+	public int insertCharge(int charge_coin, int userNo) {
 		
 			Connection conn = getConnection();
-			int result = sd.insertCharge(conn, c);
+			int result = sd.insertCharge(conn, charge_coin, userNo);
 		
-			System.out.println("서비스 : " + result);
 			if(result > 0) {
 				commit(conn);
 			} else {
@@ -110,7 +110,7 @@ public class ShopService {
 		
 	}
 
-	//purcahse등록
+	//purcahse등록 (상품구매)
 	public int insertOrder(int product_no, int userNo) {
 		Connection conn = getConnection();
 		int result = sd.insertOrder(conn, product_no, userNo );
@@ -126,10 +126,10 @@ public class ShopService {
 		return result;
 	}
 
-	//잔여코인
-	public int updateCoin(int product_no, int userNo) {
+	//잔여코인(상품구매시 코인차감되는것)
+	public int orderAfterCoin(int product_no, int userNo) {
 		Connection conn = getConnection();
-		int result = sd.updateCoin(conn, product_no, userNo);
+		int result = sd.orderAfterCoin(conn, product_no, userNo);
 		
 		if(result > 0) {
 			commit(conn);
@@ -140,6 +140,41 @@ public class ShopService {
 		
 		return result;
 	}
+
+	//충전 이후의 코인 값.
+	public int chargeAfterCoin(int charge_coin, int userNo, int userCoin) {
+		Connection conn = getConnection();
+		int result = sd.chargeAfterCoin(conn, charge_coin, userNo, userCoin);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public Product modifyImg(int product_no, String files) {
+		Connection conn = getConnection();
+
+		Product updateProduct = null;
+		
+		int result = sd.modifyImg(conn, product_no, files);
+	
+		if(result > 0) {
+			updateProduct = sd.selectProduct(conn, product_no);
+			commit(conn);
+		}
+		else
+			rollback(conn);
+		
+		close(conn);
+		
+		return updateProduct;
+	}
+
 
 	
 	

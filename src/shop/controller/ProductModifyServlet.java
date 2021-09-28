@@ -16,6 +16,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import common.MyFileRenamePolicy;
+import member.model.service.MemberService;
+import member.model.vo.Member;
 import shop.model.service.ShopService;
 import shop.model.vo.Product;
 
@@ -59,14 +61,11 @@ public class ProductModifyServlet extends HttpServlet {
 		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 		
 		String filesname = multiRequest.getFilesystemName("file");
-		String files = "/resources/uploadFiles/shop/"+ filesname;
 		
 		
-			/*if(!filesname.equals("")) {
-				File deleteFile = new File(savePath+filesname);
-				deleteFile.delete();
-			}*/
+		
 			
+		//전체 수정로직
 		
 		int product_no = Integer.parseInt(multiRequest.getParameter("product_no"));
 		String category = multiRequest.getParameter("category");
@@ -74,8 +73,30 @@ public class ProductModifyServlet extends HttpServlet {
 		int price =  Integer.parseInt(multiRequest.getParameter("price"));
 		int expirtion = Integer.parseInt(multiRequest.getParameter("expirtion"));
 		String content = multiRequest.getParameter("content");
-
 		
+		//파일 조건
+		String[] fileimg = new ShopService().selectProduct(product_no).getProduct_img().split("/");
+		
+		
+		if(fileimg.length != 4) {
+				File deleteFile = new File(savePath+fileimg[4]);
+				deleteFile.delete();
+			}
+		String files = "/resources/uploadFiles/shop/" + multiRequest.getFilesystemName("modify_file");
+		
+		
+		Product updateProduct = new ShopService().modifyImg(product_no, files);
+			
+				if(updateProduct != null) {
+					request.setAttribute("msg", "상품 이미지 변경 성공");
+				} else {
+					
+					request.setAttribute("msg", "상품 이미지 변경 실패");
+				}
+			
+				
+		//여기서부턴 전체 상품변동
+				
 		Product p = new Product(product_no, category, title, price, expirtion, content, files);
 
 		int result = new ShopService().modifyProduct(p);

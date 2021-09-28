@@ -12,20 +12,7 @@ public class RankingService {
 
 	private RankingDao rd = new RankingDao();
 	
-	// 전체, 전날 랭킹 불러오기
-	public List<Ranking> selectYesterday() {
-		Connection conn = getConnection();
-		
-		List<Ranking> resultList = rd.selectYesterday(conn);
-		
-		if(resultList != null) {
-
-			close(conn);
-		} 
-		return resultList;
-	}
-	
-	// 나의 랭킹 불러오기
+	// 어제 나의 랭킹 불러오기
 	public Ranking selectMyRanking(int userNo) {
 		Connection conn = getConnection();
 		
@@ -48,11 +35,50 @@ public class RankingService {
 		return resultList;
 	}
 	
-	// 최근 7일 랭킹 불러오기(전체)
-	public List<Ranking> selectWeekAll() {
+	// 전체, 전날 랭킹 불러오기
+	public List<Ranking> selectYesterday() {
 		Connection conn = getConnection();
 		
-		List<Ranking> resultList = rd.selectWeekAll(conn);
+		List<Ranking> resultList = rd.selectYesterday(conn);
+		
+		if(resultList != null) {
+
+			close(conn);
+		} 
+		return resultList;
+	}
+	
+	// 최근 7일,30일 랭킹 불러오기(전체)
+	public List<Ranking> selectWeekMonthAll(int d) {
+		Connection conn = getConnection();
+		
+		List<Ranking> resultList = rd.selectWeekMonthAll(conn,d);
+		
+		if(resultList != null) {
+			close(conn);
+		}
+			
+		return resultList;
+	}
+
+	// 스터디방 어제 랭킹
+	public List<Ranking> selectYesterdayS(int s_no) {
+		Connection conn = getConnection();
+		
+		List<Ranking> resultList = rd.selectYesterdayS(conn, s_no);
+		
+		if(resultList != null) {
+			close(conn);
+		}
+			
+		return resultList;
+	}
+
+	// 스터디방 7일, 30일 랭킹
+	public List<Ranking> selectWeekMonthS(int s_no, int d) {
+		Connection conn = getConnection();
+		
+		List<Ranking> resultList = rd.selectWeekMonthS(conn, s_no, d);
 		
 		if(resultList != null) {
 			close(conn);
@@ -61,36 +87,36 @@ public class RankingService {
 		return resultList;
 	}
 	
-	// 최근 30일 랭킹 불러오기(전체)
-		public List<Ranking> selectMonthAll() {
-			Connection conn = getConnection();
-			
-			List<Ranking> resultList = rd.selectMonthAll(conn);
-			
-			if(resultList != null) {
-				close(conn);
-			}
-				
-			return resultList;
-		}
-		
-	// 나의 랭킹 최근 7일
-	public Ranking selectMyWeekAll(int userNo) {
+	// 나의 랭킹 7일, 30일 (전체)
+	public Ranking selectMyMonthWeekAll(int userNo, int d) {
 		Connection conn = getConnection();
 		
-		Ranking my = rd.selectMyWeekAll(conn, userNo);
+		Ranking my = rd.selectMyMonthWeekAll(conn, userNo, d);
+		
+		if(my != null) close(conn);
+		return my;
+	}
+
+	// 스터디 방에서 어제 나의 랭킹
+	public Ranking selectMyRankYesS(int userNo, int s_no) {
+		Connection conn = getConnection();
+		
+		Ranking my = rd.selectMyRankYesS(conn, userNo, s_no);
 		
 		if(my != null) close(conn);
 		return my;
 	}
 	
-	// 나의 랭킹 최근 30일
-		public Ranking selectMyMonthAll(int userNo) {
-			Connection conn = getConnection();
-			
-			Ranking my = rd.selectMyWeekAll(conn, userNo);
-			
-			if(my != null) close(conn);
-			return my;
-		}
+	// 스터디방에서 7일, 30일 나의 랭킹
+	public Ranking selectMyRankWeekMonS(int userNo, int s_no, int d) {
+		Connection conn = getConnection();
+		
+		Ranking my = rd.selectMyRankWeekMonS(conn, userNo, s_no, d);
+		
+		if(my != null) close(conn);
+		return my;
+	}
+
+
+		
 }

@@ -46,11 +46,22 @@ public class RankingHomeServlet extends HttpServlet {
 		// 기본값인 전체, 어제 랭킹 불러오기
 		List<Ranking> rankinglist = new RankingService().selectYesterday();
 		
+		if(rankinglist != null) {
+			for(Ranking r : rankinglist){
+			 String after = r.getS_time().replace("," , ":");
+			 r.setS_time(after.trim());
+			}
+		}
+		
+		if(myRanking != null) {
+			String afterM = myRanking.getS_time().replace(",", ":");
+			myRanking.setS_time(afterM.trim());
+		}
+		
 		request.setAttribute("nav1", "ranking");
 		request.setAttribute("Study", myStudy);
 		request.setAttribute("Ranking", rankinglist);
 		request.setAttribute("myRanking", myRanking);
-
 		request.getRequestDispatcher("/WEB-INF/views/ranking/ranking.jsp").forward(request, response);
 	}
 

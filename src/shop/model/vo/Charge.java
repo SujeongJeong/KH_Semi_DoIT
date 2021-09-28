@@ -14,7 +14,6 @@ public class Charge {
 	private int chargeNo;
 	private Date chargeDate;
 	private int chargeCoin;
-	private String paymentMethod;
 	private int userNo;
 	
 	public Charge(Date chargeDate, int chargeCoin) {
@@ -25,10 +24,9 @@ public class Charge {
 	
 	
 	//충전완료시 필요한 값
-	public Charge(int chargeCoin, String paymentMethod, int userNo) {
+	public Charge(int chargeCoin, int userNo) {
 		super();
 		this.chargeCoin = chargeCoin;
-		this.paymentMethod = paymentMethod;
 		this.userNo = userNo;
 	}
 	
@@ -53,12 +51,8 @@ public class Charge {
 	public void setChargeCoin(int chargeCoin) {
 		this.chargeCoin = chargeCoin;
 	}
-	public String getPaymentMethod() {
-		return paymentMethod;
-	}
-	public void setPaymentMethod(String paymentMethod) {
-		this.paymentMethod = paymentMethod;
-	}
+	
+
 	public int getUserNo() {
 		return userNo;
 	}
@@ -68,7 +62,7 @@ public class Charge {
 	@Override
 	public String toString() {
 		return "Charge [chargeNo=" + chargeNo + ", chargeDate=" + chargeDate + ", chargeCoin=" + chargeCoin
-				+ ", paymentMethod=" + paymentMethod + ", userNo=" + userNo + "]";
+				+ ", userNo=" + userNo + "]";
 	}
 	
 	
