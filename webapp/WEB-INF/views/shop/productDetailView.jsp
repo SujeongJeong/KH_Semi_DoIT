@@ -163,7 +163,7 @@ opener.parent.location.reload();
 			
 			</form>
 			<div class="btn_area">
-			<form name="orderForm" method="post" action='<%= request.getContextPath() %>/productOrder'>
+			<form name="orderForm" method="post" action='<%= request.getContextPath() %>/productOrder' onsubmit="return confirm('${ p.product_name }을 구매하시겠습니까?');">
 			<input type="hidden" name="product_no" value="${p.product_no}">
 			<button class="paymentbtn" type="submit" onclick="return purchase()">구매</button>
 			<button class="canclebtn" type="button" onclick="window.close();">취소</button>

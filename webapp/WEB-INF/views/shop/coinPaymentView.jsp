@@ -11,24 +11,7 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-<%
-	if(request.getAttribute("result") != null) {
-		if(request.getAttribute("result").equals("success")) {
-%>
-<script>
-	alert("충전 성공");
-	window.close();
-</script>
-<%
-	} else {
-%>
-<script>
-	alert('충전 실패');
-</script>
-<%
-		}
-	}
-%>
+
 <style>
 .wrapper{
 	margin-top : 150px;
@@ -44,7 +27,7 @@
 	align-items: center;
 }
 
-.paymentArea h2, h4 {
+.chargeArea h2, h4 {
 	text-align: center;
 	margin-bottom: 30px;
 }
@@ -130,13 +113,13 @@ button[id$=payment] {
 <body>
 	<div class="wrapper">
 		<div class="content">
-			<form class="paymentArea" action="<%= request.getContextPath() %>/login" method="post" onsubmit="return validate();">
+			<form class="chargeArea" action="<%= request.getContextPath() %>/login" method="post">
 				<div class="logo_area"><a href="/Do_IT"><img class="logo" src="/Do_IT/resources/images/logo.png" alt="logo" onclick="window.close();"></a></div><br>
 				<div class="cerrent_coin">
 					<span id="cerrent_result"><h4>현재 보유 중인 코인 : ${ loginUser.userCoin } coin </h4></span>
 				<input type="text" name="result" id="result" disabled>원
 				<div id="charge_area">충전 할 코인 : <input type="text" id="charge_input"  onkeyup="calc(this.value)" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"   
-					min= 1 placeholder="충전 할 코인 수를 입력하세요."></div>
+					min= 1 placeholder="충전 할 코인 수를 입력하세요." required></div>
 				 <textarea class="textarea" rows="10" cols="60" name="content" placeholder="환불 주의사항 채우기" readonly></textarea>
 				 <div class="btn_area">
 				 <button class=chargebtn type="button" >충전</button>
@@ -162,10 +145,10 @@ button[id$=payment] {
 		
 		
 			
-			
 			//결제 API
 			
 			$(".chargebtn").click(function () {
+				
 			var IMP = window.IMP; // 생략가능
 			IMP.init('imp78099653');
 		    var money = $('#result').val();
@@ -184,10 +167,10 @@ button[id$=payment] {
 			https://docs.iamport.kr/implementation/payment
 			참고하기. 아직 못함.
 			*/
-			name: 'Do_IT 코인 결제',
 			//결제창에서 보여질 이름
-			amount: money,
+			name: 'Do_IT 코인 결제',
 			//가격
+			amount: money,
 			buyer_email: email,
 			buyer_name: nickname,
 			buyer_tel: '***-****-*****',
@@ -223,11 +206,7 @@ button[id$=payment] {
 		    
 		 });
 		})
-			
-			
-
 		
-  
 </script>
 
 

@@ -81,7 +81,7 @@
 	padding: 30px;
 }
 
-.btn_area .enrollbtn {
+.btn_area .modifybtn {
 	width: 100px;
 	height: 35px;
 	border-radius : 5px; border: 0px; 
@@ -109,7 +109,7 @@
 	<div class="logo_area"><img class="logo" src="/Do_IT/resources/images/logo.png" onclick="window.close();" alt="logo"></div>
 	<div>
 
-	<form class="productModifyForm"  method="post" action="${ contextPath }/productModify"  enctype="multipart/form-data">
+	<form class="productModifyForm"  method="post" action="${ contextPath }/productModify"  enctype="multipart/form-data" onsubmit="return confirm('이대로 수정하시겠습니까?');">
 		<div class="product_content">		
 			<input type="hidden" name="product_no" value="${p.product_no }">
 			
@@ -135,7 +135,7 @@
 			<h3>상품 설명</h3>
 			<textarea class="textarea" rows="15" cols="80" name="content">${ p.product_detail }</textarea>
 			<div class="btn_area">
-			<button class=enrollbtn type="submit" >수정</button>
+			<button class=modifybtn type="submit" >수정</button>
 			<button class=canclebtn type="button" onclick="window.close();">취소</button>
 		    </div>
 			</div>
@@ -145,7 +145,6 @@
 		
 		<script src="${ contextPath }/resources/js/imagePreview.js"></script>
 		
-	
 		
 		
 	

@@ -169,7 +169,7 @@ public class ShopDao {
 	}
 	
 	//충전 db등록
-	public int insertCharge(Connection conn, int charge_coin, int userNo) {
+	public int insertCharge(Connection conn, Charge c) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = query.getProperty("insertCharge");
@@ -177,8 +177,8 @@ public class ShopDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, charge_coin);
-			pstmt.setInt(2, userNo);
+			pstmt.setInt(1, c.getChargeCoin());
+			pstmt.setInt(2, c.getUserNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -237,7 +237,7 @@ public class ShopDao {
 	}
 
 	//충전 이후의 코인 값.
-	public int chargeAfterCoin(Connection conn, int charge_coin, int userNo, int userCoin) {
+	public int chargeAfterCoin(Connection conn, Charge c) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = query.getProperty("chargeAfterCoin");
@@ -245,9 +245,8 @@ public class ShopDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, charge_coin);
-			pstmt.setInt(2, userNo);
-			pstmt.setInt(3, userNo);
+			
+			pstmt.setInt(1, c.getUserNo());
 			
 			
 			result = pstmt.executeUpdate();
@@ -261,6 +260,7 @@ public class ShopDao {
 		return result;
 	}
 
+	//이미지 들어갔다가 지우는 dao
 	public int modifyImg(Connection conn, int product_no, String files) {
 		PreparedStatement pstmt = null;
 		int result = 0;

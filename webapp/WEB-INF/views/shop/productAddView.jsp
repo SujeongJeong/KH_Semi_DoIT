@@ -109,7 +109,7 @@
 	<div class="logo_area"><img class="logo" src="/Do_IT/resources/images/logo.png" onclick="window.close();" alt="logo"></div>
 	<div>
 	<form class="productAddForm"  method="post" action="${ contextPath }/productAdd"
-               enctype="multipart/form-data">
+               enctype="multipart/form-data" onsubmit="return confirm('상품을 등록하시겠습니까?');">
 		
 		<div class="product_content">		
 			

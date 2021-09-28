@@ -132,15 +132,12 @@
 
 	<entry key="chargeAfterCoin">
 	UPDATE MEMBER
-   	  	SET USER_COIN = (SELECT 
-                                USER_COIN + (SELECT
+   	  	SET USER_COIN = USER_COIN + (SELECT
                                             CHARGE_COIN
                                             FROM CHARGE
-                                            WHERE CHARGE_NO = ?
+                                            WHERE CHARGE_NO = (SELECT MAX(CHARGE_NO) FROM CHARGE)
                                             )
-                        from MEMBER 
-                        where USER_NO = ?) 
-   	  	
+             
    		WHERE USER_NO = ?
 	</entry>
 	

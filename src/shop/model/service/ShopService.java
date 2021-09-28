@@ -94,19 +94,20 @@ public class ShopService {
 	}
 
 	//충전 db등록
-	public int insertCharge(int charge_coin, int userNo) {
+	public int insertCharge(Charge c) {
 		
 			Connection conn = getConnection();
-			int result = sd.insertCharge(conn, charge_coin, userNo);
-		
-			if(result > 0) {
+			int result1 = sd.insertCharge(conn, c);
+			int result2 = sd.chargeAfterCoin(conn, c);
+
+			if(result1 > 0 && result2 > 0 ) {
 				commit(conn);
 			} else {
 				rollback(conn);
 			}
 			close(conn);
 			
-			return result;
+			return result1 > 0 && result2 > 0 ? 1 : 0;
 		
 	}
 
@@ -141,7 +142,7 @@ public class ShopService {
 		return result;
 	}
 
-	//충전 이후의 코인 값.
+	/*//충전 이후의 코인 값.
 	public int chargeAfterCoin(int charge_coin, int userNo, int userCoin) {
 		Connection conn = getConnection();
 		int result = sd.chargeAfterCoin(conn, charge_coin, userNo, userCoin);
@@ -154,7 +155,7 @@ public class ShopService {
 		close(conn);
 		
 		return result;
-	}
+	}*/
 
 	public Product modifyImg(int product_no, String files) {
 		Connection conn = getConnection();
