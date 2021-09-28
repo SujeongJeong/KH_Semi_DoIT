@@ -220,7 +220,7 @@ public class RankingDao {
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 			String sql = query.getProperty("selectMyMonthWeekAll");
-			Ranking my = null;
+			Ranking my = new Ranking();
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -248,7 +248,7 @@ public class RankingDao {
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 			String sql = query.getProperty("selectMyRankYesS");
-			Ranking my = null;
+			Ranking my= new Ranking();
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -257,7 +257,7 @@ public class RankingDao {
 				rset= pstmt.executeQuery();
 				
 				if(rset.next()) {
-					my = new Ranking(rset.getInt("ranking"),
+					my = new Ranking(rset.getInt("RANKING"),
 									 rset.getString("nickname"),
 									 rset.getString("sumtime"),
 									 rset.getString("profile_img"));
@@ -276,7 +276,7 @@ public class RankingDao {
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 			String sql = query.getProperty("selectMyRankWeekMonS");
-			Ranking my = null;
+			Ranking my= new Ranking();
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -286,7 +286,7 @@ public class RankingDao {
 				rset= pstmt.executeQuery();
 				
 				if(rset.next()) {
-					my = new Ranking(rset.getInt("ranking"),
+					my = new Ranking(rset.getInt("RANKING"),
 									 rset.getString("nickname"),
 									 rset.getString("sumtime"),
 									 rset.getString("profile_img"));

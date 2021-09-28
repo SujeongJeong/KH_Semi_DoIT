@@ -2,7 +2,9 @@ package ranking.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -57,15 +59,15 @@ public class RankingSelect extends HttpServlet {
 			rankinglist = new RankingService().selectWeekMonthAll(30);
 			myRanking = new RankingService().selectMyMonthWeekAll(userNo, 30);
 			
-		}else if(group.equals("study") && period.equals("yesterday")) {
+		}else if(group.equals("study") && period.equals("yesterday") && s_no != 0) {
 			rankinglist = new RankingService().selectYesterdayS(s_no);
 			myRanking = new RankingService().selectMyRankYesS(userNo, s_no);
 			
-		}else if(group.equals("study") && period.equals("week")) {
+		}else if(group.equals("study") && period.equals("week") && s_no != 0) {
 			rankinglist = new RankingService().selectWeekMonthS(s_no, 7);
 			myRanking = new RankingService().selectMyRankWeekMonS(userNo, s_no, 7);
 			
-		}else if(group.equals("study") && period.equals("month")){
+		}else if(group.equals("study") && period.equals("month") && s_no != 0){
 			rankinglist = new RankingService().selectWeekMonthS(s_no, 30);
 			myRanking = new RankingService().selectMyRankWeekMonS(userNo, s_no, 30);
 		}
@@ -82,9 +84,14 @@ public class RankingSelect extends HttpServlet {
 			myRanking.setS_time(afterM.trim());
 		}
 		
+		Map<String, Object> map = new HashMap<>();
+		if(rankinglist != null && myRanking != null) {
+			map.put("list", rankinglist);
+			map.put("my", myRanking);
+		}
 		response.setContentType("application/json; charset=utf-8");
 		Gson gson = new Gson();
-		gson.toJson(rankinglist, response.getWriter());
+		gson.toJson(map, response.getWriter());
 	}
 
 	/**

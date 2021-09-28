@@ -105,14 +105,17 @@ select{ padding : 3px;}
 	
 	
 	<script>
-	<%-- select 클릭 시 스터디방 checked, 스터디방 num 가져오기 --%>
-	var sNum = 0;
+
+	<%-- select 클릭 시 스터디방 checked, 기준 yesterday, 스터디방 num 가져오기 --%>
+	var sNum = 1;
 		$("#studyList").click(function(){
 			$("#study").click();
-			sNum = $("option:selected").val();
-	
 		});
-    
+		
+    $("#study").click(function(){
+    	$("#yesterday").click();
+    	$('#studyList option:eq(1)').attr('selected','selected');
+    });
 	<%-- 기간 라디오 버튼 누를때마다 기준 날짜, 랭킹 다르게 출력 --%>
 	var span = document.getElementById("standard");
 	var days = ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'];
@@ -130,12 +133,12 @@ select{ padding : 3px;}
 	});
 	
 	// 조건 별 랭킹 출력
-	$("input[type=radio]").change(function(){
+	$("input[type=radio]").click(function(){
 		var group = $("input[name='group']:checked").val();
 		var period = $("input[name='period']:checked").val();
 		var standard = null;
 		var today = new Date();
-
+		sNum = $("option:selected").val();
 		// 기준날짜
 		if(period == "yesterday"){
 			standard = new Date(today.setDate(today.getDate() -1 ));
@@ -154,20 +157,21 @@ select{ padding : 3px;}
 			data : {group : group , period: period, sNum: sNum},
 			type : "post",
 			dataType : "json",
-			success : function(list, my){
-				if( list != null){
+			success : function(map){
+				if( map != null){
 					var html ='';
-					for(var key in list){
-						html += '<li class="ranking"><img src=\"/Do_IT'+ list[key].rank_img +'\" alt="1위">'+
-					 			'<span>'+list[key].rank +'위</span>'+
-					 			'<span class="nickname">'+ list[key].nickName +'</span>'+
-					 			'<span class="img-wrapper"><img src=\"/Do_IT'+ list[key].profile_img +'\" alt="profile"></span>'+
-					 			'<span class="hours">'+ list[key].s_time +'</span></li>';
+					for(var key in map.list){
+						html += '<li class="ranking"><img src=\"/Do_IT'+ map.list[key].rank_img +'\" alt="1위">'+
+					 			'<span>'+map.list[key].rank +'위</span>'+
+					 			'<span class="nickname">'+ map.list[key].nickName +'</span>'+
+					 			'<span class="img-wrapper"><img src=\"/Do_IT'+ map.list[key].profile_img +'\" alt="profile"></span>'+
+					 			'<span class="hours">'+ map.list[key].s_time +'</span></li>';
 					}
-					/*html += '<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>'+${ my.rank }위+'</span>'+
-						  '<span class="nickname">'+${ my.nickName }+'</span>'+
-						  '<span class="img-wrapper"><img src=\"/Do_IT'+ my.profile_img +'\" alt="profile"></span>'+
-						  '<span class="hours">'+ ${ my.s_time }+'</span></li>';*/
+					
+					html += '<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>'+map.my.rank+'위</span>'+
+						  '<span class="nickname">'+ map.my.nickName +'</span>'+
+						  '<span class="img-wrapper"><img src=\"/Do_IT'+ map.my.profile_img +'\" alt="profile"></span>'+
+						  '<span class="hours">'+ map.my.s_time +'</span></li>';
 					
 					$(".ranking-wrapper").html(html);
 				}else{
