@@ -217,4 +217,36 @@ public class MyService {
 		 
 		return returnMap;
 	}
+
+	public String todayStudyTime(int userNo) {
+		Connection conn = getConnection();
+		
+		String todayStudyTime = md.todayStudyTime(conn, userNo);
+		
+		return todayStudyTime;
+	}
+
+	public String avgStudyTime(int userNo) {
+		Connection conn = getConnection();
+		
+		String todayStudyTime = md.avgStudyTime(conn, userNo);
+		
+		return todayStudyTime;
+	}
+
+	public String sumStudyTime(int userNo) {
+		Connection conn = getConnection();
+		
+		String todayStudyTime = md.sumStudyTime(conn, userNo);
+		
+		return todayStudyTime;
+	}
+
+	public String lastAvgStudyTime(int userNo) {
+		Connection conn = getConnection();
+		
+		String todayStudyTime = md.lastAvgStudyTime(conn, userNo);
+		
+		return todayStudyTime;
+	}
 }

@@ -491,7 +491,7 @@
 	      document.forms.recodeForm.submit();
 	   });
 	
-	  $(document).ready(function() {
+	   /* $(document).ready(function() {
 	    var totalTime = $('.formatTime').html();
 
 	    var hour = Math.floor(totalTime / 3600) <  10  ? '0'+ Math.floor(totalTime / 3600) : Math.floor(totalTime / 3600);
@@ -501,7 +501,7 @@
 		var str = hour + ":" + minute + ":" + second;
 	    $('.formatTime').html(str); 
 	    console.log(str);
-	});  
+	});    */
 	
 	/*  function formatTime(time) {
 		var totalTime = time;
@@ -512,10 +512,6 @@
 	    
 		return hour + ":" + minute + ":" + second;
 	} 
-	
-	var today = new Date();
-	var standard = new Date(today.setDate(today.getDate() - 30 ));
-	document.getElementById("standard").innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ " 0시 ~ 오늘 기준";
 		
 	$('.formatTime').ready(function(){
 		var totalTime = $('.formatTime').html();
@@ -529,6 +525,12 @@
 	});
 	 */
 
+	 $(function(){
+		 var today = new Date();
+		 var standard = new Date(today.setDate(today.getDate() - 30 ));
+		 document.getElementById("standard").innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ " 0시 ~ 오늘 기준";
+		});
+	 
 	</script>
 </body>
 </html>

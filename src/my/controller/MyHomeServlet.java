@@ -42,12 +42,21 @@ public class MyHomeServlet extends HttpServlet {
 		
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
+		// 오늘 공부 시간
+		String todayStudyTime = new MyService().todayStudyTime(userNo);
+		// 일 평균 공부 시간 -> 누적 공부시간 / S_DAY가 NULL이 아닌 컬럼
+		String avgStudyTime = new MyService().avgStudyTime(userNo);
+		// 누적 공부 시간 -> USER_NO 이용
+		String sumStudyTime = new MyService().sumStudyTime(userNo);
+		// 최근 30일 주 평균 공부시간
+		String lastAvgStudyTime = new MyService().lastAvgStudyTime(userNo);
+		
+		
 		Map<String, Object> map = new MyService().selectStudyRecodeList(page, userNo);
 		
 		request.setAttribute("pi", map.get("pi"));
 		request.setAttribute("StudyRecodeList", map.get("StudyRecodeList"));
 		
-		System.out.println(map.get("StudyRecodeList"));
 		request.setAttribute("nav1", "my");
 		
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/home.jsp");

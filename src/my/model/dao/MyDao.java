@@ -382,6 +382,7 @@ public class MyDao {
          close(rset);
          close(pstmt);
       }
+
       return PurchaseCount;
    }
    
@@ -556,7 +557,7 @@ public class MyDao {
 	}
 	
 	public List<MemberTimer> selectStudyRecodeList(Connection conn, PageInfo pi, int userNo) {
-		PreparedStatement pstmt = null;
+		  PreparedStatement pstmt = null;
 	      ResultSet rset = null;
 	      List<MemberTimer> StudyRecodeList = new ArrayList<>();
 	      String sql = query.getProperty("selectStudyRecodeList");
@@ -585,6 +586,25 @@ public class MyDao {
 	         close(pstmt);
 	      }
 	      return StudyRecodeList;
+	}
+	public String todayStudyTime(Connection conn, int userNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public String avgStudyTime(Connection conn, int userNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public String sumStudyTime(Connection conn, int userNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public String lastAvgStudyTime(Connection conn, int userNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
    
    

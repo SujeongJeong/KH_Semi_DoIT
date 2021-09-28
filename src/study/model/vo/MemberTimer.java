@@ -57,4 +57,7 @@ public class MemberTimer {
 		return "MemberTimer [studyDate=" + studyDate + ", userNo=" + userNo + ", studyNo=" + studyNo + ", studyTime="
 				+ studyTime + "]";
 	}
+
+	
+	
 }
