@@ -194,9 +194,9 @@ public class StudyService {
 		public Map<String, Object> selectList1(int page) {
 			Connection conn = getConnection();
 			
-			int result = sd.selectStudyListNumber(conn);
+			int listCount = sd.selectStudyListNumber(conn);
 			
-			PageInfo pi = new PageInfo(page);
+			PageInfo pi = new PageInfo(page,listCount);
 			
 			List<Study> StudyList = sd.selectList1(conn,pi);
 			
