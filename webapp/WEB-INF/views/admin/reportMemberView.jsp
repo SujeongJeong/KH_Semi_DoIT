@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,25 @@
 <title>관리 - Do IT</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-	<link href='<%= request.getContextPath() %>/resources/css/admin-ReportMember.css?afters' rel='stylesheet'>
+	<link href='<%= request.getContextPath() %>/resources/css/admin-ReportMember.css?after' rel='stylesheet'>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<%
+	if(request.getAttribute("result") != null) {
+		if(request.getAttribute("result").equals("success")) {
+%>
+<script>
+	alert('완료되었습니다');
+</script>
+<%
+	} else {
+%>
+<script>
+	alert('실패하였습니다.');
+</script>
+<%
+		}
+	}
+%>	
 </head>
 <body>
 <!-- 모든 페이지에 include할 menubar.jsp 생성 -->
@@ -41,22 +60,28 @@
 				<div id="board-list-wrap">
 					<h1>신고내역 - 회원</h1>
 					<div class="board-header">
-						<div class="search">
-							구분 : 
-							<select name="category">
-								<option value="10">전체</option>
-								<option value="20">게시물</option>
-								<option value="30">댓글</option>
-								<option value="40">스터디 회원</option>
-							</select>&emsp;
-							정렬 : 
-							<select name="range">
-								<option value="10">최신순</option>
-								<option value="20">신고 횟수</option>
-								<option value="30">작성자 누적 신고</option>
-							</select>&emsp;
-							<button><img src="../resources/images/search_btn.png"></button>
-						</div>
+						<c:if test="${ !empty param.category && !empty param.range }">
+							<c:set var="searchParam" 
+							value="&category=${ param.category }&range=${ param.range }"/>
+						</c:if>
+						<form method="get" action="${ contextPath }/admin/reportMember">
+							<div class="search">
+								구분 : 
+								<select name="category">
+									<option value="all" <c:if test="${ param.category == 'all' }">selected</c:if>>전체</option>
+									<option value="board" <c:if test="${ param.category == 'board' }">selected</c:if>>게시물</option>
+									<option value="reply" <c:if test="${ param.category == 'reply' }">selected</c:if>>댓글</option>
+									<option value="study-member" <c:if test="${ param.category == 'study-member' }">selected</c:if>>스터디 회원</option>
+								</select>&emsp;
+								정렬 : 
+								<select name="range">
+									<option value="latest" <c:if test="${ param.range == 'latest' }">selected</c:if>>최신순</option>
+									<option value="report-count" <c:if test="${ param.range == 'report-count' }">selected</c:if>>신고 횟수</option>
+									<option value="memberReport-count" <c:if test="${ param.range == 'memberReport-count' }">selected</c:if>>작성자 누적 신고</option>
+								</select>&emsp;
+								<button><img src="../resources/images/search_btn.png"></button>
+							</div>
+						</form>
 					</div>
 					<table class="board-list">
 						<caption>게시판 목록</caption>
@@ -65,7 +90,6 @@
                                 <th>번호</th>
 								<th>날짜</th>
 								<th>구분</th>
-								<!-- <th>제목/내용</th> -->
 								<th>신고당한 ID</th>
 								<th>신고 횟수</th>
 								<th>회원 누적신고</th>
@@ -76,7 +100,6 @@
 								<td>1</td>
 								<td>2021-08-28</td>
 								<td class="reportPopup">게시글</td>
-								<!-- <td>학원 홍보</td> -->
 								<td>닉네임1</td>
 								<td class="reportPopup" onclick="openPopup('<%= request.getContextPath() %>/reportList', 'reportList', 800, 500);">1</td>
 								<td class="reportPopup" onclick="openPopup('<%= request.getContextPath() %>/reportAllList', 'reportAllList', 800, 500);">6</td>
@@ -84,22 +107,50 @@
 
 						</tbody>
 					</table>
-					<div class="paging">
-						<a href="#" class="bt">&lt;&lt;</a>
-						<a href="#" class="bt">&lt;</a>
-						<a href="#" class="num on">1</a>
-						<a href="#" class="num">2</a>
-						<a href="#" class="num">3</a>
-						<a href="#" class="num">4</a>
-						<a href="#" class="num">5</a>
-						<a href="#" class="num">6</a>
-						<a href="#" class="num">7</a>
-						<a href="#" class="num">8</a>
-						<a href="#" class="num">9</a>
-						<a href="#" class="num">10</a>
-						<a href="#" class="bt">&gt;</a>
-						<a href="#" class="bt">&gt;&gt;</a>
-					</div>
+					<ul class="board_paging">
+					<li><a href="${ contextPath }/admin/reportMember?page=1${ searchParam }">&lt;&lt;</a></li>
+					
+					<!-- 이전 페이지로(<) -->
+					<li>
+					<c:choose>
+						<c:when test="${ pi.page > 1 }">
+						<a href="${ contextPath }/admin/reportMember?page=${ pi.page - 1}${ searchParam }">&lt;</a>
+						</c:when>
+						<c:otherwise>
+						<a href="#">&lt;</a>
+						</c:otherwise>
+					</c:choose>
+					</li>
+					
+					<!-- 페이지 목록(최대 10개) -->
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<li>
+						<c:choose>
+							<c:when test="${ p eq pi.page }">
+								<a href="#" class="current_page">${ p }</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${ contextPath }/admin/reportMember?page=${ p }${ searchParam }">${ p }</a>
+							</c:otherwise>
+						</c:choose>
+					</li>
+					</c:forEach>
+					
+					<!-- 다음 페이지로(>) -->
+					<li>
+					<c:choose>
+						<c:when test="${ pi.page < pi.maxPage }">
+						<a href="${ contextPath }/admin/reportMember?page=${ pi.page + 1 }${ searchParam }">&gt;</a>
+						</c:when>
+						<c:otherwise>
+						<a href="#">&gt;</a>
+						</c:otherwise>
+					</c:choose>
+					</li>
+					
+					<!-- 맨  끝으로(>>) -->
+					<li><a href="${ contextPath }/admin/reportMember?page=${ pi.maxPage }${ searchParam }">&gt;&gt;</a></li>
+				</ul>
 				</div>
 			</content>
 

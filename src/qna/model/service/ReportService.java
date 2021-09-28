@@ -80,6 +80,40 @@ public class ReportService {
 		return result;
 	}
 
+	// 게시판 신고 처리시 회원 신고 횟수 +1
+	public int memberBoardReportCount(int board_no) {
+		Connection conn = getConnection();
+		
+		int result = rd.memberBoardReportCount(conn, board_no);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	// 댓글 신고 처리시 회원 신고 횟수 +1
+	public int memberReplyReportCount(int reply_no) {
+		Connection conn = getConnection();
+		
+		int result = rd.memberReplyReportCount(conn, reply_no);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
 
 	
 }

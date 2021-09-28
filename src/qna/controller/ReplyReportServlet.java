@@ -72,20 +72,18 @@ public class ReplyReportServlet extends HttpServlet {
 		Report r = new Report(report_content, user_no);
 		ReplyReport rr = new ReplyReport(reply_no);
 		
-		int result =  new ReportService().replyReport(r, rr);
+		int result1 =  new ReportService().replyReport(r, rr);
+		
+		int result2 = new ReportService().memberReplyReportCount(reply_no);
 		
 		System.out.println("rc : " +report_content);
 		System.out.println("etcc : " + etc_comment);
 		System.out.println("user :  " + user_no);
 		
-		if(result > 0) { 
-//			ReplyReport br = new replyReport(reply_no);
-//			int result2 = new BoardReportService().boardReport(br);
-//
-//			if(result2 > 0) {
+		if(result1 > 0 && result2 > 0) { 
 				request.setAttribute("result", "success");
 				request.getRequestDispatcher("WEB-INF/views/qna/replyReportForm.jsp").forward(request, response);
-//			}
+
 		} else {
 			request.setAttribute("result", "fail");
 			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
