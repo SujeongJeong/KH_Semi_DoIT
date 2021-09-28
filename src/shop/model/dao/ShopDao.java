@@ -73,6 +73,9 @@ public class ShopDao {
 			pstmt.setString(4, p.getProduct_detail());
 			pstmt.setInt(5, p.getProduct_price());
 			pstmt.setString(6, p.getProduct_img());
+			pstmt.setInt(7, p.getS_limit());
+			pstmt.setInt(8, p.getS_to_limit());
+			pstmt.setInt(9, p.getTodo_limit());
 			
 			result = pstmt.executeUpdate();
 		
@@ -105,7 +108,11 @@ public class ShopDao {
 							   rset.getInt("EXPIRATION_DATE"),
 							   rset.getInt("PRODUCT_PRICE"),
 							   rset.getString("PRODUCT_DETAIL"),
-							   rset.getString("PRODUCT_IMG"));
+							   rset.getString("PRODUCT_IMG"),
+							   rset.getInt("S_LIMIT"),
+							   rset.getInt("S_TO_LIMIT"),
+							   rset.getInt("TODO_LIMIT"));
+					
 					}
 	
 				} catch (SQLException e) {
@@ -132,7 +139,10 @@ public class ShopDao {
 			pstmt.setString(4, p.getProduct_detail());
 			pstmt.setInt(5, p.getProduct_price());
 			pstmt.setString(6, p.getProduct_img());
-			pstmt.setInt(7, p.getProduct_no());
+			pstmt.setInt(7, p.getS_limit());
+			pstmt.setInt(8, p.getS_to_limit());
+			pstmt.setInt(9, p.getTodo_limit());
+			pstmt.setInt(10, p.getProduct_no());
 			
 			result = pstmt.executeUpdate();
 			
