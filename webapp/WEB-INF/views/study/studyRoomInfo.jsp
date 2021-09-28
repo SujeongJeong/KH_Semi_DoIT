@@ -233,7 +233,7 @@ h2, h3 {
 						<c:out value="입장하기" />
 						<script>
 								function studyBtn(){
-									opener.location.href='<%=request.getContextPath()%>/study/enterStudy';window.close();
+									opener.location.href='<%=request.getContextPath()%>/study/enterStudy?s_no=${studyRoom.s_no}';window.close();
 									
 								}
 							</script>
