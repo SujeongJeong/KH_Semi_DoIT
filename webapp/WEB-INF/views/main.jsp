@@ -39,6 +39,8 @@
 	}
 	.slide-wrapper { display :flex; }
 	.img-wrapper img{ width : 30px; height: 30px;}
+	.slide-wrapper img{ border-radius : 5px;}
+	.study-info:hover{transform:scale(1.05);cursor:pointer;}
 </style>
 </head>
 <body>
@@ -65,7 +67,7 @@
 					<c:otherwise>
 					<div class="slide-wrapper">
 					<c:forEach var="s" items="${ Study }">
-					<div class="study-info">
+					<div class="study-info" onclick="studyDetailView(${ s.s_no})">
 					<img src="${ contextPath }${ s.sImgList.get(0).file_path }${ s.sImgList.get(0).change_name }" alt="스터디배경사진"> 
 					<label class="study-name">${ s.s_name }</label>
 					<label class="study-category darkgray-c">#${ s.cname }</label> 
@@ -209,6 +211,23 @@
 			
 		});
 		
+		// 스터디 클릭 시 상세정보 창으로 이동
+		function openPopup(url, title, width, height){
+	
+			let left = (document.body.clientWidth/2) - (width/2);
+			//듀얼 모니터를 위한 계산
+			left += window.screenLeft;
+			//작업표시줄 제외하고. 
+			let top = (screen.availHeight/2) - (height/2);
+			
+			let options = "width=" + width+",height="+height + ",left="+left + ", top=" + top;
+			
+			
+			window.open(url, title, options);
+		}
+		function studyDetailView(s_no){
+			openPopup('${contextPath}/study/studyInfo?s_no='+s_no, 'studyInfo', 700, 1000);
+		}
 	</script>
 	</c:if>
 	<%-- todolist --%>
