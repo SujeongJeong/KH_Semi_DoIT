@@ -27,20 +27,16 @@ public class BoardService {
 		
 		// 1. 게시글 총 개수 구하기
 		int listCount = bd.getListCount(conn, s);
-		System.out.println("listCount :  " + listCount);
+
 		
 		// 2. PageInfo 객체 만들기
 		 PageInfo pi = new PageInfo(page, listCount, 10, 10);
-		// System.out.println("pi : " + pi);
 	
 		// 3. 페이징 처리가 된 게시글 목록 조회
 		 List<Board> boardList = bd.selectList(conn, pi, s);
-		 // System.out.println("boardList : " + boardList);
+
 		 
-		/* 값은 중복 저장될 수 있지만 키는 중복 저장될 수 없습니다. 만약 기존에 저장된 키와 동일한 키로 값을 저장하면 기존의 값은 없어지고
-		 * 새로운 값으로 대치됩니다. HashMap은 이름 그대로 해싱(Hashing)을 사용하기 때문에 많은 양의 데이터를 검색하는 데 있어서
-		 * 뛰어난 성능을 보입니다.*/
-		// 리턴용  Map 선언 , jsp 위임할때 가져가기위해(pi, boardList) Map으로 담아서 선언
+
 		 Map<String, Object> returnMap = new HashMap<>();
 		 
 		 returnMap.put("pi", pi);

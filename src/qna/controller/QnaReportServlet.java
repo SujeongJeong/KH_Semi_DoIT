@@ -72,7 +72,9 @@ public class QnaReportServlet extends HttpServlet {
 		Report r = new Report(report_content, user_no);
 		BoardReport br = new BoardReport(board_no);
 		
-		int result =  new ReportService().boardReport(r, br);
+		int result1 =  new ReportService().boardReport(r, br);
+		
+		int result2 = new ReportService().memberBoardReportCount(board_no);
 		
 		System.out.println("rc : " +report_content);
 		System.out.println("etcc : " + etc_comment);
@@ -80,7 +82,7 @@ public class QnaReportServlet extends HttpServlet {
 		System.out.println("board_no" + board_no);
 
 		
-		if(result > 0) {
+		if(result1 > 0 && result2 > 0) {
 			request.setAttribute("result", "success");
 			request.getRequestDispatcher("WEB-INF/views/qna/qnaReportForm.jsp").forward(request, response);
 		} else {

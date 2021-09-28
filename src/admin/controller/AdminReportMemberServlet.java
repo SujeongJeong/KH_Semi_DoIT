@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import admin.model.service.AdminService;
+import qna.model.vo.Search;
 
 /**
  * Servlet implementation class AdminReportMemberServlet
@@ -28,10 +32,27 @@ public class AdminReportMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 메뉴바 클릭했을 때 페이지로 이동
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/admin/reportMemberView.jsp");
 		request.setAttribute("nav1", "admin");
-		view.forward(request, response);
+		
+		int page = 1;
+		
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		String category = request.getParameter("category");
+		String range = request.getParameter("range");
+		
+		/*
+		 * Map<String, Object> map = new AdminService().selectReportMemberList(page, new
+		 * Search(category, range));
+		 * 
+		 * // 응답 페이지 구성 시 사용할 데이터 설정 request.setAttribute("pi", map.get("pi"));
+		 * request.setAttribute("memberList", map.get("reportMemberList"));
+		 * 
+		 * request.getRequestDispatcher("/WEB-INF/views/admin/reportMemberView.jsp").
+		 * forward(request, response);
+		 */
 	}
 
 	/**

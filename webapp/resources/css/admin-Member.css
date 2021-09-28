@@ -174,14 +174,22 @@ button{
 
 /* 페이지 이동 */
 
-#board-list-wrap .paging {
-    margin-top: 40px;
-    text-align: center;
-    
+.board_paging {
+	height: 50px;
+	line-height: 50px;
+	display: flex;
+	justify-content: center;
+	list-style: none;
+	width: 480px;
+	margin: 30px auto;
 }
-#board-list-wrap .paging a {
-    display: inline-block;
-    border: 1px solid #dae0e9;
+
+.board_paging a {
+	text-decoration: none;
+	color: #282A35;
+	display: block;
+	text-align: center;
+	border: 1px solid #dae0e9;
     margin-left: 10px;
 	width: 37px;
 	height: 37px;
@@ -189,20 +197,8 @@ button{
     font-size: 12px;
 }
 
-#board-list-wrap .paging a:first-child {
-    margin-left: 0;
-}
-
-#board-list-wrap .paging a.num {
-    font-weight: 600;
-    color: #222;
-    text-align: center;
-    background: #fff;
-}
-
-/* 현재 페이지 일때 */
-#board-list-wrap .paging a.num.on {
-    border: 1px solid #293243;
+.board_paging a.current_page {
+	border: 1px solid #293243;
     background: #222;
     color: #fff;
 }

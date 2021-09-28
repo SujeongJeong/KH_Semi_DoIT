@@ -3,6 +3,8 @@ package qna.model.vo;
 public class Search {
 	/* private String searchCondition; */
 	private String searchValue;
+	private String category;
+	private String range;
 	
 	public Search() {}
 
@@ -11,12 +13,36 @@ public class Search {
 		this.searchValue = searchValue;
 	}
 
+	
+	
+	public Search(String category, String range) {
+		super();
+		this.category = category;
+		this.range = range;
+	}
+
 	public String getSearchValue() {
 		return searchValue;
 	}
 
 	public void setSearchValue(String searchValue) {
 		this.searchValue = searchValue;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getRange() {
+		return range;
+	}
+
+	public void setRange(String range) {
+		this.range = range;
 	}
 
 	@Override
