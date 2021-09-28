@@ -1,9 +1,7 @@
 package my.controller;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,9 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import member.model.vo.Member;
 import my.model.service.MyService;
-import study.model.vo.MemberTimer;
 import study.model.vo.MemberTimerCast;
-import study.model.vo.Study;
+
 
 /**
  * Servlet implementation class MyHomeServlet
