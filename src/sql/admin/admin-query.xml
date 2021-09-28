@@ -56,5 +56,238 @@
 		 FROM MEMBER
 		 WHERE USER_NO = ?
 	</entry>
+	<entry key="getMemberCount">
+		SELECT
+			   COUNT(*)
+		  FROM MEMBER
+		 WHERE STATUS = 'Y'
+	</entry>
+	<entry key="getNicknameListCount">
+		SELECT
+			   COUNT(*)
+		  FROM MEMBER
+		 WHERE STATUS = 'Y'
+		   AND NICKNAME LIKE '%' || ? || '%'
+	</entry>
+	<entry key="selectMemberList">
+		SELECT	  
+				  USER_NO	
+				, USER_EMAIL
+			    , USER_PWD
+			    , NICKNAME
+			    , ENROLL_DATE
+			    , MODIFY_DATE
+			    , STATUS
+			    , USER_TYPE
+			    , PROFILE_IMG
+			    , TARGET_HOUR
+			    , USER_COIN
+			    , REPORT_COUNT
+		FROM (SELECT 
+					ROWNUM RNUM
+				  , RLIST.*
+	    FROM(SELECT
+				  USER_NO	
+				, USER_EMAIL
+			    , USER_PWD
+			    , NICKNAME
+			    , ENROLL_DATE
+			    , MODIFY_DATE
+			    , STATUS
+			    , USER_TYPE
+			    , PROFILE_IMG
+			    , TARGET_HOUR
+			    , USER_COIN
+			    , REPORT_COUNT
+			 FROM MEMBER 
+                 WHERE STATUS = 'Y'
+			    ORDER BY USER_TYPE, REPORT_COUNT DESC, USER_NO DESC) RLIST)
+			  WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectMemberNicknameList">
+		SELECT	  
+				  USER_NO	
+				, USER_EMAIL
+			    , USER_PWD
+			    , NICKNAME
+			    , ENROLL_DATE
+			    , MODIFY_DATE
+			    , STATUS
+			    , USER_TYPE
+			    , PROFILE_IMG
+			    , TARGET_HOUR
+			    , USER_COIN
+			    , REPORT_COUNT
+		FROM (SELECT 
+					ROWNUM RNUM
+				  , RLIST.*
+	    FROM(SELECT
+				  USER_NO	
+				, USER_EMAIL
+			    , USER_PWD
+			    , NICKNAME
+			    , ENROLL_DATE
+			    , MODIFY_DATE
+			    , STATUS
+			    , USER_TYPE
+			    , PROFILE_IMG
+			    , TARGET_HOUR
+			    , USER_COIN
+			    , REPORT_COUNT
+			 FROM MEMBER 
+                 WHERE STATUS = 'Y'
+                 AND NICKNAME LIKE '%' || ? || '%'
+			    ORDER BY USER_TYPE, REPORT_COUNT DESC, USER_NO DESC) RLIST)
+			  WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="deleteMember">
+		UPDATE
+				MEMBER
+		   SET STATUS = 'N'
+		 WHERE USER_NO = ?
+	</entry>
+	<entry key = "memberBoardDelete">
+		UPDATE
+				BOARD
+		   SET STATUS = 'N'
+		 WHERE USER_NO = ?
+	</entry>
+	<entry key = "memberNoticeDelete">
+		UPDATE
+				NOTICE
+		   SET STATUS = 'N'
+		 WHERE USER_NO = ?	
+	</entry>
+	<entry key = "memberReplyDelete">
+		UPDATE
+				REPLY
+		   SET STATUS = 'N'
+		 WHERE USER_NO = ?	
+	</entry>
+	<entry key="adminGrant">
+		UPDATE
+				MEMBER
+		   SET USER_TYPE = 'A'
+		 WHERE USER_NO = ?
+	</entry>
+	<entry key="adminDisqualify">
+	UPDATE
+				MEMBER
+		   SET USER_TYPE = 'U'
+		 WHERE USER_NO = ?
+	</entry>
+	<entry key="getStudyCount">
+	SELECT
+			   COUNT(*)
+		  FROM STUDY
+		 WHERE S_STATUS = 'Y'
+	</entry>
+	<entry key="getStudynameListCount">
+	SELECT
+		   COUNT(*)
+	  FROM STUDY
+	 WHERE S_STATUS = 'Y'
+	   AND S_NAME LIKE '%' || ? || '%'
+	</entry>
+	<entry key="selectStudyList">
+ 	SELECT
+            S_NO
+	      , S_NAME
+	      , S_TO
+	      , S_DAY
+	      , S_STARTPERIOD
+	      , S_ENDPERIOD
+	      , S_STARTTIME
+	      , S_ENDTIME
+	      , S_EXPLAIN
+	      , S_NOTICE
+	      , CNAME
+	      , NICKNAME
+	      , FILE_PATH
+	      , CHANGE_NAME
+	      , ( SELECT COUNT(*) FROM MEMBER_JOINSTUDY M WHERE M.S_NO = S_NO) AS "studyMemberNum"
+     FROM (SELECT 
+			ROWNUM RNUM
+		  , RLIST.*
+   FROM ( SELECT
+		        S.S_NO
+		      , S_NAME
+		      , S_TO
+		      , S_DAY
+		      , S_STARTPERIOD
+		      , S_ENDPERIOD
+		      , S_STARTTIME
+		      , S_ENDTIME
+		      , S_EXPLAIN
+		      , S_NOTICE
+		      , CNAME
+		      , NICKNAME
+		      , FILE_PATH
+		      , CHANGE_NAME
+		      , ( SELECT COUNT(*) FROM MEMBER_JOINSTUDY M WHERE M.S_NO = S.S_NO) AS "studyMemberNum"
+		       FROM STUDY S
+		      JOIN CATEGORY USING(CID)
+		      JOIN ATTACHMENT A ON A.S_NO = S.S_NO
+		      JOIN MEMBER USING(USER_NO)
+		      WHERE S_STATUS = 'Y'
+		      ORDER BY S_NO DESC) RLIST)
+			  WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectStudyNameList">
+	 SELECT
+            S_NO
+	      , S_NAME
+	      , S_TO
+	      , S_DAY
+	      , S_STARTPERIOD
+	      , S_ENDPERIOD
+	      , S_STARTTIME
+	      , S_ENDTIME
+	      , S_EXPLAIN
+	      , S_NOTICE
+	      , CNAME
+	      , NICKNAME
+	      , FILE_PATH
+	      , CHANGE_NAME
+	      , ( SELECT COUNT(*) FROM MEMBER_JOINSTUDY M WHERE M.S_NO = S_NO) AS "studyMemberNum"
+     FROM (SELECT 
+			ROWNUM RNUM
+		  , RLIST.*
+   FROM ( SELECT
+		        S.S_NO
+		      , S_NAME
+		      , S_TO
+		      , S_DAY
+		      , S_STARTPERIOD
+		      , S_ENDPERIOD
+		      , S_STARTTIME
+		      , S_ENDTIME
+		      , S_EXPLAIN
+		      , S_NOTICE
+		      , CNAME
+		      , NICKNAME
+		      , FILE_PATH
+		      , CHANGE_NAME
+		      , ( SELECT COUNT(*) FROM MEMBER_JOINSTUDY M WHERE M.S_NO = S.S_NO) AS "studyMemberNum"
+		       FROM STUDY S
+		      JOIN CATEGORY USING(CID)
+		      JOIN ATTACHMENT A ON A.S_NO = S.S_NO
+		      JOIN MEMBER USING(USER_NO)
+		      WHERE S_STATUS = 'Y'
+		      AND S_NAME LIKE '%' || ? || '%'
+		      ORDER BY S_NO DESC) RLIST)
+			  WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="deleteStudy">
+		UPDATE
+				STUDY
+			SET S_STATUS = 'N'
+		WHERE S_NO = ?
+	</entry>
+	<entry key="getAllListCount">
+	SELECT COUNT(*)FROM REPORT
+	</entry>
+	<entry key="getBoardListCount">
 	
+	</entry>
 </properties>

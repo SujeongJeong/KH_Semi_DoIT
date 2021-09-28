@@ -7,7 +7,25 @@
 <title>관리 - Do IT</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-	<link href='<%= request.getContextPath() %>/resources/css/admin-Member.css' rel='stylesheet'>
+	<link href='<%= request.getContextPath() %>/resources/css/admin-Member.css?after' rel='stylesheet'>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<%
+	if(request.getAttribute("result") != null) {
+		if(request.getAttribute("result").equals("success")) {
+%>
+<script>
+	alert('완료되었습니다');
+</script>
+<%
+	} else {
+%>
+<script>
+	alert('실패하였습니다.');
+</script>
+<%
+		}
+	}
+%>	
 </head>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
@@ -42,64 +60,87 @@
 					<h1>회 원</h1>
 					<div class="board-header">
 						<div class="btn">
-							<button type="button" onclick="memberDelete()">삭제</button>
-							<button type="button" onclick="adminGrant()">권환</button>
-							<button type="button" onclick="adminDisqualify()">박탈</button>
+							<button type="button" onclick="return memberDelete()">삭제</button>
+							<button type="button" onclick="return adminGrant()">권한</button>
+							<button type="button" onclick="return adminDisqualify()">박탈</button>
 						</div>
+					<form name ="memberListForm" method="get" action="<%= request.getContextPath() %>/admin/home">
 						<div class="search">
-							<button><img src="../resources/images/search_btn.png"></button><input type="text">
+							<button><img src="../resources/images/search_btn.png"></button><input type="text"  name="searchValue" value="${ param.searchValue }">
 						</div>
+					</form>
 					</div>
-					<table class="board-list">
-						<caption>게시판 목록</caption>
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>이메일</th>
-								<th>닉네임</th>
-								<th>가입날짜</th>
-								<th>신고횟수</th>
-								<th>타입</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="manager">
-								<td>
-									<input type="checkbox">12
-								</td>
-								<td>2222@naver.com</td>
-								<td>관리자</td>
-								<td>2021-08-29</td>
-								<td>0</td>
-								<td>A</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox">1</td>
-								<td>2222@naver.com</td>
-								<td>닉네임</td>
-								<td>2021-08-28</td>
-								<td>2</td>
-								<td>U</td>
-							</tr>
-
-						</tbody>
-					</table>
-					<div class="paging">
-						<a href="#" class="bt">&lt;&lt;</a>
-						<a href="#" class="bt">&lt;</a>
-						<a href="#" class="num on">1</a>
-						<a href="#" class="num">2</a>
-						<a href="#" class="num">3</a>
-						<a href="#" class="num">4</a>
-						<a href="#" class="num">5</a>
-						<a href="#" class="num">6</a>
-						<a href="#" class="num">7</a>
-						<a href="#" class="num">8</a>
-						<a href="#" class="num">9</a>
-						<a href="#" class="num">10</a>
-						<a href="#" class="bt">&gt;</a>
-						<a href="#" class="bt">&gt;&gt;</a>
-					</div>
+					<form name="memberForm" method="post">
+						<table class="board-list">
+							<caption>게시판 목록</caption>
+							<thead>
+								<tr>
+									<th>번호</th>
+									<th>이메일</th>
+									<th>닉네임</th>
+									<th>가입날짜</th>
+									<th>신고횟수</th>
+									<th>타입</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="ml" items="${ memberList }">
+								<tr>
+									<td><input type="checkbox" class="cbx_chk" name="memberNo" value="${ ml.userNo }">${ ml.userNo }</td>
+									<td>${ ml.userEmail }</td>
+									<td>${ ml.nickName }</td>
+									<td>${ ml.enrollDate }</td>
+									<td>${ ml.reportCount }</td>
+									<td>${ ml.userType }</td>
+								</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</form>
+					<ul class="board_paging">
+					<li><a href="${ contextPath }/admin/home?page=1${ searchParam }">&lt;&lt;</a></li>
+					
+					<!-- 이전 페이지로(<) -->
+					<li>
+					<c:choose>
+						<c:when test="${ pi.page > 1 }">
+						<a href="${ contextPath }/admin/home?page=${ pi.page - 1}${ searchParam }">&lt;</a>
+						</c:when>
+						<c:otherwise>
+						<a href="#">&lt;</a>
+						</c:otherwise>
+					</c:choose>
+					</li>
+					
+					<!-- 페이지 목록(최대 10개) -->
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<li>
+						<c:choose>
+							<c:when test="${ p eq pi.page }">
+								<a href="#" class="current_page">${ p }</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${ contextPath }/admin/home?page=${ p }${ searchParam }">${ p }</a>
+							</c:otherwise>
+						</c:choose>
+					</li>
+					</c:forEach>
+					
+					<!-- 다음 페이지로(>) -->
+					<li>
+					<c:choose>
+						<c:when test="${ pi.page < pi.maxPage }">
+						<a href="${ contextPath }/admin/home?page=${ pi.page + 1 }${ searchParam }">&gt;</a>
+						</c:when>
+						<c:otherwise>
+						<a href="#">&gt;</a>
+						</c:otherwise>
+					</c:choose>
+					</li>
+					
+					<!-- 맨  끝으로(>>) -->
+					<li><a href="${ contextPath }/admin/home?page=${ pi.maxPage }${ searchParam }">&gt;&gt;</a></li>
+				</ul>
 				</div>
 			</content>
 		</div>
@@ -109,19 +150,41 @@
 	</footer>
 	
 	<script>
+			
+		// 회원 삭제
 		function memberDelete(){
-			if(confirm("정말로 삭제하시겠습니까?"))
-				location.href = '<%= request.getContextPath() %>/memberDelete';
+		var checked = $("input[name=memberNo]:checked").length;
+			if(checked == 0) {
+				alert('삭제 처리 할 회원을 선택해주세요');
+				return false;
+			} else if(confirm("회원을 삭제 하시겠습니까?")) {
+				document.forms.memberForm.action = '${contextPath}/admin/memberDelete';
+				document.forms.memberForm.submit();
+			}
 		}
 		
+		// 관리자 권한 부여
 		function adminGrant(){
-			if(confirm("관리자 권환을 부여하시겠습니까?"))
-				location.href = '<%= request.getContextPath() %>/adminGrant';
+			var checked = $("input[name=memberNo]:checked").length;
+			if(checked == 0) {
+				alert('관리자 권환을 부여할 회원을 선택해주세요');
+				return false;
+			} else if(confirm("관리자 권환을 부여하시겠습니까?")) {
+				document.forms.memberForm.action = '${contextPath}/admin/grant';
+				document.forms.memberForm.submit();
+			}
 		}
 		
+		// 관리자 권한 박탈
 		function adminDisqualify(){
-			if(confirm("관리자 권한을 박탈하시겠습니까?"))
-				location.href = '<%= request.getContextPath() %>/adminDisqualify';
+			var checked = $("input[name=memberNo]:checked").length;
+			if(checked == 0) {
+				alert('관리자 권한을 박탈할 회원을 선택해주세요');
+				return false;
+			} else if(confirm("관리자 권한을 박탈하시겠습니까?")) {
+				document.forms.memberForm.action = '${contextPath}/admin/disqualify';
+				document.forms.memberForm.submit();
+			}
 		}
 	</script>
 </body>

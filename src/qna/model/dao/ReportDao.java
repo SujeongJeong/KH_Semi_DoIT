@@ -144,6 +144,52 @@ public class ReportDao {
 		return result;
 	}
 
+	// 게시글 신고 처리시 회원 신고 횟수 +1
+	public int memberBoardReportCount(Connection conn, int board_no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = query.getProperty("memberBoardReportCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, board_no);
+	
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	// 댓글 신고 처리시 회원 신고 횟수 +1
+	public int memberReplyReportCount(Connection conn, int reply_no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = query.getProperty("memberReplyReportCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, reply_no);
+	
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
 
 
 

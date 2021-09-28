@@ -255,13 +255,13 @@
 			<form action="${ contextPath }/study/home">
 				<input type="text" class="searchText" size="15px" name="search"
 					placeholder="검색할 내용을 입력하세요"> 
-					<input type="submit" class="searchTextSubmit" value="검색하기">
+					<input type="button" onclick="plusBtnEvent()" class="searchTextSubmit" value="검색하기">
 			</form>
 		</div>
 		
 		<div class="search category">
 			<form>
-				<select class="studyCategory">
+				<select class="studyCategory" id="studyCategory">
 					<option value="default" selected>카테고리</option>
 					<option value="Language">Language</option>
 					<option value="Embeded">Embeded</option>
@@ -324,8 +324,6 @@
 						<img class="studyImage"
 							src="${ contextPath }${ g.sImgList.get(0).file_path }${ g.sImgList.get(0).change_name }"
 							onclick="studyInfo(${ g.s_no })">
-					
-						<c:set var="studyMemo" value="1"/>
 						
 						<div class="studyTO">${ g.studyMemberNum } / ${ g.s_to } </div>
 					</div>
@@ -404,11 +402,75 @@ function studyInfo(s_no){
 }
 
 	
+var studyCategory = document.getElementById('studyCategory');
+var canJoinStudyBtn = document.getElementById('canJoinStudyBtn');
+
+studyCategory.addEventListener('change',plusBtnEvent);
+canJoinStudyBtn.addEventListener('change',plusBtnEvent);	
+
+	searchParams = {
+			page : 1,
+			keyword : '',
+			category : 'default',
+			canJoin : false
+	}
+	
 function plusBtnEvent(){
-	var page=1;
-	location.href='<%=request.getContextPath()%>/study/home?page='+page;
+	var keywordVal = $(".searchText").val();
+	var categoryVal = $(".studyCategory").val();
+	var canJoinVal = $("input:checkbox[id='canJoinStudyBtn']").is(":checked");
 	
+	console.log(keywordVal);
+	console.log(categoryVal);
+	console.log(canJoinVal);
 	
+	if((searchParams.keyword == keywordVal && searchParams.category == categoryVal &&
+			searchParams.canJoin == canJoinVal) || (searchParams.keyword == "" && searchParams.category == 'default' &&
+					searchParams.canJoin == false)){
+		searchParams.page +=1;
+	} else{
+		searchParams.keyword = keywordVal;
+		searchParams.category = categoryVal;
+		searchParams.canJoin = canJoinVal;
+		searchParams.page = 1;
+	}
+	
+
+	$.ajax({
+		url : "${contextPath}/study/home",
+		type : "get",
+		data : { page : searchParams.page, keyword : searchParams.keyword,
+			category : searchParams.category, canJoin : searchParams.canJoin , param : true},
+		dataType : "json",
+		success : function(resultList){
+			if(resultList != null){
+				console.log(resultList);
+				
+				var html = "";
+				
+				for(var key in resultList){
+					html+= '<div class="studyRoom"><div class="img_wrapper"><img class="studyImage" src="'
+					+ '${ contextPath }'+ resultList[key].sImgList[0].file_path +resultList[key].sImgList[0].change_name
+					+ '" onclick=studyInfo("'+ resultList[key].s_no + ')"><div class="studyTO">' + resultList[key].studyMemberNum
+					+ ' / '+ resultList[key].s_to + '</div></div><div class="sub_wrapper"><div class="sName">'
+					+ resultList[key].s_name + '</div></div><div class="sub_wrapper"><span class="sCategory">#'
+					+ resultList[key].cname + '</span></div><c:if test="'+ ${ loginUser.userType == 'A' } +'">'
+					+ '<input type="checkbox" name="deleteStudy" id="deleteStudy" value="'+resultList[key].s_no+'"></c:if></div>';
+				}
+				<%--
+				console.log("resultList[key].sImgList"+resultList[key].sImgList);
+				console.log("resultList[key].sImgList.file_path"+resultList[key].sImgList.file_path);
+				console.log("resultList[key].sImgList.get(0).file_path"+resultList[key].sImgList.get(0).file_path);
+				 '${ contextPath }'+ resultList[key].sImgList.get(0)file_path + resultList[key].sImgList.get(0)change_name --%>
+				$(".studyList").append(html);
+				
+			}
+		},
+		error : function(e){
+			console.log(e);
+			alert("무언가 잘못됨");
+		}
+	});
 }
 
 

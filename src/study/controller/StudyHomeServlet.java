@@ -1,6 +1,7 @@
 package study.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 import member.model.vo.Member;
 import study.model.service.StudyService;
@@ -39,6 +42,7 @@ public class StudyHomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("nav1", "study");
 		
+		
 		//페이징
 		int page = 1;
 		
@@ -46,27 +50,94 @@ public class StudyHomeServlet extends HttpServlet {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		
-		String search = request.getParameter("search");
+		String keyword = request.getParameter("keyword");
+		String category = request.getParameter("category");
+		String canJoin = request.getParameter("canJoin");
 		
+		if(keyword == null) {
+			keyword = "";
+		}
+		if(category == null) {
+			category = "default";
+		}
+		if(canJoin == null) {
+			canJoin = "false";
+		}
 		
 		Map<String, Object> map = new StudyService().selectList1(page);
-		
+
 		request.setAttribute("pi", map.get("pi"));
 		request.setAttribute("StudyList", map.get("StudyList"));
+		
+		// 전체 스터디 목록
+		List<Study> StudyListAll = (List<Study>) map.get("StudyList");
+		// ajax에 줄 조건에 맞는 스터디 목록
+		List<Study> StudyList = new ArrayList<>();
+		
+		
+		
+		if(keyword == "" && category.equals("default") && canJoin.equals("false") ) {
+			StudyList = StudyListAll;
+		}
+		if(keyword != "" && category.equals("default") && canJoin.equals("false") ){
+			for(Study study : StudyListAll) {
+				if(study.getS_name().contains(keyword)) {
+					StudyList.add(study);
+				}
+			}
+		}
+		if(keyword == "" && !category.equals("default") && canJoin.equals("false")) {
+			for(Study study : StudyListAll) {
+				if(study.getCname().equals(category)) {
+					StudyList.add(study);
+				}
+			}
+		}
+		if(keyword == "" && category.equals("default") && !canJoin.equals("false") ){
+			for(Study study : StudyListAll) {
+				if(study.getStudyMemberNum() < study.getS_to()) {
+					StudyList.add(study);
+				}
+			}
+		}
+		if(keyword != "" && !category.equals("default") && canJoin.equals("false") ){
+			for(Study study : StudyListAll) {
+				if(study.getS_name().contains(keyword) && study.getCname().equals(category)) {
+					StudyList.add(study);
+				}
+			}
+		}
+		if(keyword == "" && !category.equals("default") && !canJoin.equals("false") ){
+			for(Study study : StudyListAll) {
+				if(study.getCname().equals(category) && study.getStudyMemberNum() < study.getS_to()) {
+					StudyList.add(study);
+				}
+			}
+		}
+		if(keyword != "" && category.equals("default") && !canJoin.equals("false")) {
+			for(Study study : StudyListAll) {
+				if(study.getS_name().contains(keyword) && study.getStudyMemberNum() < study.getS_to()) {
+					StudyList.add(study);
+				}
+			}
+		}
+		if(keyword != "" && !category.equals("default") && !canJoin.equals("false")) {
+			for(Study study : StudyListAll) {
+				if(study.getS_name().contains(keyword) && study.getCname().equals(category) && study.getStudyMemberNum() < study.getS_to()) {
+					StudyList.add(study);
+				}
+			}
+		}
 		
 		
 		
 		// 스터디방 리스트(페이징x)
 //		List<Study> StudyList = new StudyService().selectStudyList();
 //		request.setAttribute("StudyList", StudyList);
-//		System.out.println("StudyList : "+StudyList);
-//		System.out.println("StudyList.size() : "+StudyList.size());
 		
 		// 스터디방별 가입된 회원수
 		List<Study> StudyMemberList = new StudyService().selectStudyMemberList();
 		request.setAttribute("StudyMemberList", StudyMemberList);
-//		System.out.println("StudyMemberList : "+StudyMemberList);
-//		System.out.println("StudyMemberList.size() : "+StudyMemberList.size());
 		
 		// 로그인된 유저의 회원번호로 스터디방 몇개 참가하고 있는지 가져오기
 		HttpSession session = request.getSession();
@@ -79,10 +150,16 @@ public class StudyHomeServlet extends HttpServlet {
 			request.setAttribute("userJoinStudyNum", userJoinStudyNum);
 		}
 		
+		System.out.println(StudyList);
 		
-		
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/home.jsp");
-		view.forward(request, response);
+		if(request.getParameter("param")!=null) {
+		// ajax 응답
+			response.setContentType("application/json; charset=utf-8");
+			new Gson().toJson(StudyList, response.getWriter());
+		} else {
+			RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/home.jsp");
+			view.forward(request, response);
+		}
 	}
 
 	/**

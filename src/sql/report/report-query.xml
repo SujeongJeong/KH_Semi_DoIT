@@ -61,4 +61,20 @@
  	 WHERE USER_NO = ?
        AND BOARD_NO = ?
 	</entry>
+	<entry key="memberBoardReportCount">
+	UPDATE MEMBER SET  REPORT_COUNT = REPORT_COUNT + 1
+	WHERE USER_NO IN (SELECT
+                       		 USER_NO
+                   	    FROM BOARD
+                        JOIN BOARDREPORT R USING (BOARD_NO)
+                       WHERE BOARD_NO = ?)
+	</entry>
+	<entry key="memberReplyReportCount">
+	UPDATE MEMBER SET  REPORT_COUNT = REPORT_COUNT + 1
+	WHERE USER_NO IN (SELECT
+                       		 USER_NO
+                   	    FROM REPLY
+                        JOIN REPLYREPORT R USING (REPLY_NO)
+                       WHERE REPLY_NO = ?)
+	</entry>
 </properties>

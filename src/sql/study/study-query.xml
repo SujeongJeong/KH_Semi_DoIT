@@ -193,7 +193,9 @@
  		   WHERE USER_NO = ?
    </entry>
    <entry key="selectList1">
-   		SELECT ROWNUM, SLIST.*
+   		SELECT
+        *
+FROM(SELECT ROWNUM RNUM, SLIST.*
 FROM(SELECT
         S.S_NO
       , S_NAME
@@ -215,8 +217,8 @@ FROM(SELECT
       JOIN ATTACHMENT A ON A.S_NO = S.S_NO
       JOIN MEMBER USING(USER_NO)
       WHERE S_STATUS = 'Y'
-      ORDER BY S_NO DESC) SLIST
-WHERE ROWNUM BETWEEN 1 AND ?
+      ORDER BY S_NO DESC) SLIST) 
+WHERE RNUM BETWEEN ? AND ?
    </entry>
    
 </properties>

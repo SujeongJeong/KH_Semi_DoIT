@@ -8,6 +8,24 @@
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 	<link href='<%= request.getContextPath() %>/resources/css/admin-Study.css' rel='stylesheet'>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<%
+	if(request.getAttribute("result") != null) {
+		if(request.getAttribute("result").equals("success")) {
+%>
+<script>
+	alert('완료되었습니다');
+</script>
+<%
+	} else {
+%>
+<script>
+	alert('실패하였습니다.');
+</script>
+<%
+		}
+	}
+%>	
 </head>
 <body>
 	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
@@ -41,50 +59,83 @@
 					<h1>스터디</h1>
 					<div class="board-header">
 						<div class="btn">
-							<button type="button" onclick="studyDelete()">삭제</button>
+							<button type="button" onclick="return studyDelete()">삭제</button>
 						</div>
+					<form name ="studyListForm" method="get" action="<%= request.getContextPath() %>/admin/study">	
 						<div class="search">
-							<button><img src="../resources/images/search_btn.png"></button><input type="text">
+							<button><img src="../resources/images/search_btn.png"></button><input type="text" name="searchValue" value="${ param.searchValue }">
 						</div>
+					</form>
 					</div>
-					<table class="board-list">
-						<caption>게시판 목록</caption>
-						<thead>
-							<tr>
-                                <th>번호</th>
-								<th>이름</th>
-								<th>방장</th>
-								<th>인원수</th>
-								<th>유효 날짜</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><input type="checkbox">1</td>
-								<td>java study</td>
-								<td>닉네임</td>
-								<td>5/20</td>
-								<td>2021-08-28 ~ 2021-09-10</td>
-							</tr>
-
-						</tbody>
-					</table>
-					<div class="paging">
-						<a href="#" class="bt">&lt;&lt;</a>
-						<a href="#" class="bt">&lt;</a>
-						<a href="#" class="num on">1</a>
-						<a href="#" class="num">2</a>
-						<a href="#" class="num">3</a>
-						<a href="#" class="num">4</a>
-						<a href="#" class="num">5</a>
-						<a href="#" class="num">6</a>
-						<a href="#" class="num">7</a>
-						<a href="#" class="num">8</a>
-						<a href="#" class="num">9</a>
-						<a href="#" class="num">10</a>
-						<a href="#" class="bt">&gt;</a>
-						<a href="#" class="bt">&gt;&gt;</a>
-					</div>
+					<form name="studyForm" method="post">
+						<table class="board-list">
+							<caption>게시판 목록</caption>
+							<thead>
+								<tr>
+	                                <th>번호</th>
+									<th>이름</th>
+									<th>방장</th>
+									<th>현재인원/정원</th>
+									<th>유효 날짜</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="sl" items="${ studyList }">
+									<tr>
+										<td><input type="checkbox"  class="cbx_chk" name="studyNo" value="${ sl.s_no }">${ sl.s_no }</td>
+										<td>${ sl.s_name }</td>
+										<td>${ sl.user_nkname }</td>
+										<td>${ sl.studyMemberNum } / ${ sl.s_to }</td>
+										<td>${ sl.s_startPeriod } ~ ${ sl.s_endPeriod }</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</form>
+					<ul class="board_paging">
+					<li><a href="${ contextPath }/admin/study?page=1${ searchParam }">&lt;&lt;</a></li>
+					
+					<!-- 이전 페이지로(<) -->
+					<li>
+					<c:choose>
+						<c:when test="${ pi.page > 1 }">
+						<a href="${ contextPath }/admin/study?page=${ pi.page - 1}${ searchParam }">&lt;</a>
+						</c:when>
+						<c:otherwise>
+						<a href="#">&lt;</a>
+						</c:otherwise>
+					</c:choose>
+					</li>
+					
+					<!-- 페이지 목록(최대 10개) -->
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<li>
+						<c:choose>
+							<c:when test="${ p eq pi.page }">
+								<a href="#" class="current_page">${ p }</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${ contextPath }/admin/study?page=${ p }${ searchParam }">${ p }</a>
+							</c:otherwise>
+						</c:choose>
+					</li>
+					</c:forEach>
+					
+					<!-- 다음 페이지로(>) -->
+					<li>
+					<c:choose>
+						<c:when test="${ pi.page < pi.maxPage }">
+						<a href="${ contextPath }/admin/study?page=${ pi.page + 1 }${ searchParam }">&gt;</a>
+						</c:when>
+						<c:otherwise>
+						<a href="#">&gt;</a>
+						</c:otherwise>
+					</c:choose>
+					</li>
+					
+					<!-- 맨  끝으로(>>) -->
+					<li><a href="${ contextPath }/admin/study?page=${ pi.maxPage }${ searchParam }">&gt;&gt;</a></li>
+				</ul>
 				</div>
 			</content>
 		</div>
@@ -95,8 +146,14 @@
 	
 	<script>
 		function studyDelete(){
-			if(confirm("정말로 삭제하시겠습니까?"))
-				location.href = '<%= request.getContextPath() %>/studyDelete';
+			var checked = $("input[name=studyNo]:checked").length;
+			if(checked == 0) {
+				alert('삭제 처리 할 스터디를 선택해주세요');
+				return false;
+			} else if(confirm("스터디 삭제 하시겠습니까?")) {
+				document.forms.studyForm.action = '${contextPath}/admin/studyDelete';
+				document.forms.studyForm.submit();
+			}
 		}
 	</script>
 </body>
