@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -317,35 +318,71 @@
 					</div>
 				</div>
 			</div>
-			<div class="recode_btn">
-				<input type="radio" name="study_recode" id="days" value="days"><label for="days">일별</label>
-				<input type="radio" name="study_recode" id="weeks" value="weeks"><label for="weeks">주별</label>
-				<input type="radio" name="study_recode" id="months" value="months"><label for="months">월별</label>
-			</div>
-			<div class="recode_box1">
-				<div><span>2021/09</span> <button><</button> <button>></button></div>
-				<div class="recode_span">
-					<span>월 평균 공부시간 : </span><span>00:00:00</span>
-				</div>
-			</div>
+			<div>
+				<div class="recode_box1">
+					<div><span id="standard"></span></div>
+					<div>평균 공부시간</div>
+				</div>		
 				<table class="board_list">
-	                <thead>
-	                    <tr>
-	                        <th>날짜</th>
-	                        <th>공부 시간</th>
-	                        <th>목표 시간</th>
-	                    </tr>
-	                </thead>
-	                <tbody>
-						<c:forEach var="sl" items="${ studyList }">
+					<thead>
+			        	<tr>
+			            <th>날짜</th>
+			            <th>공부 시간</th>
+			            </tr>          
+			         </thead>
+			         <tbody>
+			           	<c:forEach var="sl" items="${ StudyRecodeList }">
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td><fmt:formatDate value="${ sl.studyDate }" type="both" pattern="yyyy.MM.dd"/></td>
+								<td class="formatTime">${ sl.studyTime }</td>
 							</tr>
 						</c:forEach>
-					</tbody>
-	            </table>
+			          </tbody>
+				</table>
+				<ul class="board_paging">
+                        <li><a href="${ contextPath }/my/home?page=1${ searchParam }">&lt;&lt;</a></li>
+                        
+                        <!-- 이전 페이지로(<) -->
+                        <li>
+                        <c:choose>
+                           <c:when test="${ pi.page > 1 }">
+                           <a href="${ contextPath }/my/home?page=${ pi.page - 1}${ searchParam }">&lt;</a>
+                           </c:when>
+                           <c:otherwise>
+                           <a href="#">&lt;</a>
+                           </c:otherwise>
+                        </c:choose>
+                        </li>
+                        
+                        <!-- 페이지 목록(최대 10개) -->
+                        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                        <li>
+                           <c:choose>
+                              <c:when test="${ p eq pi.page }">
+                                 <a href="#" class="current_page">${ p }</a>
+                              </c:when>
+                              <c:otherwise>
+                                 <a href="${ contextPath }/my/home?page=${ p }${ searchParam }">${ p }</a>
+                              </c:otherwise>
+                           </c:choose>
+                        </li>
+                        </c:forEach>
+                        
+                        <!-- 다음 페이지로(>) -->
+                        <li>
+                        <c:choose>
+                           <c:when test="${ pi.page < pi.maxPage }">
+                           <a href="${ contextPath }/my/home?page=${ pi.page + 1 }${ searchParam }">&gt;</a>
+                           </c:when>
+                           <c:otherwise>
+                           <a href="#">&gt;</a>
+                           </c:otherwise>
+                        </c:choose>
+                        </li>
+                        
+                        <!-- 맨  끝으로(>>) -->
+                        <li><a href="${ contextPath }/my/home?page=${ pi.maxPage }${ searchParam }">&gt;&gt;</a></li>
+                     </ul>  
 			</div>
 		</div>
 	</div>
@@ -448,6 +485,50 @@
 		document.forms.imgForm.action = '${contextPath}/my/modifyImg';
 		document.forms.imgForm.submit();
 	});
+
+	$('input:radio[name=study_recode]').change(function(){
+	      document.forms.recodeForm.action = '${contextPath}/my/home';
+	      document.forms.recodeForm.submit();
+	   });
+	
+	  $(document).ready(function() {
+	    var totalTime = $('.formatTime').html();
+
+	    var hour = Math.floor(totalTime / 3600) <  10  ? '0'+ Math.floor(totalTime / 3600) : Math.floor(totalTime / 3600);
+		var minute = Math.floor((totalTime % 3600) / 60) <  10 ? '0'+ Math.floor((totalTime % 3600) / 60) : Math.floor((totalTime % 3600) / 60);
+		var second = (totalTime % 3600) % 60 < 10 ? '0'+ (totalTime % 3600) % 60 : (totalTime % 3600) % 60;
+	    
+		var str = hour + ":" + minute + ":" + second;
+	    $('.formatTime').html(str); 
+	    console.log(str);
+	});  
+	
+	/*  function formatTime(time) {
+		var totalTime = time;
+
+	    var hour = Math.floor(totalTime / 3600) <  10  ? '0'+ Math.floor(totalTime / 3600) : Math.floor(totalTime / 3600);
+		var minute = Math.floor((totalTime % 3600) / 60) <  10 ? '0'+ Math.floor((totalTime % 3600) / 60) : Math.floor((totalTime % 3600) / 60);
+		var second = (totalTime % 3600) % 60 < 10 ? '0'+ (totalTime % 3600) % 60 : (totalTime % 3600) % 60;
+	    
+		return hour + ":" + minute + ":" + second;
+	} 
+	
+	var today = new Date();
+	var standard = new Date(today.setDate(today.getDate() - 30 ));
+	document.getElementById("standard").innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ " 0시 ~ 오늘 기준";
+		
+	$('.formatTime').ready(function(){
+		var totalTime = $('.formatTime').html();
+
+	    var hour = Math.floor(totalTime / 3600) <  10  ? '0'+ Math.floor(totalTime / 3600) : Math.floor(totalTime / 3600);
+		var minute = Math.floor((totalTime % 3600) / 60) <  10 ? '0'+ Math.floor((totalTime % 3600) / 60) : Math.floor((totalTime % 3600) / 60);
+		var second = (totalTime % 3600) % 60 < 10 ? '0'+ (totalTime % 3600) % 60 : (totalTime % 3600) % 60;
+	    
+		$('.formatTime').html(hour + ":" + minute + ":" + second);
+		console.log(hour + ":" + minute + ":" + second);
+	});
+	 */
+
 	</script>
 </body>
 </html>

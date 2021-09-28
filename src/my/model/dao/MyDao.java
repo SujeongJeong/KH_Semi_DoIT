@@ -17,6 +17,7 @@ import qna.model.vo.PageInfo;
 import shop.model.vo.Charge;
 import shop.model.vo.Purchase;
 import shop.model.vo.Refund;
+import study.model.vo.MemberTimer;
 import study.model.vo.Study;
 
 public class MyDao {
@@ -529,6 +530,62 @@ public class MyDao {
       }
       return RefundList;
    }
+   
+	public int getRecodeCount(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      int RecodeCount = 0;
+	      String sql = query.getProperty("getRecodeCount");
+	         
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setInt(1, userNo);
+	         
+	         rset = pstmt.executeQuery();
+	            
+	         if(rset.next()) {
+	        	 RecodeCount = rset.getInt(1);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      return RecodeCount;
+	}
+	
+	public List<MemberTimer> selectStudyRecodeList(Connection conn, PageInfo pi, int userNo) {
+		PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      List<MemberTimer> StudyRecodeList = new ArrayList<>();
+	      String sql = query.getProperty("selectStudyRecodeList");
+	      
+	      int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+	      int endRow = startRow + pi.getBoardLimit() - 1;
+	      int paramIndex = 2;
+	      
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+	      
+	         pstmt.setInt(1, userNo);
+	         pstmt.setInt(paramIndex++, startRow);
+	         pstmt.setInt(paramIndex++, endRow);
+	         
+	         rset = pstmt.executeQuery();
+	         
+	         while(rset.next()) {
+	        	 StudyRecodeList.add(new MemberTimer(rset.getDate("S_DAY"),
+                       								rset.getInt("S_TIME")));
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      return StudyRecodeList;
+	}
    
    
 }

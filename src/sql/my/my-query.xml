@@ -250,4 +250,41 @@
               ORDER BY REFUND_NO DESC) RLIST)
             WHERE RNUM BETWEEN ? AND ?
    </entry>
+   <entry key="selectWeeksRecodeList">
+   	SELECT
+               S_DAY
+             , S_TIME
+      FROM (SELECT 
+              RLIST.*
+       FROM(SELECT
+                 S_DAY
+             , S_TIME
+               FROM MEMBER_TIMER 
+              WHERE USER_NO = ?
+              ORDER BY S_DAY DESC) RLIST)
+            WHERE S_DAY >= TO_CHAR(SYSDATE-7,'YYYYMMDD')
+   </entry>
+   <entry key="getRecodeCount">
+	SELECT 
+           COUNT(*)
+        FROM MEMBER_TIMER 
+       WHERE SYSDATE BETWEEN (SELECT SYSDATE - 30 FROM DUAL) AND SYSDATE
+       AND USER_NO = ?
+   </entry>
+   <entry key="selectStudyRecodeList">
+   	SELECT
+               S_DAY
+             , S_TIME
+      FROM (SELECT 
+              ROWNUM RNUM
+            , RLIST.*
+       FROM(SELECT
+                 S_DAY
+             , S_TIME
+               FROM MEMBER_TIMER 
+              WHERE USER_NO = ?
+              ORDER BY S_DAY DESC) RLIST)
+            WHERE SYSDATE BETWEEN (SELECT SYSDATE - 30 FROM DUAL) AND SYSDATE
+            AND RNUM BETWEEN ? AND ?
+   </entry>
 </properties>

@@ -1,6 +1,9 @@
 package my.model.service;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.HashMap;
@@ -13,6 +16,7 @@ import qna.model.vo.PageInfo;
 import shop.model.vo.Charge;
 import shop.model.vo.Purchase;
 import shop.model.vo.Refund;
+import study.model.vo.MemberTimer;
 import study.model.vo.Study;
 
 public class MyService {
@@ -197,4 +201,20 @@ public class MyService {
 		return returnMap;
 	}
 
+	public Map<String, Object> selectStudyRecodeList(int page, int userNo) {
+		Connection conn = getConnection();
+		
+		int RecodeCount = md.getRecodeCount(conn, userNo);
+		
+		PageInfo pi = new PageInfo(page, RecodeCount, 10, 10);
+		
+		List<MemberTimer> StudyRecodeList = md.selectStudyRecodeList(conn, pi, userNo);
+	
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		returnMap.put("pi", pi);
+		returnMap.put("StudyRecodeList", StudyRecodeList);
+		 
+		return returnMap;
+	}
 }
