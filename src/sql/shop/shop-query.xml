@@ -24,6 +24,10 @@
 			  , PRODUCT_DETAIL
 			  , PRODUCT_PRICE
 			  , PRODUCT_IMG	
+			  , S_LIMIT
+			  , S_TO_LIMIT 
+			  , TODO_LIMIT
+
 			)
 			VALUES
 			(
@@ -34,6 +38,9 @@
 			  , ?
 			  , ?
 			  , ?	
+			  , ?
+			  , ?
+			  , ?
 			)
 	
 	</entry>
@@ -46,6 +53,10 @@
 			  , PRODUCT_PRICE
 			  ,	PRODUCT_DETAIL
 			  ,	PRODUCT_IMG
+			  , S_LIMIT
+			  , S_TO_LIMIT 
+			  , TODO_LIMIT
+			  
 		   FROM PRODUCT
 		  WHERE PRODUCT_NO = ?
 	 </entry>
@@ -60,6 +71,9 @@
 			  , PRODUCT_DETAIL = ?
 			  , PRODUCT_PRICE = ?
 			  , PRODUCT_IMG = ?	
+			  , S_LIMIT = ?
+			  , S_TO_LIMIT = ? 
+			  , TODO_LIMIT = ?
    	  	
    		WHERE PRODUCT_NO = ?
 	 </entry>
@@ -132,15 +146,12 @@
 
 	<entry key="chargeAfterCoin">
 	UPDATE MEMBER
-   	  	SET USER_COIN = (SELECT 
-                                USER_COIN + (SELECT
+   	  	SET USER_COIN = USER_COIN + (SELECT
                                             CHARGE_COIN
                                             FROM CHARGE
-                                            WHERE CHARGE_NO = ?
+                                            WHERE CHARGE_NO = (SELECT MAX(CHARGE_NO) FROM CHARGE)
                                             )
-                        from MEMBER 
-                        where USER_NO = ?) 
-   	  	
+             
    		WHERE USER_NO = ?
 	</entry>
 	

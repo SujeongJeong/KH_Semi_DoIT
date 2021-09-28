@@ -69,6 +69,12 @@
 	justify-content : center;
 }
 
+.studyroomLimit, .studyroomEntryLimit, .todoListLimit{
+	width: 40px;
+	height: 25px;
+	justify-content : center;
+	margin-left: 10px;
+}
 
 .textarea{
 	margin-bottom: 30px;
@@ -81,7 +87,7 @@
 	padding: 30px;
 }
 
-.btn_area .enrollbtn {
+.btn_area .modifybtn {
 	width: 100px;
 	height: 35px;
 	border-radius : 5px; border: 0px; 
@@ -109,7 +115,7 @@
 	<div class="logo_area"><img class="logo" src="/Do_IT/resources/images/logo.png" onclick="window.close();" alt="logo"></div>
 	<div>
 
-	<form class="productModifyForm"  method="post" action="${ contextPath }/productModify"  enctype="multipart/form-data">
+	<form class="productModifyForm"  method="post" action="${ contextPath }/productModify"  enctype="multipart/form-data" onsubmit="return confirm('이대로 수정하시겠습니까?');">
 		<div class="product_content">		
 			<input type="hidden" name="product_no" value="${p.product_no }">
 			
@@ -131,21 +137,26 @@
 					<input type="number" class="coin_count" name="price" min= 1  value="${ p.product_price }"> Coin / 
 					<input type="number" class="expirtion" name="expirtion" min= 1  value="${ p.expiration_date }"> 일
 				</div>
+				<div class="limit-wrapper">
+				<h3>이용 기능 제한</h3>
+					<span>스터디방 입장/생성 가능 개수 : </span><input type="number" class="studyroomLimit" name="studyroomLimit" min=3 required value="${ p.s_limit}"> 개<br>
+					<span>스터디방 입장 인원 수 : </span><input type="number" class="studyroomEntryLimit"  name="studyroomEntryLimit" min=4 required value="${ p.s_to_limit}"> 인<br>
+					<span>오늘의 할일 수 : </span><input type="number"  class="todoListLimit" name="todoListLimit" min=5 required value="${ p.todo_limit}"> 개 <br>
+				</div><hr>
 		
 			<h3>상품 설명</h3>
-			<textarea class="textarea" rows="15" cols="80" name="content">${ p.product_detail }</textarea>
+			<textarea class="textarea" rows="15" cols="60" name="content">${ p.product_detail }</textarea>
 			<div class="btn_area">
-			<button class=enrollbtn type="submit" >수정</button>
+			<button class=modifybtn type="submit" >수정</button>
 			<button class=canclebtn type="button" onclick="window.close();">취소</button>
 		    </div>
+		    </form>
 			</div>
-			</form>
 			</div>
-		</div>	
+	
 		
 		<script src="${ contextPath }/resources/js/imagePreview.js"></script>
 		
-	
 		
 		
 	

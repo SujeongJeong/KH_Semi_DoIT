@@ -70,10 +70,13 @@ public class ProductAddServlet extends HttpServlet {
 		String title = multiRequest.getParameter("title");
 		int price =  Integer.parseInt(multiRequest.getParameter("price"));
 		int expirtion = Integer.parseInt(multiRequest.getParameter("expirtion"));
+		int studyroomlimit =  Integer.parseInt(multiRequest.getParameter("studyroomLimit"));
+		int sEntrylimit =  Integer.parseInt(multiRequest.getParameter("studyroomEntryLimit"));
+		int todoListlimit =  Integer.parseInt(multiRequest.getParameter("todoListLimit"));
 		String content = multiRequest.getParameter("content");
 
 		
-		Product p = new Product(category, title, price, expirtion, content, files);
+		Product p = new Product(category, title, price, expirtion, studyroomlimit, sEntrylimit, todoListlimit, content, files);
 
 		int result = new ShopService().insertProduct(p);
 		

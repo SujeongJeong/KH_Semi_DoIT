@@ -39,10 +39,10 @@ public class RankingHomeServlet extends HttpServlet {
 		if((Member)request.getSession().getAttribute("loginUser") != null) {
 			userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		}
-		// 나의 스터디방 리스트
-		List<Study> myStudy = new StudyService().selectMyStudy(userNo);
+		
 		// 나의 랭킹 가져오기
 		Ranking myRanking = new RankingService().selectMyRanking(userNo);
+		
 		// 기본값인 전체, 어제 랭킹 불러오기
 		List<Ranking> rankinglist = new RankingService().selectYesterday();
 		
@@ -59,7 +59,6 @@ public class RankingHomeServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("nav1", "ranking");
-		request.setAttribute("Study", myStudy);
 		request.setAttribute("Ranking", rankinglist);
 		request.setAttribute("myRanking", myRanking);
 		request.getRequestDispatcher("/WEB-INF/views/ranking/ranking.jsp").forward(request, response);

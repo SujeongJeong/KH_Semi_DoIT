@@ -142,7 +142,7 @@
 		  WHERE USER_NO = ?
 	</entry>
 	<entry key="selectMyRankWeekMonS">
-	SELECT
+	 SELECT
 		      "RANKING"
 		    , NICKNAME 
 		    , "SUMTIME"
@@ -155,11 +155,12 @@
 		              , USER_NO
 		           FROM MEMBER_TIMER
 		           JOIN MEMBER USING(USER_NO)
-		 <![CDATA[WHERE TO_CHAR(S_DAY, 'yyyymmdd') >= TO_CHAR(SYSDATE- ?, 'yyyymmdd')]]> 
+         <![CDATA[WHERE TO_CHAR(S_DAY, 'yyyymmdd') >= TO_CHAR(SYSDATE- ?, 'yyyymmdd')]]> 
 		            AND USER_TYPE = 'U'
 		            AND S_NO = ? 
 		          GROUP BY USER_NO, PROFILE_IMG, NICKNAME
 		          ORDER BY RANK() OVER (ORDER BY SUM(S_TIME) DESC))
-		  WHERE USER_NO = ?
+		  WHERE USER_NO = ?          
 	</entry>
+
 </properties>

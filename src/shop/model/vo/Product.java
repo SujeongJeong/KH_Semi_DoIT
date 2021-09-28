@@ -8,7 +8,11 @@ public class Product {
 	EXPIRATION_DATE	NUMBER
 	PRODUCT_PRICE	NUMBER
 	PRODUCT_DETAIL	VARCHAR2(800 CHAR)
-	PRODUCT_IMG	VARCHAR2(300 CHAR)*/
+	PRODUCT_IMG	VARCHAR2(300 CHAR)
+	S_LIMIT	NUMBER
+	S_TO_LIMIT	NUMBER
+	TODO_LIMIT	NUMBER
+	*/
 	
 	private int product_no;
 	private String product_category;
@@ -17,11 +21,32 @@ public class Product {
 	private int product_price;
 	private String product_detail;
 	private String product_img;
+	private int s_limit;
+	private int s_to_limit;
+	private int todo_limit;
 	
 	public Product(){}
 	
 	
-	
+	//전체용 + 수정용
+	public Product(int product_no, String product_category, String product_name, int expiration_date, int product_price,
+			String product_detail, String product_img, int s_limit, int s_to_limit, int todo_limit) {
+		super();
+		this.product_no = product_no;
+		this.product_category = product_category;
+		this.product_name = product_name;
+		this.expiration_date = expiration_date;
+		this.product_price = product_price;
+		this.product_detail = product_detail;
+		this.product_img = product_img;
+		this.s_limit = s_limit;
+		this.s_to_limit = s_to_limit;
+		this.todo_limit = todo_limit;
+	}
+
+
+
+
 	public Product(int product_no, String product_category, String product_name, int expiration_date, int product_price,
 			String product_detail, String product_img) {
 		super();
@@ -46,15 +71,19 @@ public class Product {
 	}
 	
 	//인서트용
-	public Product(String product_category, String product_name, int product_price, int expiration_date, String product_detail,
+	public Product(String product_category, String product_name, int product_price, int expiration_date, int s_limit, int s_to_limit, int todo_limit, String product_detail,
 			String product_img) {
 		super();
 		this.product_category = product_category;
 		this.product_name = product_name;
 		this.product_price = product_price;
 		this.expiration_date = expiration_date;
+		this.s_limit = s_limit;
+		this.s_to_limit = s_to_limit;
+		this.todo_limit = todo_limit;
 		this.product_detail = product_detail;
 		this.product_img = product_img;
+		
 	}
 	
 	
@@ -64,8 +93,6 @@ public class Product {
 		return product_no;
 	}
 	
-
-
 	public void setProduct_no(int product_no) {
 		this.product_no = product_no;
 	}
@@ -105,16 +132,55 @@ public class Product {
 	public void setProduct_img(String product_img) {
 		this.product_img = product_img;
 	}
-	
-	
-	
-	
+
+
+
+	public int getS_limit() {
+		return s_limit;
+	}
+
+
+
+	public void setS_limit(int s_limit) {
+		this.s_limit = s_limit;
+	}
+
+
+
+	public int getS_to_limit() {
+		return s_to_limit;
+	}
+
+
+
+	public void setS_to_limit(int s_to_limit) {
+		this.s_to_limit = s_to_limit;
+	}
+
+
+
+	public int getTodo_limit() {
+		return todo_limit;
+	}
+
+
+
+	public void setTodo_limit(int todo_limit) {
+		this.todo_limit = todo_limit;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Product [product_no=" + product_no + ", product_category=" + product_category + ", product_name="
 				+ product_name + ", expiration_date=" + expiration_date + ", product_price=" + product_price
-				+ ", product_detail=" + product_detail + ", product_img=" + product_img + "]";
+				+ ", product_detail=" + product_detail + ", product_img=" + product_img + ", s_limit=" + s_limit
+				+ ", s_to_limit=" + s_to_limit + ", todo_limit=" + todo_limit + "]";
 	}
+	
+	
+	
 	
 	
 	
