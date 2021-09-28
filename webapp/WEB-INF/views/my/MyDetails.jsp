@@ -161,7 +161,7 @@
                             <tr>
                                <th>구매일</th>
                                 <th>상품명</th>
-                                <th>상품 코인</th>        
+                                <th>상품 가격</th>        
                            </tr>
                          </thead>
                          <tbody>
@@ -180,6 +180,7 @@
                             <tr>
                               <th>충전일</th>
                               <th>충전 코인</th>
+                              <th>결제 금액</th>
                            </tr>
                          </thead>
                          <tbody>
@@ -187,6 +188,7 @@
                            <tr>
                               <td><fmt:formatDate value="${ cl.chargeDate }" type="both" pattern="yyyy.MM.dd HH:mm:ss"/></td>
                               <td>${ cl.chargeCoin }</td>
+                              <td>${ cl.chargeCoin * 11 }</td> 
                            </tr>
                         </c:forEach>
                          </tbody>

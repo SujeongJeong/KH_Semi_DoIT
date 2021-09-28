@@ -97,13 +97,11 @@ public class LoginCheckFilter implements Filter {
       
       // 랭킹
       permitList.add("/Do_IT/ranking");
+      permitList.add("/Do_IT/ranking/selectRankingt"); 
       
       // 샵
       permitList.add("/Do_IT/shop/home");
-      permitList.add("/Do_IT/productAdd");
       permitList.add("/Do_IT/productDetail");
-      permitList.add("/Do_IT/productModifyView");
-      permitList.add("/Do_IT/coin");
       
       // Q&A 게시판
       permitList.add("/Do_IT/qna/home");
