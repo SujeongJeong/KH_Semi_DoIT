@@ -577,7 +577,8 @@ public class MyDao {
 	         
 	         while(rset.next()) {
 	        	 StudyRecodeList.add(new MemberTimer(rset.getDate("S_DAY"),
-                       								rset.getInt("S_TIME")));
+                       								rset.getInt("S_TIME")
+                       								,""));
 	         }
 	      } catch (SQLException e) {
 	         e.printStackTrace();
@@ -588,23 +589,112 @@ public class MyDao {
 	      return StudyRecodeList;
 	}
 	public String todayStudyTime(Connection conn, int userNo) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String todayStudyTime = null;
+		String sql = query.getProperty("todayStudyTime");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				todayStudyTime = rset.getString(1);
+	         }
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return todayStudyTime;
 	}
 	
 	public String avgStudyTime(Connection conn, int userNo) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String avgStudyTime = null;
+		String sql = query.getProperty("avgStudyTime");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				avgStudyTime = rset.getString(1);
+	         }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return avgStudyTime;
 	}
 	
 	public String sumStudyTime(Connection conn, int userNo) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sumStudyTime = null;
+		String sql = query.getProperty("sumStudyTime");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				sumStudyTime = rset.getString(1);
+	         }
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return sumStudyTime;
 	}
 	
 	public String lastAvgStudyTime(Connection conn, int userNo) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String lastAvgStudyTime = null;
+		String sql = query.getProperty("lastAvgStudyTime");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, userNo);
+
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				lastAvgStudyTime = rset.getString(1);
+	         }
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return lastAvgStudyTime;
 	}
    
    

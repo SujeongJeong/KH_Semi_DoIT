@@ -17,6 +17,7 @@ import shop.model.vo.Charge;
 import shop.model.vo.Purchase;
 import shop.model.vo.Refund;
 import study.model.vo.MemberTimer;
+import study.model.vo.MemberTimerCast;
 import study.model.vo.Study;
 
 public class MyService {
@@ -209,12 +210,24 @@ public class MyService {
 		PageInfo pi = new PageInfo(page, RecodeCount, 10, 10);
 		
 		List<MemberTimer> StudyRecodeList = md.selectStudyRecodeList(conn, pi, userNo);
-	
-		Map<String, Object> returnMap = new HashMap<>();
 		
+		String after = "";
+		for(MemberTimer r : StudyRecodeList){
+			int time = r.getStudyTime();
+			
+			MemberTimerCast mtc = new MemberTimerCast(time);
+
+			String hour = mtc.getHour() < 10 ? "0" + mtc.getHour() : mtc.getHour() +"";
+			String minute = mtc.getMinute() < 10 ? "0" + mtc.getMinute() : mtc.getMinute() +"";
+			String second = mtc.getSecond() < 10 ? "0" + mtc.getSecond() : mtc.getSecond() +"";
+
+			after =  hour + ":" + minute + ":" + second;
+			r.setStudyTimeStr(after);
+		}
+		
+		Map<String, Object> returnMap = new HashMap<>();
 		returnMap.put("pi", pi);
 		returnMap.put("StudyRecodeList", StudyRecodeList);
-		 
 		return returnMap;
 	}
 
@@ -229,24 +242,24 @@ public class MyService {
 	public String avgStudyTime(int userNo) {
 		Connection conn = getConnection();
 		
-		String todayStudyTime = md.avgStudyTime(conn, userNo);
+		String avgStudyTime = md.avgStudyTime(conn, userNo);
 		
-		return todayStudyTime;
+		return avgStudyTime;
 	}
 
 	public String sumStudyTime(int userNo) {
 		Connection conn = getConnection();
 		
-		String todayStudyTime = md.sumStudyTime(conn, userNo);
+		String sumStudyTime = md.sumStudyTime(conn, userNo);
 		
-		return todayStudyTime;
+		return sumStudyTime;
 	}
 
 	public String lastAvgStudyTime(int userNo) {
 		Connection conn = getConnection();
 		
-		String todayStudyTime = md.lastAvgStudyTime(conn, userNo);
+		String lastAvgStudyTime = md.lastAvgStudyTime(conn, userNo);
 		
-		return todayStudyTime;
+		return lastAvgStudyTime;
 	}
 }

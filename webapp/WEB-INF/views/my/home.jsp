@@ -306,22 +306,22 @@
 				<div class="recode_box">
 					<div class="rec_box1">
 						<p>오늘 공부 시간</p>
-						<div><h1 class="time_box">00:00:00</h1></div>
+						<div><h1 class="time_box">${ todayStudyTime }</h1></div>
 					</div>
 					<div class="rec_box1">
 						<p>일 평균 공부 시간</p>
-						<div><h1 class="time_box">00:00:00</h1></div>
+						<div><h1 class="time_box">${ avgStudyTime }</h1></div>
 					</div>
 					<div class="rec_box1">
 						<p>전체 공부 시간</p>
-						<div><h1 class="time_box">00:00:00</h1></div>
+						<div><h1 class="time_box">${ sumStudyTime }</h1></div>
 					</div>
 				</div>
 			</div>
 			<div>
 				<div class="recode_box1">
 					<div><span id="standard"></span></div>
-					<div>평균 공부시간</div>
+					<div>평균 공부시간 : ${ lastAvgStudyTime }</div>
 				</div>		
 				<table class="board_list">
 					<thead>
@@ -334,7 +334,7 @@
 			           	<c:forEach var="sl" items="${ StudyRecodeList }">
 							<tr>
 								<td><fmt:formatDate value="${ sl.studyDate }" type="both" pattern="yyyy.MM.dd"/></td>
-								<td class="formatTime">${ sl.studyTime }</td>
+								<td class="formatTime">${ sl.studyTimeStr }</td>
 							</tr>
 						</c:forEach>
 			          </tbody>
@@ -391,10 +391,12 @@
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
 	<script>
+	// 카메라 버튼 클릭시 input type="file" 기능 작동
 	$("#camera_btn").click(function() {
 		$('#modify_img').click();
 	});
 	
+	// 닉네임 중복 체크 기능
 	var isUsable = false;
 	
 	function validate() {
@@ -408,9 +410,8 @@
 	}
 	
 	$("#nickCheck").click(function nickCheck(){
-		// input userId 변수
+	
 		var nickname = $("[name=nickName]");
-		// 아이디 중복 시 false, 아이디 사용 가능 시 true
 		
 		var regExp = /^[가-힣a-zA-Z\d]{2,10}$/; 
 		
@@ -418,7 +419,6 @@
 			alert('닉네임은 2~10자 한글, 숫자, 영어 대 소문자를 입력하세요.');
 			nickname.focus();
 		} else {
-			// 4자리 이상의 userId 값을 입력 했을 경우 중복 확인을 위해 ajax 통신 요청
 			$.ajax({
 				url : "${ contextPath }/nickCheck",
 				type : "post",
@@ -430,18 +430,14 @@
 						nickname.focus();
 					} else {
 						if(confirm('사용 가능한 닉네임입니다. 사용하시겠습니까?')) {
-							// 더 이상 id 입력 공간을 수정할 수 없도록 readonly 처리
 							nickname.attr('readonly', true);
 							isUsable = true; // 사용 가능한 아이디라는 flag 값
 						} else {
-							// confirm 창에서 취소를 누를 경우(처음 , 또는 반복해서) 다시 id 수정 가능하도록
 							nickname.attr('readonly', false);
 							nickname.focus();
 							isUsable = false; // 사용 불가능한 아이디라는 flag 값
 						}
 					}
-					// 아이디 중복 체크 후 중복이 아니며 사용하겠다고 선택한 경우에만
-					// joinBtn disable 제거
 					if(isUsable) {
 						$("#nick_change").removeAttr("disabled");
 					} else {
@@ -455,6 +451,7 @@
 		}
 	}); 
 	
+	// 팝업
 	function openPopup(url, title, width, height) {
 		let left = (document.body.clientWidth/2) - (width/2);
 		// 듀얼모니터를 위한 계산
@@ -466,7 +463,7 @@
 		window.open(url, title, options);
 	};
 	
-	
+	// 시간이 24가 되면 분 0으로 변경
 	$("#hour").change(function() {
 		if($('#hour').val() == "24") {
 			$('#min').val("0");
@@ -476,60 +473,48 @@
 		}
 	});
 	
+	// 취소 버튼 누르면 시간 초기화
 	function resetSetHour() {
 		$('input[name=hour]').val(${TargetHour[0]});
 		$('input[name=min]').val(${TargetHour[1]});
 	};
 	
+	// 이미지 사진이 변경되면 서블렛으로 전송
 	$('#modify_img').change(function(){
 		document.forms.imgForm.action = '${contextPath}/my/modifyImg';
 		document.forms.imgForm.submit();
 	});
 
-	$('input:radio[name=study_recode]').change(function(){
-	      document.forms.recodeForm.action = '${contextPath}/my/home';
-	      document.forms.recodeForm.submit();
-	   });
-	
-	   /* $(document).ready(function() {
-	    var totalTime = $('.formatTime').html();
-
-	    var hour = Math.floor(totalTime / 3600) <  10  ? '0'+ Math.floor(totalTime / 3600) : Math.floor(totalTime / 3600);
-		var minute = Math.floor((totalTime % 3600) / 60) <  10 ? '0'+ Math.floor((totalTime % 3600) / 60) : Math.floor((totalTime % 3600) / 60);
-		var second = (totalTime % 3600) % 60 < 10 ? '0'+ (totalTime % 3600) % 60 : (totalTime % 3600) % 60;
-	    
-		var str = hour + ":" + minute + ":" + second;
-	    $('.formatTime').html(str); 
-	    console.log(str);
-	});    */
-	
-	/*  function formatTime(time) {
-		var totalTime = time;
-
-	    var hour = Math.floor(totalTime / 3600) <  10  ? '0'+ Math.floor(totalTime / 3600) : Math.floor(totalTime / 3600);
-		var minute = Math.floor((totalTime % 3600) / 60) <  10 ? '0'+ Math.floor((totalTime % 3600) / 60) : Math.floor((totalTime % 3600) / 60);
-		var second = (totalTime % 3600) % 60 < 10 ? '0'+ (totalTime % 3600) % 60 : (totalTime % 3600) % 60;
-	    
-		return hour + ":" + minute + ":" + second;
-	} 
-		
-	$('.formatTime').ready(function(){
-		var totalTime = $('.formatTime').html();
-
-	    var hour = Math.floor(totalTime / 3600) <  10  ? '0'+ Math.floor(totalTime / 3600) : Math.floor(totalTime / 3600);
-		var minute = Math.floor((totalTime % 3600) / 60) <  10 ? '0'+ Math.floor((totalTime % 3600) / 60) : Math.floor((totalTime % 3600) / 60);
-		var second = (totalTime % 3600) % 60 < 10 ? '0'+ (totalTime % 3600) % 60 : (totalTime % 3600) % 60;
-	    
-		$('.formatTime').html(hour + ":" + minute + ":" + second);
-		console.log(hour + ":" + minute + ":" + second);
-	});
-	 */
-
-	 $(function(){
-		 var today = new Date();
-		 var standard = new Date(today.setDate(today.getDate() - 30 ));
-		 document.getElementById("standard").innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ " 0시 ~ 오늘 기준";
-		});
+	// 오늘 ~ 30일 전 날짜 기준 보여줌
+	 var today = new Date();
+	 var standard = new Date(today.setDate(today.getDate() - 30 ));
+	 document.getElementById("standard").innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ " 0시 ~ 오늘 기준";
+	 
+	/*  $('.formatTime').each(function(){
+		 var time = $(this).val();
+		 
+		 var hour = time / 3600 < 10 ? "0" + (time / 3600) : (time / 3600);
+		 var minute = (time % 3600) / 60 < 10 ? "0" + ((time % 3600) / 60) : ((time % 3600) / 60);
+		 var second = (time % 3600) % 60 < 10 ? "0" + ((time % 3600) % 60) : ((time % 3600) % 60);
+		 
+		 var str = hour + ":" + minute + ":" + second;
+		 $(this).val(str)
+	 }); */
+	 
+	 $('.formatTime').each(function(item){
+		 var time = item;
+		 console.log(time);
+		 var hour = time / 3600 < 10 ? "0" + (time / 3600) : (time / 3600);
+		 var minute = (time % 3600) / 60 < 10 ? "0" + ((time % 3600) / 60) : ((time % 3600) / 60);
+		 var second = (time % 3600) % 60 < 10 ? "0" + ((time % 3600) % 60) : ((time % 3600) % 60);
+		 
+		 var str = hour + ":" + minute + ":" + second;
+		 $(this).val(str);
+		 
+	 });
+	 
+	 
+	 
 	 
 	</script>
 </body>
