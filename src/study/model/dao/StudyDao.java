@@ -458,7 +458,12 @@ public class StudyDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, pi.getStudyLimit());
+			
+			int startRow = (pi.getPage() - 1 ) * 10 + 1 ;
+			int endRow = startRow + 10 - 1 ;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
