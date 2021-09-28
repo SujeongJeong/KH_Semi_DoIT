@@ -72,6 +72,9 @@ public class ProductModifyServlet extends HttpServlet {
 		String title = multiRequest.getParameter("title");
 		int price =  Integer.parseInt(multiRequest.getParameter("price"));
 		int expirtion = Integer.parseInt(multiRequest.getParameter("expirtion"));
+		int studyroomlimit =  Integer.parseInt(multiRequest.getParameter("studyroomLimit"));
+		int sEntrylimit =  Integer.parseInt(multiRequest.getParameter("studyroomEntryLimit"));
+		int todoListlimit =  Integer.parseInt(multiRequest.getParameter("todoListLimit"));
 		String content = multiRequest.getParameter("content");
 		
 		//파일 조건
@@ -97,7 +100,7 @@ public class ProductModifyServlet extends HttpServlet {
 				
 		//여기서부턴 전체 상품변동
 				
-		Product p = new Product(product_no, category, title, price, expirtion, content, files);
+		Product p = new Product(product_no, category, title, price, expirtion, content, files, studyroomlimit, sEntrylimit, todoListlimit);
 
 		int result = new ShopService().modifyProduct(p);
 		

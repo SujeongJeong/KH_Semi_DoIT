@@ -65,9 +65,16 @@
 }
 
 .expirtion{
-	width: 50px;
+	width: 55px;
 	height: 25px;
 	justify-content : center;
+}
+
+.studyroomLimit, .studyroomEntryLimit, .todoListLimit{
+	width: 40px;
+	height: 25px;
+	justify-content : center;
+	margin-left: 10px;
 }
 
 
@@ -109,7 +116,7 @@
 	<div class="logo_area"><img class="logo" src="/Do_IT/resources/images/logo.png" onclick="window.close();" alt="logo"></div>
 	<div>
 	<form class="productAddForm"  method="post" action="${ contextPath }/productAdd"
-               enctype="multipart/form-data">
+               enctype="multipart/form-data" onsubmit="return confirm('상품을 등록하시겠습니까?');">
 		
 		<div class="product_content">		
 			
@@ -131,15 +138,22 @@
 					<input type="number" class="coin_count" name="price" min= 1 required placeholder="Coin 입력"> Coin / 
 					<input type="number" class="expirtion" name="expirtion" min= 1 required placeholder="숫자만 입력하세요"> 일
 				</div>
-		
-			<h3>상품 설명</h3>
-			<textarea class="textarea" rows="15" cols="80" name="content" placeholder="상품설명을 입력하세요."></textarea>
-			<div class="btn_area">
-			<button class=enrollbtn type="submit">등록</button>
-			<button class=canclebtn type="button" onclick="window.close();">취소</button>
-		    </div>
-		
-			</div>
+				
+				<div class="limit-wrapper">
+					<h3>이용 기능 제한</h3>
+					<span>스터디방 입장/생성 가능 개수 : </span><input type="number" class="studyroomLimit" name="studyroomLimit" min=3 required placeholder="3"> 개<br>
+					<span>스터디방 입장 인원 수 : </span><input type="number" class="studyroomEntryLimit"  name="studyroomEntryLimit" min=4 required placeholder="4"> 인<br>
+					<span>오늘의 할일 수 : </span><input type="number"  class="todoListLimit" name="todoListLimit" min=5 required placeholder="5"> 개 <br>
+					</div><hr>
+			
+				<h3>상품 설명</h3>
+				<textarea class="textarea" rows="15" cols="80" name="content" placeholder="상품설명을 입력하세요."></textarea>
+				<div class="btn_area">
+				<button class=enrollbtn type="submit">등록</button>
+				<button class=canclebtn type="button" onclick="window.close();">취소</button>
+			    </div>
+			
+			  </div>
 			</form>
 			</div>
 		</div>	

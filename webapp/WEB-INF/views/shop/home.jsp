@@ -116,7 +116,7 @@
   
  <div class="content">	
 	<div class="product_area">
-	 <button class="coin_charge" onclick="openPopup('<%=request.getContextPath()%>/coin', 'coin_charge', 900, 900);">코인충전</button>
+	 <button class="coin_charge"  onclick="openPopup('<%=request.getContextPath()%>/coin', 'coin_charge', 900, 900);">코인충전</button>
 	
 	
 	<h3>| 프리미엄 이용권  

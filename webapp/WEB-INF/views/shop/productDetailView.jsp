@@ -15,14 +15,14 @@
 		if(request.getAttribute("result").equals("success")) {
 %>
 <script>
-	alert("구매 성공");
+	alert("상품을 구매하셨습니다. 감사합니다. ");
 	window.close();
 </script>
 <%
 	} else {
 %>
 <script>
-	alert('구매 실패');
+	alert('상품 구매에 실패하셨습니다. ');
 </script>
 <%
 		}
@@ -34,6 +34,15 @@
 	margin : 50px auto;
 	
 } 
+.productModifyForm {
+	width: 600px;
+	height: auto;
+	margin: 50px auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 
 .modifybtn {
 	width: 88px;
@@ -158,21 +167,29 @@ opener.parent.location.reload();
 				<div class="inputarea" id="coinarea"> 
 					<input type="number" class="coin_count" name="price" min= 1 readonly value="${ p.product_price }"> Coin 
 				</div>
+				<div class="limit-wrapper">
+				<h3>이용 가능한 기능</h3>
+				<span>스터디방 입장/생성 가능 개수 : ${ p.s_limit} 개</span><br>
+				<span>스터디방 입장 인원 수 : ${ p.s_to_limit} 명 </span><br>
+				<span>오늘의 할일 수 :  ${ p.todo_limit} 개</span>
+				</div><hr>	
+				
 		
 			<textarea class="textarea" rows="15" cols="80" name="content" readonly>${ p.product_detail } </textarea>
 			
 			</form>
 			<div class="btn_area">
-			<form name="orderForm" method="post" action='<%= request.getContextPath() %>/productOrder'>
+			<form name="orderForm" method="post" action='<%= request.getContextPath() %>/productOrder' onsubmit="return confirm('${ p.product_name }을 구매하시겠습니까?');">
 			<input type="hidden" name="product_no" value="${p.product_no}">
 			<button class="paymentbtn" type="submit" onclick="return purchase()">구매</button>
 			<button class="canclebtn" type="button" onclick="window.close();">취소</button>
-			</form>
+		    </form>
 		    </div>
 		    </div>
+	</div>
+		
 
-			</div>
-			</div>
+		
 		
 	
 		
