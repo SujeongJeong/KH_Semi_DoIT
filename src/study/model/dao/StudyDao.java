@@ -1,23 +1,24 @@
 package study.model.dao;
 
+import static common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
 import common.Attachment;
+import shop.model.vo.Purchase;
 import study.model.vo.MemberJoinStudy;
 import study.model.vo.PageInfo;
 import study.model.vo.Study;
-import static common.JDBCTemplate.*;
 
 
 public class StudyDao {
@@ -493,6 +494,91 @@ public class StudyDao {
 		return StudyList;
 	}
 
+
+	
+	  public int userStudyLimit(Connection conn, int userNo) { 
+		  PreparedStatement pstmt = null; 
+		  ResultSet rset = null; 
+		  int result = 0;
+		  String sql = query.getProperty("userStudyLimit");
+		  
+		  try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			rset = pstmt.executeQuery();
+			
+			if (rset != null) {
+                while (rset.next()) {
+                   result = rset.getInt(1);
+                  
+                }
+             } 
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		  return result;
+		  
+		  
+	  }
+	 
+
+	public int snameCheck(Connection conn, String sname) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String sql = query.getProperty("snameCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sname);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		return result;
+	}
+
+	public int getSExpirationDate(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int PeriodLimit = 0;
+		String sql = query.getProperty("getSExpirationDate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				PeriodLimit = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		return PeriodLimit;
+	}
 
 
 	

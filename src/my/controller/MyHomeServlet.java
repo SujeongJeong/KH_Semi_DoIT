@@ -44,14 +44,30 @@ public class MyHomeServlet extends HttpServlet {
 		
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
+		String todayStudyTime = null; 	// 하루 누적 공부시간
+		String avgStudyTime = null;	// 일 평균 공부 시간 -> 누적 공부시간 / S_DAY가 NULL이 아닌 컬럼
+		String sumStudyTime = null; // 누적 공부 시간 -> USER_NO 이용
+		String lastAvgStudyTime = null; // 최근 30일 주 평균 공부시간
+		
 		// 오늘 공부 시간
-		String todayStudyTime = formatDate(new MyService().todayStudyTime(userNo));
+		if(new MyService().todayStudyTime(userNo).equals("0") || new MyService().avgStudyTime(userNo).equals("0") || new MyService().sumStudyTime(userNo).equals("0") || new MyService().lastAvgStudyTime(userNo).equals("0") ) {
+			todayStudyTime = formatDate("0");
+			avgStudyTime = formatDate("0");
+			sumStudyTime = formatDate("0");
+			lastAvgStudyTime = formatDate("0");
+		} else {
+			todayStudyTime = formatDate(new MyService().todayStudyTime(userNo));
+			avgStudyTime = formatDate(new MyService().avgStudyTime(userNo));
+			sumStudyTime = formatDate(new MyService().sumStudyTime(userNo));
+			lastAvgStudyTime = formatDate(new MyService().lastAvgStudyTime(userNo));
+		}
+		todayStudyTime = formatDate(new MyService().todayStudyTime(userNo));
 		// 일 평균 공부 시간 -> 누적 공부시간 / S_DAY가 NULL이 아닌 컬럼
-		String avgStudyTime = formatDate(new MyService().avgStudyTime(userNo));
+		avgStudyTime = formatDate(new MyService().avgStudyTime(userNo));
 		// 누적 공부 시간 -> USER_NO 이용
-		String sumStudyTime = formatDate(new MyService().sumStudyTime(userNo));
+		sumStudyTime = formatDate(new MyService().sumStudyTime(userNo));
 		// 최근 30일 주 평균 공부시간
-		String lastAvgStudyTime = formatDate(new MyService().lastAvgStudyTime(userNo));
+		lastAvgStudyTime = formatDate(new MyService().lastAvgStudyTime(userNo));
 		
 		request.setAttribute("todayStudyTime", todayStudyTime);
 		request.setAttribute("avgStudyTime", avgStudyTime);
@@ -79,6 +95,10 @@ public class MyHomeServlet extends HttpServlet {
 	public String formatDate(String sTime) {
 		String str = "";
 		int time = Integer.parseInt(sTime);
+		
+		if(time == 0) {
+			str = "00:00:00";
+		}
 		MemberTimerCast mtc = new MemberTimerCast(time);
 
 		String hour = mtc.getHour() < 10 ? "0" + mtc.getHour() : mtc.getHour() +"";

@@ -5,10 +5,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import java.util.Date;
-
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -46,7 +43,16 @@ public class createStudyRoom extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int userNo = ((Member)(request.getSession().getAttribute("loginUser"))).getUserNo();
+	
+		// 스터디방 개설 기간 설정
+		int PeriodLimit = new StudyService().getSExpirationDate(userNo);
+		
+		request.setAttribute("PeriodLimit", PeriodLimit);
+		System.out.println(PeriodLimit);
+	
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/CreateStudy.jsp");
+		
 		request.setAttribute("nav1", "study");
 		view.forward(request, response);
 	}
@@ -95,6 +101,26 @@ public class createStudyRoom extends HttpServlet {
 		String sep = multiRequest.getParameter("s_endPeriod");
 		String sst = multiRequest.getParameter("s_startTime");
 		String set = multiRequest.getParameter("s_endTime");
+		
+		String[] ssp2 = ssp.split("/");
+		String ssp3 = "";
+		for(int i = 0; i < ssp2.length; i++) {
+			if(i == ssp2.length-1)
+				ssp3 += ssp2[i];
+			else
+				ssp3 += ssp2[i] + "-";
+		}
+	System.out.println("ssp3 : " + ssp3);
+		String[] sep2 = sep.split("/");
+		String sep3 = "";
+		for(int i = 0; i < sep2.length; i++) {
+			if(i == sep2.length-1)
+				sep3 += sep2[i];
+			else 
+				sep3 += sep2[i] + "-";
+		}
+		
+		System.out.println("sep3 : " + sep3);
 //		System.out.println("dateString : "+ ssp);
 //		System.out.println("dateString : "+ sep);
 //		System.out.println("dateString : "+ sst);
@@ -107,8 +133,8 @@ public class createStudyRoom extends HttpServlet {
 		
 		try {
 				
-				s_startPeriod = new SimpleDateFormat("yyyy-MM-dd").parse(ssp);
-				s_endPeriod = new SimpleDateFormat("yyyy-MM-dd").parse(sep);
+				s_startPeriod = new SimpleDateFormat("yyyy-MM-dd").parse(ssp3);
+				s_endPeriod = new SimpleDateFormat("yyyy-MM-dd").parse(sep3);
 				s_startTime = new SimpleDateFormat("HH:mm").parse(sst);
 				s_endTime = new SimpleDateFormat("HH:mm").parse(set);
 				

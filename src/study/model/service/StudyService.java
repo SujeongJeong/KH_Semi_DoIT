@@ -1,19 +1,21 @@
 package study.model.service;
 
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import member.model.vo.Member;
+import shop.model.vo.Purchase;
 import study.model.dao.StudyDao;
 import study.model.vo.MemberJoinStudy;
 import study.model.vo.PageInfo;
 import study.model.vo.Study;
-
-import static common.JDBCTemplate.*;
 
 public class StudyService {
 	private StudyDao sd = new StudyDao();
@@ -207,6 +209,35 @@ public class StudyService {
 //			System.out.println(returnMap);
 			return returnMap;
 		}
+
+		
+		  public int userStudyLimit(int userNo) { 
+			  Connection conn = getConnection();
+		  
+			  int result = sd.userStudyLimit(conn, userNo);
+			  
+			  return result; 
+		  }
+		 
+
+		public int snameCheck(String sname) {
+			Connection conn = getConnection();
+			
+			int result = sd.snameCheck(conn, sname);
+			
+			close(conn);
+		
+			return result;
+		}
+
+		public int getSExpirationDate(int userNo) {
+			Connection conn = getConnection();
+			
+			int PeriodLimit = sd.getSExpirationDate(conn, userNo);
+			
+			return PeriodLimit;
+		}
+
 	
 	
 

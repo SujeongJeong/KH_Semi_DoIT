@@ -92,7 +92,8 @@
 	}
 	/* left 박스 */
 	.left_box {
-		width: 150px;
+		width: 170px;
+		margin-right: 20px;
 	}
 	.profile_area h2 {
 		text-align: right;
@@ -108,17 +109,17 @@
 		 position: absolute;
 	     width: 150px;
 	     height: 150px;
-	     border: 1px solid black;
+	     border: 1px solid lightgray;
 	     border-radius: 50%;
 	}
 	#camera_btn {
 		 position: absolute;
 	     width: 50px;
 	     height: 50px;
-	     border: 1px solid black;
+	     border: 1px solid lightgray;
 	     border-radius: 50%;
          top: 100px;
-         left: 100px;
+         left: 120px;
          padding: 0;
 	}
 	#camera_btn:hover {
@@ -488,33 +489,7 @@
 	// 오늘 ~ 30일 전 날짜 기준 보여줌
 	 var today = new Date();
 	 var standard = new Date(today.setDate(today.getDate() - 30 ));
-	 document.getElementById("standard").innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ " 0시 ~ 오늘 기준";
-	 
-	/*  $('.formatTime').each(function(){
-		 var time = $(this).val();
-		 
-		 var hour = time / 3600 < 10 ? "0" + (time / 3600) : (time / 3600);
-		 var minute = (time % 3600) / 60 < 10 ? "0" + ((time % 3600) / 60) : ((time % 3600) / 60);
-		 var second = (time % 3600) % 60 < 10 ? "0" + ((time % 3600) % 60) : ((time % 3600) % 60);
-		 
-		 var str = hour + ":" + minute + ":" + second;
-		 $(this).val(str)
-	 }); */
-	 
-	 $('.formatTime').each(function(item){
-		 var time = item;
-		 console.log(time);
-		 var hour = time / 3600 < 10 ? "0" + (time / 3600) : (time / 3600);
-		 var minute = (time % 3600) / 60 < 10 ? "0" + ((time % 3600) / 60) : ((time % 3600) / 60);
-		 var second = (time % 3600) % 60 < 10 ? "0" + ((time % 3600) % 60) : ((time % 3600) % 60);
-		 
-		 var str = hour + ":" + minute + ":" + second;
-		 $(this).val(str);
-		 
-	 });
-	 
-	 
-	 
+	 document.getElementById("standard").innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ " 0시 ~ 어제 기준";
 	 
 	</script>
 </body>

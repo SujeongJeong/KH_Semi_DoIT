@@ -255,7 +255,7 @@
 	SELECT 
            COUNT(*)
         FROM MEMBER_TIMER 
-       WHERE SYSDATE BETWEEN (SELECT SYSDATE - 30 FROM DUAL) AND SYSDATE
+       WHERE S_DAY BETWEEN SYSDATE-30 AND SYSDATE-1
        AND USER_NO = ?
    </entry>
    <entry key="selectStudyRecodeList">
@@ -271,7 +271,7 @@
                FROM MEMBER_TIMER 
               WHERE USER_NO = ?
               ORDER BY S_DAY DESC) RLIST)
-            WHERE S_DAY BETWEEN (SELECT SYSDATE - 30 FROM DUAL) AND SYSDATE
+            WHERE S_DAY BETWEEN SYSDATE-30 AND SYSDATE-1
             AND RNUM BETWEEN ? AND ?
    </entry>
    <entry key="todayStudyTime">
@@ -282,35 +282,34 @@
 	     AND USER_NO = ?
    </entry>
    <entry key="avgStudyTime">
-   	SELECT
-       TO_CHAR(SUM(S_TIME) / (COUNT(S_DAY)))
-     FROM MEMBER_TIMER
-     JOIN MEMBER USING(USER_NO)
-     WHERE USER_TYPE = 'U'
-     AND USER_NO = ?
-     GROUP BY USER_NO
+     SELECT
+      		 TO_CHAR(SUM(S_TIME) / (SELECT 
+                                    COUNT(S_DAY)
+                                    FROM MEMBER_TIMER
+                                    WHERE USER_NO = ?))
+          FROM MEMBER_TIMER
+          JOIN MEMBER USING(USER_NO)
+         WHERE USER_TYPE = 'U'
+         AND USER_NO = ?
+        GROUP BY USER_NO
    </entry>
    <entry key="sumStudyTime">
-   SELECT
-       TO_CHAR(SUM(S_TIME))
-      FROM MEMBER_TIMER
-      JOIN MEMBER USING(USER_NO)
-      WHERE USER_TYPE = 'U'
-      AND USER_NO = ?
-      GROUP BY USER_NO
+  	SELECT
+      		 TO_CHAR(SUM(S_TIME)) 
+          FROM MEMBER_TIMER
+          JOIN MEMBER USING(USER_NO)
+         WHERE USER_TYPE = 'U'
+         AND USER_NO = ?
+        GROUP BY USER_NO
    </entry>
    <entry key="lastAvgStudyTime">
    		SELECT
-        TRUNC(TO_CHAR(SUM(S_TIME)) / (SELECT 
-                                        COUNT(S_DAY)
-                                        FROM  MEMBER_TIMER
-                                        WHERE S_DAY BETWEEN (SELECT SYSDATE - 30 FROM DUAL) AND SYSDATE
-                                        AND USER_NO = ?))
+      		 TO_CHAR(SUM(S_TIME) / (COUNT(S_DAY)))
           FROM MEMBER_TIMER
           JOIN MEMBER USING(USER_NO)
-         WHERE S_DAY BETWEEN (SELECT SYSDATE - 30 FROM DUAL) AND SYSDATE
+         WHERE S_DAY BETWEEN SYSDATE-30 AND SYSDATE-1
          AND USER_TYPE = 'U'
          AND USER_NO = ?
-        GROUP BY USER_NO           
+        GROUP BY USER_NO                       
    </entry>
 </properties>

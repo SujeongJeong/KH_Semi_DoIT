@@ -43,6 +43,13 @@ public class Member {
 		this.nickName = nickName;
 	}
 
+	public Member(int userNo, String nickName, String profileImg) {
+	      super();
+	      this.userNo = userNo;
+	      this.nickName = nickName;
+	      this.profileImg = profileImg;
+	   }
+	
 	public int getUserNo() {
 		return userNo;
 	}

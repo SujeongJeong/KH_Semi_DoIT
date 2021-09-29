@@ -220,7 +220,30 @@ FROM(SELECT
       ORDER BY S_NO DESC) SLIST) 
 WHERE RNUM BETWEEN ? AND ?
    </entry>
-   
+   <entry key="snameCheck">
+   	SELECT
+			  COUNT(*)
+			FROM STUDY
+		 WHERE S_NAME = ?
+   </entry>
+   <entry key="userStudyLimit">
+   SELECT
+          S_TO_LIMIT
+   FROM PRODUCT P
+   JOIN PURCHASE PR ON(P.PRODUCT_NO = PR.PRODUCT_NO)
+   JOIN MEMBER M ON(PR.USER_NO = M.USER_NO)
+   WHERE M.USER_NO = ?
+   <![CDATA[AND TO_CHAR(PR.EXPIRATION_DATE, 'yyyymmdd') >= TO_CHAR(SYSDATE, 'yyyymmdd')]]>
+   </entry>
+   <entry key="getSExpirationDate">
+   	SELECT
+          S_PERIOD_LIMIT
+   FROM PRODUCT P
+   JOIN PURCHASE PR ON(P.PRODUCT_NO = PR.PRODUCT_NO)
+   JOIN MEMBER M ON(PR.USER_NO = M.USER_NO)
+   WHERE M.USER_NO = ?
+   <![CDATA[AND TO_CHAR(PR.EXPIRATION_DATE, 'yyyymmdd') >= TO_CHAR(SYSDATE, 'yyyymmdd')]]>
+   </entry>
 </properties>
 
 

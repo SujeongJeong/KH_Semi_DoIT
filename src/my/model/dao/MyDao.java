@@ -625,6 +625,7 @@ public class MyDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, userNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -652,7 +653,7 @@ public class MyDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, userNo);
-
+			
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				sumStudyTime = rset.getString(1);
@@ -679,7 +680,6 @@ public class MyDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, userNo);
-			pstmt.setInt(2, userNo);
 
 			rset = pstmt.executeQuery();
 			if(rset.next()) {

@@ -1,12 +1,15 @@
 package member.model.dao;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import member.model.vo.Member;
@@ -90,30 +93,6 @@ public class MemberDao {
 			return result;
 		}
 		
-	
-		/*// 3. 회원 정보 수정 기능
-		public int updateMember(Connection conn, Member m) {
-			int result = 0;
-			PreparedStatement pstmt = null;
-			String sql = query.getProperty("updateMember");
-			
-			try {
-				pstmt = conn.prepareStatement(sql);
-				
-				pstmt.setXXX
-				
-				result = pstmt.executeUpdate();
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				close(pstmt);
-			}
-			
-			return result;
-		} 
-		*/
 		// 4. userNo로 member 객체 조회
 		public Member selectMember(Connection conn, int userNo) {
 			Member mem = null;
@@ -255,6 +234,7 @@ public class MemberDao {
 			return result;
 		}
 
+		// 임시비밀번호로 변경
 		public int rsetPwd(Connection conn, String userEmail, String encPwd) {
 			PreparedStatement pstmt = null;
 			int result = 0;
@@ -278,6 +258,7 @@ public class MemberDao {
 			return result;
 		}
 
+		// 닉네임 변경
 		public int updateNickName(Connection conn, int userNo, String nickName) {
 			int result = 0;
 			PreparedStatement pstmt = null;
@@ -300,6 +281,7 @@ public class MemberDao {
 			return result;
 		}
 
+		// 목표 공부시간 설정
 		public int setHour(Connection conn, int userNo, String targetHour) {
 			PreparedStatement pstmt = null;
 			int result = 0;
@@ -323,6 +305,7 @@ public class MemberDao {
 			return result;
 		}
 
+		// 프로필 이미지 변경
 		public int modifyImg(Connection conn, int userNo, String profile_img) {
 			PreparedStatement pstmt = null;
 			int result = 0;
@@ -345,4 +328,29 @@ public class MemberDao {
 			
 			return result;
 		}
+		
+		// 스터디방에 가입된 회원 목록 조회
+	      public List<Member> memberInfoForStudy(Connection conn, int s_no) {
+	         PreparedStatement pstmt = null;
+	         ResultSet rset = null;
+	         List<Member> memberInfoForStudy = new ArrayList<>();
+	         String sql = query.getProperty("memberInfoForStudy");
+	         
+	         try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setInt(1, s_no);
+	            rset = pstmt.executeQuery();
+	            while(rset.next()) {
+	               memberInfoForStudy.add(new Member(rset.getInt("USER_NO"),
+	                                         rset.getString("NICKNAME"),
+	                                         rset.getString("PROFILE_IMG")));
+	            }
+	         } catch (SQLException e) {
+	            e.printStackTrace();
+	         } finally {
+	            close(rset);
+	            close(pstmt);
+	         } 
+	         return memberInfoForStudy;
+	      }
 }
