@@ -1,6 +1,11 @@
 package admin.controller;
 
+import static common.JDBCTemplate.close;
+
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -61,3 +66,4 @@ public class AdminHomeServlet extends HttpServlet {
 	}
 
 }
+

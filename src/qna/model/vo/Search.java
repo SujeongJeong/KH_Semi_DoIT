@@ -12,8 +12,6 @@ public class Search {
 		super();
 		this.searchValue = searchValue;
 	}
-
-	
 	
 	public Search(String category, String range) {
 		super();
@@ -21,6 +19,8 @@ public class Search {
 		this.range = range;
 	}
 
+	
+	
 	public String getSearchValue() {
 		return searchValue;
 	}
@@ -47,7 +47,7 @@ public class Search {
 
 	@Override
 	public String toString() {
-		return "Search [searchValue=" + searchValue + "]";
+		return "Search [searchValue=" + searchValue + ", category=" + category + ", range=" + range + "]";
 	}
 
 	

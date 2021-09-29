@@ -84,9 +84,10 @@ public class ReportService {
 	public int memberBoardReportCount(int board_no) {
 		Connection conn = getConnection();
 		
-		int result = rd.memberBoardReportCount(conn, board_no);
+		int result1 = rd.memberBoardReportCount(conn, board_no);
+		int result2 = rd.boardReportCount(conn, board_no);
 		
-		if(result > 0) {
+		if(result1 > 0 && result2 > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -94,16 +95,17 @@ public class ReportService {
 		
 		close(conn);
 		
-		return result;
+		return result1 > 0 && result2 > 0 ? 1 : 0;
 	}
 
 	// 댓글 신고 처리시 회원 신고 횟수 +1
 	public int memberReplyReportCount(int reply_no) {
 		Connection conn = getConnection();
 		
-		int result = rd.memberReplyReportCount(conn, reply_no);
+		int result1 = rd.memberReplyReportCount(conn, reply_no);
+		int result2 = rd.replyReportCount(conn, reply_no);
 		
-		if(result > 0) {
+		if(result1 > 0 && result2 > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -111,7 +113,7 @@ public class ReportService {
 		
 		close(conn);
 		
-		return result;
+		return result1 > 0 && result2 > 0 ? 1 : 0;
 	}
 
 

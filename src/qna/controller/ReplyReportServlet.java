@@ -76,9 +76,9 @@ public class ReplyReportServlet extends HttpServlet {
 		
 		int result2 = new ReportService().memberReplyReportCount(reply_no);
 		
-		System.out.println("rc : " +report_content);
-		System.out.println("etcc : " + etc_comment);
-		System.out.println("user :  " + user_no);
+//		System.out.println("rc : " +report_content);
+//		System.out.println("etcc : " + etc_comment);
+//		System.out.println("user :  " + user_no);
 		
 		if(result1 > 0 && result2 > 0) { 
 				request.setAttribute("result", "success");
