@@ -24,6 +24,11 @@ public class Purchase {
    private int productNo; // Product 테이블 조인 상품번호
    private int productPrice; // Product 상품 코인가격 
    private String productName; //  Product 테이블 조인
+   private int s_limit;
+   private int s_to_limit;
+   private int todo_limit;
+   private int s_limitdate;
+   
    
    
    public Purchase(String productName, Date startDate, Date expirationDate, int productPrice) {
@@ -56,6 +61,17 @@ public class Purchase {
 	super();
 	this.purchaseNo = purchaseNo;
 	this.userNo = userNo;
+}
+
+	
+	
+	//LIMIT 셀렉트용
+	public Purchase(int s_limit, int s_to_limit, int todo_limit, int s_limitdate) {
+	super();
+	this.s_limit = s_limit;
+	this.s_to_limit = s_to_limit;
+	this.todo_limit = todo_limit;
+	this.s_limitdate = s_limitdate;
 }
 
 
@@ -137,14 +153,57 @@ public class Purchase {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	
-	
+
+
+	public int getS_limit() {
+		return s_limit;
+	}
+
+
+	public void setS_limit(int s_limit) {
+		this.s_limit = s_limit;
+	}
+
+
+	public int getS_to_limit() {
+		return s_to_limit;
+	}
+
+
+	public void setS_to_limit(int s_to_limit) {
+		this.s_to_limit = s_to_limit;
+	}
+
+
+	public int getTodo_limit() {
+		return todo_limit;
+	}
+
+
+	public void setTodo_limit(int todo_limit) {
+		this.todo_limit = todo_limit;
+	}
+
+
+	public int getS_limitdate() {
+		return s_limitdate;
+	}
+
+
+	public void setS_limitdate(int s_limitdate) {
+		this.s_limitdate = s_limitdate;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Purchase [purchaseNo=" + purchaseNo + ", purchaseDate=" + purchaseDate + ", startDate=" + startDate
 				+ ", expirationDate=" + expirationDate + ", userNo=" + userNo + ", productNo=" + productNo
-				+ ", productPrice=" + productPrice + ", productName=" + productName + "]";
+				+ ", productPrice=" + productPrice + ", productName=" + productName + ", s_limit=" + s_limit
+				+ ", s_to_limit=" + s_to_limit + ", todo_limit=" + todo_limit + ", s_limitdate=" + s_limitdate + "]";
 	}
 
-
+	
+	
+	
 }

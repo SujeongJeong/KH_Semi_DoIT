@@ -66,9 +66,9 @@ public class StudyHomeServlet extends HttpServlet {
 			canJoin = "false";
 		}
 		
+//		System.out.println(keyword + category + canJoin + param);
 		
-		
-		Map<String, Object> map = new StudyService().selectList1(page);
+		Map<String, Object> map = new StudyService().selectList1(page, keyword, category, canJoin);
 
 		request.setAttribute("pi", map.get("pi"));
 		request.setAttribute("StudyList", map.get("StudyList"));
@@ -79,30 +79,42 @@ public class StudyHomeServlet extends HttpServlet {
 		List<Study> StudyList = new ArrayList<>();
 //		System.out.println("StudyListAll : " + StudyListAll);
 		
+//		System.out.println(StudyListAll.size());
+		StudyList = StudyListAll;
+//		for(Study study : StudyListAll) {
+//			
+//			if(study.getS_name().contains(keyword) && study.getStudyMemberNum() < study.getS_to()) {
+//				if (!category.equals("default") && study.getCname().equals(category.toLowerCase())) {
+//					StudyList.add(study);
+//				} else if (category.equals("default")) {
+//					StudyList.add(study);
+//				}
+//			}
+//		}
 		
-		if(param == "param1") {
-			for(Study study : StudyListAll) {
-				if(study.getS_name().contains(keyword)) {
-					StudyList.add(study);
-				}
-			}
-		}
+//		if(param == "param1") {
+//			for(Study study : StudyListAll) {
+//				if(study.getS_name().contains(keyword)) {
+//					StudyList.add(study);
+//				}
+//			}
+//		}
 		
-		if(param == "param2") {
-			for(Study study : StudyListAll) {
-				if(study.getCname().equals(category)) {
-					StudyList.add(study);
-				}
-			}
-		}
+//		if(param == "param2") {
+//			for(Study study : StudyListAll) {
+//				if(study.getCname().equals(category)) {
+//					StudyList.add(study);
+//				}
+//			}
+//		}
 		
-		if(param == "param3") {
-			for(Study study : StudyListAll) {
-				if(study.getStudyMemberNum() < study.getS_to()) {
-					StudyList.add(study);
-				}
-			}
-		}
+//		if(param == "param3") {
+//			for(Study study : StudyListAll) {
+//				if(study.getStudyMemberNum() < study.getS_to()) {
+//					StudyList.add(study);
+//				}
+//			}
+//		}
 		
 		// 스터디방 리스트(페이징x)
 //		List<Study> StudyList = new StudyService().selectStudyList();

@@ -53,12 +53,11 @@ public class ChargeSucessServlet extends HttpServlet {
 				request.getSession().setAttribute("loginUser", loginUser);
 				request.setAttribute("result", "success");
 				
-			request.getSession().setAttribute("msg", "충전이 완료되었습니다.");
-			response.sendRedirect(request.getContextPath()+"/shop/home");
 		}else {
-			request.setAttribute("msg", "충전에 실패하였습니다.");
-			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
+			request.setAttribute("result", "fail");
+			
 		 }
+		response.sendRedirect(request.getContextPath()+"/shop/home");
 	  }	
 		
 	

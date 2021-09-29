@@ -17,17 +17,20 @@
 }
 
 #top {
+	display: flex;
+    align-items: center;
+    justify-content: center;
 	width: 100%;
 	height: 85px;
 	background-color: black;
 }
-
 #top-content{
-	padding-top : 17px;
+    display: flex;
+    width: 100%;
 }
 
+
 #title {
-	display: inline-block;
     color: white;
     font-size: 2.0em;
     text-align: center;
@@ -35,7 +38,6 @@
 }
 
 #currentTO{
-	display: inline-block;
     color: white;
     font-size: 2em;
    
@@ -48,14 +50,11 @@
 }
 
 #top1-content-wrapper{
-	display : inline-block;
 	position : absolute;
-	left : 1225px;
+	right : 20px;
 }
 
 #member-management {
-	
-    display: inline-block;
     background-color: white;
     width: 120px;
     height: 50px;
@@ -77,26 +76,23 @@
 }
 
 #mid-wrapper {
-    display: inline-block;
+	display:flex;
     position: relative;
-    width: 99.9%;
-    height: 651px;
+    width: 100%;
+    height: calc(100vh - 85px);
 }
 
 #mid1 {
-	display: inline-block;
 	position:relative;
 	border: 1px solid black;
-	width: 78%;
+	width: calc(100% - 335px);
 	height: 99.9%;
 }
 
 #mid2 {
-	display: inline-block;
-	position : absolute;
-	border: 1px solid black;
-	width: 22%;
-	height: 99.9%;
+    width: 335px;
+    height: 99.9%;
+    box-sizing: border-box;
 	
 }
 #joinMember-title, #joinMember-TO{
@@ -112,20 +108,20 @@
 
 #joinMember-wrapper{
 	border-bottom: 1px solid gray;
+	height:50px;
 }
 
 #currentJoinMember-wrapper{
-	height:250px;
-	border-bottom: 1px solid gray;
-
-	word-wrap: break-word;
-	word-break: keep-all;
-	overflow: auto;
+    height: calc(100% - 400px);
+    border-bottom: 1px solid gray;
+    word-wrap: break-word;
+    word-break: keep-all;
+    overflow: auto;
 }
 .currentJoinMember-content{
-	position:relative;
-	height:40px;
-	border : 1px solid black;
+	    display: flex;
+    height: 40px;
+    border-bottom: 1px solid black;
 }
 
 #chat-title-content{
@@ -161,7 +157,7 @@
 	position:relative;
 	display:grid;
 	grid-template-columns: repeat(5, 1fr);
-	grid-template-rows: 162.75px 162.75px 162.75px 162.75px;
+
 }
 
 .studyGrid{
@@ -178,16 +174,13 @@
 }
 
 #gridImg2{
-	position:absolute;
-	top:5px;
-	left:5px;
+	    padding: 5px;
 }
 
 #currentJoinMember-content-nickName{
-	position:absolute;
-	text-align:center;
-	top:7px;
-	left:45px;
+    width: calc(100% - 80px);
+    align-self: center;
+    font-size: 15px;
 }
 
 #gridNickname{
@@ -201,7 +194,7 @@
 #stopWatch{
 	position: absolute;
     text-align: center;
-    left: 186px;
+    right : 0;
     font-size: 1.2em;
     background-color: black;
     border-bottom-left-radius: 7px;
@@ -211,16 +204,13 @@
 }
 
 #reportImg{
-	position:absolute;
-	width:35px;
-	height:35px;
-	left:270px;
-	top:2px;
+    width: 35px;
+    height: 35px;
 }
 
 #timer-wrapper {
 	position: absolute;
-	top: 80%;
+	bottom:0;
 	background-color: black;
 }
 
@@ -244,7 +234,7 @@
 				${ study.s_to }
 			</div>
 			<div id="top1-content-wrapper">
-				<button id="member-management" onclick="">회원 관리</button>
+				<button id="member-management" onclick="memberManagement(${ s_no })">회원 관리</button>
 				<button id="out" onclick="outBtn()">나가기</button>
 			</div>
 		</div>
@@ -303,21 +293,29 @@
 	
 	
 	if( ${study.s_to} != null ){
+		
 		if( ${ study.s_to } == 5){
+			// height 2 
 			gridInput.style.gridTemplateColumns = 'repeat(3,1fr)';
-			gridInput.style.gridTemplateRows = '325.5px 325.5px';
+			gridInput.style.gridAutoRows = document.getElementById("mid1").getBoundingClientRect().height / 2 + "px";
 		}
 		if( ${ study.s_to } == 10){
+			// height 3
 			gridInput.style.gridTemplateColumns = 'repeat(4,1fr)';
-			gridInput.style.gridTemplateRows = '217px 217px 217px';
+			// gridInput.style.gridTemplateRows = '217px 217px 217px';
+			gridInput.style.gridAutoRows = document.getElementById("mid1").getBoundingClientRect().height / 3 + "px";
 		}
 		if( ${ study.s_to } == 15){
+			// height 4
 			gridInput.style.gridTemplateColumns = 'repeat(4,1fr)';
-			gridInput.style.gridTemplateRows = '162.75px 162.75px 162.75px 162.75px';
+			// gridInput.style.gridTemplateRows = '162.75px 162.75px 162.75px 162.75px';
+			gridInput.style.gridAutoRows = document.getElementById("mid1").getBoundingClientRect().height / 4 + "px";
 		}
 		if( ${ study.s_to } == 20){
+			// height 4
 			gridInput.style.gridTemplateColumns = 'repeat(5,1fr)';
-			gridInput.style.gridTemplateRows = '162.75px 162.75px 162.75px 162.75px';
+			// gridInput.style.gridTemplateRows = '162.75px 162.75px 162.75px 162.75px';
+			gridInput.style.gridAutoRows = document.getElementById("mid1").getBoundingClientRect().height / 4 + "px";
 		}
 	}
 		function outBtn(){
@@ -326,8 +324,27 @@
 				history.back();
 			}
 		}
+	
 		
 		
+		function openPopup(url, title, width, height){
+			
+			let left = (document.body.clientWidth/2) - (width/2);
+			//듀얼 모니터를 위한 계산
+			left += window.screenLeft;
+			//작업표시줄 제외하고. 
+			let top = (screen.availHeight/2) - (height/2);
+			
+			let options = "width=" + width+",height="+height + ",left="+left + ", top=" + top;
+			
+			
+			window.open(url, title, options);
+		}
+		
+	function memberManagement(s_no){
+			openPopup('<%= request.getContextPath() %>/study/memberManagement?s_no='+s_no, 'studyInfo', 700, 500);
+			
+		}	
 		
 	
 	// 타이머
@@ -335,7 +352,7 @@
 	var stop;
 	var allTime = 0;
 	var startParam = false;
-	
+	var s_no = ${s_no};
 	
 	//시작버튼
 	function startBtn(){
@@ -380,8 +397,7 @@
 				$(function(){
 					$.ajax({
 						url : "${ pageContext.servletContext.contextPath }/study/enterStudy/timer",
-						data : { dbSaveTime : dbSaveTime , loginUserNo : ${loginUserNo}
-							     },
+						data : { dbSaveTime : dbSaveTime , loginUserNo : ${loginUserNo} },
 						type : "post",
 						success : function(result){
 							console.log("시간 저장 성공");
@@ -398,6 +414,11 @@
 		}
 	
 	}
+	
+	
+	
+	
+	
 	
 	
 		

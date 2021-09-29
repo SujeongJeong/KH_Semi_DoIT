@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>상품 수정 페이지</title>
 <!-- 외부 스타일 시트 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <style>
  
@@ -23,13 +24,14 @@
 	align-items: center;
 }
 
-
-.logo_area {
-	margin-bottom: 10px;
-	text-align : center;
+.allcontents {
+	width: 600px;
+	height: auto;
+	margin: 50px auto;
+	display: flex;
 	justify-content: center;
+	align-items: center;
 }
-
 
 .product_content {
 	padding: 0px 20px;
@@ -38,16 +40,19 @@
 
 .image_area {
 	width: 100%;
-	height: 150px;
+	height: 300px;
 	margin-top: 30px;
 	margin-bottom: 20px;
 	justify-content : center;
+	border:1px solid #ddd;
+	border-radius: 10px;
 }
 
 
 .image_area img{
 	width: 100%;
-	height: 150px;}
+	height: auto;	
+}
 
 
 .title {
@@ -77,6 +82,7 @@
 }
 
 .textarea{
+	width: 500px;
 	margin-bottom: 30px;
 	resize: none;
 }
@@ -112,8 +118,7 @@
 <div class="wrapper">
  
 	<!-- 제목조건, 폼 입력 조건 나중에 설정하기 -->
-	<div class="logo_area"><img class="logo" src="/Do_IT/resources/images/logo.png" onclick="window.close();" alt="logo"></div>
-	<div>
+	<div class="allcontents">
 
 	<form class="productModifyForm"  method="post" action="${ contextPath }/productModify"  enctype="multipart/form-data" onsubmit="return confirm('이대로 수정하시겠습니까?');">
 		<div class="product_content">		
@@ -123,11 +128,11 @@
 			<img class="image_area" name="fileimg" src="${ contextPath }${ p.product_img}">
 			수정 파일 <input type="file" name="modify_file" id="productimg" accept="image/gif,image/jpeg,image/png"  required>
 			
-				<div class="inputarea"> 
+				<div class="inputarea" id="category">
 					<div><h3>상품명</h3> 	
 					<select name="category">
-						<option value="세트" <c:if test="${ p.product_category == '세트'}" selected</c:if>>세트</option>
-						<option value="단품" <c:if test="${ p.product_category == '단품'}" selected</c:if>>단품</option>
+						<option value="세트" <c:if test="${ p.product_category == '세트'}" </c:if>>세트</option>
+						<option value="단품" <c:if test="${ p.product_category == '단품'}" </c:if>>단품</option>
 					</select></div>
 					<input type="text" class="title" name="title" value="${ p.product_name }">	
 				</div>
@@ -139,9 +144,18 @@
 				</div>
 				<div class="limit-wrapper">
 				<h3>이용 기능 제한</h3>
-					<span>스터디방 입장/생성 가능 개수 : </span><input type="number" class="studyroomLimit" name="studyroomLimit" min=3 required value="${ p.s_limit}"> 개<br>
-					<span>스터디방 입장 인원 수 : </span><input type="number" class="studyroomEntryLimit"  name="studyroomEntryLimit" min=4 required value="${ p.s_to_limit}"> 인<br>
-					<span>오늘의 할일 수 : </span><input type="number"  class="todoListLimit" name="todoListLimit" min=5 required value="${ p.todo_limit}"> 개 <br>
+					
+					<input type=radio id="limit1" name="limit"  style="display:none"> 스터디방 입장/생성 가능 개수 : 
+					<input type="number" class="limit_number"  id="studyroomLimit" name="studyRoomLimit" min=3 required value="${ p.s_limit}"  maxlength="6"> 개 <br>
+					<input type=radio id="limit2" name="limit"  style="display:none">스터디방 입장 인원 수 : 
+					<input type="number" class="limit_number"  id="studyroomEntryLimit"  name="studyroomEntryLimit" min=5 required value="${ p.s_to_limit}"  maxlength="20"> 명 <br>
+					<input type=radio id="limit3" name="limit"  style="display:none"> 오늘의 할일 수 : 
+					<input type="number" class="limit_number"  id="todoListLimit" name="todoListLimit" min=5 required value="${ p.todo_limit}" > 개 <br>
+					<input type=radio id="limit4" name="limit" style="display:none"> 스터디방 기간연장 상품 :
+					<input type="number" class="limit_number" id="limitProduct" name="limitProduct" min=5 required value="${ p.s_limit}" > 일
+									
+				
+				
 				</div><hr>
 		
 			<h3>상품 설명</h3>
@@ -153,11 +167,41 @@
 		    </form>
 			</div>
 			</div>
-	
+
 		
 		<script src="${ contextPath }/resources/js/imagePreview.js"></script>
 		
+			<script type="text/javascript">
+		<%-- 단품 클릭 시 라디오 버튼 생성 --%>
+			$('#category').change(function(){
+				
+				 if($('input[name=limit]').css('display') == 'none'){
+			            $('input[name=limit]').show();
+			            $(".checked").attr('disabled', false);
+			                 
+			   		     }else{
+			            $('input[name=limit]').hide();
+			            $(".limit_number").attr('disabled', false);
+			            
+			      	    }
+			});
+        <%-- 클릭된 라디오버튼  텍스트 활성화,비활성화--%>
+			$("[type='radio']").click(function(){
+								
+				$(".limit_number").attr('disabled', true);
+				 $(this).next().attr('disabled', false); 
+				
+			});
+			
+			 <%-- 클릭이 되면 위에 함수로 넘어감.--%>
+			 $("[type='number']").click(function(){
+				 if($("#category option:selected").val()=="단품"){
+				 $(this).prev().click();
+				 }
+			});
 		
+
+		</script>
 		
 	
 

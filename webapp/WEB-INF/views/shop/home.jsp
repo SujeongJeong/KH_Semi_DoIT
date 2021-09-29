@@ -104,6 +104,17 @@
 .premium_img img{
 	width: 270px;
 	height: 270px;
+	border:1px solid #ddd;
+	border-radius: 10px;
+}
+
+.premium_product:hover > .premium_img{
+	border-color: #f5ff10;
+}
+
+.onmouseover {
+	cursor: pointer;
+	transform:scale(1.05);
 }
 
 
@@ -193,6 +204,47 @@
 	
 
 </script>
+
+<script>
+		//상품목록에 mouseover/mouseout 시 onmouseover클래스 추가/제거 처리
+		const productPremiumList = document.querySelector(".product_premium");
+		const productSingleList = document.querySelector(".product_single");
+		
+		productPremiumList.addEventListener('mouseover', function(){
+			
+			if(event.target.classList.contains('.premium_product'))
+				event.target.classList.add('onmouseover');
+			else if(event.target.parentNode.classList.contains('.premium_product'))
+				event.target.parentNode.classList.add('onmouseover');
+		});
+		
+		productPremiumList.addEventListener('mouseout', function(){
+			
+			if(event.target.classList.contains('.premium_product'))
+				event.target.classList.remove('onmouseover');
+			else if(event.target.parentNode.classList.contains('.premium_product'))
+				event.target.parentNode.classList.remove('onmouseover');
+		});
+		
+		productSingleList.addEventListener('mouseover', function(){
+			
+			if(event.target.classList.contains('premium_product'))
+				event.target.classList.add('onmouseover');
+			else if(event.target.parentNode.classList.contains('premium_product'))
+				event.target.parentNode.classList.add('onmouseover');
+		});
+		
+		productSingleList.addEventListener('mouseout', function(){
+			
+			if(event.target.classList.contains('premium_product'))
+				event.target.classList.remove('onmouseover');
+			else if(event.target.parentNode.classList.contains('premium_product'))
+				event.target.parentNode.classList.remove('onmouseover');
+		})
+		
+		
+	
+	</script>
 
 	<footer>
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>

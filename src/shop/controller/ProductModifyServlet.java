@@ -62,8 +62,6 @@ public class ProductModifyServlet extends HttpServlet {
 		
 		String filesname = multiRequest.getFilesystemName("file");
 		
-		
-		
 			
 		//전체 수정로직
 		
@@ -72,9 +70,37 @@ public class ProductModifyServlet extends HttpServlet {
 		String title = multiRequest.getParameter("title");
 		int price =  Integer.parseInt(multiRequest.getParameter("price"));
 		int expirtion = Integer.parseInt(multiRequest.getParameter("expirtion"));
-		int studyroomlimit =  Integer.parseInt(multiRequest.getParameter("studyroomLimit"));
-		int sEntrylimit =  Integer.parseInt(multiRequest.getParameter("studyroomEntryLimit"));
-		int todoListlimit =  Integer.parseInt(multiRequest.getParameter("todoListLimit"));
+		
+		int studyroomlimit = 0;
+	      if((multiRequest.getParameter("studyRoomLimit")) != null){
+	    	  studyroomlimit = Integer.parseInt(multiRequest.getParameter("studyRoomLimit"));
+	      }else {
+	    	  studyroomlimit = 3;
+	      }
+	      
+	      int sEntrylimit = 0;
+	      if((multiRequest.getParameter("studyroomEntryLimit")) != null){
+	    	  sEntrylimit = Integer.parseInt(multiRequest.getParameter("studyroomEntryLimit"));
+	      }else {
+	    	  sEntrylimit = 5;
+	      }   
+	      
+	      
+	      int todoListlimit = 0;
+	      if((multiRequest.getParameter("todoListLimit")) != null){
+	    	  todoListlimit = Integer.parseInt(multiRequest.getParameter("todoListLimit"));
+	      }else {
+	    	  todoListlimit = 5;
+	      }   
+	      
+	      int limitproduct = 0;
+	      if((multiRequest.getParameter("limitProduct")) != null){
+	    	  limitproduct = Integer.parseInt(multiRequest.getParameter("limitProduct"));
+	      }else {
+	    	  limitproduct = 0;
+	      }   
+		
+		
 		String content = multiRequest.getParameter("content");
 		
 		//파일 조건
@@ -100,10 +126,11 @@ public class ProductModifyServlet extends HttpServlet {
 				
 		//여기서부턴 전체 상품변동
 				
-		Product p = new Product(product_no, category, title, price, expirtion, content, files, studyroomlimit, sEntrylimit, todoListlimit);
+		Product p = new Product(product_no, category, title, price, expirtion, content, files, studyroomlimit, sEntrylimit, todoListlimit, limitproduct);
 
-		int result = new ShopService().modifyProduct(p);
 		
+		int result = new ShopService().modifyProduct(p);
+		System.out.println("서블릿:" + result);
 		
 		if(result > 0) {
 			request.setAttribute("msg", "상품 수정에 성공했습니다.");
