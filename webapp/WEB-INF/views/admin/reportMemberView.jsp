@@ -68,7 +68,6 @@
 							<div class="search">
 								구분 : 
 								<select name="category">
-									<option value="all" <c:if test="${ param.category == 'all' }">selected</c:if>>전체</option>
 									<option value="board" <c:if test="${ param.category == 'board' }">selected</c:if>>게시물</option>
 									<option value="reply" <c:if test="${ param.category == 'reply' }">selected</c:if>>댓글</option>
 									<option value="study-member" <c:if test="${ param.category == 'study-member' }">selected</c:if>>스터디 회원</option>
@@ -79,7 +78,7 @@
 									<option value="report-count" <c:if test="${ param.range == 'report-count' }">selected</c:if>>신고 횟수</option>
 									<option value="memberReport-count" <c:if test="${ param.range == 'memberReport-count' }">selected</c:if>>작성자 누적 신고</option>
 								</select>&emsp;
-								<button><img src="../resources/images/search_btn.png"></button>
+								<button type = "submit"><img src="../resources/images/search_btn.png"></button>
 							</div>
 						</form>
 					</div>
@@ -96,15 +95,16 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach  var="r" items="${ reportMemberList }">
 							<tr>
-								<td>1</td>
-								<td>2021-08-28</td>
-								<td class="reportPopup">게시글</td>
-								<td>닉네임1</td>
-								<td class="reportPopup" onclick="openPopup('<%= request.getContextPath() %>/reportList', 'reportList', 800, 500);">1</td>
-								<td class="reportPopup" onclick="openPopup('<%= request.getContextPath() %>/reportAllList', 'reportAllList', 800, 500);">6</td>
+								<td>${ r.report_no }</td>
+								<td>${ r.report_date }</td>
+								<td class="reportPopup" onclick="boardDetailView(${r.board_no})">${r.subject}</td>
+								<td>${ r.nickname }</td>
+								<td class="reportPopup" onclick="openPopup('<%= request.getContextPath() %>/reportList?br_no='+ ${r.br_no} + '&type=${r.subject}', 'reportList', 800, 500);">${ r.rcount }</td>
+								<td class="reportPopup" onclick="openPopup('<%= request.getContextPath() %>/reportAllList', 'reportAllList', 800, 500);">${ r.allcount }</td>
 							</tr>
-
+						</c:forEach>
 						</tbody>
 					</table>
 					<ul class="board_paging">
@@ -176,6 +176,11 @@
 		
 		// 새창 열기
 		window.open(url, title, options);
+	}
+	
+	
+	function boardDetailView(board_no){
+		location.href = '<%= request.getContextPath() %>/qna/detail?board_no=' + board_no;
 	}
 	
 	</script>

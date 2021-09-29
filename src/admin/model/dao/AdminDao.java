@@ -110,49 +110,6 @@ public class AdminDao {
 		return result;
 	}
 
-	public int modifyUserCoin(Connection conn, int refundNo) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		String sql = query.getProperty("modifyUserCoin");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setInt(1, refundNo);
-			pstmt.setInt(2, refundNo);
-
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-
-		return result;
-	}
-
-	public int selectUserCoin(Connection conn, int userNo) {
-		PreparedStatement pstmt = null;
-		int userCoin = 0;
-		String sql = query.getProperty("selectUserCoin");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setInt(1, userNo);
-
-			userCoin = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-
-		return userCoin;
-	}
-
 	// DO-IT 회원 개수 가져오기
 	public int getMemberCount(Connection conn, Search s) {
 		PreparedStatement pstmt = null;
@@ -570,18 +527,17 @@ public class AdminDao {
 		}
 		return studyList;
 	}
-
+	
+	
 	// 신고 처리된 count
 	public int getReportMemberListCount(Connection conn, Search s) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int listCount = 0;
-		String sql = query.getProperty("getAllListCount");
+		String sql = query.getProperty("getBoardListCount");
 
 		if (s.getCategory() != null && s.getRange() != null) {
-			if (s.getCategory().equals("all")) {
-				sql = query.getProperty("getAllListCount");
-			} else if (s.getCategory().equals("board")) {
+			if (s.getCategory().equals("board")) {
 				sql = query.getProperty("getBoardListCount");
 			} else if (s.getCategory().equals("reply")) {
 				sql = query.getProperty("getReplyListCount");
@@ -610,77 +566,140 @@ public class AdminDao {
 		return listCount;
 	}
 
-
 	// member 신고 list
-	/*
-	 * public List<Report> selectReportMemberList(Connection conn, PageInfo pi,
-	 * Search s) { PreparedStatement pstmt = null; ResultSet rset = null;
-	 * List<Board>boardList = new ArrayList<>(); String sql =
-	 * query.getProperty("selectList");
-	 * 
-	 * // 검색 조건과 검색 값이 넘어왔을 경우
-	 * 
-	 * if(s.getSearchCondition() != null && s.getSearchValue() != null) {
-	 * if(s.getSearchCondition().equals("title")) { // 재목 검색 sql =
-	 * query.getProperty("selectTitleList"); } else
-	 * if(s.getSearchCondition().equals("content")) { // 내용 검색 sql =
-	 * query.getProperty("selectContentList"); } else
-	 * if(s.getSearchCondition().contentEquals("writer")) { // 작성자 검색 sql =
-	 * query.getProperty("selectWriterList"); } }
-	 * 
-	 * 
-	 * if(s.getCategory() != null && s.getRange() != null) {
-	 * if(s.getCategory().equals("all") && s.getRange().equals("latest")) { sql =
-	 * query.getProperty("getAllLatestListCount"); } else
-	 * if(s.getCategory().equals("all") && s.getRange().equals("report-count")) {
-	 * sql = query.getProperty("getAllLatestListCount"); } else
-	 * if(s.getCategory().equals("all") &&
-	 * s.getRange().equals("memberReport-count")) { sql =
-	 * query.getProperty("getReportMemberListCount"); } else
-	 * if(s.getCategory().equals("board") && s.getRange().equals("latest")) { sql =
-	 * query.getProperty("getReportMemberListCount"); } else
-	 * if(s.getCategory().equals("board") && s.getRange().equals("report-count")) {
-	 * sql = query.getProperty("getReportMemberListCount"); } else
-	 * if(s.getCategory().equals("board") &&
-	 * s.getRange().equals("memberReport-count")) { sql =
-	 * query.getProperty("getReportMemberListCount"); } else
-	 * if(s.getCategory().equals("reply") && s.getRange().equals("latest")) { sql =
-	 * query.getProperty("getReportMemberListCount"); } else
-	 * if(s.getCategory().equals("reply") && s.getRange().equals("report-count")) {
-	 * sql = query.getProperty("getReportMemberListCount"); } else
-	 * if(s.getCategory().equals("reply") &&
-	 * s.getRange().equals("memberReport-count")) { sql =
-	 * query.getProperty("getReportMemberListCount"); } else
-	 * if(s.getCategory().equals("study-member") && s.getRange().equals("latest")) {
-	 * sql = query.getProperty("getReportMemberListCount"); } else
-	 * if(s.getCategory().equals("study-member") &&
-	 * s.getRange().equals("report-count")) { sql =
-	 * query.getProperty("getReportMemberListCount"); } else
-	 * if(s.getCategory().equals("study-member") &&
-	 * s.getRange().equals("memberReport-count")) { sql =
-	 * query.getProperty("getReportMemberListCount"); }
-	 * 
-	 * 
-	 * try { pstmt = conn.prepareStatement(sql);
-	 * 
-	 * int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1; int endRow =
-	 * startRow + pi.getBoardLimit() - 1; int paramIndex = 1;
-	 * 
-	 * // 검색 조건과 검색 값이 넘어온 경우 if(s.getSearchCondition() != null &&
-	 * s.getSearchValue() != null) { pstmt.setString(paramIndex++,
-	 * s.getSearchValue()); }
-	 * 
-	 * pstmt.setInt(paramIndex++, startRow); pstmt.setInt(paramIndex++, endRow);
-	 * 
-	 * rset = pstmt.executeQuery();
-	 * 
-	 * while(rset.next()) { boardList.add(new Board(rset.getInt("bid"),
-	 * rset.getString("cname"), rset.getString("btitle"),
-	 * rset.getString("user_name"), rset.getInt("bcount"),
-	 * rset.getDate("create_date"))); }
-	 * 
-	 * // System.out.println("dao" + boardList); } catch (SQLException e) {
-	 * e.printStackTrace(); } finally { close(rset); close(pstmt); } return
-	 * boardList; }
-	 */
+	 public List<Report> selectReportMemberList(Connection conn, PageInfo pi, Search s) {
+		 	PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			List<Report> reportList = new ArrayList<>();
+			String sql = query.getProperty("getBoardLatestList");
+
+			if(s.getCategory() != null && s.getRange() != null) {
+				if(s.getCategory().equals("board") && s.getRange().equals("latest")) {
+					sql = query.getProperty("getBoardLatestList"); 
+				} else if(s.getCategory().equals("board") && s.getRange().equals("report-count")) {
+					sql = query.getProperty("getBoardRcountList"); 
+				} else if(s.getCategory().equals("board") && s.getRange().equals("memberReport-count")) {
+					sql = query.getProperty("getBoardMcountList"); 
+				} else if(s.getCategory().equals("reply") && s.getRange().equals("latest")) {
+					sql = query.getProperty("getReplyLatestList");
+				} else if(s.getCategory().equals("reply") && s.getRange().equals("report-count")) {
+					sql = query.getProperty("getReplyRcountList");
+				} else if(s.getCategory().equals("reply") && s.getRange().equals("memberReport-count")) {
+					sql = query.getProperty("getReplyMcountList"); 
+				} else if(s.getCategory().equals("study-member") && s.getRange().equals("latest")){
+					sql = query.getProperty("getStudyLatestList");
+				} else if(s.getCategory().equals("study-member") && s.getRange().equals("report-count")) {
+					sql = query.getProperty("getStudyRcountList");
+				} else if(s.getCategory().equals("study-member") && s.getRange().equals("memberReport-count")) {
+					sql = query.getProperty("getStudyMcountList");
+				} 
+			}
+			try {
+				pstmt = conn.prepareStatement(sql);
+
+				int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				int paramIndex = 1;
+
+				// 검색 조건과 검색 값이 넘어온 경우
+				/*
+				 * if (s.getCategory() != null && s.getRange() != null) {
+				 * pstmt.setString(paramIndex++, s.getCategory()); pstmt.setString(paramIndex++,
+				 * s.getRange()); }
+				 */
+
+				pstmt.setInt(paramIndex++, startRow);
+				pstmt.setInt(paramIndex++, endRow);
+
+				rset = pstmt.executeQuery();
+
+				while (rset.next()) {
+					reportList.add( new Report( rset.getInt("report_no"),
+										rset.getDate("report_date"),
+										rset.getString("nickname"),
+										rset.getInt("r_user_no"),
+										rset.getString("subject"),
+										rset.getInt("br_no"),
+										rset.getInt("board_no"),
+										rset.getInt("rcount"),
+										rset.getInt("allcount")));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			return reportList;
+		}
+
+	// 신고 받은 게시글 리스트 가져오기
+	public List<Report> boardReportList(Connection conn, int br_no) {
+	 	PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Report> reportList = new ArrayList<>();
+		String sql = query.getProperty("getBoardreportList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, br_no);
+			
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				reportList.add( new Report( rset.getInt("report_no"),
+									rset.getString("report_content"),
+									rset.getDate("report_date"),
+									rset.getInt("user_no"),
+									rset.getString("nick_name"),
+									rset.getString("board_title")));
+			}
+			
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reportList;
+	}
+
+	// 신고 받은 댓글 리스트 가져오기
+	public List<Report> ReplyReportList(Connection conn, int br_no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Report> reportList = new ArrayList<>();
+		String sql = query.getProperty("getReplyreportList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, br_no);
+			
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				reportList.add( new Report( rset.getInt("report_no"),
+									rset.getString("report_content"),
+									rset.getDate("report_date"),
+									rset.getInt("user_no"),
+									rset.getString("nick_name"),
+									rset.getString("reply_content")));
+			}
+			
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reportList;
+	}
+	
+	
 }

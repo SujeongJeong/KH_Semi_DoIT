@@ -69,6 +69,10 @@
                         JOIN BOARDREPORT R USING (BOARD_NO)
                        WHERE BOARD_NO = ?)
 	</entry>
+	<entry key="boardReportCount">
+	UPDATE BOARD SET REPORT_COUNT = REPORT_COUNT + 1
+	WHERE BOARD_NO = ?
+	</entry>
 	<entry key="memberReplyReportCount">
 	UPDATE MEMBER SET  REPORT_COUNT = REPORT_COUNT + 1
 	WHERE USER_NO IN (SELECT
@@ -76,5 +80,9 @@
                    	    FROM REPLY
                         JOIN REPLYREPORT R USING (REPLY_NO)
                        WHERE REPLY_NO = ?)
+	</entry>
+	<entry key="replyReportCount">
+	UPDATE REPLY SET REPORT_COUNT = REPORT_COUNT + 1
+	WHERE REPLY_NO = ?
 	</entry>
 </properties>
