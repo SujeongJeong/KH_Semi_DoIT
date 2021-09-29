@@ -66,7 +66,7 @@ public class StudyHomeServlet extends HttpServlet {
 			canJoin = "false";
 		}
 		
-		System.out.println(keyword + category + canJoin + param);
+//		System.out.println(keyword + category + canJoin + param);
 		
 		Map<String, Object> map = new StudyService().selectList1(page, keyword, category, canJoin);
 
@@ -79,7 +79,7 @@ public class StudyHomeServlet extends HttpServlet {
 		List<Study> StudyList = new ArrayList<>();
 //		System.out.println("StudyListAll : " + StudyListAll);
 		
-		System.out.println(StudyListAll.size());
+//		System.out.println(StudyListAll.size());
 		StudyList = StudyListAll;
 //		for(Study study : StudyListAll) {
 //			
