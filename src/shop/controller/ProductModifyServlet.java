@@ -113,8 +113,8 @@ public class ProductModifyServlet extends HttpServlet {
 			}
 		String files = "/resources/uploadFiles/shop/" + multiRequest.getFilesystemName("modify_file");
 		
-		
 		Product updateProduct = new ShopService().modifyImg(product_no, files);
+		System.out.println(updateProduct);
 			
 				if(updateProduct != null) {
 					request.setAttribute("msg", "상품 이미지 변경 성공");
