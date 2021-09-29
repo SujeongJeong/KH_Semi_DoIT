@@ -69,7 +69,7 @@
 					<c:forEach var="s" items="${ Study }">
 					<div class="study-info" onclick="studyDetailView(${ s.s_no})">
 					<img src="${ contextPath }${ s.sImgList.get(0).file_path }${ s.sImgList.get(0).change_name }" alt="스터디배경사진"> 
-					<label class="study-name">${ s.s_name }</label>
+					<label class="study-name">${ s.s_name }</label><br>
 					<label class="study-category darkgray-c">#${ s.cname }</label> 
 					</div>
 					</c:forEach>
@@ -145,7 +145,7 @@
 							 <label class="nolist">오늘의 할일을 추가하세요.</label>
 						</c:when>
 						<c:otherwise>
-							<ul class="list">							
+							<ul class="list" id="todoList">							
 							<c:forEach var="todo" items="${ Todolist }">
 								<li><span>${ todo.todo_content }</span><button class="edit"></button><button class="delete"></button></li>
 							</c:forEach>
@@ -234,49 +234,55 @@
 	<c:if test="${ loginUser != null }">
 	<script>
 	 // todolist 추가 
-		$(".add").click(function(){
-			if( $(".scrollBlind ul").hasClass("list")){
-				$(".list").append("<li><textarea maxlength='48'></textarea></li>");
-			}else{
-				$(".scrollBlind label").replaceWith("<ul class='list'><li><textarea maxlength='48'></textarea></li></ul>");
-			}
-			
-			$(".list:last-child textarea").focus();
-			
-			$(".list:last-child textarea").keydown(function(event){
-				if(event.key == "Enter"){
-					this.blur();
-				}
-			});
-			
-			$(".list:last-child textarea").blur(function(){
-				var text = this.value;
-				$(".list:last-child").innerHTML = text;
+		$(".add").click(function(){	
+			var size = $("#todoList").children().length
 
-				$.ajax({
-					url : "${ contextPath }/main/todolistAdd",
-					type : "post",
-					data : { addList : text },
-					dataType : "json",
-					success : function(data){
-						if( data != null ){
-							var html ='';
-							for(var key in data){
-								html += '<li><span>'+ data[key].todo_content + '</span><button class="edit"></button><button class="delete"></button></li>';
-							}
-							$(".list").html(html);
-						}else{
-							alert("오늘의 할일 추가에 실패하셨습니다.");
-						}
-					},
-					error : function(e){
-						console.log(e);
+			if( size < ${limit}){
+				if( $(".scrollBlind ul").hasClass("list")){
+					$(".list").append("<li><textarea maxlength='48'></textarea></li>");
+				}else{
+					$(".scrollBlind label").replaceWith("<ul class='list'><li><textarea maxlength='48'></textarea></li></ul>");
+				}
+				
+				$(".list:last-child textarea").focus();
+				
+				$(".list:last-child textarea").keydown(function(event){
+					if(event.key == "Enter"){
+						this.blur();
 					}
 				});
 				
-			});
+				$(".list:last-child textarea").blur(function(){
+					var text = this.value;
+					$(".list:last-child").innerHTML = text;
+
+					$.ajax({
+						url : "${ contextPath }/main/todolistAdd",
+						type : "post",
+						data : { addList : text },
+						dataType : "json",
+						success : function(data){
+							if( data != null ){
+								var html ='';
+								for(var key in data){
+									html += '<li><span>'+ data[key].todo_content + '</span><button class="edit"></button><button class="delete"></button></li>';
+								}
+								$(".list").html(html);
+							}else{
+								alert("내용을 입력해주세요.");
+							}
+						},
+						error : function(e){
+							console.log(e);
+						}
+					});
+					
+				});
+			 }else{
+				alert("추가 가능한 개수를 초과하셨습니다.")
+			} 
 		}); 
-	
+					
 	// todolist 수정
 	 	$(document).on('click', '.edit', function(){
 	 		var current = this.previousSibling;

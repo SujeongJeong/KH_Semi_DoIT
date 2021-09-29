@@ -255,7 +255,7 @@
 			<form action="${ contextPath }/study/home">
 				<input type="text" class="searchText" size="15px" name="search"
 					placeholder="검색할 내용을 입력하세요"> 
-					<input type="button" onclick="plusBtnEvent()" class="searchTextSubmit" value="검색하기">
+					<input type="button" onclick="searchEvent()" class="searchTextSubmit" value="검색하기">
 			</form>
 		</div>
 		
@@ -402,23 +402,114 @@ function studyInfo(s_no){
 }
 
 	
-var studyCategory = document.getElementById('studyCategory');
-var canJoinStudyBtn = document.getElementById('canJoinStudyBtn');
-
-studyCategory.addEventListener('change',plusBtnEvent);
-canJoinStudyBtn.addEventListener('change',plusBtnEvent);	
-
+	// 제목검색,카테고리,바로참가가능,더보기버튼 사용하는 전역 변수 선언
 	searchParams = {
 			page : 1,
 			keyword : '',
 			category : 'default',
-			canJoin : false
+			canJoin : false,
+			param : ''
+			
 	}
 	
-function plusBtnEvent(){
+// 카테고리 변경시 연결 함수 
+var studyCategory = document.getElementById('studyCategory');
+studyCategory.addEventListener('change',plusBtnEvent);
+
+// 입장가능한방 체크박스 선택시 연결 함수
+var canJoinStudyBtn = document.getElementById('canJoinStudyBtn');
+canJoinStudyBtn.addEventListener('change',plusBtnEvent);	
+
+// 입력값/선택된 카테고리/체그박스 선택여부
+var keywordVal = $(".searchText").val();
+var categoryVal = $(".studyCategory").val();
+var canJoinVal = $("input:checkbox[id='canJoinStudyBtn']").is(":checked");
+
+//검색 & 더보기
+function searchEvent(){
 	var keywordVal = $(".searchText").val();
-	var categoryVal = $(".studyCategory").val();
-	var canJoinVal = $("input:checkbox[id='canJoinStudyBtn']").is(":checked");
+	searchParams.param = "param1";
+	
+	//공백 검색 = 결과값 전체
+	if(keywordVal == ""){
+		searchParams.keyword = "";
+		searchParams.param = "param1";
+		
+	
+	// 입력한 값이 있을때
+	} else{
+		// 카테고리, 바로참가가 선택되지 않았을 때
+		if(searchParams.category == 'default' && searchParams.canJoin == false){
+			searchParams.keyword = keywordVal;
+			
+			$.ajax({
+				url : "${contextPath}/study/home",
+				type : "get",
+				data : { page : searchParams.page, keyword : searchParams.keyword,
+					category : searchParams.category, canJoin : searchParams.canJoin , param : true},
+				dataType : "json",
+				success : function(resultList){
+					if(resultList != null){
+						console.log(resultList);
+						
+						var html = "";
+						
+						for(var key in resultList){
+							html+= '<div class="studyRoom"><div class="img_wrapper"><img class="studyImage" src="'
+							+ '${ contextPath }'+ resultList[key].sImgList[0].file_path +resultList[key].sImgList[0].change_name
+							+ '" onclick=studyInfo("'+ resultList[key].s_no + ')"><div class="studyTO">' + resultList[key].studyMemberNum
+							+ ' / '+ resultList[key].s_to + '</div></div><div class="sub_wrapper"><div class="sName">'
+							+ resultList[key].s_name + '</div></div><div class="sub_wrapper"><span class="sCategory">#'
+							+ resultList[key].cname + '</span></div><c:if test="'+ ${ loginUser.userType == 'A' } +'">'
+							+ '<input type="checkbox" name="deleteStudy" id="deleteStudy" value="'+resultList[key].s_no+'"></c:if></div>';
+						}
+							$(".studyList").html(html);
+					}
+				},
+				error : function(e){
+					console.log(e);
+					alert("무언가 잘못됨");
+				}
+			});
+			
+		} else{
+			$.ajax({
+				url : "${contextPath}/study/home",
+				type : "get",
+				data : { page : searchParams.page, keyword : searchParams.keyword,
+					category : searchParams.category, canJoin : searchParams.canJoin , param : true},
+				dataType : "json",
+				success : function(resultList){
+					if(resultList != null){
+						console.log(resultList);
+						
+						var html = "";
+						
+						for(var key in resultList){
+							html+= '<div class="studyRoom"><div class="img_wrapper"><img class="studyImage" src="'
+							+ '${ contextPath }'+ resultList[key].sImgList[0].file_path +resultList[key].sImgList[0].change_name
+							+ '" onclick=studyInfo("'+ resultList[key].s_no + ')"><div class="studyTO">' + resultList[key].studyMemberNum
+							+ ' / '+ resultList[key].s_to + '</div></div><div class="sub_wrapper"><div class="sName">'
+							+ resultList[key].s_name + '</div></div><div class="sub_wrapper"><span class="sCategory">#'
+							+ resultList[key].cname + '</span></div><c:if test="'+ ${ loginUser.userType == 'A' } +'">'
+							+ '<input type="checkbox" name="deleteStudy" id="deleteStudy" value="'+resultList[key].s_no+'"></c:if></div>';
+						}
+							$(".studyList").html(html);
+					}
+				},
+				error : function(e){
+					console.log(e);
+					alert("무언가 잘못됨");
+				}
+			});
+		}
+
+	}
+}
+	
+function plusBtnEvent(){
+	<%--
+	
 	
 	console.log(keywordVal);
 	console.log(categoryVal);
@@ -434,7 +525,16 @@ function plusBtnEvent(){
 		searchParams.canJoin = canJoinVal;
 		searchParams.page = 1;
 	}
-	
+	--%>
+	if(searchParams.keyword == '' && searchParams.category == 'default' && searchParams.canJoin == false){
+		searchParams.page +=1;
+	} else{
+		if(searchParams.keyword == keywordVal && searchParams.category == categoryVal && searchParams.canJoin == canJoinVal){
+			searchParams.page +=1;
+		} else{
+			searchParams.page = 1;
+		}
+	}
 
 	$.ajax({
 		url : "${contextPath}/study/home",
@@ -457,13 +557,7 @@ function plusBtnEvent(){
 					+ resultList[key].cname + '</span></div><c:if test="'+ ${ loginUser.userType == 'A' } +'">'
 					+ '<input type="checkbox" name="deleteStudy" id="deleteStudy" value="'+resultList[key].s_no+'"></c:if></div>';
 				}
-				<%--
-				console.log("resultList[key].sImgList"+resultList[key].sImgList);
-				console.log("resultList[key].sImgList.file_path"+resultList[key].sImgList.file_path);
-				console.log("resultList[key].sImgList.get(0).file_path"+resultList[key].sImgList.get(0).file_path);
-				 '${ contextPath }'+ resultList[key].sImgList.get(0)file_path + resultList[key].sImgList.get(0)change_name --%>
 				$(".studyList").append(html);
-				
 			}
 		},
 		error : function(e){
@@ -471,10 +565,10 @@ function plusBtnEvent(){
 			alert("무언가 잘못됨");
 		}
 	});
+
 }
 
-
-</script>
+	</script>
 
 
 	<footer>

@@ -42,6 +42,7 @@ public class MainServlet extends HttpServlet {
 		}
 		List<Todolist> myList = new TodolistService().selectMyList(userNo);
 		List<Study> myStudy = new StudyService().selectMyStudy(userNo);
+		int to_limit = new TodolistService().selectTodoLimit(userNo);
 		Ranking myRanking = new RankingService().selectMyRanking(userNo);
 		List<Ranking> rankingList = new RankingService().selectThirdRanking();
 		
@@ -55,9 +56,9 @@ public class MainServlet extends HttpServlet {
 		if(myRanking != null) {
 			String afterM = myRanking.getS_time().replace(",", ":");
 			myRanking.setS_time(afterM.trim());
-		}
-	
+		} 
 		request.setAttribute("Todolist", myList);
+		request.setAttribute("limit", to_limit);
 		request.setAttribute("Study", myStudy);
 		request.setAttribute("myRanking", myRanking);
 		request.setAttribute("rankingList", rankingList);

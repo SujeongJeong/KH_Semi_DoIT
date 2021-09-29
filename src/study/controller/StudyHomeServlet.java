@@ -50,9 +50,11 @@ public class StudyHomeServlet extends HttpServlet {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		
+		
 		String keyword = request.getParameter("keyword");
 		String category = request.getParameter("category");
 		String canJoin = request.getParameter("canJoin");
+		String param = request.getParameter("param");
 		
 		if(keyword == null) {
 			keyword = "";
@@ -64,6 +66,8 @@ public class StudyHomeServlet extends HttpServlet {
 			canJoin = "false";
 		}
 		
+		
+		
 		Map<String, Object> map = new StudyService().selectList1(page);
 
 		request.setAttribute("pi", map.get("pi"));
@@ -73,63 +77,32 @@ public class StudyHomeServlet extends HttpServlet {
 		List<Study> StudyListAll = (List<Study>) map.get("StudyList");
 		// ajax에 줄 조건에 맞는 스터디 목록
 		List<Study> StudyList = new ArrayList<>();
+//		System.out.println("StudyListAll : " + StudyListAll);
 		
 		
-		
-		if(keyword == "" && category.equals("default") && canJoin.equals("false") ) {
-			StudyList = StudyListAll;
-		}
-		if(keyword != "" && category.equals("default") && canJoin.equals("false") ){
+		if(param == "param1") {
 			for(Study study : StudyListAll) {
 				if(study.getS_name().contains(keyword)) {
 					StudyList.add(study);
 				}
 			}
 		}
-		if(keyword == "" && !category.equals("default") && canJoin.equals("false")) {
+		
+		if(param == "param2") {
 			for(Study study : StudyListAll) {
 				if(study.getCname().equals(category)) {
 					StudyList.add(study);
 				}
 			}
 		}
-		if(keyword == "" && category.equals("default") && !canJoin.equals("false") ){
+		
+		if(param == "param3") {
 			for(Study study : StudyListAll) {
 				if(study.getStudyMemberNum() < study.getS_to()) {
 					StudyList.add(study);
 				}
 			}
 		}
-		if(keyword != "" && !category.equals("default") && canJoin.equals("false") ){
-			for(Study study : StudyListAll) {
-				if(study.getS_name().contains(keyword) && study.getCname().equals(category)) {
-					StudyList.add(study);
-				}
-			}
-		}
-		if(keyword == "" && !category.equals("default") && !canJoin.equals("false") ){
-			for(Study study : StudyListAll) {
-				if(study.getCname().equals(category) && study.getStudyMemberNum() < study.getS_to()) {
-					StudyList.add(study);
-				}
-			}
-		}
-		if(keyword != "" && category.equals("default") && !canJoin.equals("false")) {
-			for(Study study : StudyListAll) {
-				if(study.getS_name().contains(keyword) && study.getStudyMemberNum() < study.getS_to()) {
-					StudyList.add(study);
-				}
-			}
-		}
-		if(keyword != "" && !category.equals("default") && !canJoin.equals("false")) {
-			for(Study study : StudyListAll) {
-				if(study.getS_name().contains(keyword) && study.getCname().equals(category) && study.getStudyMemberNum() < study.getS_to()) {
-					StudyList.add(study);
-				}
-			}
-		}
-		
-		
 		
 		// 스터디방 리스트(페이징x)
 //		List<Study> StudyList = new StudyService().selectStudyList();
@@ -150,7 +123,7 @@ public class StudyHomeServlet extends HttpServlet {
 			request.setAttribute("userJoinStudyNum", userJoinStudyNum);
 		}
 		
-		System.out.println(StudyList);
+//		System.out.println(StudyList);
 		
 		if(request.getParameter("param")!=null) {
 		// ajax 응답
