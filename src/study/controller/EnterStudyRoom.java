@@ -40,6 +40,7 @@ public class EnterStudyRoom extends HttpServlet {
 		int loginUserNo = Integer.parseInt(request.getParameter("userNo"));
 		Study s = new StudyService().selectStudyRoom(s_no);
 		
+		request.setAttribute("s_no", s_no);
 		request.setAttribute("study", s);
 		request.setAttribute("loginUserNo", loginUserNo);
 		
