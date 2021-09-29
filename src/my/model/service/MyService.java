@@ -236,6 +236,9 @@ public class MyService {
 		
 		String todayStudyTime = md.todayStudyTime(conn, userNo);
 		
+		if(todayStudyTime == null) {
+			todayStudyTime = "0";
+		}
 		return todayStudyTime;
 	}
 
@@ -244,6 +247,9 @@ public class MyService {
 		
 		String avgStudyTime = md.avgStudyTime(conn, userNo);
 		
+		if(avgStudyTime == null) {
+			avgStudyTime = "0";
+		}
 		return avgStudyTime;
 	}
 
@@ -252,6 +258,9 @@ public class MyService {
 		
 		String sumStudyTime = md.sumStudyTime(conn, userNo);
 		
+		if(sumStudyTime == null) {
+			sumStudyTime = "0";
+		}
 		return sumStudyTime;
 	}
 
@@ -260,6 +269,9 @@ public class MyService {
 		
 		String lastAvgStudyTime = md.lastAvgStudyTime(conn, userNo);
 		
+		if(lastAvgStudyTime == null) {
+			lastAvgStudyTime = "0";
+		}
 		return lastAvgStudyTime;
 	}
 }

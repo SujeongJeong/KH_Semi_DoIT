@@ -112,8 +112,13 @@ public class LoginCheckFilter implements Filter {
       // 나중에 로그인하면 접근가능으로 바꿀거
       permitList.add("/Do_IT/study/createStudy"); // 스터디방 만들기 -> 추후 변경 예정
       permitList.add("/Do_IT/study/enterStudy"); // 스터디방 내부 -> 추후 변경 예정
+      permitList.add("/Do_IT/study/enterStudy/timer"); // 스탑워치
+      permitList.add("/Do_IT/study/memberManagement");   // 회원관리이것도 부탁드려요
+      
+      
       resourceList = new ArrayList<>();
       resourceList.add("/resources/");
+      
    }
 
 }

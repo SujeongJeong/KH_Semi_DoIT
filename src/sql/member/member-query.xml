@@ -54,20 +54,7 @@
 			, DEFAULT
 		)
 	</entry>
-	<!-- <entry key="updateMember">
-		UPDATE
-			MEMBER
-		   SET
-		  	  USER_NAME = ?
-		  	, PHONE = ?
-		  	, EMAIL = ?
-		  	, ADDRESS = ?
-		  	, INTEREST = ?
-		  	, MODIFY_DATE = SYSDATE
-		  WHERE 
-		  	USER_NO = ?
-	</entry>
-	 -->
+	
 	<entry key="selectMember">
 		SELECT 
 				  USER_NO
@@ -144,4 +131,14 @@
 			  , MODIFY_DATE = SYSDATE
 		 WHERE USER_NO = ?
 	</entry>
+	<entry key="memberInfoForStudy">
+      SELECT
+            USER_NO
+           , NICKNAME
+           , PROFILE_IMG
+        FROM MEMBER
+        JOIN MEMBER_JOINSTUDY USING (USER_NO)
+       WHERE S_NO = ?
+   </entry>
+	
 </properties>

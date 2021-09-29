@@ -42,8 +42,16 @@ public class Purchase {
       this.productName = productName;
       
    }
+  
 
-  //Purchase db인서트
+  public Purchase(Date startDate, Date expirationDate) {
+	super();
+	this.startDate = startDate;
+	this.expirationDate = expirationDate;
+}
+
+
+	//Purchase db인서트
 	public Purchase(int purchaseNo, int userNo) {
 	super();
 	this.purchaseNo = purchaseNo;

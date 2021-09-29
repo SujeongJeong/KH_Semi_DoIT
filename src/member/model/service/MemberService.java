@@ -6,6 +6,7 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
@@ -43,25 +44,6 @@ public class MemberService {
 		return result;
 	}
 	
-//	// 3. 회원 정보 수정 기능
-//	public Member updateMember(Member m) {
-//	Connection conn = getConnection();
-//	Member updateMember = null;
-//	
-//	// 1. 수정하려는 정보가 담긴 Member 객체를 가지고 Dao에서 updateMember 수행
-//	int result = md.updateMember(conn, m);
-//
-//	// 2. 수정이 잘 되었다면 수정 된 정보의 member 객체 select 후 리턴
-//	if(result > 0) {
-//		updateMember = md.selectMember(conn, m.getUserNo());
-//		commit(conn);
-//	} else {
-//		rollback(conn);
-//	}
-//	 
-//	return updateMember;
-//	}
-//	
 	// 4. 비밀번호 수정 가능
 	public Member updatePwd(int userNo, String userPwd, String newPwd) {
 		Connection conn = getConnection();
@@ -136,6 +118,7 @@ public class MemberService {
 		return result;
 	}
 
+	// 유저닉네임 변경
 	public Member updateNickName(int userNo, String nickName) {
 		Connection conn = getConnection();
 		
@@ -155,6 +138,7 @@ public class MemberService {
 		return updateMember;
 	}
 
+	// 목표 공부시간 변경
 	public Member setHour(int userNo, String targetHour) {
 		Connection conn = getConnection();
 
@@ -174,6 +158,7 @@ public class MemberService {
 		return updateMember;
 	}
 
+	// 프로필 이미지 변경
 	public Member modifyImg(int userNo, String profile_img) {
 		Connection conn = getConnection();
 
@@ -192,6 +177,8 @@ public class MemberService {
 		
 		return updateMember;
 	}
+	
+	// userNo로 회원 한명 조회
 	public Member selectMember(int userNo) {
 		Connection conn = getConnection();
 		
@@ -199,4 +186,18 @@ public class MemberService {
 		
 		return member;
 	}
+	
+	// 스터디방에 가입된 회원 목록 조회
+	   public List<Member> memberInfoForStudy(int s_no) {
+	      Connection conn = getConnection();
+	      
+	      List<Member> memberInfoForStudyList = md.memberInfoForStudy(conn,s_no);
+	      
+	      close(conn);
+	      
+	      return memberInfoForStudyList;
+	   }
+	   
+	   
+
 }
