@@ -77,7 +77,6 @@
                S_NO
              , CNAME
              , S_NAME
-             , S_TO
              , NICKNAME
              , S_STARTPERIOD
                 , S_ENDPERIOD
@@ -105,7 +104,6 @@
                S_NO
              , CNAME
              , S_NAME
-             , S_TO
              , NICKNAME
              , S_STARTPERIOD
                 , S_ENDPERIOD
@@ -312,4 +310,26 @@
          AND USER_NO = ?
         GROUP BY USER_NO                       
    </entry>
+   <entry key="selectRefundNo">
+   	SELECT 
+	    MAX(REFUND_NO)
+	    FROM REFUND
+	    WHERE USER_NO = ?
+   </entry>
+   <entry key="modifyUserCoin">
+		UPDATE MEMBER
+		    SET USER_COIN = USER_COIN - (SELECT REFUND_COIN
+		                                    FROM REFUND
+		                                    WHERE REFUND_NO = ?)
+		     , MODIFY_DATE = SYSDATE
+		    WHERE USER_NO = (SELECT USER_NO
+		                        FROM REFUND
+		                        WHERE REFUND_NO = ?)
+	</entry>
+	<entry key="selectUserCoin">
+		SELECT
+			USER_COIN
+		 FROM MEMBER
+		 WHERE USER_NO = ?
+	</entry>
 </properties>
