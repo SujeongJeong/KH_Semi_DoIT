@@ -115,6 +115,32 @@ public class TodolistDao {
 		}
 		return result;
 	}
+
+	public int selectTodoLimit(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String sql = query.getProperty("selectTodoLimit");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
 }
 	
 

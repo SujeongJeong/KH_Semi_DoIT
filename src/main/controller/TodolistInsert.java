@@ -37,14 +37,15 @@ public class TodolistInsert extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String addList = request.getParameter("addList");
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
-	
+		List<Todolist> myList = new TodolistService().selectMyList(userNo);
+		
 		Todolist addTodo = new Todolist();
 		addTodo.setTodo_content(addList);
 		addTodo.setUser_no(userNo);
 
 		// insert 후 todolist 리턴
 		List<Todolist> resultList = new TodolistService().addTodolist(addTodo);
-		
+		request.setAttribute("changeSize", myList.size());
 		response.setContentType("application/json; charset=utf-8");
 		Gson gson = new GsonBuilder().create();
 		gson.toJson(resultList, response.getWriter());
