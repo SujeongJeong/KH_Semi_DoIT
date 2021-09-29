@@ -40,4 +40,13 @@
 	 WHERE TODO_CONTENT = ?
 	   AND USER_NO = ?  
 	</entry>
+	<entry key="selectTodoLimit">
+	SELECT
+      	    TODO_LIMIT
+	   FROM PRODUCT P
+	   JOIN PURCHASE PR ON(P.PRODUCT_NO = PR.PRODUCT_NO)
+	   JOIN MEMBER M ON(PR.USER_NO = M.USER_NO)
+	   WHERE M.USER_NO = ?
+   <![CDATA[AND TO_CHAR(PR.EXPIRATION_DATE, 'yyyymmdd') >= TO_CHAR(SYSDATE, 'yyyymmdd')]]>
+	</entry>
 </properties>

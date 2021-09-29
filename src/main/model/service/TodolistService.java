@@ -76,5 +76,17 @@ public class TodolistService {
 			close(conn);
 			return resultList;
 		}
+		
+		// 5. 나의 todo_limit 가져오기
+		public int selectTodoLimit(int userNo) {
+			Connection conn = getConnection();
+			
+			int limit = td.selectTodoLimit(conn, userNo);
+			
+			if(limit > 0) {
+				close(conn);
+			}
+			return limit;
+		}
 	
 }
