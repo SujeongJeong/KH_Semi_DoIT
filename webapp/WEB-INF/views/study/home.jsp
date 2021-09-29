@@ -450,7 +450,6 @@ function searchEvent(){
 				dataType : "json",
 				success : function(resultList){
 					if(resultList != null){
-						console.log(resultList);
 						
 						var html = "";
 						
@@ -465,7 +464,7 @@ function searchEvent(){
 						}
 							$(".studyList").html(html);
 					}
-				},
+				},					
 				error : function(e){
 					console.log(e);
 					alert("무언가 잘못됨");
@@ -481,7 +480,6 @@ function searchEvent(){
 				dataType : "json",
 				success : function(resultList){
 					if(resultList != null){
-						console.log(resultList);
 						
 						var html = "";
 						
@@ -535,10 +533,12 @@ function plusBtnEvent(isMore){
 		searchParams.page +=1;
 	} else {
 		if(searchParams.keyword == keyword && searchParams.category == category && searchParams.canJoin == canJoin){
+
 		<%--	alert('값 변경됨 하지만 더보기 눌러서 페이지 증가'); --%>
 			searchParams.page +=1;
 		} else{
 		<%--	alert('값 변경됨 페이지 1'); --%>
+
 			searchParams.page = 1;
 		}
 	}

@@ -2,6 +2,8 @@ package study.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,7 +51,6 @@ public class createStudyRoom extends HttpServlet {
 		int PeriodLimit = new StudyService().getSExpirationDate(userNo);
 		
 		request.setAttribute("PeriodLimit", PeriodLimit);
-		System.out.println(PeriodLimit);
 	
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/CreateStudy.jsp");
 		
@@ -133,11 +134,13 @@ public class createStudyRoom extends HttpServlet {
 		
 		try {
 				
-				s_startPeriod = new SimpleDateFormat("yyyy-MM-dd").parse(ssp3);
-				s_endPeriod = new SimpleDateFormat("yyyy-MM-dd").parse(sep3);
+				s_startPeriod = new SimpleDateFormat("yyyy/MM/dd").parse(ssp);
+				System.out.println("s_startPeriod : " + s_startPeriod);
+				s_endPeriod = new SimpleDateFormat("yyyy/MM/dd").parse(sep);
+				System.out.println("s_endPeriod : " + s_endPeriod);
 				s_startTime = new SimpleDateFormat("HH:mm").parse(sst);
 				s_endTime = new SimpleDateFormat("HH:mm").parse(set);
-				
+				  
 //				System.out.println("s_startPeriod : "+ s_startPeriod);
 //				System.out.println("s_endPeriod : "+ s_endPeriod);
 //				System.out.println("s_startTime : "+ s_startTime);
@@ -149,6 +152,7 @@ public class createStudyRoom extends HttpServlet {
 			
 			Study s = new Study(s_name, s_to, s_day, s_startPeriod, s_endPeriod, s_startTime, s_endTime, s_explain,
 					s_notice, user_no, cid, photo);
+			System.out.println(s);
 			result = new StudyService().insertStudyRoom(s);
 			
 			

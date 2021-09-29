@@ -23,7 +23,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 		<div class="board_wrap">
         <div class="board_info">
             <div class="writer_info">
-                <img class="user_img" src='<%= request.getContextPath() %>/resources/images/user.png' alt="게시글 유저">
+                <img class="user_img" src="${ contextPath }${ loginUser.profileImg }" alt="게시글 유저">
                 <div class="avatar_info">
                     <div class="nickname">${ board.nickname }</div>
                     <div class="write_time">
