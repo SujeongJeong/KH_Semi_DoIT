@@ -70,13 +70,40 @@ public class ProductAddServlet extends HttpServlet {
 		String title = multiRequest.getParameter("title");
 		int price =  Integer.parseInt(multiRequest.getParameter("price"));
 		int expirtion = Integer.parseInt(multiRequest.getParameter("expirtion"));
-		int studyroomlimit =  Integer.parseInt(multiRequest.getParameter("studyroomLimit"));
-		int sEntrylimit =  Integer.parseInt(multiRequest.getParameter("studyroomEntryLimit"));
-		int todoListlimit =  Integer.parseInt(multiRequest.getParameter("todoListLimit"));
-		String content = multiRequest.getParameter("content");
-
 		
-		Product p = new Product(category, title, price, expirtion, studyroomlimit, sEntrylimit, todoListlimit, content, files);
+		int studyroomlimit = 0;
+	      if((multiRequest.getParameter("studyRoomLimit")) != null){
+	    	  studyroomlimit = Integer.parseInt(multiRequest.getParameter("studyRoomLimit"));
+	      }else {
+	    	  studyroomlimit = 3;
+	      }
+	      
+	      int sEntrylimit = 0;
+	      if((multiRequest.getParameter("studyroomEntryLimit")) != null){
+	    	  sEntrylimit = Integer.parseInt(multiRequest.getParameter("studyroomEntryLimit"));
+	      }else {
+	    	  sEntrylimit = 5;
+	      }   
+	      
+	      
+	      int todoListlimit = 0;
+	      if((multiRequest.getParameter("todoListLimit")) != null){
+	    	  todoListlimit = Integer.parseInt(multiRequest.getParameter("todoListLimit"));
+	      }else {
+	    	  todoListlimit = 5;
+	      }   
+	      
+	      int limitproduct = 0;
+	      if((multiRequest.getParameter("limitProduct")) != null){
+	    	  limitproduct = Integer.parseInt(multiRequest.getParameter("limitProduct"));
+	      }else {
+	    	  limitproduct = 0;
+	      }   
+	      
+		String content = multiRequest.getParameter("content");
+	
+		
+		Product p = new Product(category, title, price, expirtion, studyroomlimit, sEntrylimit, todoListlimit, content, files, limitproduct);
 
 		int result = new ShopService().insertProduct(p);
 		

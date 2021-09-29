@@ -11,6 +11,7 @@ import member.model.vo.Member;
 import shop.model.dao.ShopDao;
 import shop.model.vo.Charge;
 import shop.model.vo.Product;
+import shop.model.vo.Purchase;
 
 
 public class ShopService {
@@ -59,6 +60,7 @@ public class ShopService {
 			Connection conn = getConnection();
 			
 			int result = sd.modifyProduct(conn, p);
+			
 			
 			if(result > 0) {
 				commit(conn);
@@ -142,20 +144,7 @@ public class ShopService {
 		return result;
 	}
 
-	/*//충전 이후의 코인 값.
-	public int chargeAfterCoin(int charge_coin, int userNo, int userCoin) {
-		Connection conn = getConnection();
-		int result = sd.chargeAfterCoin(conn, charge_coin, userNo, userCoin);
-		
-		if(result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		close(conn);
-		
-		return result;
-	}*/
+	
 
 	public Product modifyImg(int product_no, String files) {
 		Connection conn = getConnection();
@@ -175,7 +164,17 @@ public class ShopService {
 		
 		return updateProduct;
 	}
-
+	
+	//유저가 구매한 상품의 유효기간의 값.
+	public Purchase purchaseLimit(int user_no) {
+		Connection conn= getConnection();
+        
+        Purchase result = sd.purchaseLimit(conn, user_no);
+       
+        	close(conn);
+        
+        return result;
+     }
 
 	
 	

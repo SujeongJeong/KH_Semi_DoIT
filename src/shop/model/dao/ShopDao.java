@@ -15,6 +15,7 @@ import static common.JDBCTemplate.*;
 
 import shop.model.vo.Charge;
 import shop.model.vo.Product;
+import shop.model.vo.Purchase;
 
 
 public class ShopDao {
@@ -76,6 +77,7 @@ public class ShopDao {
 			pstmt.setInt(7, p.getS_limit());
 			pstmt.setInt(8, p.getS_to_limit());
 			pstmt.setInt(9, p.getTodo_limit());
+			pstmt.setInt(10, p.getS_limitdate());
 			
 			result = pstmt.executeUpdate();
 		
@@ -111,8 +113,9 @@ public class ShopDao {
 							   rset.getString("PRODUCT_IMG"),
 							   rset.getInt("S_LIMIT"),
 							   rset.getInt("S_TO_LIMIT"),
-							   rset.getInt("TODO_LIMIT"));
-					
+							   rset.getInt("TODO_LIMIT"),
+							   rset.getInt("S_LIMITDATE"));
+				
 					}
 	
 				} catch (SQLException e) {
@@ -142,9 +145,11 @@ public class ShopDao {
 			pstmt.setInt(7, p.getS_limit());
 			pstmt.setInt(8, p.getS_to_limit());
 			pstmt.setInt(9, p.getTodo_limit());
-			pstmt.setInt(10, p.getProduct_no());
+			pstmt.setInt(10, p.getS_limitdate());
+			pstmt.setInt(11, p.getProduct_no());
 			
 			result = pstmt.executeUpdate();
+			
 			
 			
 		} catch (SQLException e) {
@@ -175,7 +180,7 @@ public class ShopDao {
 		} finally {
 			close(pstmt);
 		}
-		return result;
+		return result; 
 	}
 	
 	//충전 db등록
@@ -209,8 +214,12 @@ public class ShopDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, product_no);
-			pstmt.setInt(2, userNo);
+			pstmt.setInt(2, product_no);
 			pstmt.setInt(3, product_no);
+			pstmt.setInt(4, product_no);
+			pstmt.setInt(5, product_no);
+			pstmt.setInt(6, userNo);
+			pstmt.setInt(7, product_no);
 			
 			result = pstmt.executeUpdate();
 			
@@ -292,7 +301,38 @@ public class ShopDao {
 		}
 		
 		return result;
-	}		
+	}
+
+	//유저가 구매한 상품의 유효기간의 값.
+	public Purchase purchaseLimit(Connection conn, int user_no) {
+		  PreparedStatement pstmt = null;
+          ResultSet rset = null;
+          Purchase result = null;
+          
+          String sql = query.getProperty("purchaseLimit");
+          
+          try {
+             pstmt = conn.prepareStatement(sql);
+             
+             pstmt.setInt(1, user_no);
+     
+             rset = pstmt.executeQuery();
+            while(rset.next()){
+            	result = new Purchase(rset.getInt("MAX(PR.S_LIMIT)"),
+            						  rset.getInt("MAX(PR.S_TO_LIMIT)"),
+            						  rset.getInt("MAX(PR.TODO_LIMIT)"),
+            						  rset.getInt("MAX(PR.S_LIMITDATE)"));
+            
+             }  
+          } catch (SQLException e) {
+             e.printStackTrace();
+          } finally {
+             close(rset);
+             close(pstmt);
+          }
+      
+          return result;
+    }
 	
 	
 	

@@ -12,6 +12,7 @@ public class Product {
 	S_LIMIT	NUMBER
 	S_TO_LIMIT	NUMBER
 	TODO_LIMIT	NUMBER
+	S_LIMITDATE NUMBER
 	*/
 	
 	private int product_no;
@@ -24,13 +25,15 @@ public class Product {
 	private int s_limit;
 	private int s_to_limit;
 	private int todo_limit;
+	private int s_limitdate;
+	
 	
 	public Product(){}
 	
 	
 	//전체용 + 수정용
 	public Product(int product_no, String product_category, String product_name, int expiration_date, int product_price,
-			String product_detail, String product_img, int s_limit, int s_to_limit, int todo_limit) {
+			String product_detail, String product_img, int s_limit, int s_to_limit, int todo_limit, int s_limitdate) {
 		super();
 		this.product_no = product_no;
 		this.product_category = product_category;
@@ -42,6 +45,7 @@ public class Product {
 		this.s_limit = s_limit;
 		this.s_to_limit = s_to_limit;
 		this.todo_limit = todo_limit;
+		this.s_limitdate = s_limitdate;
 	}
 
 
@@ -70,9 +74,10 @@ public class Product {
 		this.product_img = product_img;
 	}
 	
+	
 	//인서트용
 	public Product(String product_category, String product_name, int product_price, int expiration_date, int s_limit, int s_to_limit, int todo_limit, String product_detail,
-			String product_img) {
+			String product_img, int s_limitdate) {
 		super();
 		this.product_category = product_category;
 		this.product_name = product_name;
@@ -83,6 +88,7 @@ public class Product {
 		this.todo_limit = todo_limit;
 		this.product_detail = product_detail;
 		this.product_img = product_img;
+		this.s_limitdate = s_limitdate;
 		
 	}
 	
@@ -171,13 +177,26 @@ public class Product {
 
 
 
+	public int getS_limitdate() {
+		return s_limitdate;
+	}
+
+
+	public void setS_limitdate(int s_limitdate) {
+		this.s_limitdate = s_limitdate;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Product [product_no=" + product_no + ", product_category=" + product_category + ", product_name="
 				+ product_name + ", expiration_date=" + expiration_date + ", product_price=" + product_price
 				+ ", product_detail=" + product_detail + ", product_img=" + product_img + ", s_limit=" + s_limit
-				+ ", s_to_limit=" + s_to_limit + ", todo_limit=" + todo_limit + "]";
+				+ ", s_to_limit=" + s_to_limit + ", todo_limit=" + todo_limit + ", s_limitdate=" + s_limitdate + "]";
 	}
+
+
+	
 	
 	
 	
