@@ -494,6 +494,83 @@ public class StudyDao {
 		return StudyList;
 	}
 
+	public List<Study> selectList1(Connection conn, PageInfo pi, String keyword, String category, String canJoin) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Study> StudyList = new ArrayList<>();
+		String sql = query.getProperty("selectStudyList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getPage() - 1 ) * 10 + 1 ;
+			int endRow = startRow + 10 - 1 ;
+			
+//			pstmt.setInt(1, startRow);
+//			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			int num = 0;
+			
+			while(rset.next()) {
+				
+				Study study = new Study(rset.getInt("s_no"),
+						rset.getString("s_name"),
+						rset.getInt("s_to"),
+						rset.getString("s_day"),
+						rset.getTimestamp("s_startPeriod"),
+						rset.getTimestamp("s_endPeriod"),
+						rset.getTimestamp("s_startTime"),
+						rset.getTimestamp("s_endTime"),
+						rset.getString("s_explain"),
+						rset.getString("s_notice"),
+						rset.getString("cname"),
+						rset.getString("nickname"),
+						rset.getString("change_name"),
+						rset.getString("file_path"),
+						rset.getInt("studyMemberNum"));
+				
+				if(study.getS_name().contains(keyword) && study.getStudyMemberNum() < study.getS_to()) {
+					if (!category.equals("default") && study.getCname().equals(category.toLowerCase())) {
+						num++;
+						if (startRow <= num && num <= endRow) {
+							StudyList.add(study);
+						}
+						
+						
+					} else if (category.equals("default")) {
+						num++;
+						if (startRow <= num && num <= endRow) {
+							StudyList.add(study);
+						}
+//						StudyList.add(study);
+					}
+				}
+				
+//				StudyList.add(new Study(rset.getInt("s_no"),
+//										rset.getString("s_name"),
+//										rset.getInt("s_to"),
+//										rset.getString("s_day"),
+//										rset.getTimestamp("s_startPeriod"),
+//										rset.getTimestamp("s_endPeriod"),
+//										rset.getTimestamp("s_startTime"),
+//										rset.getTimestamp("s_endTime"),
+//										rset.getString("s_explain"),
+//										rset.getString("s_notice"),
+//										rset.getString("cname"),
+//										rset.getString("nickname"),
+//										rset.getString("change_name"),
+//										rset.getString("file_path"),
+//										rset.getInt("studyMemberNum")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return StudyList;
+	}
 
 	
 	  public int userStudyLimit(Connection conn, int userNo) { 

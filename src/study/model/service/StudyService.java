@@ -193,22 +193,22 @@ public class StudyService {
 	}
 	
 	// 페이징처리
-		public Map<String, Object> selectList1(int page) {
-			Connection conn = getConnection();
-			
-			int listCount = sd.selectStudyListNumber(conn);
-			
-			PageInfo pi = new PageInfo(page,listCount);
-			
-			List<Study> StudyList = sd.selectList1(conn,pi);
-			
-			Map<String, Object> returnMap = new HashMap<>();
-			
-			returnMap.put("pi", pi);
-			returnMap.put("StudyList", StudyList);
+	public Map<String, Object> selectList1(int page, String keyword, String category, String canJoin) {
+		Connection conn = getConnection();
+		
+		int listCount = sd.selectStudyListNumber(conn);
+		
+		PageInfo pi = new PageInfo(page,listCount);
+		
+		List<Study> StudyList = sd.selectList1(conn,pi, keyword, category, canJoin);
+		
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		returnMap.put("pi", pi);
+		returnMap.put("StudyList", StudyList);
 //			System.out.println(returnMap);
-			return returnMap;
-		}
+		return returnMap;
+	}
 
 		
 		  public int userStudyLimit(int userNo) { 
