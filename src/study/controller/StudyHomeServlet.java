@@ -65,9 +65,7 @@ public class StudyHomeServlet extends HttpServlet {
 		if(canJoin == null) {
 			canJoin = "false";
 		}
-		if(param == null) {
-			param = "";
-		}
+		
 		
 		
 		Map<String, Object> map = new StudyService().selectList1(page);
@@ -79,7 +77,7 @@ public class StudyHomeServlet extends HttpServlet {
 		List<Study> StudyListAll = (List<Study>) map.get("StudyList");
 		// ajax에 줄 조건에 맞는 스터디 목록
 		List<Study> StudyList = new ArrayList<>();
-		
+//		System.out.println("StudyListAll : " + StudyListAll);
 		
 		
 		if(param == "param1") {
