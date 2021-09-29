@@ -42,7 +42,7 @@
 	</entry>
 	<entry key="selectTodoLimit">
 	SELECT
-      	    TODO_LIMIT
+      	    MAX(TODO_LIMIT)
 	   FROM PRODUCT P
 	   JOIN PURCHASE PR ON(P.PRODUCT_NO = PR.PRODUCT_NO)
 	   JOIN MEMBER M ON(PR.USER_NO = M.USER_NO)
