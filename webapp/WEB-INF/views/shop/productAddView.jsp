@@ -8,6 +8,7 @@
 <title>상품 추가 – Do IT</title>
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <style>
  
  .wrapper{
@@ -70,7 +71,8 @@
 	justify-content : center;
 }
 
-.studyroomLimit, .studyroomEntryLimit, .todoListLimit{
+
+#studyroomLimit, #studyroomEntryLimit, #todoListLimit{
 	width: 40px;
 	height: 25px;
 	justify-content : center;
@@ -126,7 +128,7 @@
 			
 				<div class="inputarea"> 
 					<div><h3>상품명</h3> 	
-					<select name="category">
+					<select name="category" id="category">
 						<option value="세트">세트</option>
 						<option value="단품">단품</option>
 					</select></div>
@@ -141,9 +143,22 @@
 				
 				<div class="limit-wrapper">
 					<h3>이용 기능 제한</h3>
-					<span>스터디방 입장/생성 가능 개수 : </span><input type="number" class="studyroomLimit" name="studyroomLimit" min=3 required placeholder="3"> 개<br>
+					<!-- <span>스터디방 입장/생성 가능 개수 : </span><input type="number" class="studyroomLimit" name="studyroomLimit" min=3 required placeholder="3"> 개<br>
 					<span>스터디방 입장 인원 수 : </span><input type="number" class="studyroomEntryLimit"  name="studyroomEntryLimit" min=4 required placeholder="4"> 인<br>
-					<span>오늘의 할일 수 : </span><input type="number"  class="todoListLimit" name="todoListLimit" min=5 required placeholder="5"> 개 <br>
+					<span>오늘의 할일 수 : </span><input type="number"  class="todoListLimit" name="todoListLimit" min=5 required placeholder="5"> 개 <br>-->
+					
+					<input type=radio id="limit1" name="limit"  style="display:none"> 스터디방 입장/생성 가능 개수 : 
+					<input type="number" class="limit_number"  id="studyroomLimit" name="studyRoomLimit" min=3 required placeholder="3"  maxlength="6"> 개 <br>
+					<input type=radio id="limit2" name="limit"  style="display:none">스터디방 입장 인원 수 : 
+					<input type="number" class="limit_number"  id="studyroomEntryLimit"  name="studyroomEntryLimit" min=5 required placeholder="5"  maxlength="20"> 명 <br>
+					<input type=radio id="limit3" name="limit"  style="display:none"> 오늘의 할일 수 : 
+					<input type="number" class="limit_number"  id="todoListLimit" name="todoListLimit" min=5 required placeholder="5" > 개 <br>
+					<input type=radio id="limit4" name="limit" style="display:none"> 스터디방 기간연장 상품 :
+					<input type="number" class="limit_number" id="limitProduct" name="limitProduct" min=5 required placeholder="5" > 일
+					
+					
+					
+					
 					</div><hr>
 			
 				<h3>상품 설명</h3>
@@ -160,11 +175,38 @@
 		
 		
 		<script src="${ contextPath }/resources/js/imagePreview.js"></script>
+		<script type="text/javascript">
+		<%-- 단품 클릭 시 라디오 버튼 생성 --%>
+			$('#category').change(function(){
+				
+				 if($('input[name=limit]').css('display') == 'none'){
+			            $('input[name=limit]').show();
+			            $(".checked").attr('disabled', false);
+			                 
+			   		     }else{
+			            $('input[name=limit]').hide();
+			            $(".limit_number").attr('disabled', false);
+			            
+			      	    }
+			});
+        <%-- 클릭된 라디오버튼  텍스트 활성화,비활성화--%>
+			$("[type='radio']").click(function(){
+								
+				$(".limit_number").attr('disabled', true);
+				 $(this).next().attr('disabled', false); 
+				
+			});
+			
+			 <%-- 클릭이 되면 위에 함수로 넘어감.--%>
+			 $("[type='number']").click(function(){
+				 if($("#category option:selected").val()=="단품"){
+				 console.log("되는거니마는거니")
+				 $(this).prev().click();
+				 }
+			});
+		
 
-
-
-
-	
+		</script>
 
 
 </body>

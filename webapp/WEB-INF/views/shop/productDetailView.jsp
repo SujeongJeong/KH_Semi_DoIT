@@ -72,16 +72,19 @@
 
 .image_area {
 	width: 100%;
-	height: 150px;
+	height: 300px;
 	margin-top: 30px;
 	margin-bottom: 20px;
 	justify-content : center;
+	border:1px solid #ddd;
+	border-radius: 10px;
 }
 
 
 .image_area img{
 	width: 100%;
-	height: 150px;}
+	height: auto;
+}
 
 
 .title {
@@ -171,7 +174,8 @@ opener.parent.location.reload();
 				<h3>이용 가능한 기능</h3>
 				<span>스터디방 입장/생성 가능 개수 : ${ p.s_limit} 개</span><br>
 				<span>스터디방 입장 인원 수 : ${ p.s_to_limit} 명 </span><br>
-				<span>오늘의 할일 수 :  ${ p.todo_limit} 개</span>
+				<span>오늘의 할일 수 :  ${ p.todo_limit} 개</span><br>
+				<span>스터디방 기간연장 상품 : ${ p.s_limitdate} 일</span>
 				</div><hr>	
 				
 		
@@ -205,12 +209,47 @@ opener.parent.location.reload();
 				let userCoin = ${ loginUser.userCoin };
 				let pPrice = ${ p.product_price };
 				
+				let s_limit = ${prLimit.s_limit};
+				let s_to_limit = ${prLimit.s_to_limit};
+				let todo_limit = ${prLimit.todo_limit};
+				let s_limitdate = ${prLimit.s_limitdate};
+				
+				let p_s_limit = ${ p.s_limit} 
+				let p_s_to_limit = ${ p.s_to_limit} 
+				let p_todo_limit = ${ p.todo_limit}
+				let p_s_limitdate = ${ p.s_limitdate} 
+				
+				
+				console.log(s_limit);
+				console.log(s_to_limit);
+				console.log(todo_limit);
+				console.log(s_limitdate);
+				
+				console.log(p_s_limit);
+				console.log(p_s_to_limit);
+				console.log(p_todo_limit);
+				console.log(p_s_limitdate);
+				
+				
+				
+		
+		if(s_limit == 3 && s_to_limit == 5 && todo_limit == 5 && s_limitdate == 0 ){//세트상품을 구매하지 않았을 시. 완료
+			 if(s_limit <= p_s_limit || s_to_limit <= p_s_to_limit|| todo_limit <=  p_todo_limit || s_limitdate <=  p_s_limitdate ){
+				 
 				if(userCoin < pPrice){
 					if(confirm("코인이 부족합니다. 충전하시겠습니까?"))
 					  location.href='${contextPath}/coin';
 					  return false;
 				}
-			}
+			} 
+			
+		}	else {
+			alert("중복되는 이용권이 있습니다.");
+			return false;
+		}	
+	}
+	
+			
 	</script>
 
 

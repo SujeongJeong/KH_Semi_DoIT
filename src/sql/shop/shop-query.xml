@@ -27,6 +27,7 @@
 			  , S_LIMIT
 			  , S_TO_LIMIT 
 			  , TODO_LIMIT
+			  , S_LIMITDATE
 
 			)
 			VALUES
@@ -38,6 +39,7 @@
 			  , ?
 			  , ?
 			  , ?	
+			  , ?
 			  , ?
 			  , ?
 			  , ?
@@ -56,6 +58,7 @@
 			  , S_LIMIT
 			  , S_TO_LIMIT 
 			  , TODO_LIMIT
+			  , S_LIMITDATE
 			  
 		   FROM PRODUCT
 		  WHERE PRODUCT_NO = ?
@@ -74,6 +77,7 @@
 			  , S_LIMIT = ?
 			  , S_TO_LIMIT = ? 
 			  , TODO_LIMIT = ?
+			  , S_LIMITDATE = ?
    	  	
    		WHERE PRODUCT_NO = ?
 	 </entry>
@@ -111,6 +115,10 @@
 			  , PURCHASE_DATE
 			  , START_DATE
 		  	  , EXPIRATION_DATE
+		  	  , S_LIMIT
+			  , S_TO_LIMIT
+			  , TODO_LIMIT
+			  , S_LIMITDATE
 		 	  , USER_NO
 			  , PRODUCT_NO
 			)
@@ -123,6 +131,22 @@
                             EXPIRATION_DATE
                             FROM PRODUCT
                             WHERE PRODUCT_NO = ?)
+              ,(SELECT
+              		S_LIMIT
+              	FROM PRODUCT
+              	WHERE PRODUCT_NO = ?)
+              ,	(SELECT
+              		S_TO_LIMIT
+              	FROM PRODUCT
+              	WHERE PRODUCT_NO = ?) 
+              ,	(SELECT
+              		TODO_LIMIT
+              	FROM PRODUCT
+              	WHERE PRODUCT_NO = ?)
+              , (SELECT
+              		S_LIMITDATE
+              	FROM PRODUCT
+              	WHERE PRODUCT_NO = ?)	             
 			  , ?
 			  , ?	
 			)
@@ -161,7 +185,18 @@
 			 WHERE PRODUCT_NO = ?
 		</entry>
 
-
+	<entry key="purchaseLimit">
+	SELECT
+		        MAX(PR.S_LIMIT)
+		       , MAX(PR.S_TO_LIMIT)
+		       , MAX(PR.TODO_LIMIT)
+		       , MAX(PR.S_LIMITDATE)
+		FROM PRODUCT P
+		JOIN PURCHASE PR ON(P.PRODUCT_NO = PR.PRODUCT_NO)
+		WHERE PR.USER_NO =?
+		<![CDATA[AND TO_CHAR(PR.EXPIRATION_DATE, 'yyyymmdd') >= TO_CHAR(SYSDATE, 'yyyymmdd')]]>
+			
+	</entry>
 
 
 
