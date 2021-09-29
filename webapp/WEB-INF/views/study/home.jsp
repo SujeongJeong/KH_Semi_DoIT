@@ -450,14 +450,13 @@ function searchEvent(){
 				dataType : "json",
 				success : function(resultList){
 					if(resultList != null){
-						console.log(resultList);
 						
 						var html = "";
 						
 						for(var key in resultList){
 							html+= '<div class="studyRoom"><div class="img_wrapper"><img class="studyImage" src="'
 							+ '${ contextPath }'+ resultList[key].sImgList[0].file_path +resultList[key].sImgList[0].change_name
-							+ '" onclick=studyInfo("'+ resultList[key].s_no + ')"><div class="studyTO">' + resultList[key].studyMemberNum
+							+ '" onclick="studyInfo('+ resultList[key].s_no + ')"><div class="studyTO">' + resultList[key].studyMemberNum
 							+ ' / '+ resultList[key].s_to + '</div></div><div class="sub_wrapper"><div class="sName">'
 							+ resultList[key].s_name + '</div></div><div class="sub_wrapper"><span class="sCategory">#'
 							+ resultList[key].cname + '</span></div><c:if test="'+ ${ loginUser.userType == 'A' } +'">'
@@ -465,7 +464,7 @@ function searchEvent(){
 						}
 							$(".studyList").html(html);
 					}
-				},
+				},					
 				error : function(e){
 					console.log(e);
 					alert("무언가 잘못됨");
@@ -481,14 +480,13 @@ function searchEvent(){
 				dataType : "json",
 				success : function(resultList){
 					if(resultList != null){
-						console.log(resultList);
 						
 						var html = "";
 						
 						for(var key in resultList){
 							html+= '<div class="studyRoom"><div class="img_wrapper"><img class="studyImage" src="'
 							+ '${ contextPath }'+ resultList[key].sImgList[0].file_path +resultList[key].sImgList[0].change_name
-							+ '" onclick=studyInfo("'+ resultList[key].s_no + ')"><div class="studyTO">' + resultList[key].studyMemberNum
+							+ '" onclick="studyInfo('+ resultList[key].s_no + ')"><div class="studyTO">' + resultList[key].studyMemberNum
 							+ ' / '+ resultList[key].s_to + '</div></div><div class="sub_wrapper"><div class="sName">'
 							+ resultList[key].s_name + '</div></div><div class="sub_wrapper"><span class="sCategory">#'
 							+ resultList[key].cname + '</span></div><c:if test="'+ ${ loginUser.userType == 'A' } +'">'
@@ -535,10 +533,10 @@ function plusBtnEvent(isMore){
 		searchParams.page +=1;
 	} else {
 		if(searchParams.keyword == keyword && searchParams.category == category && searchParams.canJoin == canJoin){
-			alert('값 변경됨 하지만 더보기 눌러서 페이지 증가');
+		<%--	alert('값 변경됨 하지만 더보기 눌러서 페이지 증가');--%>
 			searchParams.page +=1;
 		} else{
-			alert('값 변경됨 페이지 1');
+			<%--		alert('값 변경됨 페이지 1');--%>
 			searchParams.page = 1;
 		}
 	}
@@ -574,7 +572,7 @@ function plusBtnEvent(isMore){
 				for(var key in resultList){
 					html+= '<div class="studyRoom"><div class="img_wrapper"><img class="studyImage" src="'
 					+ '${ contextPath }'+ resultList[key].sImgList[0].file_path +resultList[key].sImgList[0].change_name
-					+ '" onclick=studyInfo("'+ resultList[key].s_no + ')"><div class="studyTO">' + resultList[key].studyMemberNum
+					+ '" onclick="studyInfo('+ resultList[key].s_no + ')"><div class="studyTO">' + resultList[key].studyMemberNum
 					+ ' / '+ resultList[key].s_to + '</div></div><div class="sub_wrapper"><div class="sName">'
 					+ resultList[key].s_name + '</div></div><div class="sub_wrapper"><span class="sCategory">#'
 					+ resultList[key].cname + '</span></div><c:if test="'+ ${ loginUser.userType == 'A' } +'">'
