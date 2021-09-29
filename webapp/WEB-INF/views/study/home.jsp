@@ -350,7 +350,7 @@
 		<br>
 		<div class="studyRoomPlus">
 			<hr class="plusLine">
-			<button class="plusBtn" id="plusBtn" onclick="plusBtnEvent()">더보기</button>
+			<button class="plusBtn" id="plusBtn" onclick="plusBtnEvent(true)">더보기</button>
 		</div>
 	</div>
 
@@ -414,11 +414,11 @@ function studyInfo(s_no){
 	
 // 카테고리 변경시 연결 함수 
 var studyCategory = document.getElementById('studyCategory');
-studyCategory.addEventListener('change',plusBtnEvent);
+studyCategory.addEventListener('change', plusBtnEvent);
 
 // 입장가능한방 체크박스 선택시 연결 함수
 var canJoinStudyBtn = document.getElementById('canJoinStudyBtn');
-canJoinStudyBtn.addEventListener('change',plusBtnEvent);	
+canJoinStudyBtn.addEventListener('change', plusBtnEvent);	
 
 // 입력값/선택된 카테고리/체그박스 선택여부
 var keywordVal = $(".searchText").val();
@@ -507,7 +507,7 @@ function searchEvent(){
 	}
 }
 	
-function plusBtnEvent(){
+function plusBtnEvent(isMore){
 	<%--
 	
 	
@@ -526,24 +526,47 @@ function plusBtnEvent(){
 		searchParams.page = 1;
 	}
 	--%>
-	if(searchParams.keyword == '' && searchParams.category == 'default' && searchParams.canJoin == false){
+	keyword = $(".searchText").val();
+	category = $(".studyCategory").val();
+	canJoin = $("input:checkbox[id='canJoinStudyBtn']").is(":checked");
+	
+	
+	if(isMore === true){
 		searchParams.page +=1;
-	} else{
-		if(searchParams.keyword == keywordVal && searchParams.category == categoryVal && searchParams.canJoin == canJoinVal){
+	} else {
+		if(searchParams.keyword == keyword && searchParams.category == category && searchParams.canJoin == canJoin){
+			alert('값 변경됨 하지만 더보기 눌러서 페이지 증가');
 			searchParams.page +=1;
 		} else{
+			alert('값 변경됨 페이지 1');
 			searchParams.page = 1;
 		}
 	}
+	
+	searchParams.keyword = $(".searchText").val();
+	searchParams.category = $(".studyCategory").val();
+	searchParams.canJoin = $("input:checkbox[id='canJoinStudyBtn']").is(":checked");
+	
+
 
 	$.ajax({
 		url : "${contextPath}/study/home",
 		type : "get",
-		data : { page : searchParams.page, keyword : searchParams.keyword,
-			category : searchParams.category, canJoin : searchParams.canJoin , param : true},
+		data : {
+			page : searchParams.page,
+			keyword : $(".searchText").val(),
+			category :  $(".studyCategory").val(),
+			canJoin :  $("input:checkbox[id='canJoinStudyBtn']").is(":checked"),
+			param : true
+		},
 		dataType : "json",
 		success : function(resultList){
 			if(resultList != null){
+				if (searchParams.page === 1) {
+					$(".studyList").html('');
+				}
+				
+				
 				console.log(resultList);
 				
 				var html = "";
