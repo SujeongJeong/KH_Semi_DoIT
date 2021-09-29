@@ -353,5 +353,4 @@ public class MemberDao {
 	         } 
 	         return memberInfoForStudy;
 	      }
-
 }
