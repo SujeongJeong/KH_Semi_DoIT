@@ -244,7 +244,7 @@
 				${ study.s_to }
 			</div>
 			<div id="top1-content-wrapper">
-				<button id="member-management" onclick="">회원 관리</button>
+				<button id="member-management" onclick="memberManagement(${ s_no })">회원 관리</button>
 				<button id="out" onclick="outBtn()">나가기</button>
 			</div>
 		</div>
@@ -326,8 +326,27 @@
 				history.back();
 			}
 		}
+	
 		
 		
+		function openPopup(url, title, width, height){
+			
+			let left = (document.body.clientWidth/2) - (width/2);
+			//듀얼 모니터를 위한 계산
+			left += window.screenLeft;
+			//작업표시줄 제외하고. 
+			let top = (screen.availHeight/2) - (height/2);
+			
+			let options = "width=" + width+",height="+height + ",left="+left + ", top=" + top;
+			
+			
+			window.open(url, title, options);
+		}
+		
+	function memberManagement(s_no){
+			openPopup('<%= request.getContextPath() %>/study/memberManagement?s_no='+s_no, 'studyInfo', 700, 500);
+			
+		}	
 		
 	
 	// 타이머
@@ -335,7 +354,7 @@
 	var stop;
 	var allTime = 0;
 	var startParam = false;
-	
+	var s_no = ${s_no};
 	
 	//시작버튼
 	function startBtn(){
@@ -380,8 +399,7 @@
 				$(function(){
 					$.ajax({
 						url : "${ pageContext.servletContext.contextPath }/study/enterStudy/timer",
-						data : { dbSaveTime : dbSaveTime , loginUserNo : ${loginUserNo}
-							     },
+						data : { dbSaveTime : dbSaveTime , loginUserNo : ${loginUserNo} },
 						type : "post",
 						success : function(result){
 							console.log("시간 저장 성공");
@@ -398,6 +416,11 @@
 		}
 	
 	}
+	
+	
+	
+	
+	
 	
 	
 		
