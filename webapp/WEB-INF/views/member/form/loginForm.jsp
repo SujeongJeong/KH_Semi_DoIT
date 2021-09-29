@@ -7,6 +7,8 @@
 <title>로그인 - Do IT</title>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
+<!-- <script src="https://apis.google.com/js/platform.js" async defer></script>  -->
+<!-- <meta name ="google-signin-client_id" content="219502076188-pjji03me8shc0nijh9ro6elqa6rvi49b.apps.googleusercontent.com">  -->
 <% if(session.getAttribute("msg") != null) { %>
 <script>
 	 alert('<%= session.getAttribute("msg") %>');
@@ -138,6 +140,7 @@ button[id$=Btn]:hover {
 			<span class="input_area google"><button class="easy_btn" id="easy_google" type="button">google</button></span>
 			<span class="input_area naver"><button class="easy_btn" id="easy_naver" type="button">naver</button></span>
 			<span class="input_area kakao"><button class="easy_btn" id="easy_kakao" type="button">kakao</button></span>
+			<!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
 		</form>
 	</div>
 	
@@ -185,5 +188,32 @@ button[id$=Btn]:hover {
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
 	
+<!-- <script>
+	var profile = null;
+	
+	function onSignIn(googleUser) {
+		  profile = googleUser.getBasicProfile();
+		  var email = profile.getEmail();
+		  var name = profile.getName();
+		  var Image_URL = profile.getImageUrl();
+		  
+		  console.log('email: ' + email);
+		  console.log('name: ' + name);
+		  console.log('Image_URL: ' + Image_URL); // This is null if the 'email' scope is not present.
+		  
+		  $.ajax({
+				url : "${ contextPath }/member/googleSignIn",
+				type : "post",
+				data : { email:email, Image_URL:Image_URL },
+				success : function(result) {
+					alert("구글 로그인 성공");
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+		}
+	})
+</script> -->
 </body>
 </html>

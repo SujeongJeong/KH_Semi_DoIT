@@ -237,7 +237,7 @@ WHERE RNUM BETWEEN ? AND ?
    </entry>
    <entry key="getSExpirationDate">
    	SELECT
-          S_PERIOD_LIMIT
+          MAX(S_LIMITDATE)
    FROM PRODUCT P
    JOIN PURCHASE PR ON(P.PRODUCT_NO = PR.PRODUCT_NO)
    JOIN MEMBER M ON(PR.USER_NO = M.USER_NO)

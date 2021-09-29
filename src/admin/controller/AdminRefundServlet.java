@@ -58,11 +58,9 @@ public class AdminRefundServlet extends HttpServlet {
 		}
  		
 		int result = 0;
-		int result2 = 0;
 		
 		for(int i = 0; i < refundNo2.length; i++) {
-			result = new AdminService().modifyCompleteDate(refundNo2[i]);
-			result2 = new AdminService().modifyUserCoin(refundNo2[i]);
+			result += new AdminService().modifyCompleteDate(refundNo2[i]);
 		}
 		
 		int page = 1;
@@ -70,7 +68,7 @@ public class AdminRefundServlet extends HttpServlet {
 		request.setAttribute("pi", map.get("pi"));
 		request.setAttribute("refundList", map.get("refundList"));
 		
-		if(result > 0 && result2 > 0) {
+		if(result == refundNo.length) {
 			request.setAttribute("result", "success");
 		} else {
 			request.setAttribute("result", "fail");

@@ -210,7 +210,6 @@ public class MyDao {
             MyOpenStudyList.add(new Study(rset.getInt("S_NO"),
                               rset.getString("CNAME"),
                               rset.getString("S_NAME"),
-                              rset.getInt("S_TO"),
                               rset.getString("NICKNAME"),
                               rset.getDate("S_STARTPERIOD"),
                               rset.getDate("S_ENDPERIOD")));
@@ -243,7 +242,6 @@ public class MyDao {
             MyJoinStudyList.add(new Study(rset.getInt("S_NO"),
                               rset.getString("CNAME"),
                               rset.getString("S_NAME"),
-                              rset.getInt("S_TO"),
                               rset.getString("NICKNAME"),
                               rset.getDate("S_STARTPERIOD"),
                               rset.getDate("S_ENDPERIOD")));
@@ -696,6 +694,73 @@ public class MyDao {
 
 		return lastAvgStudyTime;
 	}
+	public int selectRefundNo(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int refundNo = 0;
+		String sql = query.getProperty("selectRefundNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				refundNo = rset.getInt(1);
+	         }
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return refundNo;
+	}
+	public int modifyUserCoin(Connection conn, int refundNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("modifyUserCoin");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, refundNo);
+			pstmt.setInt(2, refundNo);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	public int selectUserCoin(Connection conn, int userNo) {
+	      PreparedStatement pstmt = null;
+	      int userCoin = 0;
+	      String sql = query.getProperty("selectUserCoin");
+
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+
+	         pstmt.setInt(1, userNo);
+
+	         userCoin = pstmt.executeUpdate();
+	      } catch (SQLException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      } finally {
+	         close(pstmt);
+	      }
+
+	      return userCoin;
+	   }
    
    
 }

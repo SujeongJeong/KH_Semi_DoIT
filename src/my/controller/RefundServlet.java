@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.model.service.MemberService;
 import member.model.vo.Member;
 import my.model.service.MyService;
 import shop.model.vo.Refund;
@@ -47,12 +48,19 @@ public class RefundServlet extends HttpServlet {
 		
 		int userNo = ((Member)(request.getSession().getAttribute("loginUser"))).getUserNo();
 		
-		Refund r = new Refund(refund_coin, bank_account, bank_name, account_name, userNo);
-		
-		int result = new MyService().insertRefundCoin(r);
-		
-		if(result > 0) {
-			request.setAttribute("result", "success");
+		if(((Member)(request.getSession().getAttribute("loginUser"))).getUserCoin() >= refund_coin) {
+			Refund r = new Refund(refund_coin, bank_account, bank_name, account_name, userNo);
+			int result = new MyService().insertRefundCoin(r);
+			if(result > 0) {
+				int refundNo = new MyService().selectRefundNo(userNo);
+				int result2 = new MyService().modifyUserCoin(refundNo);
+				if(result2 > 0) {
+					Member m = new MemberService().selectMember(userNo);
+					request.getSession().setAttribute("loginUser", m);
+					request.setAttribute("result", "success");	
+				}
+				
+			}
 		} else {
 			request.setAttribute("result", "fail");
 		}
