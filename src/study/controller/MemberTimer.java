@@ -34,8 +34,23 @@ public class MemberTimer extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		int dbSaveTime = Integer.parseInt(request.getParameter("dbSaveTime"));
+		int loginUserNo = Integer.parseInt(request.getParameter("loginUserNo"));
+		
+		System.out.println(dbSaveTime);
+		System.out.println(loginUserNo);
+		
+		
+		
+		
+		
+		
+		response.setCharacterEncoding("UTF-8");
+		
+		response.getWriter();
+	
+	
 	}
 
 }

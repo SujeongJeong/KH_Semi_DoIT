@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import member.model.service.MemberService;
 import member.model.vo.Member;
 import study.model.service.StudyService;
 import study.model.vo.Study;
@@ -36,25 +37,19 @@ public class EnterStudyRoom extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
-		
+		int loginUserNo = Integer.parseInt(request.getParameter("userNo"));
 		Study s = new StudyService().selectStudyRoom(s_no);
+		
 		request.setAttribute("study", s);
-		
-		System.out.println("study : "+s);
-		
-		HttpSession session = request.getSession();
-		Member loginUser = (Member) session.getAttribute("loginUser");
-		session.setAttribute("loginUser", loginUser);
+		request.setAttribute("loginUserNo", loginUserNo);
 		
 		int StudyMemberCount = new StudyService().StudyMemberCount(s_no);
 		request.setAttribute("StudyMemberCount", StudyMemberCount);
 		
-		List<Member> 
+		// 입장한 스터디방에 가입한 회원 목록
+		List<Member> MemberList = new MemberService().memberInfoForStudy(s_no);
 		
-		
-		
-		
-		
+		request.setAttribute("MemberList", MemberList);
 		
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/enterStudyRoom.jsp");
 		view.forward(request, response);
