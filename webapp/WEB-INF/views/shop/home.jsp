@@ -117,6 +117,15 @@
 	
 }
 
+#bannerImg {
+	display: block;
+	margin-left: -370px; 
+	margin-top: 200px;
+	width : 200px;
+	position: absolute;
+}
+
+
 
 </style>
 
@@ -136,9 +145,10 @@
 	<button class="product_addBtn" onclick="openPopup('<%=request.getContextPath()%>/productAdd', 'ProductAdd', 900, 1200);"></button>
 	<button class="product_deleteBtn" id="checkbox_btn" onclick="checkbox()"></button> 
 	</c:if>
+	 <div id="banner"><img id="bannerImg" src="/Do_IT/resources/images/banner_shop.png" onclick=""></div>
 	<form id="deleteProductForm" name="deleteProductForm" method="get" onsubmit="return confirm('정말 삭제하시겠습니까?');" action="<%=request.getContextPath()%>/productDelete">
 		 <button  class="deleteProductBtn"  style="display:none" onclick="deleteBtn()">삭제</button></h3>
-		 
+		
 		  <!-- 프리미엄 상품 리스트  -->	
 		  <div class="product_premium">
 		   <c:forEach var="p" items="${ productList }">
