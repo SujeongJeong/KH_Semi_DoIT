@@ -90,8 +90,8 @@
 						<c:when test="${ loginUser == null }">
 						<li><span class="todayhours point-c">0시간 00분</span><span class="goalhours lightgray-c">/ 0시간 00분</span></li>
 						</c:when>
-						<c:when test="${ loginUser != null and my_today.s_time == 0 }">
-						<li><span class="todayhours point-c">0시간 00분</span>
+						<c:when test="${ loginUser != null }">
+						<li><span class="todayhours point-c">${ myHour }시간 ${ myMin }분</span>
 						<span class="goalhours lightgray-c">/ 
 						<c:set var="targetHour" value="${ loginUser.targetHour }"/>
 						<c:set var ="hours" value="${fn:split(targetHour, '/') }"/>
@@ -274,7 +274,8 @@
 							if( data != null ){
 								var html ='';
 								for(var key in data){
-									html += '<li><span>'+ data[key].todo_content + '</span><button class="edit"></button><button class="delete"></button></li>';
+									html += '<li><span>'+ data[key].todo_content + 
+									'</span><button class="edit"></button><button class="delete"></button></li>';
 								}
 								$(".list").html(html);
 							}else{
