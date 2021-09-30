@@ -162,5 +162,12 @@
 		          ORDER BY RANK() OVER (ORDER BY SUM(S_TIME) DESC))
 		  WHERE USER_NO = ?          
 	</entry>
+	<entry key="selectMyToday">
+	SELECT 
+   		  CASE WHEN TO_CHAR(SUM(S_TIME), '999990,00,00' ) IS NULL THEN '0' ELSE TO_CHAR(SUM(S_TIME)) END AS SUMTIME
+	      FROM TIMER 
+	     WHERE TO_CHAR(S_DAY) = TO_CHAR(SYSDATE) 
+	     AND USER_NO = ?
+	</entry>
 
 </properties>
