@@ -106,6 +106,13 @@
 	border: 0;
 	font-size: 25px;
 	color: #5FC5FF;
+	font-weight: bold;
+}
+#limitcount{
+	font-size: 15px;
+	color: #5FC5FF;
+	font-weight: bold;
+
 }
 
 
@@ -172,11 +179,11 @@ opener.parent.location.reload();
 				</div>
 				<div class="limit-wrapper">
 				<h3>이용 가능한 기능</h3>
-				<span>스터디방 입장/생성 가능 개수 : ${ p.s_limit} 개</span><br>
-				<span>스터디방 입장 인원 수 : ${ p.s_to_limit} 명 </span><br>
-				<span>오늘의 할일 수 :  ${ p.todo_limit} 개</span><br>
-				<span>스터디방 기간연장 상품 : ${ p.s_limitdate} 일</span>
-				</div><hr>	
+				<span>스터디방 입장/생성 가능 개수 :<label id="limitcount"> ${ p.s_limit}</label> 개</span><br>
+				<span>스터디방 입장 인원 수 : <label id="limitcount">${ p.s_to_limit}</label> 명 </span><br>
+				<span>오늘의 할일 수 : <label id="limitcount">${ p.todo_limit}</label> 개</span><br>
+				<span>스터디방 기간연장 상품 : <label id="limitcount">${ p.s_limitdate}</label> 일</span>
+				</div><br><hr>	
 				
 		
 			<textarea class="textarea" rows="15" cols="80" name="content" readonly>${ p.product_detail } </textarea>
@@ -193,11 +200,11 @@ opener.parent.location.reload();
 	</div>
 		
 
-		
-		
-	
+
 		
 	<script>
+	
+	
 			
 			function detailView(){
 				alert('로그인 후 이용 가능 합니다.');
@@ -240,6 +247,7 @@ opener.parent.location.reload();
 					if(confirm("코인이 부족합니다. 충전하시겠습니까?"))
 					  location.href='${contextPath}/coin';
 					  return false;
+					  
 				}
 			} 
 			

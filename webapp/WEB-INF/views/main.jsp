@@ -68,9 +68,12 @@
 					<div class="slide-wrapper">
 					<c:forEach var="s" items="${ Study }">
 					<div class="study-info" onclick="studyDetailView(${ s.s_no})">
-					<img src="${ contextPath }${ s.sImgList.get(0).file_path }${ s.sImgList.get(0).change_name }" alt="스터디배경사진"> 
-					<label class="study-name">${ s.s_name }</label><br>
-					<label class="study-category darkgray-c">#${ s.cname }</label> 
+						<div class="s-img-wrapper">
+						<img src="${ contextPath }${ s.sImgList.get(0).file_path }${ s.sImgList.get(0).change_name }" alt="스터디배경사진"> 
+						</div>
+						<label class="study-name">${ s.s_name }</label>&nbsp;&nbsp;<span class="studyTO">${s.studyMemberNum }/${s.s_to }</span><br>
+						<label class="s_text">${ s.s_day }</label><br>
+						<label class="study-category darkgray-c">#${ s.cname }</label>
 					</div>
 					</c:forEach>
 					</div>
@@ -235,9 +238,9 @@
 	<script>
 	 // todolist 추가 
 		$(".add").click(function(){	
-			var size = $("#todoList").children().length
-
-			if( size < ${limit}){
+			var size = $("#todoList").children().length;
+			var limit = ${limit};
+			if( size < limit){
 				if( $(".scrollBlind ul").hasClass("list")){
 					$(".list").append("<li><textarea maxlength='48'></textarea></li>");
 				}else{
@@ -279,9 +282,9 @@
 					
 				});
 			 }else{
-				alert("추가 가능한 개수를 초과하셨습니다.")
-			} 
-		}); 
+					alert("추가 가능한 개수를 초과하셨습니다.")
+				} 
+			}); 
 					
 	// todolist 수정
 	 	$(document).on('click', '.edit', function(){

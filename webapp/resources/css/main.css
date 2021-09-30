@@ -66,8 +66,19 @@
 	/* studylist*/
 	.study-list{display:flex; padding-left: 10px; padding-right: 10px; overflow: hidden;}
 	.study-info { width : 210px; height : 250px; margin : 10px; padding: 15px 5px;}
-	.study-list img { width : 200px; height : 200px;}
-	
+	.study-list img { width : 180px; height : 180px;}
+	.studyTO{
+	    /* position: absolute;
+	    top: 183px;
+	    left: 25px; */
+	    border: 1px solid #eee;
+	    border-radius: 5px;
+	    padding: 0px 8px;
+	    background: #fff;
+	    font-size: 14px;
+	    width: 40px;
+	    text-align: center;
+	} 
 	/* 전체 구조 css */
 	.title{
 		font-weight : bold;

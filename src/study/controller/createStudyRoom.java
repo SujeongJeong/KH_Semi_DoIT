@@ -2,8 +2,6 @@ package study.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +20,7 @@ import com.oreilly.servlet.MultipartRequest;
 import common.Attachment;
 import common.MyFileRenamePolicy;
 import member.model.vo.Member;
+import shop.model.vo.Purchase;
 import study.model.service.StudyService;
 import study.model.vo.MemberJoinStudy;
 import study.model.vo.Study;
@@ -48,9 +47,9 @@ public class createStudyRoom extends HttpServlet {
 		int userNo = ((Member)(request.getSession().getAttribute("loginUser"))).getUserNo();
 	
 		// 스터디방 개설 기간 설정
-		int PeriodLimit = new StudyService().getSExpirationDate(userNo);
+		Purchase prLimit = new StudyService().purchaseLimit(userNo);
 		
-		request.setAttribute("PeriodLimit", PeriodLimit);
+		request.setAttribute("prLimit", prLimit);
 	
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/CreateStudy.jsp");
 		
@@ -111,7 +110,7 @@ public class createStudyRoom extends HttpServlet {
 			else
 				ssp3 += ssp2[i] + "-";
 		}
-	System.out.println("ssp3 : " + ssp3);
+//	System.out.println("ssp3 : " + ssp3);
 		String[] sep2 = sep.split("/");
 		String sep3 = "";
 		for(int i = 0; i < sep2.length; i++) {
@@ -121,7 +120,7 @@ public class createStudyRoom extends HttpServlet {
 				sep3 += sep2[i] + "-";
 		}
 		
-		System.out.println("sep3 : " + sep3);
+//		System.out.println("sep3 : " + sep3);
 //		System.out.println("dateString : "+ ssp);
 //		System.out.println("dateString : "+ sep);
 //		System.out.println("dateString : "+ sst);
@@ -185,9 +184,3 @@ public class createStudyRoom extends HttpServlet {
 	}
 
 }
-
-
-
-
-
-

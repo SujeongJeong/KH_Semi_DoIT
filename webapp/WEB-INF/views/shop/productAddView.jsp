@@ -9,6 +9,29 @@
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<%
+   if(request.getAttribute("result") != null) {
+      if(request.getAttribute("result").equals("success")) {
+%>
+<script>
+   alert('상품 등록이 완료되었습니다.');
+   opener.parent.location.reload();
+   window.close();
+</script>
+<%
+   } else {
+%>
+<script>
+   alert(' 상품 등록에 실패하셨습니다.');
+   window.close();
+</script>
+<%
+      }
+   }
+%>
+
+
+
 <style>
  
  .wrapper{
@@ -175,6 +198,7 @@
 		
 		
 		<script src="${ contextPath }/resources/js/imagePreview.js"></script>
+		
 		<script type="text/javascript">
 		<%-- 단품 클릭 시 라디오 버튼 생성 --%>
 			$('#category').change(function(){
@@ -205,6 +229,12 @@
 				 }
 			});
 		
+			 
+			 if(){
+					opener.parent.location.reload();
+					  window.close();
+				}
+				
 
 		</script>
 

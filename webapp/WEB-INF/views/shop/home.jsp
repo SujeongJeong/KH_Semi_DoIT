@@ -9,11 +9,6 @@
 <!-- 외부 스타일 시트 -->
 <link href='<%= request.getContextPath() %>/resources/css/all.css?after' rel='stylesheet'>
 <script src="<%= request.getContextPath() %>/resources/js/jquery-3.6.0.min.js"></script>
-<script>
-//자식창닫고 부모창열기
- opener.parent.location.reload();
- window.close();
-</script>
 
 <style>
 
@@ -206,44 +201,25 @@
 </script>
 
 <script>
-		//상품목록에 mouseover/mouseout 시 onmouseover클래스 추가/제거 처리
-		const productPremiumList = document.querySelector(".product_premium");
-		const productSingleList = document.querySelector(".product_single");
-		
-		productPremiumList.addEventListener('mouseover', function(){
+		//이미지 hover하기
+		const productAreaList = document.querySelector(".product_area");
+	
+		productAreaList.addEventListener('mouseover', function(){
 			
-			if(event.target.classList.contains('.premium_product'))
+			if(event.target.classList.contains('premium_img'))
 				event.target.classList.add('onmouseover');
-			else if(event.target.parentNode.classList.contains('.premium_product'))
+			else if(event.target.parentNode.classList.contains('premium_img'))
 				event.target.parentNode.classList.add('onmouseover');
 		});
 		
-		productPremiumList.addEventListener('mouseout', function(){
+		productAreaList.addEventListener('mouseout', function(){
 			
-			if(event.target.classList.contains('.premium_product'))
+			if(event.target.classList.contains('premium_img'))
 				event.target.classList.remove('onmouseover');
-			else if(event.target.parentNode.classList.contains('.premium_product'))
-				event.target.parentNode.classList.remove('onmouseover');
-		});
-		
-		productSingleList.addEventListener('mouseover', function(){
-			
-			if(event.target.classList.contains('premium_product'))
-				event.target.classList.add('onmouseover');
-			else if(event.target.parentNode.classList.contains('premium_product'))
-				event.target.parentNode.classList.add('onmouseover');
-		});
-		
-		productSingleList.addEventListener('mouseout', function(){
-			
-			if(event.target.classList.contains('premium_product'))
-				event.target.classList.remove('onmouseover');
-			else if(event.target.parentNode.classList.contains('premium_product'))
+			else if(event.target.parentNode.classList.contains('premium_img'))
 				event.target.parentNode.classList.remove('onmouseover');
 		})
 		
-		
-	
 	</script>
 
 	<footer>

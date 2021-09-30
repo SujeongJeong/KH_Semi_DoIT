@@ -310,7 +310,7 @@
 						<div><h1 class="time_box">${ todayStudyTime }</h1></div>
 					</div>
 					<div class="rec_box1">
-						<p>일 평균 공부 시간</p>
+						<p>하루 평균 공부 시간</p>
 						<div><h1 class="time_box">${ avgStudyTime }</h1></div>
 					</div>
 					<div class="rec_box1">
@@ -322,13 +322,14 @@
 			<div>
 				<div class="recode_box1">
 					<div><span id="standard"></span></div>
-					<div>평균 공부시간 : ${ lastAvgStudyTime }</div>
+					<div>30일 평균 공부시간 : ${ lastAvgStudyTime }</div>
 				</div>		
 				<table class="board_list">
 					<thead>
 			        	<tr>
 			            <th>날짜</th>
 			            <th>공부 시간</th>
+			            <th>스터디방 번호</th>
 			            </tr>          
 			         </thead>
 			         <tbody>
@@ -336,6 +337,7 @@
 							<tr>
 								<td><fmt:formatDate value="${ sl.studyDate }" type="both" pattern="yyyy.MM.dd"/></td>
 								<td class="formatTime">${ sl.studyTimeStr }</td>
+								<td>${ sl.studyNo }</td>
 							</tr>
 						</c:forEach>
 			          </tbody>

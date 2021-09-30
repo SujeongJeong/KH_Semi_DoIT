@@ -57,11 +57,15 @@ public class MainServlet extends HttpServlet {
 			String afterM = myRanking.getS_time().replace(",", ":");
 			myRanking.setS_time(afterM.trim());
 		} 
+		
+		if(to_limit == 0) to_limit = 5;
+		System.out.println(myStudy);
 		request.setAttribute("Todolist", myList);
 		request.setAttribute("limit", to_limit);
 		request.setAttribute("Study", myStudy);
 		request.setAttribute("myRanking", myRanking);
 		request.setAttribute("rankingList", rankingList);
+
 		request.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(request, response);
 	}
 
