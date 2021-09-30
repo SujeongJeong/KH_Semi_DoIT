@@ -7,6 +7,16 @@
 <title>회원 관리</title>
 </head>
 <body>
+	<div id="content-wrapper">
+		
+	
+	
+	
+	
+	
+	</div>
+
+
 
 </body>
 </html>

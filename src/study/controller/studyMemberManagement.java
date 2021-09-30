@@ -31,6 +31,9 @@ public class studyMemberManagement extends HttpServlet {
 		int user_no = Integer.parseInt(request.getParameter("user_no"));
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		
+		request.setAttribute("user_no", user_no);
+		request.setAttribute("s_no", s_no);
+		
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/studyMemberManagement.jsp");
 		view.forward(request, response);
 		
