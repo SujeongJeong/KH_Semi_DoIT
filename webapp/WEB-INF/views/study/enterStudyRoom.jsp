@@ -237,7 +237,9 @@
 				${ study.s_to }
 			</div>
 			<div id="top1-content-wrapper">
-				<button id="member-management" onclick="memberManagement(${ s_no })">회원 관리</button>
+				<c:if test="${ loginUserNo == CreateRoomUser.userNo }">
+					<button id="member-management" onclick="memberManagement(${ s_no },${ loginUserNo })">회원 관리</button>
+				</c:if>
 				<button id="out" onclick="outBtn()">나가기</button>
 			</div>
 		</div>
@@ -246,7 +248,20 @@
 	<div id="mid-wrapper">
 		<div id="mid1">
 			<div id="mid1-gridContainer">
-				
+					<div class="studyGrid" id="studyGrid">
+						<img src="<%= request.getContextPath() %>${ CreateRoomUser.profileImg }" id="gridImg1">
+						<div id="gridNickname">${ CreateRoomUser.nickName } (방장)</div>
+						<div id="stopWatch">hh:mm:ss</div>
+						<c:if test="${ CreateRoomUser.userNo == loginUserNo }">
+							<div id="timer-wrapper">
+								<button class="timer start" onclick="startBtn()">▷</button>
+								<button class="timer stop" onclick="stopBtn()">||</button>
+								<button class="timer end" onclick="endBtn()">ㅁ</button>
+								
+							</div>
+						</c:if>
+					</div>
+					
 				<c:forEach items="${ MemberList }" var="m" begin="0" end="${ MemberList.size() }">
 					<div class="studyGrid" id="studyGrid">
 						<img src="<%= request.getContextPath() %>${ m.profileImg }" id="gridImg1">
@@ -271,11 +286,22 @@
 				<div id="joinMember-TO">${ StudyMemberCount } / ${study.s_to }</div>
 			</div>
 			<div id="currentJoinMember-wrapper">
+			
+				<div class="currentJoinMember-content">
+						<img src="<%= request.getContextPath() %>${ CreateRoomUser.profileImg }" id="gridImg2">
+						<span id="currentJoinMember-content-nickName">${ CreateRoomUser.nickName } (방장)</span>
+				<%--	<span id="reportMember"><img src="/Do_IT/resources/images/reporticon4.jpg" id="reportImg"></span>  --%>
+					</div>
+			
 				<c:forEach items="${ MemberList }" var="m" begin="0" end="${ MemberList.size() }">
 					<div class="currentJoinMember-content">
 						<img src="<%= request.getContextPath() %>${ m.profileImg }" id="gridImg2">
-						<span id="currentJoinMember-content-nickName">${ m.nickName }</span>
-						<span id="reportMember"><img src="/Do_IT/resources/images/reporticon4.jpg" id="reportImg"></span>
+						<span id="currentJoinMember-content-nickName">${ m.nickName }
+							<c:if test="${ m.userNo == studyCreater.user_no }">
+								 (방장)
+							</c:if>
+						</span>
+				<%--	<span id="reportMember"><img src="/Do_IT/resources/images/reporticon4.jpg" id="reportImg"></span>  --%>
 					</div>
 				</c:forEach>	
 			</div>
@@ -288,6 +314,21 @@
 			</div>
 		</div>
 	</div>
+	
+	<c:if test="${ m.userNo == loginUserNo }">
+		<script>
+			var stopWatchTime = document.getElementById('stopWatch');
+			
+			setInterval(function(){
+				
+				
+				
+				
+				stopWatchTime.innerHTML = 
+			},1000);
+			
+		</script>
+	</c:if>
 	
 	<script>
 	var gridInput = document.querySelector('#mid1-gridContainer');
@@ -344,11 +385,10 @@
 			window.open(url, title, options);
 		}
 		
-	function memberManagement(s_no){
-			openPopup('<%= request.getContextPath() %>/study/memberManagement?s_no='+s_no, 'studyInfo', 700, 500);
+	function memberManagement(s_no,user_no){
+			openPopup('<%= request.getContextPath() %>/study/memberManagement?s_no=' + s_no + '& user_no='+user_no, 'studyInfo', 700, 700);
 			
 		}	
-		
 	
 	// 타이머
 	var start;
@@ -400,7 +440,7 @@
 				$(function(){
 					$.ajax({
 						url : "${ pageContext.servletContext.contextPath }/study/enterStudy/timer",
-						data : { dbSaveTime : dbSaveTime , loginUserNo : ${loginUserNo} },
+						data : { dbSaveTime : dbSaveTime , loginUserNo : ${loginUserNo} , s_no : ${ s_no }},
 						type : "post",
 						success : function(result){
 							console.log("시간 저장 성공");
@@ -411,6 +451,7 @@
 						}
 					});
 				});
+				allTime = 0;
 			}
 		} else{
 			alert("저장할 공부 시간이 없습니다.");
