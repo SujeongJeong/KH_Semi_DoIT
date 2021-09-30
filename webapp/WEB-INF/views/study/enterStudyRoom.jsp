@@ -136,7 +136,7 @@ cursor: pointer;
 }
 .currentJoinMember-content{
 	display: flex;
-    height: 40px;
+    height: 70px;
     border-bottom: 1px solid #e5e5e5;
 }
 
@@ -303,7 +303,7 @@ cursor: pointer;
 					<div class="studyGrid" id="studyGrid">
 						<div class="user-header">
 						<div id="gridNickname">${ m.nickName }</div>
-						<div id="stopWatch">hh:mm:ss</div>
+						<%--<div id="stopWatch">hh:mm:ss</div> --%>
 						</div>
 						<div class="user-profile"><img src="<%= request.getContextPath() %>${ m.profileImg }" id="gridImg1"></div>
 						<c:if test="${ m.userNo == loginUserNo }">

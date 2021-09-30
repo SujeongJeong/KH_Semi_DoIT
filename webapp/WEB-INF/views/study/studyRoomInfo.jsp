@@ -44,7 +44,7 @@ body{
 	width: 135px;
 	height: 100px;
 	top: 115px;
-	left: 530px;
+	right : 20px;
 }
 
 #backImage {
