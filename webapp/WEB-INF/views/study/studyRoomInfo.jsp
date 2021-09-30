@@ -106,6 +106,7 @@ body{
 	border-radius: 5px;
 	border: 0;
 	outline: 0;
+	margin-bottom:10px;
 }
 
 #report {
