@@ -283,10 +283,10 @@
    </entry>
    <entry key="avgStudyTime">
      SELECT
-      		 TO_CHAR(SUM(S_TIME) / (SELECT 
+      		 TO_CHAR(TRUNC(SUM(S_TIME) / (SELECT 
                                     COUNT(S_DAY)
                                     FROM TIMER
-                                    WHERE USER_NO = ?))
+                                    WHERE USER_NO = ?)))
           FROM TIMER
           JOIN MEMBER USING(USER_NO)
          WHERE USER_TYPE = 'U'
@@ -304,7 +304,7 @@
    </entry>
    <entry key="lastAvgStudyTime">
    		SELECT
-      		 TO_CHAR(SUM(S_TIME) / (COUNT(S_DAY)))
+      		 TO_CHAR(TRUNC(SUM(S_TIME) / (COUNT(S_DAY))))
           FROM TIMER
           JOIN MEMBER USING(USER_NO)
          WHERE S_DAY BETWEEN SYSDATE-30 AND SYSDATE-1
