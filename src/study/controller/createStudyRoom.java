@@ -49,8 +49,21 @@ public class createStudyRoom extends HttpServlet {
 		// 스터디방 개설 기간 설정
 		Purchase prLimit = new StudyService().purchaseLimit(userNo);
 		
+//		System.out.println("prLimit1 : " + prLimit);
+		
+		
+		if(prLimit.gets_limit_date() == 0) {
+			prLimit.sets_limit_date(4);
+		}
+		if(prLimit.getS_to_limit() == 0) {
+			prLimit.setS_to_limit(5);
+		}
+		
 		request.setAttribute("prLimit", prLimit);
-	
+		
+//		System.out.println("prLimit2 : " + prLimit);
+		
+		
 		request.setAttribute("nav1", "study");
 		
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/CreateStudy.jsp");
