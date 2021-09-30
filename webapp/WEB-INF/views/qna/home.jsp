@@ -20,7 +20,7 @@
        
             <form method="get" action="<%= request.getContextPath() %>/qna/home">
 	            <div class="search">
-	                <button type="submit"><img src="../resources/images/search_btn.png"></button><input type="text"  name="searchValue" value="${ param.searchValue }">
+	                <button type="submit"><img src="../resources/images/search_btn.png"></button><input type="text" placeholder="제목을 입력해주세요." name="searchValue" value="${ param.searchValue }">
 	            </div>
             </form>
             <div class="newpost_btn">

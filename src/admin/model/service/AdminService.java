@@ -218,8 +218,7 @@ public class AdminService {
 	  
 	  returnMap.put("pi", pi); 
 	  returnMap.put("reportMemberList", reportMemberList);
-	  
-	  System.out.println("reportMemberList : " + reportMemberList);
+
 	  return returnMap; 
 	  }
 
@@ -239,6 +238,17 @@ public class AdminService {
 		Connection conn = getConnection();
 		
 		List<Report> reportList = ad.ReplyReportList(conn, br_no);
+		
+		close(conn);
+		
+		return reportList;
+	}
+
+	// 회원이 받은 모든 신고리스트 가져오기
+	public List<Report> selectReportAllList(int ruser_no) {
+		Connection conn = getConnection();
+		
+		List<Report> reportList = ad.ReportAllList(conn, ruser_no);
 		
 		close(conn);
 		

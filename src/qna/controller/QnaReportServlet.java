@@ -33,12 +33,10 @@ public class QnaReportServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//String bid = request.getParameter("board_no");
 		int bid = Integer.parseInt(request.getParameter("board_no"));
 		int user_no = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
-//		System.out.println("bid:"+bid);
-//		System.out.println("user_no:"+user_no);
+
 		Report r = new Report(user_no);
 		BoardReport br = new BoardReport(bid);
 		
@@ -48,7 +46,6 @@ public class QnaReportServlet extends HttpServlet {
 		
 		String view = "";
 		if(result > 0) {
-//			System.out.println("result:"+result);
 			view = "WEB-INF/views/qna/ReportForm.jsp";
 		} else {
 			view = "WEB-INF/views/qna/qnaReportForm.jsp?board_no="+ bid;
@@ -67,19 +64,21 @@ public class QnaReportServlet extends HttpServlet {
 		
 		String report_content = report + etc_comment;
 
-
-	
-		Report r = new Report(report_content, user_no);
+		/*
+		 * int ruser_no = new ReportService().selectWriter(board_no);
+		 * System.out.println("확이 ㄴㄴㄴ : " + ruser_no);
+		 */
+		
+		
+		Report r = new Report(report_content, user_no, board_no);
+		
 		BoardReport br = new BoardReport(board_no);
+		
 		
 		int result1 =  new ReportService().boardReport(r, br);
 		
 		int result2 = new ReportService().memberBoardReportCount(board_no);
 		
-//		System.out.println("rc : " +report_content);
-//		System.out.println("etcc : " + etc_comment);
-//		System.out.println("user :  " + user_no);
-//		System.out.println("board_no" + board_no);
 
 		
 		if(result1 > 0 && result2 > 0) {

@@ -51,7 +51,7 @@ public class BoardService {
 		
 		int result = bd.insertBoard(conn, b);
 		
-		System.out.println("b : " + b);
+		
 		
 		if(result > 0) {
 			commit(conn);

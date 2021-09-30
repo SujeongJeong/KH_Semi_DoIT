@@ -147,6 +147,7 @@
 		      , B.MODIFY_DATE
 		      , USER_NO		      
 		      , COUNT
+		      , PROFILE_IMG
 			   FROM BOARD B
 			   JOIN CATEGORY USING(CID)
 			   JOIN MEMBER USING (USER_NO)
@@ -194,6 +195,7 @@
 		      , BOARD_NO
 		      , USER_NO
 		      , NICKNAME
+		      , PROFILE_IMG
 		   FROM REPLY R
 		   JOIN MEMBER USING (USER_NO)
 		  WHERE BOARD_NO = ?
