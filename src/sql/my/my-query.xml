@@ -120,7 +120,7 @@
                FROM STUDY S
                JOIN CATEGORY USING(CID)
                JOIN MEMBER M USING (USER_NO)
-                  JOIN MEMBER_JOINSTUDY MJ USING(S_NO)
+                  JOIN JOINSTUDY MJ USING(S_NO)
               WHERE S_STATUS = 'Y'
               AND MJ.USER_NO = ?
               ORDER BY S_NO DESC) SLIST)
@@ -132,7 +132,7 @@
       AND USER_NO = ?
    </entry>
    <entry key="exitJoinStudy">
-      DELETE FROM MEMBER_JOINSTUDY
+      DELETE FROM JOINSTUDY
          WHERE S_NO = ?
          AND USER_NO = ?
    </entry>
@@ -252,7 +252,7 @@
    <entry key="getRecodeCount">
 	SELECT 
            COUNT(*)
-        FROM MEMBER_TIMER 
+        FROM TIMER 
        WHERE S_DAY BETWEEN SYSDATE-30 AND SYSDATE-1
        AND USER_NO = ?
    </entry>
@@ -268,7 +268,7 @@
                  S_DAY
              , S_TIME
              , S_NO
-               FROM MEMBER_TIMER 
+               FROM TIMER 
               WHERE USER_NO = ?
               ORDER BY S_DAY DESC) RLIST)
             WHERE S_DAY BETWEEN SYSDATE-30 AND SYSDATE-1
@@ -277,7 +277,7 @@
    <entry key="todayStudyTime">
    		SELECT 
    			S_TIME 
-	      FROM MEMBER_TIMER 
+	      FROM TIMER 
 	     WHERE TO_CHAR(S_DAY) = TO_CHAR(SYSDATE) 
 	     AND USER_NO = ?
    </entry>
@@ -285,9 +285,9 @@
      SELECT
       		 TO_CHAR(SUM(S_TIME) / (SELECT 
                                     COUNT(S_DAY)
-                                    FROM MEMBER_TIMER
+                                    FROM TIMER
                                     WHERE USER_NO = ?))
-          FROM MEMBER_TIMER
+          FROM TIMER
           JOIN MEMBER USING(USER_NO)
          WHERE USER_TYPE = 'U'
          AND USER_NO = ?
@@ -296,7 +296,7 @@
    <entry key="sumStudyTime">
   	SELECT
       		 TO_CHAR(SUM(S_TIME)) 
-          FROM MEMBER_TIMER
+          FROM TIMER
           JOIN MEMBER USING(USER_NO)
          WHERE USER_TYPE = 'U'
          AND USER_NO = ?
@@ -305,7 +305,7 @@
    <entry key="lastAvgStudyTime">
    		SELECT
       		 TO_CHAR(SUM(S_TIME) / (COUNT(S_DAY)))
-          FROM MEMBER_TIMER
+          FROM TIMER
           JOIN MEMBER USING(USER_NO)
          WHERE S_DAY BETWEEN SYSDATE-30 AND SYSDATE-1
          AND USER_TYPE = 'U'
