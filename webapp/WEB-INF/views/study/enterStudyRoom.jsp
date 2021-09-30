@@ -19,6 +19,9 @@
 	padding : 0px;
 }
 
+button{
+cursor: pointer;
+}
 #top {
 	display: flex;
     align-items: center;
@@ -26,6 +29,7 @@
 	width: 100%;
 	height: 85px;
 	background-color: black;
+	opacity: 0.8;
 }
 #top-content{
     display: flex;
@@ -59,23 +63,25 @@
 
 #member-management {
     background-color: white;
-    width: 120px;
-    height: 50px;
-    text-align: center;
-    border-radius: 30px;
-    font-size: 1.05em;
+ 	text-align: center;
+    border-radius: 15px;
+    font-size: 1.01em;
+    width: 100px;
+    height: 40px;
+    border: 0;
 }
 
 #out {
 	display: inline-block;
     background-color: red;
     margin-left: 15px;
-    width: 120px;
-    height: 50px;
+    width: 100px;
+    height: 40px;
     text-align: center;
-    border-radius: 30px;
+    border-radius: 15px;
     font-size: 1.05em;
     color: white;
+    border : 0;
 }
 
 #mid-wrapper {
@@ -85,14 +91,15 @@
     height: calc(100vh - 85px);
 }
 
-#mid1 {
+#mid1{
 	position:relative;
 	border: 1px solid black;
 	width: calc(100% - 335px);
 	height: 99.9%;
+	background-color: #474747;
 }
 
-#mid2 {
+#mid2{
     width: 335px;
     height: 99.9%;
     box-sizing: border-box;
@@ -105,6 +112,9 @@
     margin : 10px;
 }
 
+#study-limit{
+	font-size : 18px;
+}
 #joinMember-TO{
 	margin-left : 85px;
 }
@@ -112,6 +122,9 @@
 #joinMember-wrapper{
 	border-bottom: 1px solid gray;
 	height:50px;
+	background-color: black;
+    opacity: 0.8;
+    color: white;
 }
 
 #currentJoinMember-wrapper{
@@ -124,12 +137,15 @@
 .currentJoinMember-content{
 	display: flex;
     height: 40px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 #chat-title-content{
-	margin:10px;
-	font-size: 1.5em;
+    font-size: 1.5em;
+    background-color: black;
+    opacity: 0.8;
+    color: white;
+    padding: 10px;
 }
 
 #chat-title{
@@ -154,6 +170,8 @@
 	margin:5px;
 	width:95%;
 	height:30px;
+	border: 1px solid #c4c4c4;
+    border-radius: 5px;
 }
 
 #mid1-gridContainer{
@@ -168,12 +186,18 @@
 	border : 1px solid black;
 }
 
+.user-header{
+	 display: flex;
+    justify-content: space-between;
+}
+
 #gridImg1{
-	position: absolute; 
-	top:0; 
-	left: 0;
-	width: 100%;
-	height: 100%;
+    width: 90%;
+    height: 25vh;
+    margin: 10px auto;
+    left: 6%;
+    position: absolute;
+    top: 15%;
 }
 
 #gridImg2{
@@ -187,25 +211,31 @@
 }
 
 #gridNickname{
-	position:absolute;
-	text-align:center;
+/*	position:absolute;
 	top:10px;
-	left:15px;
+	left:15px;*/
+	text-align:center;
 	font-size:1.2em;
+	color: white;
+    padding-left: 10px;
+    padding-top: 5px;
 }
 
 #stopWatch{
-	position: absolute;
+	/*position: absolute;
+    right: 0;*/
     text-align: center;
-    right : 0;
+    height: 33px;
     font-size: 1.2em;
     background-color: black;
     border-bottom-left-radius: 7px;
     color: white;
-    padding: 8px;
-    padding-left: 20px;
+    /* padding-left: 20px; */
+    width: 105px;
 }
-
+#stopWatch div{
+	margin-bottom : 5px;
+}
 #reportImg{
     width: 35px;
     height: 35px;
@@ -225,7 +255,11 @@
 	text-align: center;
 	padding: 13px;
 }
-
+/* 광고 css */
+.ad img{
+	width : 334px;
+	height : 110px ;
+}
 
 </style>
 <body>
@@ -233,8 +267,10 @@
 		<div id="top-content">
 			<div id="title">${ study.s_name }</div>
 			<div id="currentTO">
+				<div class="user-profile">
 				<img src="/Do_IT/resources/images/studyicon2.jpg" id="img1">
 				${ study.s_to }
+				</div>
 			</div>
 			<div id="top1-content-wrapper">
 				<c:if test="${ loginUserNo == CreateRoomUser.userNo }">
@@ -249,24 +285,27 @@
 		<div id="mid1">
 			<div id="mid1-gridContainer">
 					<div class="studyGrid" id="studyGrid">
-						<img src="<%= request.getContextPath() %>${ CreateRoomUser.profileImg }" id="gridImg1">
+						<div class="user-header">
 						<div id="gridNickname">${ CreateRoomUser.nickName } (방장)</div>
-						<div id="stopWatch">hh:mm:ss</div>
+						<%-- <div id="stopWatch">hh:mm:ss</div>--%>
+						</div>
+						<div class="user-profile"><img src="<%= request.getContextPath() %>${ CreateRoomUser.profileImg }" id="gridImg1"></div>
 						<c:if test="${ CreateRoomUser.userNo == loginUserNo }">
 							<div id="timer-wrapper">
 								<button class="timer start" onclick="startBtn()">▷</button>
 								<button class="timer stop" onclick="stopBtn()">||</button>
 								<button class="timer end" onclick="endBtn()">ㅁ</button>
-								
 							</div>
 						</c:if>
 					</div>
 					
 				<c:forEach items="${ MemberList }" var="m" begin="0" end="${ MemberList.size() }">
 					<div class="studyGrid" id="studyGrid">
-						<img src="<%= request.getContextPath() %>${ m.profileImg }" id="gridImg1">
+						<div class="user-header">
 						<div id="gridNickname">${ m.nickName }</div>
 						<div id="stopWatch">hh:mm:ss</div>
+						</div>
+						<div class="user-profile"><img src="<%= request.getContextPath() %>${ m.profileImg }" id="gridImg1"></div>
 						<c:if test="${ m.userNo == loginUserNo }">
 							<div id="timer-wrapper">
 								<button class="timer start" onclick="startBtn()">▷</button>
@@ -283,7 +322,7 @@
 		<div id="mid2">
 			<div id="joinMember-wrapper">
 				<div id="joinMember-title">참가자 목록</div>
-				<div id="joinMember-TO">${ StudyMemberCount } / ${study.s_to }</div>
+				<div id="joinMember-TO">${ StudyMemberCount } / <span id="study-limit">${study.s_to }</span></div>
 			</div>
 			<div id="currentJoinMember-wrapper">
 			
@@ -305,14 +344,22 @@
 					</div>
 				</c:forEach>	
 			</div>
-			<div id="chat-title">
+			<div class="ad">
+			<img src="<%= request.getContextPath() %>/resources/images/banner_memberjoin.png" alt="광고1">
+			<img src="<%= request.getContextPath() %>/resources/images/banner_qna.png" alt="광고1">
+			<img src="<%= request.getContextPath() %>/resources/images/banner_ranking.png" alt="광고1">			
+			</div>
+		</div>
+			
+		<%-- 채팅 
+				<div id="chat-title">
 				<div id="chat-title-content">채팅</div>
 			</div>
 			<div id="chat-content">채팅구간</div>
 			<div id="chat-input">
 				<input type="text" id="chat" placeholder="대화를 입력하세요">
 			</div>
-		</div>
+		</div> --%>
 	</div>
 	
 	<c:if test="${ m.userNo == loginUserNo }">
