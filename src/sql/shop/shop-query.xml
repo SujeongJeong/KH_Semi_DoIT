@@ -27,7 +27,7 @@
 			  , S_LIMIT
 			  , S_TO_LIMIT 
 			  , TODO_LIMIT
-			  , S_LIMITDATE
+			  , S_LIMIT_DATE
 
 			)
 			VALUES
@@ -58,7 +58,7 @@
 			  , S_LIMIT
 			  , S_TO_LIMIT 
 			  , TODO_LIMIT
-			  , S_LIMITDATE
+			  , S_LIMIT_DATE
 			  
 		   FROM PRODUCT
 		  WHERE PRODUCT_NO = ?
@@ -77,7 +77,7 @@
 			  , S_LIMIT = ?
 			  , S_TO_LIMIT = ? 
 			  , TODO_LIMIT = ?
-			  , S_LIMITDATE = ?
+			  , S_LIMIT_DATE = ?
    	  	
    		WHERE PRODUCT_NO = ?
 	 </entry>
@@ -118,7 +118,7 @@
 		  	  , S_LIMIT
 			  , S_TO_LIMIT
 			  , TODO_LIMIT
-			  , S_LIMITDATE
+			  , S_LIMIT_DATE
 		 	  , USER_NO
 			  , PRODUCT_NO
 			)
@@ -144,7 +144,7 @@
               	FROM PRODUCT
               	WHERE PRODUCT_NO = ?)
               , (SELECT
-              		S_LIMITDATE
+              		S_LIMIT_DATE
               	FROM PRODUCT
               	WHERE PRODUCT_NO = ?)	             
 			  , ?
@@ -190,7 +190,7 @@
 		        MAX(PR.S_LIMIT)
 		       , MAX(PR.S_TO_LIMIT)
 		       , MAX(PR.TODO_LIMIT)
-		       , MAX(PR.S_LIMITDATE)
+		       , MAX(PR.S_LIMIT_DATE)
 		FROM PRODUCT P
 		JOIN PURCHASE PR ON(P.PRODUCT_NO = PR.PRODUCT_NO)
 		WHERE PR.USER_NO =?
