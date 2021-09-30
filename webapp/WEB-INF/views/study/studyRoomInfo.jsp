@@ -200,7 +200,7 @@ h2, h3 {
 					<c:if test="${ selectMemberJoinStudy == null }">
 						<c:out value="가입하기" />
 						
-						<c:if test="${ memberJoinStudyNum < 3}">
+						<c:if test="${ memberJoinStudyNum < userStudyLimit}">
 							<c:if test="${ StudyMemberCount +1 < studyRoom.s_to }">
 								<script>
 									function studyBtn() {
@@ -220,7 +220,7 @@ h2, h3 {
 								</script>
 							</c:if>
 						</c:if>
-						<c:if test="${ memberJoinStudyNum >= 3}">
+						<c:if test="${ memberJoinStudyNum >= userStudyLimit }">
 							<script>
 								function studyBtn() {
 									alert("가입 한도를 초과하셨습니다.");

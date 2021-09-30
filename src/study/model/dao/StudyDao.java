@@ -377,11 +377,14 @@ public class StudyDao {
           rset = pstmt.executeQuery();
           while(rset.next()) {
              resultList.add(new Study(rset.getInt("s_no"),
-                                rset.getString("s_name"),
-                                rset.getInt("s_to"),
-                                rset.getString("cname"),
-                                rset.getString("file_path"),
-                                rset.getString("change_name")));
+                     rset.getString("s_name"),
+                     rset.getInt("s_to"),
+                     rset.getString("s_day"),
+                     rset.getString("cname"),
+                     rset.getString("change_name"),
+                     rset.getString("file_path"),
+                     rset.getInt("studyMemberNum")
+                     ));
           }
           
        } catch (SQLException e) {
@@ -679,6 +682,35 @@ public class StudyDao {
 	}
 
 
+	public int userStudyLimit(Connection conn, int userNo) {
+	       
+        PreparedStatement pstmt = null;
+          ResultSet rset = null;
+          int result = 0;
+          
+          String sql = query.getProperty("userStudyLimit");
+          
+          try {
+             pstmt = conn.prepareStatement(sql);
+             
+             pstmt.setInt(1, userNo);
+     
+             rset = pstmt.executeQuery();
+             if (rset != null) {
+                while (rset.next()) {
+                   result = rset.getInt(1);
+                  
+                }
+             } 
+          } catch (SQLException e) {
+             e.printStackTrace();
+          } finally {
+             close(rset);
+             close(pstmt);
+          }
+      
+          return result;
+    }
 	
 
 }
