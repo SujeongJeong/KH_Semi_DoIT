@@ -84,7 +84,6 @@ public class MyHomeServlet extends HttpServlet {
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/home.jsp");
 		view.forward(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
