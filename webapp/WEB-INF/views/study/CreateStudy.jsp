@@ -11,11 +11,13 @@
 <!-- 외부 스타일 시트 -->
 <link href='<%=request.getContextPath()%>/resources/css/all.css'
 	rel='stylesheet'>
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
 <style>
 .span1 {
 	display: inline-block;
@@ -249,7 +251,7 @@
 	});
 	 
 	let s_to_limit = ${prLimit.s_to_limit}; // 스터디방 입장 가능 인원 수 제한 4
-	let s_limitdate = ${prLimit.s_limitdate}; //스터디방연장상품 0
+	let s_limitdate = ${prLimit.s_limit_date}; //스터디방연장상품 0
 	
 	if(s_limitdate == 0) {
 		$(".radio_to").attr("disabled", true);
@@ -257,22 +259,23 @@
 		$(".radio_to").removeAttr("disabled");
 		
 		$('.radio_to').click(function(){
+			console.log();
 			if(s_limitdate != 0) {
-				$( '.datepicker' ).datepicker( "destroy" );
-				$('.datepicker').datepicker({ dateFormat: 'yy/mm/dd',minDate : 0, maxDate : "+"+s_limitdate+"d"});
+				$('.datepicker').datepicker( "destroy" );
+				$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', minDate : 0, maxDate : "+" + s_limitdate + "d" });
 			}
 		});
 	}
 	
 	// 
 	$('#TO_5').click(function(){
-		$( '.datepicker' ).datepicker( "destroy" );
-		$('.datepicker').datepicker({ dateFormat: 'yy/mm/dd',minDate : 0, maxDate : '+3m'});
+		$('.datepicker').datepicker( "destroy" );
+		$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd',minDate : 0, maxDate : '+3m'});
 	});
 	
 	
 	$("input[name=s_to]").each(function(index, elem){ 
-		if($(elem).val() <= s_to_limit+1) {
+		if($(elem).val() <= s_to_limit) {
 			$(elem).removeAttr("disabled");
 		} else {
 			$(elem).attr("disabled", true);

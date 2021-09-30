@@ -29,7 +29,14 @@ public class Purchase {
    private int todo_limit;
    private int s_limit_date;
    
-   
+ //LIMIT 셀렉트용
+ 	public Purchase(int s_limit, int s_to_limit, int todo_limit, int s_limit_date) {
+ 	super();
+ 	this.s_limit = s_limit;
+ 	this.s_to_limit = s_to_limit;
+ 	this.todo_limit = todo_limit;
+ 	this.s_limit_date = s_limit_date;
+ }
    
    public Purchase(String productName, Date startDate, Date expirationDate, int productPrice) {
       super();
@@ -65,14 +72,7 @@ public class Purchase {
 
 	
 	
-	//LIMIT 셀렉트용
-	public Purchase(int s_limit, int s_to_limit, int todo_limit, int s_limit_date) {
-	super();
-	this.s_limit = s_limit;
-	this.s_to_limit = s_to_limit;
-	this.todo_limit = todo_limit;
-	this.s_limit_date = s_limit_date;
-}
+	
 
 
 	public int getPurchaseNo() {

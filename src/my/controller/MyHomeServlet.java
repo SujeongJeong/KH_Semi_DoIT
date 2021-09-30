@@ -38,6 +38,11 @@ public class MyHomeServlet extends HttpServlet {
 
 		int page = 	1;
 		
+		// 하지만 페이지 전환 시 전달 받은 현재 페이지가 있을 경우 해당 값을 page로 적용
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}	
+		
 		// 메뉴바 클릭했을 때 페이지로 이동
 		if(request.getSession().getAttribute("loginUser") == null) {
 			request.setAttribute("msg", "로그인 후 이용 가능합니다.");
@@ -47,32 +52,26 @@ public class MyHomeServlet extends HttpServlet {
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		String todayStudyTime = null; 	// 하루 누적 공부시간
-		String avgStudyTime = null;	// 일 평균 공부 시간 -> 누적 공부시간 / S_DAY가 NULL이 아닌 컬럼
 		String sumStudyTime = null; // 누적 공부 시간 -> USER_NO 이용
 		String lastAvgStudyTime = null; // 최근 30일 주 평균 공부시간
 		
 		// 오늘 공부 시간
-		if(new MyService().todayStudyTime(userNo).equals("0") || new MyService().avgStudyTime(userNo).equals("0") || new MyService().sumStudyTime(userNo).equals("0") || new MyService().lastAvgStudyTime(userNo).equals("0") ) {
+		if(new MyService().todayStudyTime(userNo).equals("0") || new MyService().sumStudyTime(userNo).equals("0") || new MyService().lastAvgStudyTime(userNo).equals("0") ) {
 			todayStudyTime = formatDate("0");
-			avgStudyTime = formatDate("0");
 			sumStudyTime = formatDate("0");
 			lastAvgStudyTime = formatDate("0");
 		} else {
 			todayStudyTime = formatDate(new MyService().todayStudyTime(userNo));
-			avgStudyTime = formatDate(new MyService().avgStudyTime(userNo));
 			sumStudyTime = formatDate(new MyService().sumStudyTime(userNo));
 			lastAvgStudyTime = formatDate(new MyService().lastAvgStudyTime(userNo));
 		}
 		todayStudyTime = formatDate(new MyService().todayStudyTime(userNo));
 		// 일 평균 공부 시간 -> 누적 공부시간 / S_DAY가 NULL이 아닌 컬럼
-		avgStudyTime = formatDate(new MyService().avgStudyTime(userNo));
-		// 누적 공부 시간 -> USER_NO 이용
 		sumStudyTime = formatDate(new MyService().sumStudyTime(userNo));
 		// 최근 30일 주 평균 공부시간
 		lastAvgStudyTime = formatDate(new MyService().lastAvgStudyTime(userNo));
 				
 		request.setAttribute("todayStudyTime", todayStudyTime);
-		request.setAttribute("avgStudyTime", avgStudyTime);
 		request.setAttribute("sumStudyTime", sumStudyTime);
 		request.setAttribute("lastAvgStudyTime", lastAvgStudyTime);
 		
@@ -108,5 +107,4 @@ public class MyHomeServlet extends HttpServlet {
 		str =  hour + ":" + minute + ":" + second;
 		return str;
 	} 
-
 }

@@ -49,11 +49,24 @@ public class createStudyRoom extends HttpServlet {
 		// 스터디방 개설 기간 설정
 		Purchase prLimit = new StudyService().purchaseLimit(userNo);
 		
+//		System.out.println("prLimit1 : " + prLimit);
+		
+		
+		if(prLimit.gets_limit_date() == 0) {
+			prLimit.sets_limit_date(4);
+		}
+		if(prLimit.getS_to_limit() == 0) {
+			prLimit.setS_to_limit(5);
+		}
+		
 		request.setAttribute("prLimit", prLimit);
-	
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/CreateStudy.jsp");
+		
+//		System.out.println("prLimit2 : " + prLimit);
+		
 		
 		request.setAttribute("nav1", "study");
+		
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/CreateStudy.jsp");
 		view.forward(request, response);
 	}
 
@@ -102,24 +115,6 @@ public class createStudyRoom extends HttpServlet {
 		String sst = multiRequest.getParameter("s_startTime");
 		String set = multiRequest.getParameter("s_endTime");
 		
-		String[] ssp2 = ssp.split("/");
-		String ssp3 = "";
-		for(int i = 0; i < ssp2.length; i++) {
-			if(i == ssp2.length-1)
-				ssp3 += ssp2[i];
-			else
-				ssp3 += ssp2[i] + "-";
-		}
-//	System.out.println("ssp3 : " + ssp3);
-		String[] sep2 = sep.split("/");
-		String sep3 = "";
-		for(int i = 0; i < sep2.length; i++) {
-			if(i == sep2.length-1)
-				sep3 += sep2[i];
-			else 
-				sep3 += sep2[i] + "-";
-		}
-		
 //		System.out.println("sep3 : " + sep3);
 //		System.out.println("dateString : "+ ssp);
 //		System.out.println("dateString : "+ sep);
@@ -133,9 +128,9 @@ public class createStudyRoom extends HttpServlet {
 		
 		try {
 				
-				s_startPeriod = new SimpleDateFormat("yyyy/MM/dd").parse(ssp);
+				s_startPeriod = new SimpleDateFormat("yyyy-MM-dd").parse(ssp);
 //				System.out.println("s_startPeriod : " + s_startPeriod);
-				s_endPeriod = new SimpleDateFormat("yyyy/MM/dd").parse(sep);
+				s_endPeriod = new SimpleDateFormat("yyyy-MM-dd").parse(sep);
 //				System.out.println("s_endPeriod : " + s_endPeriod);
 				s_startTime = new SimpleDateFormat("HH:mm").parse(sst);
 				s_endTime = new SimpleDateFormat("HH:mm").parse(set);

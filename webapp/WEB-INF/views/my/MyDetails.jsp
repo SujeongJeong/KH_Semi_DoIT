@@ -294,11 +294,9 @@
       </div>
    </div>
    
-   
    <footer>
    <%@ include file='/WEB-INF/views/common/footer.jsp' %>
    </footer>
-   
    <script>
    $('input[type=radio]').change(function(){
       document.forms.detailsForm.action = '${contextPath}/my/details';
