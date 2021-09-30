@@ -13,7 +13,7 @@
 		              , TO_NUMBER(RANK() OVER (ORDER BY SUM(S_TIME) DESC)) "RANKING"
 		              , TO_CHAR(SUM(S_TIME), '999990,00,00' )"SUMTIME"
 		              , PROFILE_IMG
-		           FROM MEMBER_TIMER
+		           FROM TIMER
 		           JOIN MEMBER USING(USER_NO)
 		          WHERE TO_CHAR(S_DAY, 'yyyymmdd') = TO_CHAR(SYSDATE-1, 'yyyymmdd') 
 		            AND USER_TYPE = 'U'
@@ -33,7 +33,7 @@
 		              , TO_CHAR(SUM(S_TIME), '999990,00,00' )"SUMTIME"
 		              , PROFILE_IMG
 		              , USER_NO
-		           FROM MEMBER_TIMER
+		           FROM TIMER
 		           JOIN MEMBER USING(USER_NO)
 		          WHERE TO_CHAR(S_DAY,'yyyymmdd') = TO_CHAR(SYSDATE-1,'yyyymmdd')
 		            AND USER_TYPE = 'U' 
@@ -52,7 +52,7 @@
 		              , TO_NUMBER(RANK() OVER (ORDER BY SUM(S_TIME) DESC)) "RANKING"
 		              , TO_CHAR(SUM(S_TIME), '999990,00,00' )"SUMTIME"
 		              , PROFILE_IMG
-		           FROM MEMBER_TIMER
+		           FROM TIMER
 		           JOIN MEMBER USING(USER_NO)
      	 <![CDATA[WHERE TO_CHAR(S_DAY, 'yyyymmdd') >= TO_CHAR(SYSDATE- ?, 'yyyymmdd')]]> 
 		            AND USER_TYPE = 'U'
@@ -72,7 +72,7 @@
 		              , TO_CHAR(SUM(S_TIME), '999990,00,00' )"SUMTIME"
 		              , PROFILE_IMG
 		              , USER_NO
-		           FROM MEMBER_TIMER
+		           FROM TIMER
 		           JOIN MEMBER USING(USER_NO)
 		 <![CDATA[WHERE TO_CHAR(S_DAY, 'yyyymmdd') >= TO_CHAR(SYSDATE-?, 'yyyymmdd')]]> 
 		            AND USER_TYPE = 'U' 
@@ -91,7 +91,7 @@
 		              , TO_NUMBER(RANK() OVER (ORDER BY SUM(S_TIME) DESC)) "RANKING"
 		              , TO_CHAR(SUM(S_TIME), '999990,00,00' )"SUMTIME"
 		              , PROFILE_IMG
-		           FROM MEMBER_TIMER
+		           FROM TIMER
 		           JOIN MEMBER USING(USER_NO)
 		          WHERE TO_CHAR(S_DAY, 'yyyymmdd') = TO_CHAR(SYSDATE-1, 'yyyymmdd') 
 		            AND USER_TYPE = 'U'
@@ -111,7 +111,7 @@
 	              , TO_NUMBER(RANK() OVER (ORDER BY SUM(S_TIME) DESC)) "RANKING"
 	              , TO_CHAR(SUM(S_TIME), '999990,00,00' )"SUMTIME"
 	              , PROFILE_IMG
-	           FROM MEMBER_TIMER
+	           FROM TIMER
 	           JOIN MEMBER USING(USER_NO)
      <![CDATA[WHERE TO_CHAR(S_DAY, 'yyyymmdd') >= TO_CHAR(SYSDATE- ?, 'yyyymmdd')]]> 
 	            AND USER_TYPE = 'U'
@@ -132,7 +132,7 @@
 		              , TO_CHAR(SUM(S_TIME), '999990,00,00' )"SUMTIME"
 		              , PROFILE_IMG
 		              , USER_NO
-		           FROM MEMBER_TIMER
+		           FROM TIMER
 		           JOIN MEMBER USING(USER_NO)
 		          WHERE TO_CHAR(S_DAY,'yyyymmdd') = TO_CHAR(SYSDATE-1,'yyyymmdd')
 		            AND USER_TYPE = 'U'
@@ -153,7 +153,7 @@
 		              , TO_CHAR(SUM(S_TIME), '999990,00,00' )"SUMTIME"
 		              , PROFILE_IMG
 		              , USER_NO
-		           FROM MEMBER_TIMER
+		           FROM TIMER
 		           JOIN MEMBER USING(USER_NO)
          <![CDATA[WHERE TO_CHAR(S_DAY, 'yyyymmdd') >= TO_CHAR(SYSDATE- ?, 'yyyymmdd')]]> 
 		            AND USER_TYPE = 'U'

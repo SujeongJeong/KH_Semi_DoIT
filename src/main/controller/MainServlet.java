@@ -59,7 +59,6 @@ public class MainServlet extends HttpServlet {
 		} 
 		
 		if(to_limit == 0) to_limit = 5;
-		System.out.println(myStudy);
 		request.setAttribute("Todolist", myList);
 		request.setAttribute("limit", to_limit);
 		request.setAttribute("Study", myStudy);
