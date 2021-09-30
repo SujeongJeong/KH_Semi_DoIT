@@ -56,7 +56,8 @@ public class MyHomeServlet extends HttpServlet {
 		String lastAvgStudyTime = null; // 최근 30일 주 평균 공부시간
 		
 		// 오늘 공부 시간
-		if(new MyService().todayStudyTime(userNo).equals("0") || new MyService().sumStudyTime(userNo).equals("0") || new MyService().lastAvgStudyTime(userNo).equals("0") ) {
+		if(new MyService().todayStudyTime(userNo).equals("0") || new MyService().sumStudyTime(userNo).equals("0") 
+				|| new MyService().lastAvgStudyTime(userNo).equals("0") ) {
 			todayStudyTime = formatDate("0");
 			sumStudyTime = formatDate("0");
 			lastAvgStudyTime = formatDate("0");

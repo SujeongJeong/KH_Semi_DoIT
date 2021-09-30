@@ -189,7 +189,7 @@
                            <tr>
                               <td><fmt:formatDate value="${ cl.chargeDate }" type="both" pattern="yyyy.MM.dd HH:mm:ss"/></td>
                               <td>${ cl.chargeCoin }</td>
-                              <td>${ cl.chargeCoin * 11 }</td> 
+                              <td>${ cl.chargeCoin * 110 }</td> 
                            </tr>
                         </c:forEach>
                          </tbody>
