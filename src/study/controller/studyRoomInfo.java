@@ -87,9 +87,17 @@ public class studyRoomInfo extends HttpServlet {
 			int memberJoinStudyNum = new StudyService().memberJoinStudyNum(userNo);
 //			System.out.println("로그인된 멤버의 가입된 스터디방 수 : "+memberJoinStudyNum);
 			request.setAttribute("memberJoinStudyNum", memberJoinStudyNum);
+
+			int userStudyLimit = new StudyService().userStudyLimit(userNo); 
+		
+        
+        if(userStudyLimit == 0) {
+           userStudyLimit = 3;
+        }
+        
+        request.setAttribute("userStudyLimit", userStudyLimit);
+		
 		}
-		
-		
 		
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/studyRoomInfo.jsp");
 		view.forward(request, response);

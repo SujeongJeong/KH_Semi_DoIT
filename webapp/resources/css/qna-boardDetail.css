@@ -1,22 +1,25 @@
 @charset "UTF-8";
 
+.min_content { width : 800px; height:auto;}
 .board_wrap{
-    border: 2px solid rgb(208, 215, 222);
-
+   	width: 800px;
+    height: auto;
 }
 
+button { border-radius: 5px; }
 .btn .modify_btn,
 	 .del_btn,
 	 .report_btn,
 	 .confirm_btn{
-    width: 70px;
-    height: 40px;
+    width: 60px;
+    height: 35px;
     border: none;
     margin-left: 12px;   
+
 }
 
 .btn .report_btn{
-    background: rgb(204, 10, 30);
+    background: rgb(255 0 0);
     color: #fff;
 }
 
@@ -42,11 +45,12 @@
 }
 
 .nickname{
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .write_time{
-    color: rgb(208, 215, 222);
+    color: #C4C4C4;
+    font-size : 14px;
 }
 
 
@@ -57,22 +61,31 @@
     font-weight :bolder;
     padding: 20px 0;
     background-color: #f9f9f9;
-    border-top: 2px solid rgb(208, 215, 222);
+    border-top: 1.5px solid rgb(208, 215, 222);
 
+}
+.board_titld h1{ margin-top : 0px;}
+.cname{
+	text-align : left;
+	color : #5FC5FF;
+	font-weight:bolder;
+	padding-left : 40px;
+}
+#board_no{
+	text-align : left;
+	padding-left : 40px;
+	font-weight : normal;
+	margin-bottom : 5px;
 }
 
 /* 게시물 내용 */
-.board_text .cname{
-	text-align :right;
-	color : #5FC5FF;
-	font-weight:bolder;
-}
-
 .board_text{
     padding: 20px 30px;
     line-height: 45px;
-    border-top: 2px solid rgb(208, 215, 222);
+    border-top: 1px solid rgb(208, 215, 222);
+    border-bottom: 1px solid rgb(208, 215, 222);
     margin : 0;
+    min-height: 400px;
 }
 
 
@@ -83,15 +96,18 @@
 
 
 .user_img{
-	width:50px;
-	height: 50px;;
+	width:40px;
+	height: 40px;;
 	margin-right : 10px;
+	margin-top : 5px;
 }
 
 
 .board_btn{
     /* border-bottom: 2px solid rgb(208, 215, 222); */
-    padding: 10px 10px;
+    padding-top: 20px;
+    display : flex;
+    justify-content: flex-end;
 }
 
 .board_view{
@@ -105,8 +121,7 @@
     margin-top: 20px;
 	font-weight :bolder;
 	line-height: 40px;
-	border-bottom :2px solid rgb(208, 215, 222);
-    border-top: 2px solid rgb(208, 215, 222);
+    /* border-top: 1.5px solid rgb(208, 215, 222); */
 	background-color: #f9f9f9;
 	padding: 10px 20px;
 }
@@ -115,20 +130,22 @@
 .new_comment{
     display: flex;
     padding : 15px 10px;
-    border-bottom: 2px solid rgb(208, 215, 222);
+    border-bottom: 1px solid rgb(208, 215, 222);
 }
 
 .reply_content{
     border : 2px solid rgb(208, 215, 222);
-    width: 100%;
+    width: 95%;
     height: 50px;
     padding-left: 10px;
     line-height: 50px;
     margin  :0;
+    resize: vertical;
+    margin-left : 20px;
 }
 
 .modifyReply_content{
-    border : 2px solid rgb(208, 215, 222);
+    border : 1px solid rgb(208, 215, 222);
     width: 860px;
     height: 50px;
     padding-left: 10px;
@@ -138,30 +155,34 @@
 
 
 .new_comment button {
-    width: 70px;
+    width: 65px;
     height: 52px;
-    margin-left: 5px;
+    margin-right: 5px;
     border: none;
-    
+    margin-left : 15px;
 }
 
 /* 댓글 */
 
 .comment_wrapper{
-    padding: 35px 10px;
-    border: 2px solid rgb(208, 215, 222);
+    padding-top: 35px
     margin-bottom: 20px;
+    width: 800px;
+    height: auto;
 }
 
 .comment_wrapper .comment{
-    border: 2px solid rgb(208, 215, 222);
     padding: 20px 10px;
     line-height: 25px;
 }
 
 .comment_btn{
     margin: 10px 0px;
-
+    border-bottom: 1px solid #c4c4c4; 
+    padding-bottom: 10px;
+    display : flex;
+    justify-content: flex-end;
+    padding-right: 5px;
 }
 
 /* .my_comment{

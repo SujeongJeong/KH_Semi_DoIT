@@ -74,6 +74,18 @@ public class Study {
 	      this.sImgList.add(new Attachment(change_name, file_path));
 	   }
    
+   public Study(int s_no, String s_name, int s_to, String s_day, String cname, String change_name, String file_path ,
+			int studyMemberNum) {
+		super();
+		this.s_no = s_no;
+		this.s_name = s_name;
+		this.s_to = s_to;
+		this.s_day = s_day;
+		this.cname = cname;
+		this.sImgList.add(new Attachment(change_name, file_path));
+		this.studyMemberNum = studyMemberNum;
+	}
+   
 	public Study(int s_no, String s_name, int s_to, String s_day, Date s_startPeriod, Date s_endPeriod, Date s_startTime,
 		Date s_endTime, String s_explain, String s_notice, String cname, String user_nkname, String change_name, String file_path, int studyMemberNum) {
 	super();

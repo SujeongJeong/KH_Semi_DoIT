@@ -67,7 +67,7 @@ public class createStudyRoom extends HttpServlet {
 		String root = request.getSession().getServletContext().getRealPath("/");	// 웹서버 컨테이너 경로
 		String savePath = root + "resources\\uploadFiles\\study";		// 저장될 경로
 		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-		System.out.println(savePath);
+//		System.out.println(savePath);
 		
 		// DB의 Study,Attachment 데이터 저장
 		// Attachment 테이블에 값 삽입
@@ -134,9 +134,9 @@ public class createStudyRoom extends HttpServlet {
 		try {
 				
 				s_startPeriod = new SimpleDateFormat("yyyy/MM/dd").parse(ssp);
-				System.out.println("s_startPeriod : " + s_startPeriod);
+//				System.out.println("s_startPeriod : " + s_startPeriod);
 				s_endPeriod = new SimpleDateFormat("yyyy/MM/dd").parse(sep);
-				System.out.println("s_endPeriod : " + s_endPeriod);
+//				System.out.println("s_endPeriod : " + s_endPeriod);
 				s_startTime = new SimpleDateFormat("HH:mm").parse(sst);
 				s_endTime = new SimpleDateFormat("HH:mm").parse(set);
 				  
@@ -151,14 +151,29 @@ public class createStudyRoom extends HttpServlet {
 			
 			Study s = new Study(s_name, s_to, s_day, s_startPeriod, s_endPeriod, s_startTime, s_endTime, s_explain,
 					s_notice, user_no, cid, photo);
-			System.out.println(s);
+//			System.out.println(s);
 			result = new StudyService().insertStudyRoom(s);
+			
 			
 			
 			// 스터디방 생성 성공시, 방장도 정원수에 포함되므로 db에 저장하기 위해 회원이 방금 만든 스터디방의 s_no 가져오는 처리
 			Study s2 = new StudyService().selectStudyRoomOnlySNo(user_no);
 			int s_no = s2.getS_no();
 				
+			int userStudyLimit = new StudyService().userStudyLimit(user_no); 
+			
+			if(userStudyLimit == 0) {
+				userStudyLimit = 3;
+			}
+			request.setAttribute("userStudyLimit", userStudyLimit);
+			
+		
+			
+			
+			
+			
+			
+			
 		if (result > 0) {
 			//스터디방 생성 성공시, 방장도 정원수에 포함되므로 db에 저장처리
 			MemberJoinStudy mjs = new MemberJoinStudy(user_no,s_no);

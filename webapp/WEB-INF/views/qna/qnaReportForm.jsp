@@ -12,7 +12,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
    .outer{
 		width:90%;
 		min-width : 450px;
-		margin: 0 auto;
+		margin: 65px auto;
         text-align: center;
 	}
 	
@@ -23,6 +23,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
     #report_comment{
         display: none;
         margin : 0 auto;
+        resize: vertical;
     }
     
     .btnArea {
@@ -36,9 +37,10 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 		height : 35px;
 		border : 0px;
 		color:white;
-		background:#282A35;
+		background:#C4C4C4;
 		margin : 15px;
-		cursor:pointer
+		cursor:pointer;
+		border-radius : 5px;
 	}
 </style>
 
@@ -82,7 +84,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 	            <label for="etc">기타</label>
 				
 	        </div>
-	        <textarea name="etc_comment" id="report_comment" cols="30" rows="10" placeholder="신고사유를 입력해주세요."></textarea>
+	        <textarea name="etc_comment" id="report_comment" cols="30" rows="10" placeholder="신고사유를 입력해주세요." ></textarea>
 	        <div class="btn_area">
 				<button id="updatePwdBtn">등록</button>
 			</div>

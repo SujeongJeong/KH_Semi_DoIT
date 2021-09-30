@@ -250,7 +250,30 @@ public class StudyService {
 			return result;
 		}
 
-	
+		// 스터디방 내 회원 강퇴
+		public int deleteMemberJoinStudy(int s_no, int user_no) {
+			Connection conn = getConnection();
+			
+			int result = sd.deleteMemberJoinStudy(conn,s_no,user_no);
+			
+			if(result>0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			return result;
+		}
+
+		 public int userStudyLimit(int userNo) {
+	         Connection conn= getConnection();
+	         
+	         int result = sd.userStudyLimit(conn, userNo);
+					
+	         if(result>0) close(conn);
+	         
+	         return result;
+	      }
 	
 
 

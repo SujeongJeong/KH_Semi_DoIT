@@ -35,7 +35,7 @@ public class QnaReplyInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 넘어온 파라미터 추출
+
 		int board_no = Integer.parseInt(request.getParameter("board_no"));
 		String reply_content = request.getParameter("reply_content");
 		int writer = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();

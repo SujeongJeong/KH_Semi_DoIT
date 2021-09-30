@@ -7,7 +7,6 @@ public class Reply {
 	private String reply_content;
 	private Date create_date;
 	private Date modify_date;
-	private String reply_secret;
 	private int board_no;
 	private String status;
 	private int user_no;
@@ -114,14 +113,6 @@ public void setModify_date(Date modify_date) {
 }
 
 
-public String getReply_secret() {
-	return reply_secret;
-}
-
-public void setReply_secret(String reply_secret) {
-	this.reply_secret = reply_secret;
-}
-
 public String getStatus() {
 	return status;
 }
@@ -177,7 +168,7 @@ public void setProfile_img(String profile_img) {
 @Override
 public String toString() {
 	return "Reply [reply_no=" + reply_no + ", reply_content=" + reply_content + ", create_date=" + create_date
-			+ ", modify_date=" + modify_date + ", reply_secret=" + reply_secret + ", board_no=" + board_no + ", status="
+			+ ", modify_date=" + modify_date  + ", board_no=" + board_no + ", status="
 			+ status + ", user_no=" + user_no + ", nickName=" + nickName + ", notice_no=" + notice_no + ", profile_img="
 			+ profile_img + "]";
 }
