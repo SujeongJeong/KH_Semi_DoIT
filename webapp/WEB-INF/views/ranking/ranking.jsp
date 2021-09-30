@@ -72,7 +72,8 @@ select{ padding : 3px;}
 		 	<span class='hours'>${ r.s_time }</span></li>
 		 </c:forEach>
 			<c:if test="${ loginUser == null }">
-			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span class="nickname">로그인하여 나의 랭킹을 확인해보세요.</span></li>			
+			<li class="me"><img src="resources/images/flag-me.png" alt="me">
+			<span class="nickname">로그인하여 나의 랭킹을 확인해보세요.</span></li>			
 			</c:if>
 			<c:if test="${ loginUser != null }">
 			<li class="me"><img src="resources/images/flag-me.png" alt="me"><span>${ myRanking.rank }위</span>
@@ -105,7 +106,6 @@ select{ padding : 3px;}
 	
 	
 	<script>
-
 	<%-- select 클릭 시 스터디방 checked, 기준 yesterday, 스터디방 num 가져오기 --%>
 	var sNum = 1;
 		$("#studyList").click(function(){
@@ -129,7 +129,9 @@ select{ padding : 3px;}
 			standard = new Date(today.setDate(today.getDate() -1 ));
 		}
 		var days = ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'];
-		span.innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 기준";
+		span.innerHTML = standard.getFullYear()+"년 "+ 
+						(standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ 
+						 days[standard.getDay()]+" 0시 기준";
 	});
 	
 	// 조건 별 랭킹 출력
@@ -142,13 +144,18 @@ select{ padding : 3px;}
 		// 기준날짜
 		if(period == "yesterday"){
 			standard = new Date(today.setDate(today.getDate() -1 ));
-			span.innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 기준";
+			span.innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " 
+							 + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 기준";
+			
 		}else if(period == "week"){
 			standard = new Date(today.setDate(today.getDate() -7 ));
-			span.innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 ~ 어제 기준";
+			span.innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " 
+				             + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 ~ 어제 기준";
+			
 		}else if(period == "month"){
 			standard = new Date(today.setDate(today.getDate() -30 ));
-			span.innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 ~ 어제 기준";
+			span.innerHTML = standard.getFullYear()+"년 "+ (standard.getMonth()+1)+"월 " + 
+			                 standard.getDate()+"일 "+ days[standard.getDay()]+" 0시 ~ 어제 기준";
 		}
 		
 		// 랭킹
