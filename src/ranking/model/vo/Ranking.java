@@ -11,6 +11,11 @@ public class Ranking {
 	
 	public Ranking() {}	
 
+	public Ranking(String s_time) {
+		super();
+		this.s_time = s_time;
+	}
+
 	public Ranking(int rank, String nickName, String s_time, String profile_img) {
 		super();
 		this.rank = rank;

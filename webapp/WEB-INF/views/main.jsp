@@ -90,7 +90,7 @@
 						<c:when test="${ loginUser == null }">
 						<li><span class="todayhours point-c">0시간 00분</span><span class="goalhours lightgray-c">/ 0시간 00분</span></li>
 						</c:when>
-						<c:when test="${ loginUser != null and empty myRanking.s_time  }">
+						<c:when test="${ loginUser != null and my_today.s_time == 0 }">
 						<li><span class="todayhours point-c">0시간 00분</span>
 						<span class="goalhours lightgray-c">/ 
 						<c:set var="targetHour" value="${ loginUser.targetHour }"/>
@@ -99,7 +99,7 @@
 						</c:when>
 						<c:otherwise>
 						<li><span class="todayhours point-c">
-						<c:set var="stime" value="${ myRanking.s_time }"/>
+						<c:set var="stime" value="${ my_today.s_time }"/>
 						<c:set var ="myHours" value="${fn:split(stime, ':') }"/> 
 						${ myHours[0] }시간 ${ myHours[1] }분
 						</span> 
@@ -127,10 +127,14 @@
 				<c:when test="${ loginUser == null }">
 				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹">로그인하여 나의 랭킹을 확인해보세요.</li>
 				</c:when>
+				<c:when test="${ loginUser != null and myRanking == null }">
+				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹">어제 기록된 공부 기록이 없습니다.</li>
+				</c:when>
 				<c:otherwise>
-				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹"><span>${ myRanking.rank }위</span>
-				<span class="nickname">${ myRanking.nickName }</span>
-				<span class="img-wrapper"><img src="${ contextPath }${ myRanking.profile_img }" alt="profile"></span>
+				<li class="myranking"><img src="resources/images/flag-me.png" alt="내랭킹">
+				<span>${ myRanking.rank }위</span>
+				<span class="nickname">${ loginUser.nickName }</span>
+				<span class="img-wrapper"><img src="${ contextPath }${ loginUser.profileImg }" alt="profile"></span>
 				<span class='hours'>${ myRanking.s_time }</span></li>
 				</c:otherwise>
 				</c:choose>

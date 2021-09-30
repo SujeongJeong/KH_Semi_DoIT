@@ -117,6 +117,16 @@ public class RankingService {
 		return my;
 	}
 
+	// 나의 오늘 공부시간
+	public Ranking selectMyToday(int userNo) {
+		Connection conn = getConnection();
+		
+		Ranking my = rd.selectMyToday(conn, userNo);
+		
+		if(my != null) close(conn);
+		return my;
+	}
+
 
 		
 }

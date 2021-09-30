@@ -300,9 +300,34 @@ public class RankingDao {
 			return my;
 		}
 		
+		// 나의 오늘 공부시간
+		public Ranking selectMyToday(Connection conn, int userNo) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = query.getProperty("selectMyToday");
+			Ranking my= new Ranking();
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, userNo);
+				
+				rset = pstmt.executeQuery();
+				while(rset.next()) {
+					my = new Ranking(rset.getString("sumtime"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			return my;
+		}
+	}
+		
 		
 
-}
+
 
 
 
