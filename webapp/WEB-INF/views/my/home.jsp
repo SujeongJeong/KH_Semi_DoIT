@@ -310,10 +310,6 @@
 						<div><h1 class="time_box">${ todayStudyTime }</h1></div>
 					</div>
 					<div class="rec_box1">
-						<p>하루 평균 공부 시간</p>
-						<div><h1 class="time_box">${ avgStudyTime }</h1></div>
-					</div>
-					<div class="rec_box1">
 						<p>전체 공부 시간</p>
 						<div><h1 class="time_box">${ sumStudyTime }</h1></div>
 					</div>

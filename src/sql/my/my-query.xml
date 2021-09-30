@@ -276,22 +276,10 @@
    </entry>
    <entry key="todayStudyTime">
    		SELECT 
-   			TO_CHAR(SUM(S_TIME))) 
+   			CASE WHEN TO_CHAR(SUM(S_TIME)) IS NULL THEN '0' ELSE TO_CHAR(SUM(S_TIME)) END
 	      FROM TIMER 
 	     WHERE TO_CHAR(S_DAY) = TO_CHAR(SYSDATE) 
 	     AND USER_NO = ?
-   </entry>
-   <entry key="avgStudyTime">
-     SELECT
-      		 TO_CHAR(TRUNC(SUM(S_TIME) / (SELECT 
-                                    COUNT(DISTINCT S_DAY)
-                                    FROM TIMER
-                                    WHERE USER_NO = ?)))
-          FROM TIMER
-          JOIN MEMBER USING(USER_NO)
-         WHERE USER_TYPE = 'U'
-         AND USER_NO = ?
-        GROUP BY USER_NO
    </entry>
    <entry key="sumStudyTime">
   	SELECT
@@ -304,13 +292,13 @@
    </entry>
    <entry key="lastAvgStudyTime">
    		SELECT
-      		 TO_CHAR(TRUNC(SUM(S_TIME) / (COUNT(S_DAY))))
+        TO_CHAR(TRUNC(SUM(S_TIME) / 30))
           FROM TIMER
           JOIN MEMBER USING(USER_NO)
          WHERE S_DAY BETWEEN SYSDATE-30 AND SYSDATE-1
          AND USER_TYPE = 'U'
          AND USER_NO = ?
-        GROUP BY USER_NO                       
+        GROUP BY USER_NO                   
    </entry>
    <entry key="selectRefundNo">
    	SELECT 
@@ -334,4 +322,5 @@
 		 FROM MEMBER
 		 WHERE USER_NO = ?
 	</entry>
+	
 </properties>
