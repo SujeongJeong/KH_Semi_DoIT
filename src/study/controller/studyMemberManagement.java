@@ -1,6 +1,7 @@
 package study.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class studyMemberManagement
@@ -34,9 +38,17 @@ public class studyMemberManagement extends HttpServlet {
 		request.setAttribute("user_no", user_no);
 		request.setAttribute("s_no", s_no);
 		
+		
+		// 입장한 스터디방에 방장의 회원정보 조회
+		Member m = new MemberService().selectMember(user_no);
+		request.setAttribute("managerAccount", m);
+		
+		// 입장한 스터디방에 가입한 회원 목록(방장제외)
+		List<Member> MemberList = new MemberService().memberInfoForStudy(s_no,user_no);
+		request.setAttribute("MemberList", MemberList);
+		
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/studyMemberManagement.jsp");
 		view.forward(request, response);
-		
 	}
 
 	/**
