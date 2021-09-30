@@ -97,7 +97,7 @@ body{
 }
 
 #studyRoomBtn {
-	width: 65%;
+	width: 90%;
 	height: 45px;
 	background-color: #5FC5FF;
 	font-size: 1.2rem;
@@ -250,8 +250,9 @@ h2, h3 {
 				</c:otherwise>
 			</c:choose>
 		</button>
-
+		<%-- 
 		<button id="report">신고하기</button>
+		--%>
 		</div>
 
 

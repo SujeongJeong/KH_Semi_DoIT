@@ -20,7 +20,6 @@ import com.oreilly.servlet.MultipartRequest;
 import common.Attachment;
 import common.MyFileRenamePolicy;
 import member.model.vo.Member;
-import shop.model.service.ShopService;
 import shop.model.vo.Purchase;
 import study.model.service.StudyService;
 import study.model.vo.MemberJoinStudy;
@@ -46,11 +45,10 @@ public class createStudyRoom extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userNo = ((Member)(request.getSession().getAttribute("loginUser"))).getUserNo();
-		
+	
+		// 스터디방 개설 기간 설정
 		Purchase prLimit = new StudyService().purchaseLimit(userNo);
 		
-		 if(prLimit.getS_to_limit() == 0 &&  prLimit.getS_limitdate() == 0) {prLimit.setS_to_limit(5); prLimit.setS_limitdate(0); }
-		 
 		request.setAttribute("prLimit", prLimit);
 	
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/CreateStudy.jsp");
@@ -104,16 +102,25 @@ public class createStudyRoom extends HttpServlet {
 		String sst = multiRequest.getParameter("s_startTime");
 		String set = multiRequest.getParameter("s_endTime");
 		
-		/*
-		 * String[] ssp2 = ssp.split("/"); String ssp3 = ""; for(int i = 0; i <
-		 * ssp2.length; i++) { if(i == ssp2.length-1) ssp3 += ssp2[i]; else ssp3 +=
-		 * ssp2[i] + "-"; }
-		 * 
-		 * String[] sep2 = sep.split("/"); String sep3 = ""; for(int i = 0; i <
-		 * sep2.length; i++) { if(i == sep2.length-1) sep3 += sep2[i]; else sep3 +=
-		 * sep2[i] + "-"; }
-		 */
+		String[] ssp2 = ssp.split("/");
+		String ssp3 = "";
+		for(int i = 0; i < ssp2.length; i++) {
+			if(i == ssp2.length-1)
+				ssp3 += ssp2[i];
+			else
+				ssp3 += ssp2[i] + "-";
+		}
+//	System.out.println("ssp3 : " + ssp3);
+		String[] sep2 = sep.split("/");
+		String sep3 = "";
+		for(int i = 0; i < sep2.length; i++) {
+			if(i == sep2.length-1)
+				sep3 += sep2[i];
+			else 
+				sep3 += sep2[i] + "-";
+		}
 		
+//		System.out.println("sep3 : " + sep3);
 //		System.out.println("dateString : "+ ssp);
 //		System.out.println("dateString : "+ sep);
 //		System.out.println("dateString : "+ sst);
@@ -177,9 +184,3 @@ public class createStudyRoom extends HttpServlet {
 	}
 
 }
-
-
-
-
-
-

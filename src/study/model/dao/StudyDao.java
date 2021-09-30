@@ -193,6 +193,7 @@ public class StudyDao {
 					s.sets_endTime(rset.getTimestamp("s_endTime"));
 					s.setS_explain(rset.getString("s_explain"));
 					s.setS_notice(rset.getString("s_notice"));
+					s.setUser_no(rset.getInt("user_no"));
 					s.setCname(rset.getString("cname"));
 					s.setUser_nkname(rset.getString("nickname"));
 				}
@@ -571,40 +572,7 @@ public class StudyDao {
 		}
 		return StudyList;
 	}
-
-	
-	  public int userStudyLimit(Connection conn, int userNo) { 
-		  PreparedStatement pstmt = null; 
-		  ResultSet rset = null; 
-		  int result = 0;
-		  String sql = query.getProperty("userStudyLimit");
-		  
-		  try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, userNo);
-			rset = pstmt.executeQuery();
-			
-			if (rset != null) {
-                while (rset.next()) {
-                   result = rset.getInt(1);
-                  
-                }
-             } 
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		  return result;
-		  
-		  
-	  }
 	 
-
 	public int snameCheck(Connection conn, String sname) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -631,30 +599,60 @@ public class StudyDao {
 		return result;
 	}
 
-	public int getSExpirationDate(Connection conn, int userNo) {
+	//유저가 구매한 상품의 유효기간의 값.
+    public Purchase purchaseLimit(Connection conn, int user_no) {
+         PreparedStatement pstmt = null;
+           ResultSet rset = null;
+           Purchase result = null;
+           
+           String sql = query.getProperty("purchaseLimit");
+           
+           try {
+              pstmt = conn.prepareStatement(sql);
+              
+              pstmt.setInt(1, user_no);
+      
+              rset = pstmt.executeQuery();
+             while(rset.next()){
+                result = new Purchase(rset.getInt("MAX(PR.S_LIMIT)"),
+                                 rset.getInt("MAX(PR.S_TO_LIMIT)"),
+                                 rset.getInt("MAX(PR.TODO_LIMIT)"),
+                                 rset.getInt("MAX(PR.S_LIMIT_DATE)"));
+             
+              }  
+           } catch (SQLException e) {
+              e.printStackTrace();
+           } finally {
+              close(rset);
+              close(pstmt);
+           }
+       
+           return result;
+    }
+
+
+	
+	public int insertTime(Connection conn, int loginUserNo, int s_no, int dbSaveTime) {
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		int PeriodLimit = 0;
-		String sql = query.getProperty("getSExpirationDate");
+		int result = 0;
+		String sql = query.getProperty("insertTime");
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, userNo);
+			pstmt=conn.prepareStatement(sql);
 			
-			rset = pstmt.executeQuery();
+			pstmt.setInt(1, loginUserNo);
+			pstmt.setInt(2, s_no);
+			pstmt.setInt(3, dbSaveTime);
 			
-			if(rset.next()) {
-				PeriodLimit = rset.getInt(1);
-			}
+			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			close(rset);
 			close(pstmt);
 		}
-	
-		return PeriodLimit;
+		
+		return result;
 	}
 
 
