@@ -113,5 +113,4 @@ public class MyHomeServlet extends HttpServlet {
 		str =  hour + ":" + minute + ":" + second;
 		return str;
 	} 
-
 }
