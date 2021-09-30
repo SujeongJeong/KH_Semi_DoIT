@@ -46,9 +46,6 @@ public class NoticeInsertServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		int writer = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
-		System.out.println("title : " + title );
-		System.out.println("content : " + content);
-		System.out.println(writer);
 		
 		Notice n = new Notice(title, content, writer);
 		
@@ -62,22 +59,6 @@ public class NoticeInsertServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
 		}
 		
-		/*
-		 * String writer =
-		 * ((Member)request.getSession().getAttribute("loginUser")).getNickname();
-		 * String userType =
-		 * ((Member)request.getSession().getAttribute("loginUser")).getUser_type();
-		 * 
-		 * Notice n = new Notice(title, content, writer);
-		 * 
-		 * int result = new NoticeService().insertNotice(n);
-		 * 
-		 * if(result > 0) { request.getSession().setAttribute("msg",
-		 * "공지사항이 성공적으로 등록 되었습니다."); response.sendRedirect(request.getContextPath() +
-		 * "/qna/home"); } else { request.setAttribute("msg", "공지사항 등록에 실패하였습니다.");
-		 * request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(
-		 * request, response); }
-		 */
 	}
 
 }
