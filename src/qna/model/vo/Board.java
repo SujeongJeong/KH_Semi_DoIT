@@ -15,7 +15,6 @@ public class Board {
 	private Date create_date;
 	private Date modify_date;
 	private String status;
-	private String board_secret;
 	private int user_no;
 	private int count;
 	private List<Reply> replyList;
@@ -58,7 +57,7 @@ public class Board {
 
 
 	public Board(int board_no, String cname, String board_title, String nickname, String board_content,
-			Date create_date, Date modify_date, String status, String board_secret, int count) {
+			Date create_date, Date modify_date, String status, int count) {
 		super();
 		this.board_no = board_no;
 		this.cname = cname;
@@ -68,7 +67,6 @@ public class Board {
 		this.create_date = create_date;
 		this.modify_date = modify_date;
 		this.status = status;
-		this.board_secret = board_secret;
 		this.count = count;
 	}
 
@@ -108,7 +106,7 @@ public class Board {
 
 
 	public Board(int board_no, int cid, String cname, String board_title, String nickname, String board_content,
-			Date create_date, Date modify_date, String status, String board_secret, int user_no, int count,
+			Date create_date, Date modify_date, String status, int user_no, int count,
 			List<Reply> replyList) {
 		super();
 		this.board_no = board_no;
@@ -120,7 +118,6 @@ public class Board {
 		this.create_date = create_date;
 		this.modify_date = modify_date;
 		this.status = status;
-		this.board_secret = board_secret;
 		this.user_no = user_no;
 		this.count = count;
 		this.replyList = replyList;
@@ -200,13 +197,6 @@ public class Board {
 		this.status = status;
 	}
 
-	public String getBoard_secret() {
-		return board_secret;
-	}
-
-	public void setBoard_secret(String board_secret) {
-		this.board_secret = board_secret;
-	}
 
 	public int getUser_no() {
 		return user_no;
@@ -249,7 +239,7 @@ public class Board {
 	public String toString() {
 		return "Board [board_no=" + board_no + ", cid=" + cid + ", cname=" + cname + ", board_title=" + board_title
 				+ ", nickname=" + nickname + ", board_content=" + board_content + ", create_date=" + create_date
-				+ ", modify_date=" + modify_date + ", status=" + status + ", board_secret=" + board_secret
+				+ ", modify_date=" + modify_date + ", status=" + status
 				+ ", user_no=" + user_no + ", count=" + count + ", replyList=" + replyList + ", profile_img="
 				+ profile_img + "]";
 	}
