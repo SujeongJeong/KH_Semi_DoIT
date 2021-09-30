@@ -47,7 +47,7 @@
 						<a href="<%= request.getContextPath() %>/admin/reportMember">신고내역</a>
 						<ul class="report-ul">
 							<li><a href="<%= request.getContextPath() %>/admin/reportMember">-&ensp;회원</a></li>
-							<li><a href="<%= request.getContextPath() %>/admin/reportStudy">-&ensp;스터디</a></li>
+							<%-- <li><a href="<%= request.getContextPath() %>/admin/reportStudy">-&ensp;스터디</a></li> --%>
 						</ul>
 					</li>
 				</ul>
