@@ -75,7 +75,7 @@
 			<li><a href="${ contextPath }/qna/home"<% if ("qna".equals(nav1)) { %>class="current"<%}%>>Q&amp;A</a></li>
 			<c:choose>
 			<c:when test="${ loginUser == null || loginUser.userType == 'U' }">
-			<li><a class="mypage" onclick="login();" <% if ("my".equals(nav1)) { %>class="current"<%}%>>마이페이지</a></li>
+			<li><a class="mypage <c:if test="${nav1 == 'my'}">current</c:if>" onclick="login();">마이페이지</a></li>
 			</c:when>
 			<c:when  test="${ loginUser != null && loginUser.userType =='A'  }">
 			<li><a href="${ contextPath }/admin/home"<% if ("admin".equals(nav1)) { %>class="current"<%}%>>관리페이지</a></li>
