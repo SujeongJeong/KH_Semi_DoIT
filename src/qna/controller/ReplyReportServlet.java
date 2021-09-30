@@ -69,7 +69,7 @@ public class ReplyReportServlet extends HttpServlet {
 
 
 	
-		Report r = new Report(report_content, user_no);
+		Report r = new Report(report_content, user_no, reply_no);
 		ReplyReport rr = new ReplyReport(reply_no);
 		
 		int result1 =  new ReportService().replyReport(r, rr);

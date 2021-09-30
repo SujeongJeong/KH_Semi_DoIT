@@ -66,7 +66,7 @@
 						</div>
 					<form name ="memberListForm" method="get" action="<%= request.getContextPath() %>/admin/home">
 						<div class="search">
-							<button><img src="../resources/images/search_btn.png"></button><input type="text"  name="searchValue" value="${ param.searchValue }">
+							<button><img src="../resources/images/search_btn.png"></button><input type="text" placeholder="닉네임을 입력해주세요." name="searchValue" value="${ param.searchValue }">
 						</div>
 					</form>
 					</div>

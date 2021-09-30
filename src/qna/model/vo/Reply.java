@@ -13,18 +13,11 @@ public class Reply {
 	private int user_no;
 	private String nickName;
 	private int notice_no;
-
-//	REPLY_NO	NUMBER
-//	REPLY_CONTENT	VARCHAR2(4000 CHAR)
-//	CREATE_DATE	DATE
-//	MODIFY_DATE	DATE
-//	REPLY_SECRET	VARCHAR2(1 CHAR)
-//	STATUS	VARCHAR2(1 CHAR)
-//	BOARD_NO	NUMBER
-//	USER_NO	NUMBER
-//	NOTICE_NO	NUMBER
+	private String profile_img;
+	
 
 	public Reply() {}
+	
 	
 	public Reply(int reply_no, String reply_content, Date create_date, Date modify_date, int user_no, String nickName,
 			int notice_no) {
@@ -36,6 +29,38 @@ public class Reply {
 		this.user_no = user_no;
 		this.nickName = nickName;
 		this.notice_no = notice_no;
+	}
+
+	
+	
+
+	public Reply(int reply_no, String reply_content, Date create_date, Date modify_date, int board_no, int user_no,
+			String nickName, String profile_img) {
+		super();
+		this.reply_no = reply_no;
+		this.reply_content = reply_content;
+		this.create_date = create_date;
+		this.modify_date = modify_date;
+		this.board_no = board_no;
+		this.user_no = user_no;
+		this.nickName = nickName;
+		this.profile_img = profile_img;
+	}
+
+
+
+
+public Reply(int reply_no, String reply_content, Date create_date, Date modify_date, int user_no, String nickName,
+			int notice_no, String profile_img) {
+		super();
+		this.reply_no = reply_no;
+		this.reply_content = reply_content;
+		this.create_date = create_date;
+		this.modify_date = modify_date;
+		this.user_no = user_no;
+		this.nickName = nickName;
+		this.notice_no = notice_no;
+		this.profile_img = profile_img;
 	}
 
 
@@ -138,11 +163,23 @@ public void setNickName(String nickName) {
 	this.nickName = nickName;
 }
 
+public String getProfile_img() {
+	return profile_img;
+}
+
+public void setProfile_img(String profile_img) {
+	this.profile_img = profile_img;
+}
+
+
+
+
 @Override
 public String toString() {
 	return "Reply [reply_no=" + reply_no + ", reply_content=" + reply_content + ", create_date=" + create_date
 			+ ", modify_date=" + modify_date + ", reply_secret=" + reply_secret + ", board_no=" + board_no + ", status="
-			+ status + ", user_no=" + user_no + ", nickName=" + nickName + ", notice_no=" + notice_no + "]";
+			+ status + ", user_no=" + user_no + ", nickName=" + nickName + ", notice_no=" + notice_no + ", profile_img="
+			+ profile_img + "]";
 }
 
 

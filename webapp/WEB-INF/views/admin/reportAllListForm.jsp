@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,16 +54,20 @@
                                 <th>날짜</th>
 								<th>신고자 ID</th>
 								<th>구분</th>
+								<th>제목/내용</th>
 								<th>신고사유</th>
 							</tr>
 						</thead>
 						<tbody>
+							<c:forEach  var="r" items="${ reportList }">
 							<tr>
-								<td>2021-08-25</td>
-								<td>닉네임1</td>
-								<td>게시판</td>
-								<td>욕설</td>
+								<td>${ r.report_date }</td>
+								<td>${ r.nickname }</td>
+								<td>${ r.board_title }</td>
+								<td>${ r.subject }</td>
+								<td>${ r.report_content }</td>
 							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
     </div>

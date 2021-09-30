@@ -459,8 +459,9 @@
 		 SELECT
                       REPORT_NO
                     , REPORT_DATE
-                    , NICKNAME
-                    , R_USER_NO
+                    , USER_NO
+                    , RUSER_NO
+                    , RNICKNAME
                     , SUBJECT
                     , BR_NO
                     , BOARD_NO
@@ -472,8 +473,9 @@
     FROM(SELECT
                       R.REPORT_NO
                     , REPORT_DATE
-                    , M.NICKNAME
-                    , M.USER_NO "R_USER_NO"
+                    , R.USER_NO
+                    , RUSER_NO
+                    , M.NICKNAME "RNICKNAME"
                     , NVL2('BR.BOARD_NO','게시판','NULL일경우 반환값') SUBJECT
                     , BR.BOARD_NO "BR_NO"
                     , BR.BOARD_NO
@@ -488,11 +490,12 @@
 	WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key ="getBoardRcountList">
-	 SELECT
+	  SELECT
                       REPORT_NO
                     , REPORT_DATE
-                    , NICKNAME
-                    , R_USER_NO
+                    , USER_NO
+                    , RUSER_NO
+                    , RNICKNAME
                     , SUBJECT
                     , BR_NO
                     , BOARD_NO
@@ -504,8 +507,9 @@
     FROM(SELECT
                       R.REPORT_NO
                     , REPORT_DATE
-                    , M.NICKNAME
-                    , M.USER_NO "R_USER_NO"
+                    , R.USER_NO
+                    , RUSER_NO
+                    , M.NICKNAME "RNICKNAME"
                     , NVL2('BR.BOARD_NO','게시판','NULL일경우 반환값') SUBJECT
                     , BR.BOARD_NO "BR_NO"
                     , BR.BOARD_NO
@@ -520,11 +524,12 @@
 	WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key ="getBoardMcountList">
-		 SELECT
+		  SELECT
                       REPORT_NO
                     , REPORT_DATE
-                    , NICKNAME
-                    , R_USER_NO
+                    , USER_NO
+                    , RUSER_NO
+                    , RNICKNAME
                     , SUBJECT
                     , BR_NO
                     , BOARD_NO
@@ -536,8 +541,9 @@
     FROM(SELECT
                       R.REPORT_NO
                     , REPORT_DATE
-                    , M.NICKNAME
-                    , M.USER_NO "R_USER_NO"
+                    , R.USER_NO
+                    , RUSER_NO
+                    , M.NICKNAME "RNICKNAME"
                     , NVL2('BR.BOARD_NO','게시판','NULL일경우 반환값') SUBJECT
                     , BR.BOARD_NO "BR_NO"
                     , BR.BOARD_NO
@@ -552,11 +558,12 @@
 	WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key ="getReplyLatestList">
-	 SELECT
+		 SELECT
                       REPORT_NO
                     , REPORT_DATE
-                    , NICKNAME
-                    , R_USER_NO
+                    , USER_NO
+                    , RUSER_NO
+                    , RNICKNAME
                     , SUBJECT
                     , BR_NO
                     , BOARD_NO
@@ -568,8 +575,9 @@
     FROM( SELECT
                       R.REPORT_NO
                     , REPORT_DATE
-                    , M.NICKNAME
-                    , M.USER_NO "R_USER_NO"
+                    , R.USER_NO
+                    , RUSER_NO
+                    , M.NICKNAME "RNICKNAME"
                     , NVL2('RE.BOARD_NO','댓글','NULL일경우 반환값') SUBJECT
                     , RE.REPLY_NO "BR_NO"
                     , RE.BOARD_NO
@@ -584,11 +592,12 @@
 	WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key ="getReplyRcountList">
-	 SELECT
+		 SELECT
                       REPORT_NO
                     , REPORT_DATE
-                    , NICKNAME
-                    , R_USER_NO
+                    , USER_NO
+                    , RUSER_NO
+                    , RNICKNAME
                     , SUBJECT
                     , BR_NO
                     , BOARD_NO
@@ -600,8 +609,9 @@
     FROM( SELECT
                       R.REPORT_NO
                     , REPORT_DATE
-                    , M.NICKNAME
-                    , M.USER_NO "R_USER_NO"
+                    , R.USER_NO
+                    , RUSER_NO
+                    , M.NICKNAME "RNICKNAME"
                     , NVL2('RE.BOARD_NO','댓글','NULL일경우 반환값') SUBJECT
                     , RE.REPLY_NO "BR_NO"
                     , RE.BOARD_NO
@@ -614,13 +624,15 @@
                  WHERE M.STATUS = 'Y'
                  ORDER BY RCOUNT DESC) BLIST)
 	WHERE RNUM BETWEEN ? AND ?
+
 	</entry>
 	<entry key ="getReplyMcountList">
 	 SELECT
                       REPORT_NO
                     , REPORT_DATE
-                    , NICKNAME
-                    , R_USER_NO
+                    , USER_NO
+                    , RUSER_NO
+                    , RNICKNAME
                     , SUBJECT
                     , BR_NO
                     , BOARD_NO
@@ -632,8 +644,9 @@
     FROM( SELECT
                       R.REPORT_NO
                     , REPORT_DATE
-                    , M.NICKNAME
-                    , M.USER_NO "R_USER_NO"
+                    , R.USER_NO
+                    , RUSER_NO
+                    , M.NICKNAME "RNICKNAME"
                     , NVL2('RE.BOARD_NO','댓글','NULL일경우 반환값') SUBJECT
                     , RE.REPLY_NO "BR_NO"
                     , RE.BOARD_NO
@@ -658,7 +671,7 @@
 		      R.REPORT_NO
 		    , REPORT_DATE
 		    , R.USER_NO
-		    , M.NICKNAME "NICK_NAME"
+		    , M.NICKNAME
 		    , B.BOARD_TITLE
 		    , REPORT_CONTENT
 		 FROM BOARDREPORT BR
@@ -673,7 +686,7 @@
 		      R.REPORT_NO
 		    , REPORT_DATE
 		    , R.USER_NO
-		    , M.NICKNAME "NICK_NAME"
+		    , M.NICKNAME
 		    , RP.REPLY_CONTENT
 		    , REPORT_CONTENT
 		 FROM REPLYREPORT RR
@@ -682,6 +695,50 @@
 		 JOIN REPLY RP ON (RR.REPLY_NO = RP.REPLY_NO)
 		 WHERE RR.REPLY_NO = ?
 		 ORDER BY REPORT_DATE DESC
-	
+	</entry>
+	<entry key="ReportAllList">
+	 SELECT
+                      REPORT_NO
+                    , REPORT_DATE
+                    , USER_NO
+                    , NICKNAME
+                    , REPLY_CONTENT
+                    , SUBJECT
+                    , REPORT_CONTENT
+	FROM (SELECT 
+				ROWNUM RNUM,
+                BLIST.*
+         FROM( SELECT
+                        R.REPORT_NO
+                      , REPORT_DATE
+                      , R.USER_NO
+                      , NICKNAME
+                      , REPLY_CONTENT
+                      , NVL2('RR.REPLY_NO','댓글','NULL일경우 반환값') SUBJECT
+                      , REPORT_CONTENT
+                      FROM REPORT R
+                      JOIN REPLYREPORT RR ON (R.REPORT_NO = RR.REPORT_NO)
+                      JOIN REPLY RP ON (RR.REPLY_NO = RP.REPLY_NO)
+                      JOIN MEMBER M ON (R.USER_NO = M.USER_NO)
+                      WHERE M.STATUS = 'Y'
+                      AND RUSER_NO = ?
+                
+                        UNION
+                        
+                 SELECT
+                        R.REPORT_NO
+                      , REPORT_DATE
+                      , R.USER_NO
+                      , NICKNAME
+                      , BOARD_TITLE
+                      , NVL2('BR.BOARD_NO','게시판','NULL일경우 반환값') SUBJECT
+                      , REPORT_CONTENT
+                      FROM REPORT R
+                      JOIN BOARDREPORT BR ON (R.REPORT_NO = BR.REPORT_NO)
+                      JOIN BOARD B ON (BR.BOARD_NO = B.BOARD_NO)
+                      JOIN MEMBER M ON (R.USER_NO = M.USER_NO)
+                      WHERE M.STATUS = 'Y'
+                      AND RUSER_NO = ?
+                      ORDER BY REPORT_DATE DESC) BLIST)
 	</entry>
 </properties>

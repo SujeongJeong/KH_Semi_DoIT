@@ -68,7 +68,7 @@
 							<div class="search">
 								구분 : 
 								<select name="category">
-									<option value="board" <c:if test="${ param.category == 'board' }">selected</c:if>>게시물</option>
+									<option value="board" <c:if test="${ param.category == 'board' }">selected</c:if>>게시글</option>
 									<option value="reply" <c:if test="${ param.category == 'reply' }">selected</c:if>>댓글</option>
 									<option value="study-member" <c:if test="${ param.category == 'study-member' }">selected</c:if>>스터디 회원</option>
 								</select>&emsp;
@@ -76,7 +76,7 @@
 								<select name="range">
 									<option value="latest" <c:if test="${ param.range == 'latest' }">selected</c:if>>최신순</option>
 									<option value="report-count" <c:if test="${ param.range == 'report-count' }">selected</c:if>>신고 횟수</option>
-									<option value="memberReport-count" <c:if test="${ param.range == 'memberReport-count' }">selected</c:if>>작성자 누적 신고</option>
+									<option value="memberReport-count" <c:if test="${ param.range == 'memberReport-count' }">selected</c:if>>회원 누적 신고</option>
 								</select>&emsp;
 								<button type = "submit"><img src="../resources/images/search_btn.png"></button>
 							</div>
@@ -100,9 +100,9 @@
 								<td>${ r.report_no }</td>
 								<td>${ r.report_date }</td>
 								<td class="reportPopup" onclick="boardDetailView(${r.board_no})">${r.subject}</td>
-								<td>${ r.nickname }</td>
+								<td>${ r.rnickname }</td>
 								<td class="reportPopup" onclick="openPopup('<%= request.getContextPath() %>/reportList?br_no='+ ${r.br_no} + '&type=${r.subject}', 'reportList', 800, 500);">${ r.rcount }</td>
-								<td class="reportPopup" onclick="openPopup('<%= request.getContextPath() %>/reportAllList', 'reportAllList', 800, 500);">${ r.allcount }</td>
+								<td class="reportPopup" onclick="openPopup('<%= request.getContextPath() %>/reportAllList?ruser_no='+ ${r.ruser_no}, 'reportAllList', 800, 500);">${ r.allcount }</td>
 							</tr>
 						</c:forEach>
 						</tbody>

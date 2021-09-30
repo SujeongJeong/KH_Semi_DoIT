@@ -616,8 +616,9 @@ public class AdminDao {
 				while (rset.next()) {
 					reportList.add( new Report( rset.getInt("report_no"),
 										rset.getDate("report_date"),
-										rset.getString("nickname"),
-										rset.getInt("r_user_no"),
+										rset.getInt("user_no"),
+										rset.getInt("ruser_no"),
+										rset.getString("rnickname"),
 										rset.getString("subject"),
 										rset.getInt("br_no"),
 										rset.getInt("board_no"),
@@ -652,7 +653,7 @@ public class AdminDao {
 									rset.getString("report_content"),
 									rset.getDate("report_date"),
 									rset.getInt("user_no"),
-									rset.getString("nick_name"),
+									rset.getString("nickname"),
 									rset.getString("board_title")));
 			}
 			
@@ -686,8 +687,44 @@ public class AdminDao {
 									rset.getString("report_content"),
 									rset.getDate("report_date"),
 									rset.getInt("user_no"),
-									rset.getString("nick_name"),
+									rset.getString("nickname"),
 									rset.getString("reply_content")));
+			}
+			
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reportList;
+	}
+
+	// 회원이 받은 모든 신고내역 가져오기
+	public List<Report> ReportAllList(Connection conn, int ruser_no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Report> reportList = new ArrayList<>();
+		String sql = query.getProperty("ReportAllList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, ruser_no);
+			pstmt.setInt(2, ruser_no);
+			
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				reportList.add( new Report( rset.getInt("report_no"),
+											rset.getString("report_content"),
+											rset.getDate("report_date"),
+											rset.getInt("user_no"),
+											rset.getString("nickname"),
+											rset.getString("reply_content"),
+											rset.getString("subject")));
 			}
 			
 		

@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM
 "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="report">
+	<entry key="boardReport">
 	INSERT
 		INTO REPORT
 		(
@@ -10,6 +10,7 @@
 		  , REPORT_CONTENT
 		  , REPORT_DATE
 		  , USER_NO
+          , RUSER_NO
 		)
 		VALUES
 		(
@@ -17,6 +18,34 @@
 		  , ?
 		  , DEFAULT
 		  , ?
+          , (SELECT 
+                        USER_NO
+                FROM MEMBER
+                JOIN BOARD USING (USER_NO)
+                WHERE BOARD_NO = ?)
+		)
+	</entry>
+		<entry key="replyReport">
+	INSERT
+		INTO REPORT
+		(
+			REPORT_NO
+		  , REPORT_CONTENT
+		  , REPORT_DATE
+		  , USER_NO
+          , RUSER_NO
+		)
+		VALUES
+		(
+			SEQ_RPID.NEXTVAL
+		  , ?
+		  , DEFAULT
+		  , ?
+          , (SELECT 
+                        USER_NO
+                FROM MEMBER
+                JOIN REPLY USING (USER_NO)
+                WHERE REPLY_NO = ?)
 		)
 	</entry>
 	<entry key="reportBoardManager">
@@ -85,4 +114,11 @@
 	UPDATE REPLY SET REPORT_COUNT = REPORT_COUNT + 1
 	WHERE REPLY_NO = ?
 	</entry>
+<!-- 	<entry key="selectWriter">
+	SELECT
+        USER_NO
+        FROM MEMBER
+        JOIN BOARD USING (USER_NO)
+        WHERE BOARD_NO = ?
+	</entry> -->
 </properties>

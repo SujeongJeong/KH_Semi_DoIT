@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+
+
 import static common.JDBCTemplate.close;
 
 import qna.model.vo.BoardReport;
@@ -31,17 +34,42 @@ public class ReportDao {
 	}
 	
 
-	// 신고
-	public int Report(Connection conn, Report r) {
+	// 게시글 신고
+	public int boardReport(Connection conn, Report r) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = query.getProperty("report");
+		String sql = query.getProperty("boardReport");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, r.getReport_content());
 			pstmt.setInt(2, r.getUser_no());
+			pstmt.setInt(3, r.getBoard_no());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 댓글 신고
+	public int replyReport(Connection conn, Report r) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("replyReport");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, r.getReport_content());
+			pstmt.setInt(2, r.getUser_no());
+			pstmt.setInt(3, r.getBoard_no());
 			
 			result = pstmt.executeUpdate();
 			
@@ -237,6 +265,27 @@ public class ReportDao {
 		
 		return result;
 	}
+
+//	// 게시글 작성자 회원번호 알아오기
+//	public int selectWriter(Connection conn, int board_no) {
+//		PreparedStatement pstmt = null;
+//		int result = 0;
+//		String sql = query.getProperty("selectWriter");
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			
+//			pstmt.setInt(1, board_no);
+//		
+//			result = pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(pstmt);
+//		}
+//		return result;
+//	}
 
 
 }
