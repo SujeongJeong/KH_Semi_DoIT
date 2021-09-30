@@ -8,7 +8,7 @@
 <title>관리 - Do IT</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-	<link href='<%= request.getContextPath() %>/resources/css/admin-ReportMember.css?after' rel='stylesheet'>
+	<link href='<%= request.getContextPath() %>/resources/css/admin-ReportMember.css' rel='stylesheet'>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <%
 	if(request.getAttribute("result") != null) {

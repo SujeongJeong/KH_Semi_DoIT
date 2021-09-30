@@ -189,7 +189,7 @@
 	      , NICKNAME
 	      , FILE_PATH
 	      , CHANGE_NAME
-	      , ( SELECT COUNT(*) FROM MEMBER_JOINSTUDY M WHERE M.S_NO = S_NO) AS "studyMemberNum"
+	      , ( SELECT COUNT(*) FROM JOINSTUDY M WHERE M.S_NO = S_NO) AS "studyMemberNum"
      FROM (SELECT 
 			ROWNUM RNUM
 		  , RLIST.*
@@ -208,7 +208,7 @@
 		      , NICKNAME
 		      , FILE_PATH
 		      , CHANGE_NAME
-		      , ( SELECT COUNT(*) FROM MEMBER_JOINSTUDY M WHERE M.S_NO = S.S_NO) AS "studyMemberNum"
+		      , ( SELECT COUNT(*) FROM JOINSTUDY M WHERE M.S_NO = S.S_NO) AS "studyMemberNum"
 		       FROM STUDY S
 		      JOIN CATEGORY USING(CID)
 		      JOIN ATTACHMENT A ON A.S_NO = S.S_NO
@@ -233,7 +233,7 @@
 	      , NICKNAME
 	      , FILE_PATH
 	      , CHANGE_NAME
-	      , ( SELECT COUNT(*) FROM MEMBER_JOINSTUDY M WHERE M.S_NO = S_NO) AS "studyMemberNum"
+	      , ( SELECT COUNT(*) FROM JOINSTUDY M WHERE M.S_NO = S_NO) AS "studyMemberNum"
      FROM (SELECT 
 			ROWNUM RNUM
 		  , RLIST.*
@@ -252,7 +252,7 @@
 		      , NICKNAME
 		      , FILE_PATH
 		      , CHANGE_NAME
-		      , ( SELECT COUNT(*) FROM MEMBER_JOINSTUDY M WHERE M.S_NO = S.S_NO) AS "studyMemberNum"
+		      , ( SELECT COUNT(*) FROM JOINSTUDY M WHERE M.S_NO = S.S_NO) AS "studyMemberNum"
 		       FROM STUDY S
 		      JOIN CATEGORY USING(CID)
 		      JOIN ATTACHMENT A ON A.S_NO = S.S_NO
