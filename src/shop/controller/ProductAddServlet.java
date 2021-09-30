@@ -109,13 +109,12 @@ public class ProductAddServlet extends HttpServlet {
 		
 	
 		if(result > 0) {
-			request.getSession().setAttribute("msg", "상품이 등록되었습니다.");
-			response.sendRedirect(request.getContextPath()+"/shop/home");
+			request.setAttribute("result", "success");
+			
 		}else {
-			request.setAttribute("msg", "상품 등록에 실패하였습니다.");
-			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
+			request.setAttribute("result", "fail");
 		}
-		
+		request.getRequestDispatcher("/WEB-INF/views/shop/productAddView.jsp").forward(request, response);
 	}
 		
 		
