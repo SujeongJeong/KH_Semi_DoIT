@@ -276,10 +276,10 @@
    </entry>
    <entry key="todayStudyTime">
    		SELECT 
-   			TRUNC(SUM(S_TIME)) 
+   			TO_CHAR(SUM(S_TIME))) 
 	      FROM TIMER 
 	     WHERE TO_CHAR(S_DAY) = TO_CHAR(SYSDATE) 
-	     AND USER_NO = 
+	     AND USER_NO = ?
    </entry>
    <entry key="avgStudyTime">
      SELECT
