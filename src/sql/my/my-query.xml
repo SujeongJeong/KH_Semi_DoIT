@@ -322,4 +322,5 @@
 		 FROM MEMBER
 		 WHERE USER_NO = ?
 	</entry>
+	
 </properties>
