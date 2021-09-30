@@ -122,7 +122,7 @@
     overflow: auto;
 }
 .currentJoinMember-content{
-	    display: flex;
+	display: flex;
     height: 40px;
     border-bottom: 1px solid black;
 }
@@ -318,7 +318,7 @@
 	<c:if test="${ m.userNo == loginUserNo }">
 		<script>
 			var stopWatchTime = document.getElementById('stopWatch');
-			
+			<%--
 			setInterval(function(){
 				
 				
@@ -326,7 +326,7 @@
 				
 				stopWatchTime.innerHTML = 
 			},1000);
-			
+			--%>
 		</script>
 	</c:if>
 	
@@ -386,7 +386,7 @@
 		}
 		
 	function memberManagement(s_no,user_no){
-			openPopup('<%= request.getContextPath() %>/study/memberManagement?s_no=' + s_no + '& user_no='+user_no, 'studyInfo', 700, 700);
+			openPopup('<%= request.getContextPath() %>/study/memberManagement?s_no='+s_no+'&user_no='+user_no, 'studyInfo', 700, 700);
 			
 		}	
 	

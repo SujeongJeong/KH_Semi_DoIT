@@ -239,8 +239,6 @@ WHERE RNUM BETWEEN ? AND ?
       WHERE PR.USER_NO =?
       <![CDATA[AND TO_CHAR(PR.EXPIRATION_DATE, 'yyyymmdd') >= TO_CHAR(SYSDATE, 'yyyymmdd')]]>
    </entry>
-
-  
    
    <entry key="insertTime">
    	INSERT 
@@ -258,9 +256,45 @@ WHERE RNUM BETWEEN ? AND ?
 		?,
 		?
 	)
-
    </entry>
+   
+   <entry key="deleteMemberJoinStudy">
+	   	DELETE
+		  FROM MEMBER_JOINSTUDY
+	 	 WHERE S_NO = ?
+	       AND USER_NO = ?
+   </entry>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 </properties>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -655,6 +655,29 @@ public class StudyDao {
 		return result;
 	}
 
+	// 스터디방 내 회원 강퇴
+	public int deleteMemberJoinStudy(Connection conn, int s_no, int user_no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("deleteMemberJoinStudy");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, s_no);
+			pstmt.setInt(2, user_no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 	
 
