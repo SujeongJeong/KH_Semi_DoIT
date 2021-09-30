@@ -39,7 +39,6 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
     					</c:if>     
                     </div>
                 </div>
-                
             </div>
 	            <span>조회수 : ${ board.count }</span>
 	        </div>
@@ -48,7 +47,6 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 	        	${ board.board_content }
 	        </div>
 	        
-		        
 		    <div class="board_btn btn">
 		    	<c:if test="${ board.user_no != loginUser.userNo}">
 		    	
@@ -77,7 +75,6 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
             <textarea class="reply_content"></textarea>
             <button onclick="addReply(${ board.board_no });">등록</button>
         </div>
-       
          
         <!-- 댓글 -->
         <div class="comment_list">
@@ -130,7 +127,6 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 			                <button class="modify_btn" onclick="modifyReply(${ r.board_no },${ r.reply_no })">수정</button>
 			                </c:if>
 			            </div>
-		  		    
 	        	</c:otherwise>
 	        </c:choose>
             </c:forEach>

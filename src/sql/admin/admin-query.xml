@@ -174,22 +174,23 @@
 	   AND S_NAME LIKE '%' || ? || '%'
 	</entry>
 	<entry key="selectStudyList">
- 	SELECT
-            S_NO
-	      , S_NAME
-	      , S_TO
-	      , S_DAY
-	      , S_STARTPERIOD
-	      , S_ENDPERIOD
-	      , S_STARTTIME
-	      , S_ENDTIME
-	      , S_EXPLAIN
-	      , S_NOTICE
-	      , CNAME
-	      , NICKNAME
-	      , FILE_PATH
-	      , CHANGE_NAME
-	      , ( SELECT COUNT(*) FROM JOINSTUDY M WHERE M.S_NO = S_NO) AS "studyMemberNum"
+ 	      
+      SELECT
+                S_NO
+		      , S_NAME
+		      , S_TO
+		      , S_DAY
+		      , S_STARTPERIOD
+		      , S_ENDPERIOD
+		      , S_STARTTIME
+		      , S_ENDTIME
+		      , S_EXPLAIN
+		      , S_NOTICE
+		      , CNAME
+		      , NICKNAME
+		      , FILE_PATH
+		      , CHANGE_NAME
+		      , "studyMemberNum"
      FROM (SELECT 
 			ROWNUM RNUM
 		  , RLIST.*
@@ -476,7 +477,7 @@
                     , R.USER_NO
                     , RUSER_NO
                     , M.NICKNAME "RNICKNAME"
-                    , NVL2('BR.BOARD_NO','게시판','NULL일경우 반환값') SUBJECT
+                    , NVL2('BR.BOARD_NO','게시글','NULL일경우 반환값') SUBJECT
                     , BR.BOARD_NO "BR_NO"
                     , BR.BOARD_NO
                     , B.REPORT_COUNT RCOUNT
@@ -510,7 +511,7 @@
                     , R.USER_NO
                     , RUSER_NO
                     , M.NICKNAME "RNICKNAME"
-                    , NVL2('BR.BOARD_NO','게시판','NULL일경우 반환값') SUBJECT
+                    , NVL2('BR.BOARD_NO','게시글','NULL일경우 반환값') SUBJECT
                     , BR.BOARD_NO "BR_NO"
                     , BR.BOARD_NO
                     , B.REPORT_COUNT RCOUNT
@@ -544,7 +545,7 @@
                     , R.USER_NO
                     , RUSER_NO
                     , M.NICKNAME "RNICKNAME"
-                    , NVL2('BR.BOARD_NO','게시판','NULL일경우 반환값') SUBJECT
+                    , NVL2('BR.BOARD_NO','게시글','NULL일경우 반환값') SUBJECT
                     , BR.BOARD_NO "BR_NO"
                     , BR.BOARD_NO
                     , B.REPORT_COUNT RCOUNT
