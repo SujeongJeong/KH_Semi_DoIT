@@ -26,7 +26,7 @@ public class QnaReplyUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// request.setAttribute("flag", "u");
+
 		int board_no = Integer.parseInt(request.getParameter("board_no"));
 		int reply_no = Integer.parseInt(request.getParameter("reply_no"));
 		

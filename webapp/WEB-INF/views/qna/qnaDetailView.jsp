@@ -29,7 +29,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 	        </div>
         <div class="board_info">
             <div class="writer_info">
-                <img class="user_img" src="${ contextPath }${ loginUser.profileImg }" alt="게시글 유저">
+                <img class="user_img" src="${ contextPath }${ board.profile_img }" alt="게시글 유저">
                 <div class="avatar_info">
                     <div class="nickname">${ board.nickname }</div>
                     <div class="write_time">
@@ -39,7 +39,6 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
     					</c:if>     
                     </div>
                 </div>
-                
             </div>
 	            <span>조회수 : ${ board.count }</span>
 	        </div>
@@ -48,7 +47,6 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 	        	${ board.board_content }
 	        </div>
 	        
-		        
 		    <div class="board_btn btn">
 		    	<c:if test="${ board.user_no != loginUser.userNo}">
 		    	
@@ -71,13 +69,12 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
         <div class="comment_header">Comment</div>
         <div class="new_comment comment">
         	<div>
-            <img class="user_img" src='<%= request.getContextPath() %>/resources/images/user.png' alt="게시글 유저">
+            <img class="user_img" src="${ contextPath }${ loginUser.profileImg }" alt="게시글 유저">
            	<div>${ loginUser.nickName }</div>
             </div>
             <textarea class="reply_content"></textarea>
             <button onclick="addReply(${ board.board_no });">등록</button>
         </div>
-       
          
         <!-- 댓글 -->
         <div class="comment_list">
@@ -87,7 +84,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 	        		<!-- 댓글수정 -->
 					<div class="comment_wrapper" style="border: 5px solid #5FC5FF">
 			            <div class="writer_info">
-			                <img class="user_img" src='<%= request.getContextPath() %>/resources/images/user.png' alt="게시글 유저">
+			                <img class="user_img" src="${ contextPath }${ loginUser.profileImg }" alt="게시글 유저">
 			                <div class="avatar_info">
 			                    <div class="nickname">${ r.nickName }</div>
 			                    <div class="write_time">
@@ -107,7 +104,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 	        	<c:otherwise>
 		        	
 			            <div class="writer_info">
-			                <img class="user_img" src='<%= request.getContextPath() %>/resources/images/user.png' alt="게시글 유저">
+			                <img class="user_img" src="${ contextPath }${ r.profile_img }" alt="게시글 유저">
 			                <div class="avatar_info">
 			                    <div class="nickname">${ r.nickName }</div>
 			                    <div class="write_time">
@@ -130,7 +127,6 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 			                <button class="modify_btn" onclick="modifyReply(${ r.board_no },${ r.reply_no })">수정</button>
 			                </c:if>
 			            </div>
-		  		    
 	        	</c:otherwise>
 	        </c:choose>
             </c:forEach>
@@ -210,7 +206,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 													
 						// 새로 받아온 갱신 된 댓글 목록을 for문을 통해 html에 저장
 						for(var key in data){
-							html += '<div class="comment_wrapper"><div class="writer_info"><img class="user_img" src="<%= request.getContextPath() %>/resources/images/user.png" alt="게시글 유저">'
+							html += '<div class="comment_wrapper"><div class="writer_info"><img class="user_img" src="${ contextPath }${ r.profile_img }" alt="게시글 유저">'
 						           +'<div class="avatar_info"><div class="nickname">'
 						           + data[key].nickName + '</div><div class="write_time">'
 						           + data[key].create_date + ' 작성 ';

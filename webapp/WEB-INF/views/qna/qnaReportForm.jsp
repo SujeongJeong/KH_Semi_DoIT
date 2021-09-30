@@ -110,10 +110,6 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
         });
         
         function checkReport(){
-	/* 		const porno = document.getElementById('porno');
-			const ad = document.getElementById('ad');
-			const abuse = document.getElementById('abuse');
-			const etc = document.getElementById('etc'); */
 			
 			if( !$('input:radio[id=porno]').is(':checked') && !$('input:radio[id=ad]').is(':checked') && !$('input:radio[id=abuse]').is(':checked') && !$('input:radio[id=etc]').is(':checked')){
 				alert('신고사유를 선택해주세요');
@@ -124,7 +120,6 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 				alert('내용을 입력해주세요.');
 				return false;
 			}
-			
 			return true;
 		}
         

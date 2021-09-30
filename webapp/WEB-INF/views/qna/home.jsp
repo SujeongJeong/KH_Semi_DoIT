@@ -8,12 +8,15 @@
 <title>Q&A - Do IT</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-	<link href='<%= request.getContextPath() %>/resources/css/qna-main.css' rel='stylesheet'>
+	<link href='<%= request.getContextPath() %>/resources/css/qna-main.css?afters' rel='stylesheet'>
 </head>
 <body>
 	
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
 	
+          <!-- 광고배너 -->						
+          <div id="banner"><a href="${ contextPath }/shop/home"><img id="bannerImg" src="/Do_IT/resources/images/banner_shop.png"></a></div>
+        
 	<div class="content">
 		<div id="board_list_wrap">
          <div class="board-header">
@@ -62,9 +65,8 @@
 								<td>${ b.count }</td>
 							</tr>
 						</c:forEach>
-						
-                    
-                    
+
+					
                 </tbody>
             </table>
             

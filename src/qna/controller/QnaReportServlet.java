@@ -63,12 +63,6 @@ public class QnaReportServlet extends HttpServlet {
 		int board_no = Integer.parseInt(request.getParameter("board_no"));
 		
 		String report_content = report + etc_comment;
-
-		/*
-		 * int ruser_no = new ReportService().selectWriter(board_no);
-		 * System.out.println("확이 ㄴㄴㄴ : " + ruser_no);
-		 */
-		
 		
 		Report r = new Report(report_content, user_no, board_no);
 		
