@@ -137,7 +137,7 @@
            , NICKNAME
            , PROFILE_IMG
         FROM MEMBER
-        JOIN MEMBER_JOINSTUDY USING (USER_NO)
+        JOIN JOINSTUDY USING (USER_NO)
        WHERE S_NO = ?
    </entry>
 	
