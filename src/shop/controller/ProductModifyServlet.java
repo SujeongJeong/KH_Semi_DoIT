@@ -129,7 +129,7 @@ public class ProductModifyServlet extends HttpServlet {
 
 		
 		int result = new ShopService().modifyProduct(p);
-		System.out.println("서블릿:" + result);
+	
 		
 		if(result > 0) {
 			request.setAttribute("msg", "상품 수정에 성공했습니다.");

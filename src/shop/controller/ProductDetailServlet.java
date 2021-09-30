@@ -51,8 +51,8 @@ public class ProductDetailServlet extends HttpServlet {
 
 		
 		
-		 if(prLimit.getS_limit() == 0 && prLimit.getS_to_limit() == 0 && prLimit.getTodo_limit() == 0 && prLimit.getS_limitdate() == 0) { prLimit.setS_limit(3); prLimit.setS_to_limit(5);
-		 prLimit.setTodo_limit(5); prLimit.setS_limitdate(0); }
+		 if(prLimit.getS_limit() == 0 && prLimit.getS_to_limit() == 0 && prLimit.getTodo_limit() == 0 && prLimit.gets_limit_date() == 0) { prLimit.setS_limit(3); prLimit.setS_to_limit(5);
+		 prLimit.setTodo_limit(5); prLimit.sets_limit_date(0); }
 		 
 		
 		 

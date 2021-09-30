@@ -27,7 +27,7 @@ public class Purchase {
    private int s_limit;
    private int s_to_limit;
    private int todo_limit;
-   private int s_limitdate;
+   private int s_limit_date;
    
    
    
@@ -66,12 +66,12 @@ public class Purchase {
 	
 	
 	//LIMIT 셀렉트용
-	public Purchase(int s_limit, int s_to_limit, int todo_limit, int s_limitdate) {
+	public Purchase(int s_limit, int s_to_limit, int todo_limit, int s_limit_date) {
 	super();
 	this.s_limit = s_limit;
 	this.s_to_limit = s_to_limit;
 	this.todo_limit = todo_limit;
-	this.s_limitdate = s_limitdate;
+	this.s_limit_date = s_limit_date;
 }
 
 
@@ -185,13 +185,13 @@ public class Purchase {
 	}
 
 
-	public int getS_limitdate() {
-		return s_limitdate;
+	public int gets_limit_date() {
+		return s_limit_date;
 	}
 
 
-	public void setS_limitdate(int s_limitdate) {
-		this.s_limitdate = s_limitdate;
+	public void sets_limit_date(int s_limit_date) {
+		this.s_limit_date = s_limit_date;
 	}
 
 
@@ -200,7 +200,7 @@ public class Purchase {
 		return "Purchase [purchaseNo=" + purchaseNo + ", purchaseDate=" + purchaseDate + ", startDate=" + startDate
 				+ ", expirationDate=" + expirationDate + ", userNo=" + userNo + ", productNo=" + productNo
 				+ ", productPrice=" + productPrice + ", productName=" + productName + ", s_limit=" + s_limit
-				+ ", s_to_limit=" + s_to_limit + ", todo_limit=" + todo_limit + ", s_limitdate=" + s_limitdate + "]";
+				+ ", s_to_limit=" + s_to_limit + ", todo_limit=" + todo_limit + ", s_limit_date=" + s_limit_date + "]";
 	}
 
 	

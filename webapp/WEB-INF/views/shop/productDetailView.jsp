@@ -182,7 +182,7 @@ opener.parent.location.reload();
 				<span>스터디방 입장/생성 가능 개수 :<label id="limitcount"> ${ p.s_limit}</label> 개</span><br>
 				<span>스터디방 입장 인원 수 : <label id="limitcount">${ p.s_to_limit}</label> 명 </span><br>
 				<span>오늘의 할일 수 : <label id="limitcount">${ p.todo_limit}</label> 개</span><br>
-				<span>스터디방 기간연장 상품 : <label id="limitcount">${ p.s_limitdate}</label> 일</span>
+				<span>스터디방 기간연장 상품 : <label id="limitcount">${ p.s_limit_date}</label> 일</span>
 				</div><br><hr>	
 				
 		
@@ -219,29 +219,29 @@ opener.parent.location.reload();
 				let s_limit = ${prLimit.s_limit};
 				let s_to_limit = ${prLimit.s_to_limit};
 				let todo_limit = ${prLimit.todo_limit};
-				let s_limitdate = ${prLimit.s_limitdate};
+				let s_limit_date = ${prLimit.s_limit_date};
 				
 				let p_s_limit = ${ p.s_limit} 
 				let p_s_to_limit = ${ p.s_to_limit} 
 				let p_todo_limit = ${ p.todo_limit}
-				let p_s_limitdate = ${ p.s_limitdate} 
+				let p_s_limit_date = ${ p.s_limit_date} 
 				
 				
 				console.log(s_limit);
 				console.log(s_to_limit);
 				console.log(todo_limit);
-				console.log(s_limitdate);
+				console.log(s_limit_date);
 				
 				console.log(p_s_limit);
 				console.log(p_s_to_limit);
 				console.log(p_todo_limit);
-				console.log(p_s_limitdate);
+				console.log(p_s_limit_date);
 				
 				
 				
 		
-		if(s_limit == 3 && s_to_limit == 5 && todo_limit == 5 && s_limitdate == 0 ){//세트상품을 구매하지 않았을 시. 완료
-			 if(s_limit <= p_s_limit || s_to_limit <= p_s_to_limit|| todo_limit <=  p_todo_limit || s_limitdate <=  p_s_limitdate ){
+		if(s_limit == 3 && s_to_limit == 5 && todo_limit == 5 && s_limit_date == 0 ){//세트상품을 구매하지 않았을 시. 완료
+			 if(s_limit <= p_s_limit || s_to_limit <= p_s_to_limit|| todo_limit <=  p_todo_limit || s_limit_date <=  p_s_limit_date ){
 				 
 				if(userCoin < pPrice){
 					if(confirm("코인이 부족합니다. 충전하시겠습니까?"))
