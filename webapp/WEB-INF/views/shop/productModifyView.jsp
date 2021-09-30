@@ -86,7 +86,7 @@
 	margin-bottom: 30px;
 	resize: none;
 }
-
+  
 .btn_area {
 	text-align: center;
 	border-top: 1px solid #282A35;
@@ -140,7 +140,7 @@
 				<div class="inputarea"> 
 				<h3>상품 코인 | 기간</h3>
 					<input type="number" class="coin_count" name="price" min= 1  value="${ p.product_price }"> Coin / 
-					<input type="number" class="expirtion" name="expirtion" min= 1  value="${ p.expiration_date }"> 일
+					<input type="number" class="expirtion" name="expirtion"  value="${ p.expiration_date }"> 일
 				</div>
 				<div class="limit-wrapper">
 				<h3>이용 기능 제한</h3>
@@ -152,7 +152,7 @@
 					<input type=radio id="limit3" name="limit"  style="display:none"> 오늘의 할일 수 : 
 					<input type="number" class="limit_number"  id="todoListLimit" name="todoListLimit" min=5 required value="${ p.todo_limit}" > 개 <br>
 					<input type=radio id="limit4" name="limit" style="display:none"> 스터디방 기간연장 상품 :
-					<input type="number" class="limit_number" id="limitProduct" name="limitProduct" min=5 required value="${ p.s_limit}" > 일
+					<input type="number" class="limit_number" id="limitProduct" name="limitProduct" min=5 required value="${ p.s_limit_date}" > 일
 									
 				
 				
