@@ -156,7 +156,7 @@ opener.parent.location.reload();
 
 <div class="wrapper">
  
-	<!-- 제목조건, 폼 입력 조건 나중에 설정하기 -->
+	
 	
 	<div class=allcontents>
 	<form class="productModifyForm"  method="post" action='<%= request.getContextPath() %>/productModifyView'>
@@ -225,18 +225,6 @@ opener.parent.location.reload();
 				let p_s_to_limit = ${ p.s_to_limit} 
 				let p_todo_limit = ${ p.todo_limit}
 				let p_s_limit_date = ${ p.s_limit_date} 
-				
-				
-				console.log(s_limit);
-				console.log(s_to_limit);
-				console.log(todo_limit);
-				console.log(s_limit_date);
-				
-				console.log(p_s_limit);
-				console.log(p_s_to_limit);
-				console.log(p_todo_limit);
-				console.log(p_s_limit_date);
-				
 				
 				
 		
