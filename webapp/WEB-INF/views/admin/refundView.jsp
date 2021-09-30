@@ -68,7 +68,7 @@
 						<table class="board-list">
 							<thead>
 								<tr>
-	                                <th><input type="checkbox" id="cbx_chkAll" name="cbx_chkAll">신청번호</th>
+	                                <th>신청번호</th>
 	                                <th>회원번호</th>
 									<th>이메일</th>
 									<th>환불 신청 코인</th>
@@ -158,20 +158,6 @@
 			}
 			
 		};
-		
-		$("#cbx_chkAll").click(function() {
-			if($("#cbx_chkAll").is(":checked")) $("input[name=refundNo]").prop("checked", true);
-			else $("input[name=refundNo]").prop("checked", false);
-		});
-
-		$("input[name=refundNo]").click(function() {
-			var total = $("input[name=refundNo]").length;
-			var checked = $("input[name=refundNo]:checked").length;
-
-			if(total != checked) $("#cbx_chkAll").prop("checked", false);
-			else $("#cbx_chkAll").prop("checked", true); 
-		});
-	
 	</script>
 </body>
 </html>

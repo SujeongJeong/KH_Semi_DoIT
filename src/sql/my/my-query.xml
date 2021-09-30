@@ -260,12 +260,14 @@
    	SELECT
                S_DAY
              , S_TIME
+             , S_NO
       FROM (SELECT 
               ROWNUM RNUM
             , RLIST.*
        FROM(SELECT
                  S_DAY
              , S_TIME
+             , S_NO
                FROM MEMBER_TIMER 
               WHERE USER_NO = ?
               ORDER BY S_DAY DESC) RLIST)

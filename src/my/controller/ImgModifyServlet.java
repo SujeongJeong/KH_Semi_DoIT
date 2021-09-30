@@ -68,7 +68,6 @@ public class ImgModifyServlet extends HttpServlet {
 			// 비밀번호 수정이 실패 했음을 result fail로 표시
 			request.setAttribute("msg", "프로필 이미지 변경 실패");
 		}
-		
 		response.sendRedirect(request.getContextPath()+"/my/home");
 	}
 
