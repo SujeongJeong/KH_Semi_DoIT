@@ -266,7 +266,16 @@ public class StudyService {
 		}
 
 		 
-	
+		 public int userStudyLimit(int userNo) {
+	         Connection conn= getConnection();
+	         
+	         int result = sd.userStudyLimit(conn, userNo);
+					
+	         close(conn);
+	         
+	         return result;
+	      }
+		 
 }
 
 

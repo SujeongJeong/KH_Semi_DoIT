@@ -266,5 +266,13 @@ WHERE RNUM BETWEEN ? AND ?
 	 	 WHERE S_NO = ?
 	       AND USER_NO = ?
    </entry>
+   <entry key="userStudyLimit">
+	  SELECT
+        MAX(p.S_LIMIT) AS "LIMITNUMBER"          
+	   FROM PRODUCT P
+	   JOIN PURCHASE PR ON(P.PRODUCT_NO = PR.PRODUCT_NO)
+	   JOIN MEMBER M ON(PR.USER_NO = M.USER_NO)
+	   WHERE M.USER_NO = ?
+   </entry>
   
 </properties>

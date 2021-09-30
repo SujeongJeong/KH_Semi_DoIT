@@ -616,7 +616,9 @@ public class StudyDao {
               pstmt.setInt(1, user_no);
       
               rset = pstmt.executeQuery();
+              
              while(rset.next()){
+            	 
                 result = new Purchase(rset.getInt("MAX(PR.S_LIMIT)"),
                                  rset.getInt("MAX(PR.S_TO_LIMIT)"),
                                  rset.getInt("MAX(PR.TODO_LIMIT)"),
@@ -682,6 +684,32 @@ public class StudyDao {
 	}
 
 
+	 public int userStudyLimit(Connection conn, int userNo) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			int result = 3;
+			
+			String sql = query.getProperty("userStudyLimit");
+
+			try {
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setInt(1, userNo);
+
+				rset = pstmt.executeQuery();
+
+				while (rset.next()) {
+					if(rset.getInt("LIMITNUMBER") == 6)
+						result = rset.getInt("LIMITNUMBER");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			return result;
+		}
 	
 	
 
