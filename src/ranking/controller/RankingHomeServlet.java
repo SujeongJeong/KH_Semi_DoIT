@@ -42,6 +42,7 @@ public class RankingHomeServlet extends HttpServlet {
 		
 		// 나의 랭킹 가져오기
 		Ranking myRanking = new RankingService().selectMyRanking(userNo);
+		List<Study> myStudy = new StudyService().selectMyStudy(userNo);
 		
 		// 기본값인 전체, 어제 랭킹 불러오기
 		List<Ranking> rankinglist = new RankingService().selectYesterday();
@@ -60,6 +61,7 @@ public class RankingHomeServlet extends HttpServlet {
 		
 		request.setAttribute("nav1", "ranking");
 		request.setAttribute("Ranking", rankinglist);
+		request.setAttribute("Study", myStudy);
 		request.setAttribute("myRanking", myRanking);
 		request.getRequestDispatcher("/WEB-INF/views/ranking/ranking.jsp").forward(request, response);
 	}

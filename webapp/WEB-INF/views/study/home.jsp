@@ -533,10 +533,12 @@ function plusBtnEvent(isMore){
 		searchParams.page +=1;
 	} else {
 		if(searchParams.keyword == keyword && searchParams.category == category && searchParams.canJoin == canJoin){
-		<%--	alert('값 변경됨 하지만 더보기 눌러서 페이지 증가');--%>
+
+		<%--	alert('값 변경됨 하지만 더보기 눌러서 페이지 증가'); --%>
 			searchParams.page +=1;
 		} else{
-			<%--		alert('값 변경됨 페이지 1');--%>
+		<%--	alert('값 변경됨 페이지 1'); --%>
+
 			searchParams.page = 1;
 		}
 	}
