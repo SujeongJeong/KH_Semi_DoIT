@@ -211,13 +211,7 @@ public class StudyService {
 	}
 
 		
-		  public int userStudyLimit(int userNo) { 
-			  Connection conn = getConnection();
 		  
-			  int result = sd.userStudyLimit(conn, userNo);
-			  
-			  return result; 
-		  }
 		 
 
 		public int snameCheck(String sname) {
@@ -230,12 +224,30 @@ public class StudyService {
 			return result;
 		}
 
-		public int getSExpirationDate(int userNo) {
+		//유저가 구매한 상품의 유효기간의 값.
+	      public Purchase purchaseLimit(int user_no) {
+	         Connection conn= getConnection();
+	           
+	           Purchase result = sd.purchaseLimit(conn, user_no);
+	          
+	              close(conn);
+	           
+	           return result;
+	        }
+
+		// 타이머 스탑워치 시간 저장
+		public int insertTime(int loginUserNo, int s_no, int dbSaveTime) {
 			Connection conn = getConnection();
 			
-			int PeriodLimit = sd.getSExpirationDate(conn, userNo);
+			int result = sd.insertTime(conn,loginUserNo,s_no,dbSaveTime);
 			
-			return PeriodLimit;
+			if(result>0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			return result;
 		}
 
 	

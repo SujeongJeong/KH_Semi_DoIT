@@ -330,7 +330,7 @@ public class MemberDao {
 		}
 		
 		// 스터디방에 가입된 회원 목록 조회
-	      public List<Member> memberInfoForStudy(Connection conn, int s_no) {
+	      public List<Member> memberInfoForStudy(Connection conn, int s_no, int createRoomUser_no) {
 	         PreparedStatement pstmt = null;
 	         ResultSet rset = null;
 	         List<Member> memberInfoForStudy = new ArrayList<>();
@@ -341,9 +341,11 @@ public class MemberDao {
 	            pstmt.setInt(1, s_no);
 	            rset = pstmt.executeQuery();
 	            while(rset.next()) {
-	               memberInfoForStudy.add(new Member(rset.getInt("USER_NO"),
-	                                         rset.getString("NICKNAME"),
-	                                         rset.getString("PROFILE_IMG")));
+	            	if(rset.getInt("USER_NO") != createRoomUser_no) {
+		               memberInfoForStudy.add(new Member(rset.getInt("USER_NO"),
+		                                         rset.getString("NICKNAME"),
+		                                         rset.getString("PROFILE_IMG")));
+		            }
 	            }
 	         } catch (SQLException e) {
 	            e.printStackTrace();

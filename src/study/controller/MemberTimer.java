@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import study.model.service.StudyService;
+
 /**
  * Servlet implementation class MemberTimer
  */
@@ -37,19 +39,19 @@ public class MemberTimer extends HttpServlet {
 
 		int dbSaveTime = Integer.parseInt(request.getParameter("dbSaveTime"));
 		int loginUserNo = Integer.parseInt(request.getParameter("loginUserNo"));
+		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		
-		System.out.println(dbSaveTime);
-		System.out.println(loginUserNo);
+//		System.out.println(dbSaveTime);
+//		System.out.println(loginUserNo);
+//		System.out.println(s_no);
 		
-		
-		
-		
-		
+		int result = new StudyService().insertTime(loginUserNo,s_no,dbSaveTime);
 		
 		response.setCharacterEncoding("UTF-8");
 		
-		response.getWriter();
-	
+		if(result>0) {
+			response.getWriter();
+		} 
 	
 	}
 

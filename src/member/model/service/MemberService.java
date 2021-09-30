@@ -188,10 +188,10 @@ public class MemberService {
 	}
 	
 	// 스터디방에 가입된 회원 목록 조회
-	   public List<Member> memberInfoForStudy(int s_no) {
+	   public List<Member> memberInfoForStudy(int s_no, int createRoomUser_no) {
 	      Connection conn = getConnection();
 	      
-	      List<Member> memberInfoForStudyList = md.memberInfoForStudy(conn,s_no);
+	      List<Member> memberInfoForStudyList = md.memberInfoForStudy(conn,s_no,createRoomUser_no);
 	      
 	      close(conn);
 	      

@@ -110,7 +110,7 @@ public class createStudyRoom extends HttpServlet {
 			else
 				ssp3 += ssp2[i] + "-";
 		}
-	System.out.println("ssp3 : " + ssp3);
+//	System.out.println("ssp3 : " + ssp3);
 		String[] sep2 = sep.split("/");
 		String sep3 = "";
 		for(int i = 0; i < sep2.length; i++) {
@@ -120,7 +120,7 @@ public class createStudyRoom extends HttpServlet {
 				sep3 += sep2[i] + "-";
 		}
 		
-		System.out.println("sep3 : " + sep3);
+//		System.out.println("sep3 : " + sep3);
 //		System.out.println("dateString : "+ ssp);
 //		System.out.println("dateString : "+ sep);
 //		System.out.println("dateString : "+ sst);

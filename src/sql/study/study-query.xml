@@ -108,6 +108,7 @@
 		, S_ENDTIME
 		, S_EXPLAIN
 		, S_NOTICE
+		, USER_NO
 		, CNAME
 		, NICKNAME
 		FROM STUDY
@@ -226,23 +227,36 @@ WHERE RNUM BETWEEN ? AND ?
 			FROM STUDY
 		 WHERE S_NAME = ?
    </entry>
-   <entry key="userStudyLimit">
+   
+   <entry key="purchaseLimit">
    SELECT
-          S_TO_LIMIT
-   FROM PRODUCT P
-   JOIN PURCHASE PR ON(P.PRODUCT_NO = PR.PRODUCT_NO)
-   JOIN MEMBER M ON(PR.USER_NO = M.USER_NO)
-   WHERE M.USER_NO = ?
-   <![CDATA[AND TO_CHAR(PR.EXPIRATION_DATE, 'yyyymmdd') >= TO_CHAR(SYSDATE, 'yyyymmdd')]]>
+               MAX(PR.S_LIMIT)
+             , MAX(PR.S_TO_LIMIT)
+             , MAX(PR.TODO_LIMIT)
+             , MAX(PR.S_LIMIT_DATE)
+      FROM PRODUCT P
+      JOIN PURCHASE PR ON(P.PRODUCT_NO = PR.PRODUCT_NO)
+      WHERE PR.USER_NO =?
+      <![CDATA[AND TO_CHAR(PR.EXPIRATION_DATE, 'yyyymmdd') >= TO_CHAR(SYSDATE, 'yyyymmdd')]]>
    </entry>
-   <entry key="getSExpirationDate">
-   	SELECT
-          S_PERIOD_LIMIT
-   FROM PRODUCT P
-   JOIN PURCHASE PR ON(P.PRODUCT_NO = PR.PRODUCT_NO)
-   JOIN MEMBER M ON(PR.USER_NO = M.USER_NO)
-   WHERE M.USER_NO = ?
-   <![CDATA[AND TO_CHAR(PR.EXPIRATION_DATE, 'yyyymmdd') >= TO_CHAR(SYSDATE, 'yyyymmdd')]]>
+  
+   
+   <entry key="insertTime">
+   	INSERT 
+	INTO MEMBER_TIMER
+	(
+		S_DAY,
+		USER_NO,
+		S_NO,
+		S_TIME
+	)
+	VALUES
+	(
+		SYSDATE,
+		?,
+		?,
+		?
+	)
    </entry>
 </properties>
 

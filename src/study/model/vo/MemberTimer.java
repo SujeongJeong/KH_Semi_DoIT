@@ -15,6 +15,9 @@ public class MemberTimer {
 	private int studyTime;
 	private String studyTimeStr; // 마이페이지에 공부 기록 포맷팅해서 넘기기 위한 변수
 	
+	
+	
+	
 	public MemberTimer(Date studyDate, int studyTime) {
 		super();
 		this.studyDate = studyDate;
@@ -28,6 +31,14 @@ public class MemberTimer {
 		this.studyTimeStr = studyTimeStr;
 	}
 
+	public MemberTimer(Date studyDate, int studyTime, String studyTimeStr, int studyNo) {
+	      super();
+	      this.studyDate = studyDate;
+	      this.studyTime = studyTime;
+	      this.studyTimeStr = studyTimeStr;
+	      this.studyNo = studyNo;
+	   }
+	
 	public Date getStudyDate() {
 		return studyDate;
 	}
