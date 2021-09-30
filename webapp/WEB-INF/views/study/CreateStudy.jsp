@@ -259,7 +259,7 @@
 		$('.radio_to').click(function(){
 			if(s_limitdate != 0) {
 				$( '.datepicker' ).datepicker( "destroy" );
-				$('.datepicker').datepicker({ dateFormat: 'yy/mm/dd',minDate : 0, maxDate : "+"+s_limitdate+"d"});
+				$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd',minDate : 0, maxDate : "+"+s_limitdate+"d"});
 			}
 		});
 	}
@@ -267,7 +267,7 @@
 	// 
 	$('#TO_5').click(function(){
 		$( '.datepicker' ).datepicker( "destroy" );
-		$('.datepicker').datepicker({ dateFormat: 'yy/mm/dd',minDate : 0, maxDate : '+3m'});
+		$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd',minDate : 0, maxDate : '+3m'});
 	});
 	
 	
