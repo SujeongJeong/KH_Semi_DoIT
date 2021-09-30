@@ -46,8 +46,7 @@ public class QnaReportServlet extends HttpServlet {
 		
 		String view = "";
 		if(result > 0) {
-			request.getSession().setAttribute("msg", "신고처리 중입니다.");
-			view = "WEB-INF/views/qna/qnaDetailView.jsp?board_no="+ bid;
+			view = "WEB-INF/views/qna/ReportForm.jsp";
 		} else {
 			view = "WEB-INF/views/qna/qnaReportForm.jsp?board_no="+ bid;
 		}
