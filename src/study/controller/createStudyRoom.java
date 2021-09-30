@@ -51,9 +51,9 @@ public class createStudyRoom extends HttpServlet {
 		
 		request.setAttribute("prLimit", prLimit);
 	
-		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/CreateStudy.jsp");
-		
 		request.setAttribute("nav1", "study");
+		
+		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/CreateStudy.jsp");
 		view.forward(request, response);
 	}
 

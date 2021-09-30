@@ -201,10 +201,10 @@ h2, h3 {
 						<c:out value="가입하기" />
 						
 						<c:if test="${ memberJoinStudyNum < userStudyLimit}">
-							<c:if test="${ StudyMemberCount +1 < studyRoom.s_to }">
+							<c:if test="${ StudyMemberCount < studyRoom.s_to }">
 								<script>
 									function studyBtn() {
-										let cResult = confirm("가입하시겠습니까?");
+										var cResult = confirm("가입하시겠습니까?");
 										if (cResult == true) {
 											document.forms.joinStudyValues.action = "${contextPath}/study/joinStudy";
 											document.forms.joinStudyValues.submit();
@@ -212,7 +212,7 @@ h2, h3 {
 									}
 								</script>
 							</c:if>
-							<c:if test="${ StudyMemberCount +1 == studyRoom.s_to }">
+							<c:if test="${ StudyMemberCount  == studyRoom.s_to }">
 								<script>
 									function studyBtn() {
 										alert("정원이 초과되어 가입하실 수 없습니다.");

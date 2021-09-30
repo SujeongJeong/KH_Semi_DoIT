@@ -133,6 +133,11 @@ public class StudyHomeServlet extends HttpServlet {
 			MemberJoinStudy userJoinStudyNum = new StudyService().userJoinStudyNum(user_no);
 //			System.out.println("userJoinStudyNum : "+ userJoinStudyNum);
 			request.setAttribute("userJoinStudyNum", userJoinStudyNum);
+			
+			
+			int userStudyLimit = new StudyService().userStudyLimit(user_no); 
+	         
+	        request.setAttribute("userStudyLimit", userStudyLimit);
 		}
 		
 //		System.out.println(StudyList);

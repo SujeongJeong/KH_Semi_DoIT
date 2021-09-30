@@ -287,7 +287,7 @@
 		<div class="search createStudy">
 			<button class="studyCreateBtn" onclick="createBtnEvent()">스터디 만들기</button>
 			<c:if test="${ loginUser != null }">
-				<c:if test="${ userJoinStudyNum.userJoinStudyNum < userStudyLimit }">
+				<c:if test="${ userJoinStudyNum.userJoinStudyNum < userStudyLimit  }">
 					<script>
 					function createBtnEvent(){
 						location.href='<%=request.getContextPath()%>/study/createStudy';
