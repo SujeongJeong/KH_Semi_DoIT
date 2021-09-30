@@ -238,8 +238,10 @@
 	<script>
 	 // todolist 추가 
 		$(".add").click(function(){	
-			var size = $("#todoList").children().length;
+			var size = $(".todo-list li").length;
 			var limit = ${limit};
+			console.log(size);
+			console.log(limit);
 			if( size < limit){
 				if( $(".scrollBlind ul").hasClass("list")){
 					$(".list").append("<li><textarea maxlength='48'></textarea></li>");
