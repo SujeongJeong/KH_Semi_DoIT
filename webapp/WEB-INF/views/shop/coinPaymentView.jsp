@@ -120,7 +120,7 @@ button[id$=payment] {
 				<input type="text" name="result" id="result" disabled>원
 				<div id="charge_area">충전 할 코인 : <input type="text" id="charge_input"  onkeyup="calc(this.value)" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"   
 					min= 1 placeholder="충전 할 코인 수를 입력하세요." required></div>
-				 <textarea class="textarea" rows="10" cols="60" name="content" readonly>다양한 상품을 구매하고 공부의 재미를 더하세요!&#10;&#10;포인트를 구매해서 최대 ㅇㅇ 스터디를 개설하고,&#10;좋은 경쟁을 해보세요.&#10;&#10;다양한 아이템을 통해 공부의 재미도 느낄 수 있습니다.&#10; 
+				 <textarea class="textarea" rows="10" cols="60" name="content" readonly>다양한 상품을 구매하고 공부의 재미를 더하세요!&#10;&#10;포인트를 구매해서 최대 6개 스터디를 개설하고,&#10;입장하여 좋은 경쟁을 해보세요.&#10;&#10;다양한 아이템을 통해 공부의 재미도 느낄 수 있습니다.&#10; 
 상품 가격에 부가가치세가 포함되어 있으며&#10; 사용하지 않은 코인은 마이페이지에서 환불 가능합니다.&#10;</textarea>
 				 <div class="btn_area">
 				 <button class=chargebtn type="button" >충전</button>
