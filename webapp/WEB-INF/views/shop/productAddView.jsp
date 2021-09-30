@@ -177,7 +177,7 @@
 					<input type=radio id="limit3" name="limit"  style="display:none"> 오늘의 할일 수 : 
 					<input type="number" class="limit_number"  id="todoListLimit" name="todoListLimit" min=5 required placeholder="5" > 개 <br>
 					<input type=radio id="limit4" name="limit" style="display:none"> 스터디방 기간연장 상품 :
-					<input type="number" class="limit_number" id="limitProduct" name="limitProduct" min=5 required placeholder="5" > 일
+					<input type="number" class="limit_number" id="limitProduct" name="limitProduct" min=0 required placeholder="0" > 일
 					
 					
 					
@@ -228,12 +228,7 @@
 				 $(this).prev().click();
 				 }
 			});
-		
-			 
-			 if(){
-					opener.parent.location.reload();
-					  window.close();
-				}
+	
 				
 
 		</script>
