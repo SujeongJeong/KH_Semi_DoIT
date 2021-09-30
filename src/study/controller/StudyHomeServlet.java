@@ -142,7 +142,7 @@ public class StudyHomeServlet extends HttpServlet {
 			response.setContentType("application/json; charset=utf-8");
 			new Gson().toJson(StudyList, response.getWriter());
 		} else {
-			RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/studyMemberManagement.jsp");
+			RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/study/home.jsp");
 			view.forward(request, response);
 		}
 	}
