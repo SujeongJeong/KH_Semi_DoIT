@@ -160,17 +160,7 @@ public class createStudyRoom extends HttpServlet {
 			Study s2 = new StudyService().selectStudyRoomOnlySNo(user_no);
 			int s_no = s2.getS_no();
 				
-			int userStudyLimit = new StudyService().userStudyLimit(user_no); 
-			
-			if(userStudyLimit == 0) {
-				userStudyLimit = 3;
-			}
-			request.setAttribute("userStudyLimit", userStudyLimit);
-			
-		
-			
-			
-			
+			 
 			
 			
 			

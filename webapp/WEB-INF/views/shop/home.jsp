@@ -103,13 +103,18 @@
 	border-radius: 10px;
 }
 
+
+
 .premium_product:hover > .premium_img{
 	border-color: #f5ff10;
+	
 }
 
 .onmouseover {
 	cursor: pointer;
 	transform:scale(1.05);
+	border-color: #f5ff10;
+	
 }
 
 
@@ -237,7 +242,7 @@
 			 	}else{
 			 		login();
 			 	}
-		};
+		}
 	</script>
 
 	<footer>

@@ -31,7 +31,7 @@
 
 #admin-nav{
     width: 160px;
-    padding-left :5%;
+    padding-left :10%;
     
 }
 
@@ -65,7 +65,7 @@
 /*---------------------------------------------- admin content -----------------------------------------------*/
 
 .content { 
-	margin : 50px 0 50px 110px;
+	margin : 50px auto auto 11%;
 	width: 850px;
 	} 
 

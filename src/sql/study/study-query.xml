@@ -165,19 +165,21 @@
 		  WHERE S_NO=? 
 	</entry>
 	<entry key="selectMyStudy">
-      SELECT
+            SELECT
              S.S_NO
            , S_NAME
            , S_TO
            , CNAME
            , FILE_PATH
            , CHANGE_NAME
+           , (SELECT COUNT(*) FROM JOINSTUDY M WHERE M.S_NO = S.S_NO) AS "studyMemberNum"
+           , S_DAY
         FROM STUDY S
         JOIN JOINSTUDY M ON(S.S_NO = M.S_NO)
         JOIN CATEGORY USING(CID)
         JOIN ATTACHMENT A ON(S.S_NO = A.S_NO)
         WHERE S_STATUS = 'Y'
-           AND M.USER_NO = ?
+          AND M.USER_NO = ?
    </entry>
    <entry key="selectStudyRoomOnlySNo">
    		SELECT
@@ -264,50 +266,5 @@ WHERE RNUM BETWEEN ? AND ?
 	 	 WHERE S_NO = ?
 	       AND USER_NO = ?
    </entry>
-   
-   <entry key="userStudyLimit">
-   SELECT
-          MAX(S_LIMIT)          
-   FROM PRODUCT P
-   JOIN PURCHASE PR ON(P.PRODUCT_NO = PR.PRODUCT_NO)
-   JOIN MEMBER M ON(PR.USER_NO = M.USER_NO)
-   WHERE M.USER_NO = ?
-   <![CDATA[AND TO_CHAR(PR.EXPIRATION_DATE, 'yyyymmdd') >= TO_CHAR(SYSDATE, 'yyyymmdd')]]>
-   </entry>
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+  
 </properties>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -161,7 +161,7 @@
 				<div class="inputarea"> 
 				<h3>상품 코인 | 기간</h3>
 					<input type="number" class="coin_count" name="price" min= 1 required placeholder="Coin 입력"> Coin / 
-					<input type="number" class="expirtion" name="expirtion" min= 1 required placeholder="숫자만 입력하세요"> 일
+					<input type="number" class="expirtion" name="expirtion"  required placeholder="숫자만 입력하세요"> 일
 				</div>
 				
 				<div class="limit-wrapper">
