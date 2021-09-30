@@ -77,7 +77,12 @@
 		background:#5FC5FF;
 		border-radius : 5px; 
 	}
+	#joinBtn:disabled {
+		color:lightgray;
+	}
+	
 
+}
 </style>
 </head>
 <body>
@@ -138,11 +143,13 @@
 	            });
 
 	            $("#termsAll").prop("checked", is_checked);
+	            
 	        });
 	      }); 
 	
 	    var isUsable_e = false;
 		var isUsable_n = false;
+		$("#joinBtn").attr("disabled", true);
 		
 		$("#emailCheck").click(function(){
 			// input userId 변수
@@ -175,8 +182,7 @@
 								isUsable_e = false; // 사용 불가능한 아이디라는 flag 값
 							}
 						}
-						// 아이디 중복 체크 후 중복이 아니며 사용하겠다고 선택한 경우에만
-						// joinBtn disable 제거
+						
 						if(isUsable_e && isUsable_n) {
 							$("#joinBtn").removeAttr("disabled");
 						} else {
@@ -223,8 +229,7 @@
 								isUsable_n = false; // 사용 불가능한 아이디라는 flag 값
 							}
 						}
-						// 아이디 중복 체크 후 중복이 아니며 사용하겠다고 선택한 경우에만
-						// joinBtn disable 제거
+						
 						if(isUsable_e && isUsable_n) {
 							$("#joinBtn").removeAttr("disabled");
 						} else {
@@ -267,6 +272,9 @@
 			
 			return true;
 		}
+		
+		
+		
 		
 		function openPopup(url, title, width, height) {
 			let left = (document.body.clientWidth/2) - (width/2);
