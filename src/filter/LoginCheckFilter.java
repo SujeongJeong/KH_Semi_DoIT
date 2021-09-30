@@ -66,7 +66,7 @@ public class LoginCheckFilter implements Filter {
             // 로그인 하지 않은 상태에서 허가되지 않은 요청을 한 상황이므로
             if(loginUser == null) {
                hreq.setAttribute("msg", "올바르지 않은 요청입니다.");
-               hreq.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
+               hreq.getRequestDispatcher("/WEB-INF/views/my/loginForm.jsp").forward(request, response);
                return; // -> 아래의 doFilter 요청으로 서블릿으로 넘어가지 않도록
             }
          }
