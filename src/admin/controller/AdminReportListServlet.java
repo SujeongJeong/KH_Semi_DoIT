@@ -1,11 +1,16 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import admin.model.service.AdminService;
+import qna.model.vo.Report;
 
 /**
  * Servlet implementation class AdminReportList
@@ -26,18 +31,22 @@ public class AdminReportListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String view = "";
-		// 세션에 로그인 유저 객체가 없다면
-//		if(request.getSession().getAttribute("loginUser") == null) {
-//			// 세션에 로그인 유저 객체가 없다면 에러페이지로 이동
-//			request.setAttribute("msg", "올바르지 않은 요청입니다.");
-//			view = "WEB-INF/views/common/errorpage.jsp";
-//		} else {
-//			// 비밀번호 변경 창으로 이동
-//			view = "WEB-INF/views/qna/qnaReportForm.jsp";
-//		}
-		view = "WEB-INF/views/admin/reportListForm.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		
+		int br_no =  Integer.parseInt(request.getParameter("br_no"));
+		String type =  request.getParameter("type");
+		
+
+		List<Report> r = null;
+		
+		if(type.equals("게시판")) {
+			r = new AdminService().selectBoardReportList(br_no);			
+		} else {
+			r = new AdminService().selectReplyReportList(br_no);
+		}
+		
+		request.setAttribute("reportList", r);
+	
+		request.getRequestDispatcher("WEB-INF/views/admin/reportListForm.jsp").forward(request, response);
 	}
 
 	/**

@@ -37,8 +37,8 @@ public class QnaReportServlet extends HttpServlet {
 		int bid = Integer.parseInt(request.getParameter("board_no"));
 		int user_no = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
-		System.out.println("bid:"+bid);
-		System.out.println("user_no:"+user_no);
+//		System.out.println("bid:"+bid);
+//		System.out.println("user_no:"+user_no);
 		Report r = new Report(user_no);
 		BoardReport br = new BoardReport(bid);
 		
@@ -48,7 +48,7 @@ public class QnaReportServlet extends HttpServlet {
 		
 		String view = "";
 		if(result > 0) {
-			System.out.println("result:"+result);
+//			System.out.println("result:"+result);
 			view = "WEB-INF/views/qna/ReportForm.jsp";
 		} else {
 			view = "WEB-INF/views/qna/qnaReportForm.jsp?board_no="+ bid;
@@ -76,10 +76,10 @@ public class QnaReportServlet extends HttpServlet {
 		
 		int result2 = new ReportService().memberBoardReportCount(board_no);
 		
-		System.out.println("rc : " +report_content);
-		System.out.println("etcc : " + etc_comment);
-		System.out.println("user :  " + user_no);
-		System.out.println("board_no" + board_no);
+//		System.out.println("rc : " +report_content);
+//		System.out.println("etcc : " + etc_comment);
+//		System.out.println("user :  " + user_no);
+//		System.out.println("board_no" + board_no);
 
 		
 		if(result1 > 0 && result2 > 0) {

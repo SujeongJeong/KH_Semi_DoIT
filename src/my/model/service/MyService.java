@@ -6,6 +6,8 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -274,4 +276,41 @@ public class MyService {
 		}
 		return lastAvgStudyTime;
 	}
+
+	public int selectRefundNo(int userNo) {
+		Connection conn = getConnection();
+		
+		int refundNo = md.selectRefundNo(conn, userNo);
+		
+		return refundNo;
+	}
+
+	public int modifyUserCoin(int refundNo) {
+	      Connection conn = getConnection();
+	      
+	      int result = md.modifyUserCoin(conn, refundNo);
+	      
+	      if(result > 0) {
+	         commit(conn);
+	      } else {
+	         rollback(conn);
+	      }
+	      
+	      close(conn);
+	      
+	      return result;
+	   }
+
+	public int selectUserCoin(int userNo) {
+		Connection conn = getConnection();
+	      
+	      int userCoin = md.modifyUserCoin(conn, userNo);
+	 
+	      
+	      return userCoin;
+	}
+
+	
+
+
 }

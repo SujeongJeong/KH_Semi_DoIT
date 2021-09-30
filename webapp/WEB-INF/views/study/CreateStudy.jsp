@@ -79,17 +79,17 @@
 			action="<%=request.getContextPath()%>/study/createStudy" enctype="multipart/form-data" onsubmit="return validate();">
 			<span class="span1"><label class="title">스터디 배경화면</label></span> 
 			<input type="file" id="studyImage" name="s_image" value="studyImage" 
-			accept="image/gif.image/jpeg,image/png">
+			accept="image/gif.image/jpeg,image/png" required>
 			<div id="imgArea"></div>
 
 			<hr>
 			<span class="span1"><label class="title" id="studyTitle">스터디 이름</label></span> 
 			<input type="text" name="s_name" size="20" placeholder="스터디 이름을 입력하세요"
-				maxlength="20">
+				maxlength="20" required>
 			<hr>
 			<span class="span1"><label class="title">스터디 정원수</label></span> 
 			<span class="studyTO"> 
-				<input type="radio" name="s_to" id="TO_5" value="5"> 
+				<input type="radio" name="s_to" id="TO_5" value="5" required> 
 				<label for="TO_5">5인(기본)</label> 
 				<input type="radio" name="s_to" id="TO_10" value="10" class="radio_to"> 
 				<label for="TO_10">10인(유료)</label> 
@@ -101,7 +101,7 @@
 			<hr>
 			<span class="span1"><label class="title">요일 설정</label></span> 
 			<span class="studyDay"> 
-				<input type="checkbox" name="s_day"	id="monday" value="월"> 
+				<input type="checkbox" name="s_day"	id="monday" value="월" required> 
 				<label for="monday">월</label> 
 				<input type="checkbox" name="s_day" id="tuesday" value="화"> 
 				<label for="tuesday">화</label> 
@@ -119,13 +119,13 @@
 			<hr>
 			
 			<span class="span1"><label class="title">기간 설정</label></span>
-			시작일 : <input type="text" name="s_startPeriod" class="datepicker" id="s_startPeriod"> 
-			종료일 : <input type="text" name="s_endPeriod" class="datepicker" id="s_endPeriod">
+			시작일 : <input type="text" name="s_startPeriod" class="datepicker" id="s_startPeriod" required> 
+			종료일 : <input type="text" name="s_endPeriod" class="datepicker" id="s_endPeriod" required>
 			<hr>
 			<span class="span1"><label class="title">시간 설정</label></span> 
-			시작 시간 :	<input type="time" id="studyStartTime" name="s_startTime"> 
+			시작 시간 :	<input type="time" id="studyStartTime" name="s_startTime" required> 
 			<label class="endTime"> 종료 시간 :</label> 
-			<input type="time" id="studyEndTime" name="s_endTime">
+			<input type="time" id="studyEndTime" name="s_endTime" required>
 			
 			<hr>
 			<span class="span1"><label class="title">카테고리</label></span> <span
@@ -159,14 +159,14 @@
 			<span class="span1 span2"><label class="title title2">스터디 소개<br>(설명)
 			</label></span>
 			<textarea name="s_explain" id="studyExplain" cols="80" rows="5"
-				placeholder="스터디 소개 및 설명을 입력하세요(최대800자)"></textarea>
+				placeholder="스터디 소개 및 설명을 입력하세요(최대800자)" required></textarea>
 			<hr>
 			<span class="span1 span2"><label class="title title2">스터디
 					공지사항<br>(주의사항,규칙)
 			</label></span>
 
 			<textarea name="s_notice" id="studyNotice" cols="80" rows="5"
-				placeholder="스터디 공지사항(주의사항/규칙 등)을 입력하세요(최대800자)"></textarea>
+				placeholder="스터디 공지사항(주의사항/규칙 등)을 입력하세요(최대800자)" required></textarea>
 			<br> <br>
 			<input type="hidden" name="userNo" value="${ loginUser.userNo }">
 			
@@ -280,7 +280,18 @@
 	      }
 	}
 	
-		
+	var flag = false; 
+
+    $("input[name='wr1[]']").each( function () {
+        if (this.checked) { 
+            flag = !flag;  
+            return; 
+        }
+    });
+    if (!flag) {
+        alert("종류는 하나 이상 체크해주세요.");
+        return false;
+    }
 	
 	
 

@@ -40,22 +40,6 @@
 		SET COMPLETE_DATE = SYSDATE
 		WHERE REFUND_NO = ?
 	</entry>
-	<entry key="modifyUserCoin">
-		UPDATE MEMBER
-		    SET USER_COIN = USER_COIN - (SELECT REFUND_COIN
-		                                    FROM REFUND
-		                                    WHERE REFUND_NO = ?)
-		     , MODIFY_DATE = SYSDATE
-		    WHERE USER_NO = (SELECT USER_NO
-		                        FROM REFUND
-		                        WHERE REFUND_NO = ?)
-	</entry>
-	<entry key="selectUserCoin">
-		SELECT
-			USER_COIN
-		 FROM MEMBER
-		 WHERE USER_NO = ?
-	</entry>
 	<entry key="getMemberCount">
 		SELECT
 			   COUNT(*)
@@ -284,10 +268,420 @@
 			SET S_STATUS = 'N'
 		WHERE S_NO = ?
 	</entry>
-	<entry key="getAllListCount">
-	SELECT COUNT(*)FROM REPORT
-	</entry>
+<!-- 	<entry key="getAllListCount">
+	SELECT SUM(A)
+	  FROM (SELECT
+			     COUNT(*) AS A
+				 FROM REPORT R
+				 JOIN BOARDREPORT BR ON (R.REPORT_NO = BR.REPORT_NO)
+				 JOIN BOARD B ON (BR.BOARD_NO = B.BOARD_NO)
+				 JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
+				 WHERE M.STATUS = 'Y'
+	 UNION ALL
+			 SELECT
+				    COUNT(*) AS A
+				 FROM REPORT R
+				 JOIN REPLYREPORT RR ON (R.REPORT_NO = RR.REPORT_NO)
+				 JOIN REPLY RE ON (RR.REPLY_NO = RE.REPLY_NO)
+				 JOIN MEMBER M ON (RE.USER_NO = M.USER_NO)
+				 WHERE M.STATUS = 'Y'
+			 )
+	</entry> -->
 	<entry key="getBoardListCount">
+	SELECT
+		     COUNT(*)
+		 FROM REPORT R
+		 JOIN BOARDREPORT BR ON (R.REPORT_NO = BR.REPORT_NO)
+		 JOIN BOARD B ON (BR.BOARD_NO = B.BOARD_NO)
+		 JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
+		 WHERE M.STATUS = 'Y'
+	</entry>
+	<entry key = "getReplyListCount">
+	SELECT
+		    COUNT(*)
+		 FROM REPORT R
+		 JOIN REPLYREPORT RR ON (R.REPORT_NO = RR.REPORT_NO)
+		 JOIN REPLY RE ON (RR.REPLY_NO = RE.REPLY_NO)
+		 JOIN MEMBER M ON (RE.USER_NO = M.USER_NO)
+		 WHERE M.STATUS = 'Y'
+	</entry>
+	<!-- <entry key ="getAllLatestList">
+	 SELECT
+                      REPORT_NO
+                    , REPORT_DATE
+                    , NICKNAME
+                    , R_USER_NO
+                    , SUBJECT
+                    , BR_NO
+                    , BOARD_NO
+                    , RCOUNT
+                    , ALLCOUNT
+	FROM (SELECT 
+				ROWNUM RNUM,
+                BLIST.*
+    FROM(SELECT
+                      R.REPORT_NO
+                    , REPORT_DATE
+                    , M.NICKNAME
+                    , M.USER_NO "R_USER_NO"
+                    , NVL2('BR.BOARD_NO','게시판','NULL일경우 반환값') SUBJECT
+                    , BR.BOARD_NO "BR_NO"
+                    , BR.BOARD_NO
+                    , B.REPORT_COUNT RCOUNT
+                    , M.REPORT_COUNT ALLCOUNT
+                 FROM REPORT R
+                 JOIN BOARDREPORT BR ON (R.REPORT_NO = BR.REPORT_NO)
+                 JOIN BOARD B ON (BR.BOARD_NO = B.BOARD_NO)
+                 JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
+                 WHERE M.STATUS = 'Y'
+                 
+                 UNION
+                 
+                 SELECT
+                      R.REPORT_NO
+                    , REPORT_DATE
+                    , M.NICKNAME
+                    , M.USER_NO "R_USER_NO"
+                    , NVL2('RE.BOARD_NO','댓글','NULL일경우 반환값') SUBJECT
+                    , RE.REPLY_NO "BR_NO"
+                    , RE.BOARD_NO
+                    , RE.REPORT_COUNT RCOUNT
+                    , M.REPORT_COUNT ALLCOUNT
+                 FROM REPORT R
+                 JOIN REPLYREPORT RR ON (R.REPORT_NO = RR.REPORT_NO)
+                 JOIN REPLY RE ON (RR.REPLY_NO = RE.REPLY_NO)
+                 JOIN MEMBER M ON (RE.USER_NO = M.USER_NO)
+                 WHERE M.STATUS = 'Y'
+                 ORDER BY REPORT_DATE DESC) BLIST)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key ="getAllRcountList">
+ 	SELECT
+                      REPORT_NO
+                    , REPORT_DATE
+                    , NICKNAME
+                    , R_USER_NO
+                    , SUBJECT
+                    , BR_NO
+                    , BOARD_NO
+                    , RCOUNT
+                    , ALLCOUNT
+	FROM (SELECT 
+				ROWNUM RNUM,
+                BLIST.*
+    FROM(SELECT
+                      R.REPORT_NO
+                    , REPORT_DATE
+                    , M.NICKNAME
+                    , M.USER_NO "R_USER_NO"
+                    , NVL2('BR.BOARD_NO','게시판','NULL일경우 반환값') SUBJECT
+                    , BR.BOARD_NO "BR_NO"
+                    , BR.BOARD_NO
+                    , B.REPORT_COUNT RCOUNT
+                    , M.REPORT_COUNT ALLCOUNT
+                 FROM REPORT R
+                 JOIN BOARDREPORT BR ON (R.REPORT_NO = BR.REPORT_NO)
+                 JOIN BOARD B ON (BR.BOARD_NO = B.BOARD_NO)
+                 JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
+                 WHERE M.STATUS = 'Y'
+                 
+                 UNION
+                 
+                 SELECT
+                      R.REPORT_NO
+                    , REPORT_DATE
+                    , M.NICKNAME
+                    , M.USER_NO "R_USER_NO"
+                    , NVL2('RE.BOARD_NO','댓글','NULL일경우 반환값') SUBJECT
+                    , RE.REPLY_NO "BR_NO"
+                    , RE.BOARD_NO
+                    , RE.REPORT_COUNT RCOUNT
+                    , M.REPORT_COUNT ALLCOUNT
+                 FROM REPORT R
+                 JOIN REPLYREPORT RR ON (R.REPORT_NO = RR.REPORT_NO)
+                 JOIN REPLY RE ON (RR.REPLY_NO = RE.REPLY_NO)
+                 JOIN MEMBER M ON (RE.USER_NO = M.USER_NO)
+                 WHERE M.STATUS = 'Y'
+                 ORDER BY RCOUNT DESC) BLIST)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key ="getAlltMcountList">
+	 SELECT
+                      REPORT_NO
+                    , REPORT_DATE
+                    , NICKNAME
+                    , R_USER_NO
+                    , SUBJECT
+                    , BR_NO
+                    , BOARD_NO
+                    , RCOUNT
+                    , ALLCOUNT
+	FROM (SELECT 
+				ROWNUM RNUM,
+                BLIST.*
+    FROM(SELECT
+                      R.REPORT_NO
+                    , REPORT_DATE
+                    , M.NICKNAME
+                    , M.USER_NO "R_USER_NO"
+                    , NVL2('BR.BOARD_NO','게시판','NULL일경우 반환값') SUBJECT
+                    , BR.BOARD_NO "BR_NO"
+                    , BR.BOARD_NO
+                    , B.REPORT_COUNT RCOUNT
+                    , M.REPORT_COUNT ALLCOUNT
+                 FROM REPORT R
+                 JOIN BOARDREPORT BR ON (R.REPORT_NO = BR.REPORT_NO)
+                 JOIN BOARD B ON (BR.BOARD_NO = B.BOARD_NO)
+                 JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
+                 WHERE M.STATUS = 'Y'
+                 
+                 UNION
+                 
+                 SELECT
+                      R.REPORT_NO
+                    , REPORT_DATE
+                    , M.NICKNAME
+                    , M.USER_NO "R_USER_NO"
+                    , NVL2('RE.BOARD_NO','댓글','NULL일경우 반환값') SUBJECT
+                    , RE.REPLY_NO "BR_NO"
+                    , RE.BOARD_NO
+                    , RE.REPORT_COUNT RCOUNT
+                    , M.REPORT_COUNT ALLCOUNT
+                 FROM REPORT R
+                 JOIN REPLYREPORT RR ON (R.REPORT_NO = RR.REPORT_NO)
+                 JOIN REPLY RE ON (RR.REPLY_NO = RE.REPLY_NO)
+                 JOIN MEMBER M ON (RE.USER_NO = M.USER_NO)
+                 WHERE M.STATUS = 'Y'
+                 ORDER BY ALLCOUNT DESC) BLIST)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry> -->
+	<entry key ="getBoardLatestList">
+		 SELECT
+                      REPORT_NO
+                    , REPORT_DATE
+                    , NICKNAME
+                    , R_USER_NO
+                    , SUBJECT
+                    , BR_NO
+                    , BOARD_NO
+                    , RCOUNT
+                    , ALLCOUNT
+	FROM (SELECT 
+				ROWNUM RNUM,
+                BLIST.*
+    FROM(SELECT
+                      R.REPORT_NO
+                    , REPORT_DATE
+                    , M.NICKNAME
+                    , M.USER_NO "R_USER_NO"
+                    , NVL2('BR.BOARD_NO','게시판','NULL일경우 반환값') SUBJECT
+                    , BR.BOARD_NO "BR_NO"
+                    , BR.BOARD_NO
+                    , B.REPORT_COUNT RCOUNT
+                    , M.REPORT_COUNT ALLCOUNT
+                 FROM REPORT R
+                 JOIN BOARDREPORT BR ON (R.REPORT_NO = BR.REPORT_NO)
+                 JOIN BOARD B ON (BR.BOARD_NO = B.BOARD_NO)
+                 JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
+                 WHERE M.STATUS = 'Y'
+                 ORDER BY REPORT_DATE DESC) BLIST)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key ="getBoardRcountList">
+	 SELECT
+                      REPORT_NO
+                    , REPORT_DATE
+                    , NICKNAME
+                    , R_USER_NO
+                    , SUBJECT
+                    , BR_NO
+                    , BOARD_NO
+                    , RCOUNT
+                    , ALLCOUNT
+	FROM (SELECT 
+				ROWNUM RNUM,
+                BLIST.*
+    FROM(SELECT
+                      R.REPORT_NO
+                    , REPORT_DATE
+                    , M.NICKNAME
+                    , M.USER_NO "R_USER_NO"
+                    , NVL2('BR.BOARD_NO','게시판','NULL일경우 반환값') SUBJECT
+                    , BR.BOARD_NO "BR_NO"
+                    , BR.BOARD_NO
+                    , B.REPORT_COUNT RCOUNT
+                    , M.REPORT_COUNT ALLCOUNT
+                 FROM REPORT R
+                 JOIN BOARDREPORT BR ON (R.REPORT_NO = BR.REPORT_NO)
+                 JOIN BOARD B ON (BR.BOARD_NO = B.BOARD_NO)
+                 JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
+                 WHERE M.STATUS = 'Y'
+                 ORDER BY RCOUNT DESC) BLIST)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key ="getBoardMcountList">
+		 SELECT
+                      REPORT_NO
+                    , REPORT_DATE
+                    , NICKNAME
+                    , R_USER_NO
+                    , SUBJECT
+                    , BR_NO
+                    , BOARD_NO
+                    , RCOUNT
+                    , ALLCOUNT
+	FROM (SELECT 
+				ROWNUM RNUM,
+                BLIST.*
+    FROM(SELECT
+                      R.REPORT_NO
+                    , REPORT_DATE
+                    , M.NICKNAME
+                    , M.USER_NO "R_USER_NO"
+                    , NVL2('BR.BOARD_NO','게시판','NULL일경우 반환값') SUBJECT
+                    , BR.BOARD_NO "BR_NO"
+                    , BR.BOARD_NO
+                    , B.REPORT_COUNT RCOUNT
+                    , M.REPORT_COUNT ALLCOUNT
+                 FROM REPORT R
+                 JOIN BOARDREPORT BR ON (R.REPORT_NO = BR.REPORT_NO)
+                 JOIN BOARD B ON (BR.BOARD_NO = B.BOARD_NO)
+                 JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
+                 WHERE M.STATUS = 'Y'
+                 ORDER BY ALLCOUNT DESC) BLIST)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key ="getReplyLatestList">
+	 SELECT
+                      REPORT_NO
+                    , REPORT_DATE
+                    , NICKNAME
+                    , R_USER_NO
+                    , SUBJECT
+                    , BR_NO
+                    , BOARD_NO
+                    , RCOUNT
+                    , ALLCOUNT
+	FROM (SELECT 
+				ROWNUM RNUM,
+                BLIST.*
+    FROM( SELECT
+                      R.REPORT_NO
+                    , REPORT_DATE
+                    , M.NICKNAME
+                    , M.USER_NO "R_USER_NO"
+                    , NVL2('RE.BOARD_NO','댓글','NULL일경우 반환값') SUBJECT
+                    , RE.REPLY_NO "BR_NO"
+                    , RE.BOARD_NO
+                    , RE.REPORT_COUNT RCOUNT
+                    , M.REPORT_COUNT ALLCOUNT
+                 FROM REPORT R
+                 JOIN REPLYREPORT RR ON (R.REPORT_NO = RR.REPORT_NO)
+                 JOIN REPLY RE ON (RR.REPLY_NO = RE.REPLY_NO)
+                 JOIN MEMBER M ON (RE.USER_NO = M.USER_NO)
+                 WHERE M.STATUS = 'Y'
+                 ORDER BY REPORT_DATE DESC) BLIST)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key ="getReplyRcountList">
+	 SELECT
+                      REPORT_NO
+                    , REPORT_DATE
+                    , NICKNAME
+                    , R_USER_NO
+                    , SUBJECT
+                    , BR_NO
+                    , BOARD_NO
+                    , RCOUNT
+                    , ALLCOUNT
+	FROM (SELECT 
+				ROWNUM RNUM,
+                BLIST.*
+    FROM( SELECT
+                      R.REPORT_NO
+                    , REPORT_DATE
+                    , M.NICKNAME
+                    , M.USER_NO "R_USER_NO"
+                    , NVL2('RE.BOARD_NO','댓글','NULL일경우 반환값') SUBJECT
+                    , RE.REPLY_NO "BR_NO"
+                    , RE.BOARD_NO
+                    , RE.REPORT_COUNT RCOUNT
+                    , M.REPORT_COUNT ALLCOUNT
+                 FROM REPORT R
+                 JOIN REPLYREPORT RR ON (R.REPORT_NO = RR.REPORT_NO)
+                 JOIN REPLY RE ON (RR.REPLY_NO = RE.REPLY_NO)
+                 JOIN MEMBER M ON (RE.USER_NO = M.USER_NO)
+                 WHERE M.STATUS = 'Y'
+                 ORDER BY RCOUNT DESC) BLIST)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key ="getReplyMcountList">
+	 SELECT
+                      REPORT_NO
+                    , REPORT_DATE
+                    , NICKNAME
+                    , R_USER_NO
+                    , SUBJECT
+                    , BR_NO
+                    , BOARD_NO
+                    , RCOUNT
+                    , ALLCOUNT
+	FROM (SELECT 
+				ROWNUM RNUM,
+                BLIST.*
+    FROM( SELECT
+                      R.REPORT_NO
+                    , REPORT_DATE
+                    , M.NICKNAME
+                    , M.USER_NO "R_USER_NO"
+                    , NVL2('RE.BOARD_NO','댓글','NULL일경우 반환값') SUBJECT
+                    , RE.REPLY_NO "BR_NO"
+                    , RE.BOARD_NO
+                    , RE.REPORT_COUNT RCOUNT
+                    , M.REPORT_COUNT ALLCOUNT
+                 FROM REPORT R
+                 JOIN REPLYREPORT RR ON (R.REPORT_NO = RR.REPORT_NO)
+                 JOIN REPLY RE ON (RR.REPLY_NO = RE.REPLY_NO)
+                 JOIN MEMBER M ON (RE.USER_NO = M.USER_NO)
+                 WHERE M.STATUS = 'Y'
+                 ORDER BY ALLCOUNT DESC) BLIST)
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key ="getStudyLatestList">
+	</entry>
+	<entry key ="getStudyRcountList">
+	</entry>
+	<entry key ="getStudyMcountList">
+	</entry>
+	<entry key ="getBoardreportList">
+	 SELECT
+		      R.REPORT_NO
+		    , REPORT_DATE
+		    , R.USER_NO
+		    , M.NICKNAME "NICK_NAME"
+		    , B.BOARD_TITLE
+		    , REPORT_CONTENT
+		 FROM BOARDREPORT BR
+		 JOIN REPORT R ON (BR.REPORT_NO = R.REPORT_NO)
+		 JOIN MEMBER M ON (R.USER_NO = M.USER_NO)
+		 JOIN BOARD B ON( BR.BOARD_NO = B.BOARD_NO)
+		 WHERE BR.BOARD_NO = ?
+		 ORDER BY REPORT_DATE DESC
+	</entry>
+	<entry key="getReplyreportList">
+	SELECT
+		      R.REPORT_NO
+		    , REPORT_DATE
+		    , R.USER_NO
+		    , M.NICKNAME "NICK_NAME"
+		    , RP.REPLY_CONTENT
+		    , REPORT_CONTENT
+		 FROM REPLYREPORT RR
+		 JOIN REPORT R ON (RR.REPORT_NO = R.REPORT_NO)
+		 JOIN MEMBER M ON (R.USER_NO = M.USER_NO)
+		 JOIN REPLY RP ON (RR.REPLY_NO = RP.REPLY_NO)
+		 WHERE RR.REPLY_NO = ?
+		 ORDER BY REPORT_DATE DESC
 	
 	</entry>
 </properties>

@@ -65,7 +65,6 @@
 	                        <th>스터디 번호</th>
 	                        <th>카테고리</th>
 	                        <th>스터디명</th>
-	                        <th>현재 인원수</th>
 	                        <th>개설자</th>
 	                        <th>개설일</th>
 	                        <th>종료일</th>
@@ -78,7 +77,6 @@
 								<td>${ mos.s_no }</td>
 								<td>${ mos.cname }</td>
 								<td>${ mos.s_name }</td>
-								<td>${ mos.s_to }</td>
 								<td>${ mos.user_nkname }</td>
 								<td>${ mos.s_startPeriod }</td>
 								<td>${ mos.s_endPeriod }</td>
@@ -145,7 +143,6 @@
 	                        <th>스터디 번호</th>
 	                        <th>카테고리</th>
 	                        <th>스터디명</th>
-	                        <th>현재 인원수</th>
 	                        <th>개설자</th>
 	                        <th>개설일</th>
 	                        <th>종료일</th>
@@ -158,7 +155,6 @@
 								<td>${ mjs.s_no }</td>
 								<td>${ mjs.cname }</td>
 								<td>${ mjs.s_name }</td>
-								<td>${ mjs.s_to }</td>
 								<td>${ mjs.user_nkname }</td>
 								<td>${ mjs.s_startPeriod }</td>
 								<td>${ mjs.s_endPeriod }</td>

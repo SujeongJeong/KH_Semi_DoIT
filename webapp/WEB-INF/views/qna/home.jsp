@@ -11,7 +11,7 @@
 	<link href='<%= request.getContextPath() %>/resources/css/qna-main.css' rel='stylesheet'>
 </head>
 <body>
-	<!-- 모든 페이지에 include할 menubar.jsp 생성 -->
+	
 	<%@ include file='/WEB-INF/views/common/menubar.jsp' %>
 	
 	<div class="content">

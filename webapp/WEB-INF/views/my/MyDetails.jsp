@@ -16,6 +16,7 @@
 %>
 <script>
    alert('코인 환불 신청을 완료하였습니다.');
+   opener.parent.location.reload();
    window.close();
 </script>
 <%

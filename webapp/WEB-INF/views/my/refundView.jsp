@@ -95,7 +95,7 @@ button[id$=Btn]:hover {
 				<div class="current_coin">
 					<span id="current_result"><h2>현재 보유 중인 코인 : ${ loginUser.userCoin }</h2></span>
 				</div>
-				<h3>환불 신청 코인 : <input type="number" name="refund_coin" id="refund_coin" min= 1 required></h3>
+				<h3>환불 신청 코인 : <input type="number" name="refund_coin" id="refund_coin" min="1" max="${ loginUser.userCoin }" required></h3>
 				<h4>계좌번호 : <input type="text" name="bank_account" id="bank_account" required></h4>
 				<h4>은행명 : 
 					<select id="bank_name" name="bank_name" required>

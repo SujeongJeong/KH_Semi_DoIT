@@ -74,7 +74,7 @@
 	justify-content : center;
 }
 
-.studyroomLimit, .studyroomEntryLimit, .todoListLimit{
+#studyroomLimit, #studyroomEntryLimit, #todoListLimit{
 	width: 40px;
 	height: 25px;
 	justify-content : center;
@@ -171,6 +171,7 @@
 		
 		<script src="${ contextPath }/resources/js/imagePreview.js"></script>
 		
+	
 			<script type="text/javascript">
 		<%-- 단품 클릭 시 라디오 버튼 생성 --%>
 			$('#category').change(function(){
@@ -199,8 +200,26 @@
 				 $(this).prev().click();
 				 }
 			});
-		
-
+		</script>
+		<script>
+		//파일변경
+		function readUpload(input) {
+			 if (input.files && input.files[0]) {
+			  var reader = new FileReader();
+			  
+			  reader.onload = function (e) {
+			   $('.image_area').attr('src', e.target.result);  
+			  }
+			  
+			  reader.readAsDataURL(input.files[0]);
+			  }
+			}
+			 
+			//함수
+			$("#productimg").change(function(){
+			   readUpload(this);
+			});
+			
 		</script>
 		
 	

@@ -239,6 +239,7 @@ WHERE RNUM BETWEEN ? AND ?
       WHERE PR.USER_NO =?
       <![CDATA[AND TO_CHAR(PR.EXPIRATION_DATE, 'yyyymmdd') >= TO_CHAR(SYSDATE, 'yyyymmdd')]]>
    </entry>
+
   
    
    <entry key="insertTime">
@@ -257,6 +258,7 @@ WHERE RNUM BETWEEN ? AND ?
 		?,
 		?
 	)
+
    </entry>
 </properties>
 

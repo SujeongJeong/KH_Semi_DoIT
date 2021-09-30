@@ -144,11 +144,10 @@ public class Study {
 		this.sImgList.add(new Attachment(change_name, file_path));
 	}
 
-	public Study(int s_no, String cname, String s_name, int s_to, String user_nkname, Date s_startPeriod, Date s_endPeriod) {
+	public Study(int s_no, String cname, String s_name, String user_nkname, Date s_startPeriod, Date s_endPeriod) {
 	      super();
 	      this.s_no = s_no;
 	      this.s_name = s_name;
-	      this.s_to = s_to;
 	      this.s_startPeriod = s_startPeriod;
 	      this.s_endPeriod = s_endPeriod;
 	      this.cname = cname;

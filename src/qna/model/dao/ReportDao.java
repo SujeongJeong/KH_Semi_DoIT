@@ -166,6 +166,30 @@ public class ReportDao {
 		
 		return result;
 	}
+	
+	// 게시글 신고 처리시 게시글 신고 횟수 + 1
+	public int boardReportCount(Connection conn, int board_no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = query.getProperty("boardReportCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, board_no);
+	
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
 
 	// 댓글 신고 처리시 회원 신고 횟수 +1
 	public int memberReplyReportCount(Connection conn, int reply_no) {
@@ -190,7 +214,29 @@ public class ReportDao {
 		return result;
 	}
 
-
+	
+	// 댓글 신고 처리시 댓글 신고 횟수 + 1
+	public int replyReportCount(Connection conn, int reply_no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = query.getProperty("replyReportCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, reply_no);
+	
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 
 
 }

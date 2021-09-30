@@ -16,13 +16,13 @@
 		if(request.getAttribute("result").equals("success")) {
 %>
 <script>
-	alert('환불 처리 완료');
+	alert('환불 처리를 완료하였습니다.');
 </script>
 <%
 	} else {
 %>
 <script>
-	alert('환불 처리 실패');
+	alert('환불 처리를 실패하였습니다.');
 </script>
 <%
 		}
@@ -62,14 +62,13 @@
 					<div class="board-header">
 						<div class="btn">
 							<button type="button" onclick="return validate()">환불</button>
-							<button type="button" id="cbx_chkAll">전체 선택</button>
 						</div>
 					</div>
 					<form name="refundForm" method="post">
 						<table class="board-list">
 							<thead>
 								<tr>
-	                                <th>신청번호</th>
+	                                <th><input type="checkbox" id="cbx_chkAll" name="cbx_chkAll">신청번호</th>
 	                                <th>회원번호</th>
 									<th>이메일</th>
 									<th>환불 신청 코인</th>
@@ -159,6 +158,20 @@
 			}
 			
 		};
+		
+		$("#cbx_chkAll").click(function() {
+			if($("#cbx_chkAll").is(":checked")) $("input[name=refundNo]").prop("checked", true);
+			else $("input[name=refundNo]").prop("checked", false);
+		});
+
+		$("input[name=refundNo]").click(function() {
+			var total = $("input[name=refundNo]").length;
+			var checked = $("input[name=refundNo]:checked").length;
+
+			if(total != checked) $("#cbx_chkAll").prop("checked", false);
+			else $("#cbx_chkAll").prop("checked", true); 
+		});
+	
 	</script>
 </body>
 </html>
