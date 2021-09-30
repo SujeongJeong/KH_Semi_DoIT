@@ -169,8 +169,9 @@
     </form>
    </div>
  </div>
-
-
+ 
+ 
+	
 <script>
 
 		function openPopup(url, title, width, height){			
@@ -192,13 +193,22 @@
             $('.deleteProductBtn').hide();
       	    }
     	  }
-		//상세페이지로 product_no 값 넘기기
-	 	function pnoSubmit(product_no){
-		 openPopup('${contextPath}/productDetail?product_no='+product_no, 'productDetail', 900, 1200);
-	 	}
+	</script>	
+		
+	<c:if test="${ loginUser == null }">
+	<script>
+		function login(){
+				if(confirm("로그인 후 이용 가능 합니다.")){
+					 location.href="${ contextPath}/login";
+					 return false;
+				 }
+		  };
+	</script>
+	</c:if>
+	
+		
 	
 
-</script>
 
 <script>
 		//이미지 hover하기
@@ -220,6 +230,14 @@
 				event.target.parentNode.classList.remove('onmouseover');
 		})
 		
+		
+		function pnoSubmit(product_no){
+			if(${ loginUser != null }){
+				 openPopup('${contextPath}/productDetail?product_no='+product_no, 'productDetail', 900, 1200);
+			 	}else{
+			 		login();
+			 	}
+		}
 	</script>
 
 	<footer>
