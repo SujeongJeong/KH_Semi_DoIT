@@ -46,13 +46,20 @@ public class studyRoomInfo extends HttpServlet {
 	
 		// 스터디방 조회
 		Study s = new StudyService().selectStudyRoom(s_no);
+		
+		System.out.println(s);
+		
 		int ssp_year = s.getS_startPeriod().getYear()-100;
-		int ssp_month = s.getS_startPeriod().getMonth();
+		int ssp_month = s.getS_startPeriod().getMonth()-1;
 		int ssp_date = s.getS_startPeriod().getDate();
 		String ssp = "20" + ssp_year + "년 "+ ssp_month + "월 "+ssp_date + "일";
 		
+		System.out.println(ssp_year);
+		System.out.println(ssp_month);
+		System.out.println(ssp_date);
+		
 		int sep_year = s.gets_endPeriod().getYear()-100;
-		int sep_month = s.gets_endPeriod().getMonth();
+		int sep_month = s.gets_endPeriod().getMonth()-1;
 		int sep_date = s.gets_endPeriod().getDate();
 		String sep = "20" + sep_year + "년 "+ sep_month + "월 "+sep_date + "일";
 		
@@ -63,6 +70,13 @@ public class studyRoomInfo extends HttpServlet {
 		int set_time = s.gets_endTime().getHours();
 		int set_min = s.gets_endTime().getMinutes();
 		String set = set_time + "시 " + set_min + "분";
+		
+		System.out.println(ssp);
+		System.out.println(sep);
+		System.out.println(sst);
+		System.out.println(set);
+		
+		
 		
 		request.setAttribute("ssp", ssp);
 		request.setAttribute("sep", sep);

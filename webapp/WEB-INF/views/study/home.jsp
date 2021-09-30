@@ -311,7 +311,7 @@
 			</c:if>
 		</div>
 		
-		<br> <br>
+		<br> <br><br>
 
 		<form id="deleteStudyForm" method="get" action="<%=request.getContextPath()%>/study/deleteStudy">
 			
@@ -347,7 +347,7 @@
 		</div>
 		</form>
 
-		<br>
+		<br><br>
 		<div class="studyRoomPlus">
 			<hr class="plusLine">
 			<button class="plusBtn" id="plusBtn" onclick="plusBtnEvent(true)">더보기</button>
