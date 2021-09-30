@@ -9,11 +9,13 @@
 <title>스터디방 상세 – Do IT</title>
 <style>
 body{
-	margin:0px;
+	margin: 15px;
 }
+
 *{
 	text-align:center;
 }
+
 #outer {
 	width: 100%;
 	height: 100%;
@@ -22,29 +24,47 @@ body{
 .Top {
 	position: relative;
 }
+.Top img{
+	border-radius : 5px;
+}
+/*.titles{
+	background-color : white;
+	border-radius : 5px;
+	
+}*/
 
 #studyName {
 	position: absolute;
 	width: 300px;
-	height: 75px;
 	top: 10px;
 	left: 30%;
-	font-size: 1.2em;
+	font-size: 1.4em;
+	background-color : white;
+	border-radius: 5px;
+    font-weight: bold;
 }
 
 #nickName {
 	position: absolute;
 	width: 150px;
-	height: 50px;
-	top: 135px;
+	top: 173px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	background-color : #e5e5e5;
+	font-size: 20px;
+    font-weight: 200;
 }
 
 #studyTO {
 	position: absolute;
 	width: 135px;
-	height: 100px;
-	top: 115px;
-	left: 530px;
+	top: 152px;
+    left: 519px;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	background-color : #e5e5e5;
+	font-size: 18px;
+    font-weight: 200;
 }
 
 #backImage {
@@ -55,10 +75,14 @@ body{
 
 .mid1 {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 30px 10px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 10px;
+   
 }
 
+.mid1 div{
+	height: 60px;
+}
 .sDay, .sTime, .sPeriod {
 	display: flex;
 	justify-content: center;
@@ -75,12 +99,11 @@ body{
 
 .studyExplain, .studyNotice {
 	display: inline-block;
-	width: 90%;
+	width: 560px;
 	height: 195px;
 	border: 1px solid black;
 	border-color : #E5E5E5; 
 	border-radius:5px;
-	
 	word-wrap: break-word;
 	word-break: keep-all;
 	overflow: auto;
@@ -97,7 +120,8 @@ body{
 }
 
 #studyRoomBtn {
-	width: 90%;
+	/* width: 65%; */
+	width : 90%;
 	height: 45px;
 	background-color: #5FC5FF;
 	font-size: 1.2rem;
@@ -106,6 +130,10 @@ body{
 	border-radius: 5px;
 	border: 0;
 	outline: 0;
+	cursor: pointer;
+}
+#enter-wrapper{
+	padding : 0 auto;
 }
 
 #report {
@@ -124,6 +152,12 @@ body{
 
 h2, h3 {
 	text-align: center;
+	margin : 5px;
+}
+
+.studyExplain, .studyNotice{
+	margin : 20px;
+	padding : 15px;
 }
 </style>
 </head>
@@ -133,15 +167,13 @@ h2, h3 {
 			<img id="backImage"
 				src="/Do_IT/resources/images/study-background1.jpg">
 			<div id="studyName">
-				<h2>${ studyRoom.s_name }</h2>
+				${ studyRoom.s_name }
 			</div>
 			<div id="nickName">
-				<h3>${ studyRoom.user_nkname }</h3>
+				${ studyRoom.user_nkname }
 			</div>
 			<div id="studyTO">
-				<h3>
-					스터디 정원<br>${ StudyMemberCount } / ${ studyRoom.s_to } 명
-				</h3>
+				정원<br>${ StudyMemberCount } / ${ studyRoom.s_to } 명
 			</div>
 			
 
@@ -172,17 +204,17 @@ h2, h3 {
 		<h2>소개글</h2>
 		<div class="mid2">
 			<div class="studyExplain">
-				<h3>
+				<div>
 					${ studyRoom.s_explain }
-				</h3>
+				</div>
 			</div>
 		</div>
 		<h2>공지사항</h2>
 		<div class="mid3">
 			<div class="studyNotice">
-				<h3>
+				<div>
 					${ studyRoom.s_notice }
-				</h3>
+				</div>
 			</div>
 		</div>
 		<br>
@@ -192,7 +224,7 @@ h2, h3 {
 				<input type="hidden" name="s_no" value="${studyRoom.s_no}"></input>
 			</form>
 
-		<button id="studyRoomBtn" onclick="studyBtn()">
+		<div id="enter-wrapper"><button id="studyRoomBtn" onclick="studyBtn()">
 			<c:choose>
 				<c:when test="${ !empty loginUser }">
 
@@ -200,7 +232,7 @@ h2, h3 {
 					<c:if test="${ selectMemberJoinStudy == null }">
 						<c:out value="가입하기" />
 						
-						<c:if test="${ memberJoinStudyNum < userStudyLimit}">
+						<c:if test="${ memberJoinStudyNum < 3}">
 							<c:if test="${ StudyMemberCount +1 < studyRoom.s_to }">
 								<script>
 									function studyBtn() {
@@ -220,7 +252,7 @@ h2, h3 {
 								</script>
 							</c:if>
 						</c:if>
-						<c:if test="${ memberJoinStudyNum >= userStudyLimit }">
+						<c:if test="${ memberJoinStudyNum >= 3}">
 							<script>
 								function studyBtn() {
 									alert("가입 한도를 초과하셨습니다.");
@@ -249,9 +281,10 @@ h2, h3 {
 					</script>
 				</c:otherwise>
 			</c:choose>
-		</button>
+		 </button>
+		 </div>
 		<%-- 
-		<button id="report">신고하기</button>
+		<button id="report">신고하기</button> 
 		--%>
 		</div>
 

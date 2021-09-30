@@ -23,7 +23,24 @@
     max-width: 1000px;
     position: relative;
 }
-
+#title{
+	font-size: 1.5em;
+ 	margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+#search-area{
+	display: flex;
+    justify-content: flex-end;
+    margin-right: 35px;
+}
+#btn_area{
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 15px;
+}
 .search {
 	display: inline-block;
 }
@@ -35,49 +52,50 @@
 .searchText{
     width: 200px;
     height: 25px;
-    border-radius:10px;
+    border-radius:5px;
+    border: 1px solid #c4c4c4;
 }
 
 .searchTextSubmit{
 	height: 30px;
     width: 75px;
-    border-radius:10px;
+    border-radius: 5px;
+    border : 1px;
+    
 }
 
 .deleteStudyRoom{
-	position: absolute;
-    left: 860px;
-    top: 17px;
+
 }
 
 .createStudy {
-	margin-left: 388px;
-	margin-right: 20px;
+	display: flex;
+    justify-content: flex-end;
+    margin-right: 35px;
 }
 .deleteStudyRoomBtn{
-    background-color: #E5E5E5;
-    outline: 0;
+    background-color: red;
+    border: 0;
+    color: white;
     border-radius: 5px;
-    color: red;
-    border: 1px solid red;
-    width: 100px;
-    height: 33px;
-    
+    width: 70px;
+    height: 30px;
 }
 .studyCreateBtn, .plusBtn{
 	background-color: #5FC5FF;
     border: 0;
-    outline: 0;
+    color: white;
     border-radius: 5px;
-    width: 140px;
+    width: 70px;
     height: 30px;
-    font-size: 1.05em;
-    font-weight: bold;
+    margin-left: 10px;
 }
 
 .plusBtn{
-	border: 1px solid black;
-}
+	background-color: white;
+    border: 1px solid #e5e5e5;
+    color: black;
+} 
 
 .category {
 	margin-left: 5px;
@@ -89,7 +107,8 @@
     background-color: white;
     width: 110px;
     height: 30px;
-    border-radius: 10px;
+    border-radius: 5px;
+    border: 1px solid #c4c4c4;
 }
 
 .studyList {
@@ -121,16 +140,15 @@
 }
 
 .sCategory{
-    border: 1px solid #5886fb;
     border-radius: 10px;
     padding: 1px 10px;
-    background: #5886fb;
+    background: #e5e5e5;
     color: white;
 }
 
 .canJoinStudy{
-	position: absolute;
-    top: 70px;
+	padding-left: 840px;
+    margin-top: 20px;
 }
 
 
@@ -141,7 +159,7 @@
 
 .canJoinStudyText{
 	display: inline-block;
-    font-size: 1.1em;
+    font-size: 15px;
 }
 
 
@@ -234,7 +252,7 @@
 }
 
 .plusLine {
-	border-style: dotted;
+	border: 1px solid #e5e5e5;
 	position: relative;
 }
 
@@ -249,44 +267,17 @@
 	<%@ include file='/WEB-INF/views/common/menubar.jsp'%>
 
 	<div class="content" id="content">
-		<span><h1>오픈 스터디</h1></span>
-
-		<div class="search search1">
-			<form action="${ contextPath }/study/home">
-				<input type="text" class="searchText" size="15px" name="search"
-					placeholder="검색할 내용을 입력하세요"> 
-					<input type="button" onclick="searchEvent()" class="searchTextSubmit" value="검색하기">
-			</form>
-		</div>
-		
-		<div class="search category">
-			<form>
-				<select class="studyCategory" id="studyCategory">
-					<option value="default" selected>카테고리</option>
-					<option value="Language">Language</option>
-					<option value="Embeded">Embeded</option>
-					<option value="Ai">Ai</option>
-					<option value="Front-End">Front-End</option>
-					<option value="Back-End">Back-End</option>
-					<option value="App">App</option>
-					<option value="Bigdata">Bigdata</option>
-					<option value="BlockChain">BlockChain</option>
-					<option value="Devops">Devops</option>
-					<option value="Project">Project</option>
-					<option value="Game">Game</option>
-				</select>
-			</form>
-
-
-		</div>
-		<div class="search canJoinStudy">
-			<input type="checkbox" id="canJoinStudyBtn" class="canJoinStudyBtn" name="canJoinStudyBtn">
-			<label for="canJoinStudyBtn" class="canJoinStudyText">바로 참여 가능한 방</label>
-		</div>
-		
+		<div id="title-header">
+		<span id="title">오픈 스터디</span>
+		<div id="btn_area">
+		<c:if test="${ loginUser.userType == 'A' }">
+			<div class="deleteStudyRoom">
+				<button type="submit" class="deleteStudyRoomBtn">삭제 </button>
+			</div>
+			</c:if>
 		<div class="search createStudy">
-			<button class="studyCreateBtn" onclick="createBtnEvent()">스터디 만들기</button>
-			<c:if test="${ loginUser != null }">
+			<button class="studyCreateBtn" onclick="createBtnEvent()">만들기</button>
+				<c:if test="${ loginUser != null }">
 				<c:if test="${ userJoinStudyNum.userJoinStudyNum < userStudyLimit }">
 					<script>
 					function createBtnEvent(){
@@ -310,6 +301,42 @@
 				</script>
 			</c:if>
 		</div>
+		</div>
+		</div>
+		<div id="search-area">
+		<div class="search category">
+			<form>
+				<select class="studyCategory" id="studyCategory">
+					<option value="default" selected>카테고리</option>
+					<option value="Language">Language</option>
+					<option value="Embeded">Embeded</option>
+					<option value="Ai">Ai</option>
+					<option value="Front-End">Front-End</option>
+					<option value="Back-End">Back-End</option>
+					<option value="App">App</option>
+					<option value="Bigdata">Bigdata</option>
+					<option value="BlockChain">BlockChain</option>
+					<option value="Devops">Devops</option>
+					<option value="Project">Project</option>
+					<option value="Game">Game</option>
+				</select>
+			</form>
+
+		</div>
+		<div class="search search1">
+			<form action="${ contextPath }/study/home">
+				<input type="text" class="searchText" size="15px" name="search"
+					placeholder="검색할 내용을 입력하세요"> 
+					<input type="button" onclick="searchEvent()" class="searchTextSubmit" value="검색">
+			</form>
+		</div>
+				
+		</div>
+		<div class="search canJoinStudy">
+				<input type="checkbox" id="canJoinStudyBtn" class="canJoinStudyBtn" name="canJoinStudyBtn">
+				<div for="canJoinStudyBtn" class="canJoinStudyText">참여 가능한 방</div>
+			</div>
+		
 		
 		<br> <br>
 
@@ -339,11 +366,7 @@
 					</c:if>
 				</div>
 			</c:forEach>
-				<c:if test="${ loginUser.userType == 'A' }">
-			<div class="deleteStudyRoom">
-				<button type="submit" class="deleteStudyRoomBtn">스터디 삭제</button>
-			</div>
-			</c:if>
+				
 		</div>
 		</form>
 
