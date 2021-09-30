@@ -19,6 +19,7 @@ button{
 
 .content{
 	width : 1000px;
+	position :relative;
 }
 
 
@@ -80,17 +81,7 @@ button{
     position: relative;
 }
 
-.board_list tbody tr input[type=checkbox]{
-    position: absolute;
-    left: -4px;
-    width: 20px;
-    height: 20px;
- 
-}
 
-.board_list tbody .manager input[type=checkbox]{
-    bottom: 8px;
-}
 
 .board_list tr {
     border-bottom: 1px solid #ccc;
@@ -115,6 +106,14 @@ button{
 .board_list .tit:hover {
     text-decoration: underline;
     cursor: pointer;
+}
+
+#bannerImg {
+
+   position: absolute;
+   margin-left: 1580px;
+   margin-top: 150px;
+   width : 200px;
 }
 
 /* 페이지 이동 */
