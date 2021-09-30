@@ -86,7 +86,7 @@
 	margin-bottom: 30px;
 	resize: none;
 }
-
+  
 .btn_area {
 	text-align: center;
 	border-top: 1px solid #282A35;
