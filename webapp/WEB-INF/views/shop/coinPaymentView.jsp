@@ -133,7 +133,7 @@ button[id$=payment] {
 	<script>
 		
 		
-		function calc(val){ //수수료포함 코인가격 현금화.
+		function calc(val){ //수수료포함 코인가격 현금화 계산 함수.
 		    var charge = parseInt(val);
 		    var price = 110*charge;
 		    
@@ -150,7 +150,7 @@ button[id$=payment] {
 			
 			$(".chargebtn").click(function () {
 				
-			var IMP = window.IMP; // 생략가능
+			var IMP = window.IMP; 
 			IMP.init('imp78099653');
 		    var money = $('#result').val();
 		        console.log(money);
@@ -158,16 +158,10 @@ button[id$=payment] {
 			var nickname = '${ loginUser.nickName }';
 			var userCoin = '${ loginUser.userCoin }';
 			IMP.request_pay({
-			pg: 'inicis', // version 1.1.0부터 지원.
-
+			pg: 'inicis', 
 			pay_method: 'card',
-			
 			merchant_uid: 'merchant_' + new Date().getTime(),
-			/*
-			merchant_uid에 경우
-			https://docs.iamport.kr/implementation/payment
-			참고하기. 아직 못함.
-			*/
+			
 			//결제창에서 보여질 이름
 			name: 'Do_IT 코인 결제',
 			//가격

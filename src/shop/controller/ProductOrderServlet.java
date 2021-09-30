@@ -47,10 +47,10 @@ public class ProductOrderServlet extends HttpServlet {
 		int product_no = Integer.parseInt(request.getParameter("product_no"));
 		int userNo = ((Member)(request.getSession().getAttribute("loginUser"))).getUserNo();
 		
-		int result = new ShopService().insertOrder(product_no, userNo);//주문용
+		int result = new ShopService().insertOrder(product_no, userNo);//상품구매용 서블릿
 		
 		if(result > 0) {
-			int result1 = new ShopService().orderAfterCoin(product_no, userNo);
+			int result1 = new ShopService().orderAfterCoin(product_no, userNo); //상품을 구매한 후 남은 코인
 			if(result1 > 0) {
 				Member loginUser = new MemberService().selectMember(userNo);
 				request.getSession().setAttribute("loginUser", loginUser);
