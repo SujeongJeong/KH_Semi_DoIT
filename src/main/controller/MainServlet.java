@@ -45,6 +45,7 @@ public class MainServlet extends HttpServlet {
 		int to_limit = new TodolistService().selectTodoLimit(userNo);
 		Ranking myRanking = new RankingService().selectMyRanking(userNo);
 		List<Ranking> rankingList = new RankingService().selectThirdRanking();
+		Ranking my_today = new RankingService().selectMyToday(userNo);
 		
 		if(rankingList != null) {
 			for(Ranking r : rankingList){
@@ -56,14 +57,17 @@ public class MainServlet extends HttpServlet {
 		if(myRanking != null) {
 			String afterM = myRanking.getS_time().replace(",", ":");
 			myRanking.setS_time(afterM.trim());
-		} 
+		}
+		
 		
 		if(to_limit == 0) to_limit = 5;
+		
 		request.setAttribute("Todolist", myList);
 		request.setAttribute("limit", to_limit);
 		request.setAttribute("Study", myStudy);
 		request.setAttribute("myRanking", myRanking);
 		request.setAttribute("rankingList", rankingList);
+		request.setAttribute("my_today", my_today);
 
 		request.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(request, response);
 	}
