@@ -237,7 +237,7 @@
 			 	}else{
 			 		login();
 			 	}
-		}
+		};
 	</script>
 
 	<footer>
