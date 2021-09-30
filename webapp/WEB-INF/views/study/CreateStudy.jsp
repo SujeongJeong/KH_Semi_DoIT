@@ -259,6 +259,7 @@
 		$(".radio_to").removeAttr("disabled");
 		
 		$('.radio_to').click(function(){
+			console.log();
 			if(s_limitdate != 0) {
 				$('.datepicker').datepicker( "destroy" );
 				$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', minDate : 0, maxDate : "+" + s_limitdate + "d" });
@@ -274,7 +275,7 @@
 	
 	
 	$("input[name=s_to]").each(function(index, elem){ 
-		if($(elem).val() <= s_to_limit+1) {
+		if($(elem).val() <= s_to_limit) {
 			$(elem).removeAttr("disabled");
 		} else {
 			$(elem).attr("disabled", true);
