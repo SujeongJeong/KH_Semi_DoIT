@@ -44,7 +44,6 @@ public class AdminStudyServlet extends HttpServlet {
 		
 		Map<String, Object> map = new AdminService().selectStudyList(page, new Search(searchValue));
 		
-		// 응답 페이지 구성 시 사용할 데이터 설정
 		request.setAttribute("pi", map.get("pi"));
 		request.setAttribute("studyList", map.get("studyList"));
 		
