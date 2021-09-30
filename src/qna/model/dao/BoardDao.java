@@ -102,7 +102,7 @@ public class BoardDao {
 										rset.getInt("count")));
 			}
 			
-			// System.out.println("dao" + boardList);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -128,7 +128,7 @@ public class BoardDao {
 			
 			result = pstmt.executeUpdate();
 			
-			// System.out.println("result : " + result);
+		
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -183,11 +183,9 @@ public class BoardDao {
 							  rset.getTimestamp("create_date"),
 							  rset.getTimestamp("modify_date"),
 							  rset.getInt("user_no"),
-							  rset.getInt("count"));
+							  rset.getInt("count"),
+							  rset.getString("profile_img"));
 				
-				// getDate -> 년/월/일 데이터만 사용 가능하고 시/분/초 데이터 사용 불가능
-				// getTimestamp -> 년/월/일/시/분/초 데이터 사용 가능
-				// Timestamp는 Date 클래스의 후손
 			}
 			
 		} catch (SQLException e) {
@@ -196,7 +194,7 @@ public class BoardDao {
 			close(rset);
 			close(pstmt);
 		}
-		
+
 		return b;
 	}
 
@@ -279,39 +277,28 @@ public class BoardDao {
 	}
 
 	// 1. 공지사항 목록 조회
-		public List<Notice> selectList(Connection conn) {
-			PreparedStatement pstmt = null;
-			ResultSet rset = null;
-			List<Notice> noticeList = new ArrayList<>();
-			String sql = query.getProperty("selectList");
-			
-			try {
-				pstmt = conn.prepareStatement(sql);
-				
-				rset = pstmt.executeQuery();
-						
-				while(rset.next()) {
-					noticeList.add(new Notice(rset.getInt("notice_no"),
-											  rset.getString("notice_title"),
-											  rset.getString("notice_content"),
-											  rset.getInt("count"),
-											  rset.getDate("create_date"),
-											  rset.getDate("modify_date"),
-											  rset.getString("status"),
-											  rset.getInt("user_no")));
-
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(rset);
-				close(pstmt);
-			}
-			
-			// System.out.println(noticeList);
-			return noticeList;
-		}
+	/*
+	 * public List<Notice> selectList(Connection conn) { PreparedStatement pstmt =
+	 * null; ResultSet rset = null; List<Notice> noticeList = new ArrayList<>();
+	 * String sql = query.getProperty("selectList");
+	 * 
+	 * try { pstmt = conn.prepareStatement(sql);
+	 * 
+	 * rset = pstmt.executeQuery();
+	 * 
+	 * while(rset.next()) { noticeList.add(new Notice(rset.getInt("notice_no"),
+	 * rset.getString("notice_title"), rset.getString("notice_content"),
+	 * rset.getInt("count"), rset.getDate("create_date"),
+	 * rset.getDate("modify_date"), rset.getString("status"),
+	 * rset.getInt("user_no")));
+	 * 
+	 * }
+	 * 
+	 * } catch (SQLException e) { e.printStackTrace(); } finally { close(rset);
+	 * close(pstmt); }
+	 * 
+	 * // System.out.println(noticeList); return noticeList; }
+	 */
 	
 	// 게시글 당 댓글 리스트 조회
 	public List<Reply> selectReplyList(Connection conn, int bid) {
@@ -333,7 +320,8 @@ public class BoardDao {
 										rset.getTimestamp("modify_date"),
 										rset.getInt("board_no"),
 										rset.getInt("user_no"),
-										rset.getString("nickName")));
+										rset.getString("nickName"),
+										rset.getString("profile_img")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

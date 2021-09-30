@@ -14,16 +14,8 @@ public class Notice {
 	private String status;
 	private int user_no;
 	private List<Reply> replyList;
+	private String profile_img;
 	
-//	notice_no	NUMBER
-//	notice_title	VARCHAR2(100 CHAR)
-//	notice_content	VARCHAR2(4000 CHAR)
-//	count	NUMBER
-//	create_date	DATE
-//	modify_date	DATE
-//	status	VARCHAR2(1 CHAR)
-//	user_no	NUMBER
-
 	public Notice() {}
 	
 	
@@ -33,6 +25,23 @@ public class Notice {
 	this.notice_no = notice_no;
 	this.notice_title = notice_title;
 	this.notice_content = notice_content;
+	}
+
+	
+
+
+	public Notice(int notice_no, String notice_title, String notice_content, int count, Date create_date,
+			Date modify_date, String status, int user_no, String profile_img) {
+		super();
+		this.notice_no = notice_no;
+		this.notice_title = notice_title;
+		this.notice_content = notice_content;
+		this.count = count;
+		this.create_date = create_date;
+		this.modify_date = modify_date;
+		this.status = status;
+		this.user_no = user_no;
+		this.profile_img = profile_img;
 	}
 
 
@@ -132,13 +141,22 @@ public class Notice {
 	}
 
 
+	public String getProfile_img() {
+		return profile_img;
+	}
+
+
+
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
+	}
 
 	@Override
 	public String toString() {
 		return "Notice [notice_no=" + notice_no + ", notice_title=" + notice_title + ", notice_content="
 				+ notice_content + ", count=" + count + ", create_date=" + create_date + ", modify_date=" + modify_date
-				+ ", status=" + status + ", user_no=" + user_no + ", replyList=" + replyList + "]";
+				+ ", status=" + status + ", user_no=" + user_no + ", replyList=" + replyList + ", profile_img="
+				+ profile_img + "]";
 	}
-
 
 }

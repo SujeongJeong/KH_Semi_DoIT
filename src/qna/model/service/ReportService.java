@@ -2,6 +2,8 @@ package qna.model.service;
 
 import java.sql.Connection;
 import java.util.List;
+
+
 import static common.JDBCTemplate.*;
 
 import qna.model.dao.ReportDao;
@@ -18,7 +20,7 @@ public class ReportService {
 	public int boardReport(Report r, BoardReport br) {
 		Connection conn = getConnection();
 		
-		int result1 = rd.Report(conn, r);
+		int result1 = rd.boardReport(conn, r);
 		int result2 = rd.boardReportManager(conn, br);
 		
 		if(result1 > 0 && result2 > 0) {
@@ -35,7 +37,7 @@ public class ReportService {
 	public int replyReport(Report r, ReplyReport rr) {
 		Connection conn = getConnection();
 		
-		int result1 = rd.Report(conn, r);
+		int result1 = rd.replyReport(conn, r);
 		int result2 = rd.replyReportManager(conn, rr);
 		
 		if(result1 > 0 && result2 > 0) {
@@ -115,6 +117,17 @@ public class ReportService {
 		
 		return result1 > 0 && result2 > 0 ? 1 : 0;
 	}
+
+//	// 게시글 작성자 회원번호 알아오기
+//	public int selectWriter(int board_no) {
+//		Connection conn = getConnection();
+//		
+//		int report = rd.selectWriter(conn, board_no);
+//
+//		close(conn);
+//		
+//		return report;
+//	}
 
 
 	

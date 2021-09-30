@@ -19,6 +19,7 @@ public class Board {
 	private int user_no;
 	private int count;
 	private List<Reply> replyList;
+	private String profile_img;
 	
 	
 	public Board() {}
@@ -87,6 +88,25 @@ public class Board {
 	}
 
 	
+	
+	public Board(int board_no, int cid, String cname, String board_title, String nickname, String board_content,
+			Date create_date, Date modify_date, int user_no, int count, String profile_img) {
+		super();
+		this.board_no = board_no;
+		this.cid = cid;
+		this.cname = cname;
+		this.board_title = board_title;
+		this.nickname = nickname;
+		this.board_content = board_content;
+		this.create_date = create_date;
+		this.modify_date = modify_date;
+		this.user_no = user_no;
+		this.count = count;
+		this.profile_img = profile_img;
+	}
+
+
+
 	public Board(int board_no, int cid, String cname, String board_title, String nickname, String board_content,
 			Date create_date, Date modify_date, String status, String board_secret, int user_no, int count,
 			List<Reply> replyList) {
@@ -213,14 +233,28 @@ public class Board {
 	}
 
 
+	public String getProfile_img() {
+		return profile_img;
+	}
+
+
+
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "Board [board_no=" + board_no + ", cid=" + cid + ", cname=" + cname + ", board_title=" + board_title
 				+ ", nickname=" + nickname + ", board_content=" + board_content + ", create_date=" + create_date
 				+ ", modify_date=" + modify_date + ", status=" + status + ", board_secret=" + board_secret
-				+ ", user_no=" + user_no + ", count=" + count + ", replyList=" + replyList + "]";
+				+ ", user_no=" + user_no + ", count=" + count + ", replyList=" + replyList + ", profile_img="
+				+ profile_img + "]";
 	}
+
+
 
 
 }

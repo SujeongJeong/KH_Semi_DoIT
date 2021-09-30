@@ -149,7 +149,7 @@
 		 WHERE NOTICE_NO = ?
 		   AND STATUS = 'Y'
 	</entry>
-	<entry key = "selectNotice">
+	<entry key ="selectNotice">
 		SELECT
 			  NOTICE_NO
 			, NOTICE_TITLE
@@ -177,20 +177,21 @@
 		 WHERE NOTICE_NO = ?
 	</entry>
 	
-		<entry key="selectReplyList">
-		SELECT
-		        REPLY_NO
-		      , REPLY_CONTENT
-		      , R.CREATE_DATE
-		      , R.MODIFY_DATE
-		      , USER_NO
-		      , NOTICE_NO
-		      , NICKNAME
-		   FROM REPLY R
-		   JOIN MEMBER USING (USER_NO)
-		  WHERE NOTICE_NO = ?
-		    AND R.STATUS = 'Y'
-		  ORDER BY REPLY_NO DESC
+	<entry key="selectReplyList">
+	SELECT
+	        REPLY_NO
+	      , REPLY_CONTENT
+	      , R.CREATE_DATE
+	      , R.MODIFY_DATE
+	      , USER_NO
+	      , NOTICE_NO
+	      , NICKNAME
+	      , PROFILE_IMG
+	   FROM REPLY R
+	   JOIN MEMBER USING (USER_NO)
+	  WHERE NOTICE_NO = ?
+	    AND R.STATUS = 'Y'
+	  ORDER BY REPLY_NO DESC
 	</entry>
 	<entry key="insertReply">
 		INSERT

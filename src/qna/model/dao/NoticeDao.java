@@ -59,7 +59,7 @@ public class NoticeDao {
 			close(pstmt);
 		}
 		
-//		System.out.println(noticeList);
+
 		return noticeList;
 	}
 	
@@ -75,9 +75,7 @@ public class NoticeDao {
 			pstmt.setString(1, n.getNotice_title());
 			pstmt.setString(2, n.getNotice_content());
 			pstmt.setInt(3, n.getUser_no());
-			
-			System.out.println(n.getNotice_title() + n.getNotice_content()+n.getUser_no());
-			
+	
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -203,7 +201,7 @@ public class NoticeDao {
 				pstmt.setInt(1, notice_no);
 				
 				rset = pstmt.executeQuery();
-				System.out.println("rset : " + rset);
+
 				while(rset.next()) {
 					replyList.add(new Reply(rset.getInt("reply_no"),
 											rset.getString("reply_content"),
@@ -211,7 +209,8 @@ public class NoticeDao {
 											rset.getTimestamp("modify_date"),
 											rset.getInt("user_no"),
 											rset.getString("nickName"),
-											rset.getInt("notice_no")));
+											rset.getInt("notice_no"),
+											rset.getString("profile_img")));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -219,7 +218,7 @@ public class NoticeDao {
 				close(rset);
 				close(pstmt);
 			}
-			System.out.println("noticedao : " + replyList);
+
 			return replyList;
 		}
 	

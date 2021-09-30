@@ -7,10 +7,9 @@ public class Report {
 	private String report_content;			// 신고사유
 	private Date report_date;				// 신고날짜
 	private int user_no;					// 신고자 회원번호
-	// join 값
-	private String nick_name;				// 신고자 회원닉네임
-	private String nickname;				// 신고당한 회원닉네임
-	private int r_user_no;					// 신고당한 회원번호
+	private String nickname;				// 신고자 회원닉네임
+	private int ruser_no;					// 신고당한 회원번호
+	private String rnickname;				// 신고당한 회원닉네임
 	private String subject;					// 분류
 	private int br_no;						// board_no, reply_no
 	private int board_no;					// 게시글 번호,댓글의 게시글번호
@@ -26,13 +25,15 @@ public class Report {
 	public Report(int user_no) {
 		super();
 		this.user_no = user_no;
-	} 
+	}
 
 
-	public Report(String report_content, int user_no) {
+
+	public Report(String report_content, int user_no, int board_no) {
 		super();
 		this.report_content = report_content;
 		this.user_no = user_no;
+		this.board_no = board_no;
 	}
 
 	public Report(int report_no, String report_content, Date report_date, int user_no) {
@@ -46,35 +47,46 @@ public class Report {
 	// --------------------
 	
 
-	
-	
-	
-	
-	public Report(int report_no, Date report_date, String nickname, int r_user_no, String subject, int br_no,
-			int board_no, int rcount, int allcount) {
-		super();
-		this.report_no = report_no;
-		this.report_date = report_date;
-		this.nickname = nickname;
-		this.r_user_no = r_user_no;
-		this.subject = subject;
-		this.br_no = br_no;
-		this.board_no = board_no;
-		this.rcount = rcount;
-		this.allcount = allcount;
-	}
-	
-	
-	
-	public Report(int report_no, String report_content, Date report_date, int user_no, String nick_name,
+	public Report(int report_no, String report_content, Date report_date, int user_no, String nickname,
 			String board_title) {
 		super();
 		this.report_no = report_no;
 		this.report_content = report_content;
 		this.report_date = report_date;
 		this.user_no = user_no;
-		this.nick_name = nick_name;
+		this.nickname = nickname;
 		this.board_title = board_title;
+	}
+
+
+
+	public Report(int report_no, String report_content, Date report_date, int user_no, String nickname, String subject,
+			String board_title) {
+		super();
+		this.report_no = report_no;
+		this.report_content = report_content;
+		this.report_date = report_date;
+		this.user_no = user_no;
+		this.nickname = nickname;
+		this.subject = subject;
+		this.board_title = board_title;
+	}
+
+
+
+	public Report(int report_no, Date report_date, int user_no, int ruser_no, String rnickname, String subject,
+			int br_no, int board_no, int rcount, int allcount) {
+		super();
+		this.report_no = report_no;
+		this.report_date = report_date;
+		this.user_no = user_no;
+		this.ruser_no = ruser_no;
+		this.rnickname = rnickname;
+		this.subject = subject;
+		this.br_no = br_no;
+		this.board_no = board_no;
+		this.rcount = rcount;
+		this.allcount = allcount;
 	}
 
 
@@ -115,21 +127,6 @@ public class Report {
 //---------------------------------------------------
 	
 
-	public String getNickname() {
-		return nickname;
-	}
-
-
-
-	public String getNick_name() {
-		return nick_name;
-	}
-
-
-
-	public void setNick_name(String nick_name) {
-		this.nick_name = nick_name;
-	}
 
 
 
@@ -145,20 +142,38 @@ public class Report {
 
 
 
+	public int getRuser_no() {
+		return ruser_no;
+	}
+
+
+
+	public void setRuser_no(int ruser_no) {
+		this.ruser_no = ruser_no;
+	}
+
+
+
+	public String getNickname() {
+		return nickname;
+	}
+
+
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 
 
 
-	public int getR_user_no() {
-		return r_user_no;
+	public String getRnickname() {
+		return rnickname;
 	}
 
 
 
-	public void setR_user_no(int r_user_no) {
-		this.r_user_no = r_user_no;
+	public void setRnickname(String rnickname) {
+		this.rnickname = rnickname;
 	}
 
 
@@ -226,11 +241,14 @@ public class Report {
 	@Override
 	public String toString() {
 		return "Report [report_no=" + report_no + ", report_content=" + report_content + ", report_date=" + report_date
-				+ ", user_no=" + user_no + ", nick_name=" + nick_name + ", nickname=" + nickname + ", r_user_no="
-				+ r_user_no + ", subject=" + subject + ", br_no=" + br_no + ", board_no=" + board_no + ", board_title="
+				+ ", user_no=" + user_no + ", ruser_no=" + ruser_no + ", nickname=" + nickname + ", rnickname="
+				+ rnickname + ", subject=" + subject + ", br_no=" + br_no + ", board_no=" + board_no + ", board_title="
 				+ board_title + ", rcount=" + rcount + ", allcount=" + allcount + "]";
 	}
 
+
+
+	
 
 
 	

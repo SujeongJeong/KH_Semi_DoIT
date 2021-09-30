@@ -44,9 +44,6 @@ public class AdminReportMemberServlet extends HttpServlet {
 		String category = request.getParameter("category");
 		String range = request.getParameter("range");
 
-		System.out.println("Category :" + category);
-		System.out.println("range : " + range);
-		
 		Map<String, Object> map = new AdminService().selectReportMemberList(page, new Search(category, range));
 		  
 		// 응답 페이지 구성 시 사용할 데이터 설정 

@@ -1,11 +1,16 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import admin.model.service.AdminService;
+import qna.model.vo.Report;
 
 /**
  * Servlet implementation class AdminReportAllList
@@ -26,7 +31,7 @@ public class AdminReportAllListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String view = "";
+
 		// 세션에 로그인 유저 객체가 없다면
 //		if(request.getSession().getAttribute("loginUser") == null) {
 //			// 세션에 로그인 유저 객체가 없다면 에러페이지로 이동
@@ -36,8 +41,15 @@ public class AdminReportAllListServlet extends HttpServlet {
 //			// 비밀번호 변경 창으로 이동
 //			view = "WEB-INF/views/qna/qnaReportForm.jsp";
 //		}
-		view = "WEB-INF/views/admin/reportAllListForm.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		int ruser_no = Integer.parseInt(request.getParameter("ruser_no"));
+		
+		List<Report> r = null;
+		
+		r = new AdminService().selectReportAllList(ruser_no);
+		
+		request.setAttribute("reportList", r);
+		
+		request.getRequestDispatcher("WEB-INF/views/admin/reportAllListForm.jsp").forward(request, response);
 	}
 
 	/**

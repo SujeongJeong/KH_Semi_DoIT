@@ -34,7 +34,7 @@ public class emailCheckServlet extends HttpServlet {
 		
 		// 중복 아이디가 있으면  1, 없으면 0 리턴
 		int result = new MemberService().emailCheck(userEmail);
-		System.out.println(result);
+	
 		PrintWriter out = response.getWriter();
 		
 		if(result > 0) {

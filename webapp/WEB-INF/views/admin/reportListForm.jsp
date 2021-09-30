@@ -62,7 +62,7 @@
 						<c:forEach  var="r" items="${ reportList }">
 							<tr>
 								<td>${ r.report_date }</td>
-								<td>${ r.nick_name }</td>
+								<td>${ r.nickname }</td>
 								<td>${ r.board_title }</td>
 								<td>${ r.report_content }</td>
 							</tr>
