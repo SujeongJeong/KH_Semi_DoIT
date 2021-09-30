@@ -38,7 +38,7 @@ public class ProductDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// 등록된 상품의 넘버를 불러온다.
 		int product_no = Integer.parseInt(request.getParameter("product_no"));
 
 		HttpSession session = request.getSession();
@@ -49,12 +49,9 @@ public class ProductDetailServlet extends HttpServlet {
 
 		Purchase prLimit = new ShopService().purchaseLimit(user_no);
 
-		
-		
 		 if(prLimit.getS_limit() == 0 && prLimit.getS_to_limit() == 0 && prLimit.getTodo_limit() == 0 && prLimit.gets_limit_date() == 0) { prLimit.setS_limit(3); prLimit.setS_to_limit(5);
 		 prLimit.setTodo_limit(5); prLimit.sets_limit_date(0); }
 		 
-		
 		 
 		request.setAttribute("prLimit", prLimit);
 

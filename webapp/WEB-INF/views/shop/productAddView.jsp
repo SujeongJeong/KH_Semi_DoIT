@@ -166,9 +166,6 @@
 				
 				<div class="limit-wrapper">
 					<h3>이용 기능 제한</h3>
-					<!-- <span>스터디방 입장/생성 가능 개수 : </span><input type="number" class="studyroomLimit" name="studyroomLimit" min=3 required placeholder="3"> 개<br>
-					<span>스터디방 입장 인원 수 : </span><input type="number" class="studyroomEntryLimit"  name="studyroomEntryLimit" min=4 required placeholder="4"> 인<br>
-					<span>오늘의 할일 수 : </span><input type="number"  class="todoListLimit" name="todoListLimit" min=5 required placeholder="5"> 개 <br>-->
 					
 					<input type=radio id="limit1" name="limit"  style="display:none"> 스터디방 입장/생성 가능 개수 : 
 					<input type="number" class="limit_number"  id="studyroomLimit" name="studyRoomLimit" min=3 required placeholder="3"  maxlength="6"> 개 <br>
