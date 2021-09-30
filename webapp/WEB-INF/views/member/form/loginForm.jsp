@@ -7,8 +7,6 @@
 <title>로그인 - Do IT</title>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-<!-- <script src="https://apis.google.com/js/platform.js" async defer></script>  -->
-<!-- <meta name ="google-signin-client_id" content="219502076188-pjji03me8shc0nijh9ro6elqa6rvi49b.apps.googleusercontent.com">  -->
 <% if(session.getAttribute("msg") != null) { %>
 <script>
 	 alert('<%= session.getAttribute("msg") %>');
@@ -87,35 +85,17 @@ button[id$=Btn]:hover {
 	cursor: pointer;
 }
 
-.easy_btn {
-	width: 280px;
-	height: 30px;
-	border: 0px;
-	margin-top: 30px;
+#loginBtn:hover{
+	cursor: pointer;
 }
-.naver {
-	border: 0;
-	outline: 0;
-	background: #2BD400;
+.banner > * {
+	width: 100%;
 }
-.kakao {
-	border: 0;
-	outline: 0;
-	background: #FFEA00;
-}
-#easy_google {
-	background: white;
-	color: red;
-}
-
-#easy_naver {
-	background: #2BD400;
-	color: white;
-}
-
-#easy_kakao {
-	background: #FFEA00;
-	color: #3A1D1D;
+#bannerImg {
+	display: block;
+	width: 700px;
+	border: 1px solid black;
+	margin: 20px auto;
 }
 
 </style>
@@ -135,15 +115,10 @@ button[id$=Btn]:hover {
 				<div id="join_box"><button id="joinBtn" type="button" onclick="location.href ='<%= request.getContextPath() %>/memberJoin';">회원가입</button ></div>
 			</div>
 			<h5><input type="checkbox" name="remember" id="remember"><label for="remember">이메일 기억하기</label></h5>
-			<span class="input_area login_btn"><input type="submit" value="로그인"></span><br><br>
-			<hr>
-			<span class="input_area google"><button class="easy_btn" id="easy_google" type="button">google</button></span>
-			<span class="input_area naver"><button class="easy_btn" id="easy_naver" type="button">naver</button></span>
-			<span class="input_area kakao"><button class="easy_btn" id="easy_kakao" type="button">kakao</button></span>
-			<!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+			<span class="input_area login_btn"><input id="loginBtn" type="submit" value="로그인"></span>
 		</form>
 	</div>
-	
+	<div id="banner"><img id="bannerImg" src="/Do_IT/resources/images/banner_ranking.png"></div>
 	<script>
 		// 아이디와 비말번호가 공란이 아닐때만 submit 할 수 있도록 확인
 		function validate(){
@@ -188,32 +163,5 @@ button[id$=Btn]:hover {
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
 	
-<!-- <script>
-	var profile = null;
-	
-	function onSignIn(googleUser) {
-		  profile = googleUser.getBasicProfile();
-		  var email = profile.getEmail();
-		  var name = profile.getName();
-		  var Image_URL = profile.getImageUrl();
-		  
-		  console.log('email: ' + email);
-		  console.log('name: ' + name);
-		  console.log('Image_URL: ' + Image_URL); // This is null if the 'email' scope is not present.
-		  
-		  $.ajax({
-				url : "${ contextPath }/member/googleSignIn",
-				type : "post",
-				data : { email:email, Image_URL:Image_URL },
-				success : function(result) {
-					alert("구글 로그인 성공");
-				},
-				error : function(e) {
-					console.log(e);
-				}
-			});
-		}
-	})
-</script> -->
 </body>
 </html>

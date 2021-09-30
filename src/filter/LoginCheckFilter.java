@@ -101,7 +101,6 @@ public class LoginCheckFilter implements Filter {
       
       // 샵
       permitList.add("/Do_IT/shop/home");
-      permitList.add("/Do_IT/productDetail");
       
       // Q&A 게시판
       permitList.add("/Do_IT/qna/home");
