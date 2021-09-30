@@ -12,16 +12,15 @@
 .board_content .contents {
     padding: 20px 0;
 	margin-bottom: 30px;
-    border-top: 3px solid darkgray;
 }
 
 .board_content .contents .title_span{
     display: inline-block;
-    font-size: 200;
     font-weight: normal;
     width: 100px;
     text-align: center;
     background-color: rgb(242, 245, 249);
+	border-radius : 5px;
 }
 
 .input_area {
@@ -35,15 +34,14 @@
 .input_area select {
 	width: 510px;
 	height: 30px;
-	border: 2px solid rgb(242, 245, 249);
-
+	border: 1px solid rgb(242, 245, 249);
 }
 
 .input_area input {
-	width: 500px;
+	width: 510px;
 	height: 30px;
 	border: 0px;
-	border: 2px solid rgb(242, 245, 249);
+	border: 1px solid rgb(242, 245, 249);
 }
 
 .input_area input:focus,
@@ -65,10 +63,14 @@
 	height: 40px;
 	border: 0px;
 	color: white;
-	background: #282A35;
+	background: #e5e5e5;
 	margin: 25px;
+	border-radius : 5px;
 }
 
 .btn_area {
     text-align: center;
 }
+#save { 
+	background-color : #5FC5FF; 
+	}
