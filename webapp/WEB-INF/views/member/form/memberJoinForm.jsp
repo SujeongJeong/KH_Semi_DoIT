@@ -78,7 +78,7 @@
 		border-radius : 5px; 
 	}
 	#joinBtn:disabled {
-		color:lightgray;
+		background:lightgray;
 	}
 	
 
