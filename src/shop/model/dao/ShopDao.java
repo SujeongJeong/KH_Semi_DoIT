@@ -77,7 +77,7 @@ public class ShopDao {
 			pstmt.setInt(7, p.getS_limit());
 			pstmt.setInt(8, p.getS_to_limit());
 			pstmt.setInt(9, p.getTodo_limit());
-			pstmt.setInt(10, p.getS_limitdate());
+			pstmt.setInt(10, p.gets_limit_date());
 			
 			result = pstmt.executeUpdate();
 		
@@ -114,7 +114,7 @@ public class ShopDao {
 							   rset.getInt("S_LIMIT"),
 							   rset.getInt("S_TO_LIMIT"),
 							   rset.getInt("TODO_LIMIT"),
-							   rset.getInt("S_LIMITDATE"));
+							   rset.getInt("S_limit_date"));
 				
 					}
 	
@@ -145,7 +145,7 @@ public class ShopDao {
 			pstmt.setInt(7, p.getS_limit());
 			pstmt.setInt(8, p.getS_to_limit());
 			pstmt.setInt(9, p.getTodo_limit());
-			pstmt.setInt(10, p.getS_limitdate());
+			pstmt.setInt(10, p.gets_limit_date());
 			pstmt.setInt(11, p.getProduct_no());
 			
 			result = pstmt.executeUpdate();
@@ -321,7 +321,7 @@ public class ShopDao {
             	result = new Purchase(rset.getInt("MAX(PR.S_LIMIT)"),
             						  rset.getInt("MAX(PR.S_TO_LIMIT)"),
             						  rset.getInt("MAX(PR.TODO_LIMIT)"),
-            						  rset.getInt("MAX(PR.S_LIMITDATE)"));
+            						  rset.getInt("MAX(PR.S_limit_date)"));
             
              }  
           } catch (SQLException e) {
