@@ -265,7 +265,7 @@
               ROWNUM RNUM
             , RLIST.*
        FROM(SELECT
-                 S_DAY
+               S_DAY
              , S_TIME
              , S_NO
                FROM TIMER 
