@@ -12,7 +12,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
    .outer{
 		width:90%;
 		min-width : 450px;
-		margin: 0 auto;
+		margin: 65px auto;
         text-align: center;
 	}
 	
@@ -23,6 +23,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
     #report_comment{
         display: none;
         margin : 0 auto;
+        resize: vertical;
     }
     
     .btnArea {
@@ -36,9 +37,10 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 		height : 35px;
 		border : 0px;
 		color:white;
-		background:#282A35;
+		background:#C4C4C4;
 		margin : 15px;
-		cursor:pointer
+		cursor:pointer;
+		border-radius : 5px;
 	}
 </style>
 

@@ -201,7 +201,6 @@
 		  , REPLY_CONTENT
 		  , CREATE_DATE
 		  , MODIFY_DATE
-		  , REPLY_SECRET
 		  , STATUS
 		  , USER_NO
 		  , NOTICE_NO
@@ -212,7 +211,6 @@
 		  , ?
 		  , SYSDATE
 		  , SYSDATE
-		  , DEFAULT
 		  , DEFAULT
 		  , ?
 		  , ?

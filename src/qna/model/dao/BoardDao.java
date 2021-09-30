@@ -264,7 +264,6 @@ public class BoardDao {
 										rset.getDate("create_date"),
 										rset.getDate("modify_date"),
 										rset.getString("status"),
-										rset.getString("board_secret"),
 										rset.getInt("count")));
 			}
 		} catch (SQLException e) {
