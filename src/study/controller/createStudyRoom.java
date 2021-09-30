@@ -155,10 +155,25 @@ public class createStudyRoom extends HttpServlet {
 			result = new StudyService().insertStudyRoom(s);
 			
 			
+			
 			// 스터디방 생성 성공시, 방장도 정원수에 포함되므로 db에 저장하기 위해 회원이 방금 만든 스터디방의 s_no 가져오는 처리
 			Study s2 = new StudyService().selectStudyRoomOnlySNo(user_no);
 			int s_no = s2.getS_no();
 				
+			int userStudyLimit = new StudyService().userStudyLimit(user_no); 
+			
+			if(userStudyLimit == 0) {
+				userStudyLimit = 3;
+			}
+			request.setAttribute("userStudyLimit", userStudyLimit);
+			
+		
+			
+			
+			
+			
+			
+			
 		if (result > 0) {
 			//스터디방 생성 성공시, 방장도 정원수에 포함되므로 db에 저장처리
 			MemberJoinStudy mjs = new MemberJoinStudy(user_no,s_no);

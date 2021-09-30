@@ -32,7 +32,7 @@
 				S_NO,
 				COUNT(*) "s_memberCount"
 		   FROM STUDY
-		   JOIN MEMBER_JOINSTUDY USING (S_NO) 
+		   JOIN JOINSTUDY USING (S_NO) 
            WHERE S_STATUS = 'Y'
            GROUP BY S_NO
            ORDER BY S_NO DESC
@@ -133,7 +133,7 @@
 	</entry>
 	<entry key="insertMemberJoinStudy">
 		INSERT 
-		INTO MEMBER_JOINSTUDY
+		INTO JOINSTUDY
 		(
 				USER_NO
 			  , S_NO
@@ -148,20 +148,20 @@
 		SELECT
 				USER_NO
 			  , S_NO
-		   FROM MEMBER_JOINSTUDY
+		   FROM JOINSTUDY
 		  WHERE USER_NO=?
 		    AND S_NO=? 
 	</entry>
 	<entry key="memberJoinStudyNum">
 		SELECT
 				COUNT(*)
-		   FROM MEMBER_JOINSTUDY
+		   FROM JOINSTUDY
 		  WHERE USER_NO=? 
 	</entry>
 	<entry key="StudyMemberCount">
 		SELECT
 				COUNT(*)
-		   FROM MEMBER_JOINSTUDY
+		   FROM JOINSTUDY
 		  WHERE S_NO=? 
 	</entry>
 	<entry key="selectMyStudy">
@@ -173,7 +173,7 @@
            , FILE_PATH
            , CHANGE_NAME
         FROM STUDY S
-        JOIN MEMBER_JOINSTUDY M ON(S.S_NO = M.S_NO)
+        JOIN JOINSTUDY M ON(S.S_NO = M.S_NO)
         JOIN CATEGORY USING(CID)
         JOIN ATTACHMENT A ON(S.S_NO = A.S_NO)
         WHERE S_STATUS = 'Y'
@@ -190,7 +190,7 @@
    <entry key="userJoinStudyNum">
    		  SELECT
        			 COUNT(*) AS "userJoinStudyNum"
-   			FROM MEMBER_JOINSTUDY
+   			FROM JOINSTUDY
  		   WHERE USER_NO = ?
    </entry>
    <entry key="selectList1">
@@ -212,7 +212,7 @@ FROM(SELECT
       , NICKNAME
       , FILE_PATH
       , CHANGE_NAME
-      , ( SELECT COUNT(*) FROM MEMBER_JOINSTUDY M WHERE M.S_NO = S.S_NO) AS "studyMemberNum"
+      , ( SELECT COUNT(*) FROM JOINSTUDY M WHERE M.S_NO = S.S_NO) AS "studyMemberNum"
       FROM STUDY S
       JOIN CATEGORY USING(CID)
       JOIN ATTACHMENT A ON A.S_NO = S.S_NO
@@ -242,7 +242,7 @@ WHERE RNUM BETWEEN ? AND ?
    
    <entry key="insertTime">
    	INSERT 
-	INTO MEMBER_TIMER
+	INTO TIMER
 	(
 		S_DAY,
 		USER_NO,
@@ -260,12 +260,20 @@ WHERE RNUM BETWEEN ? AND ?
    
    <entry key="deleteMemberJoinStudy">
 	   	DELETE
-		  FROM MEMBER_JOINSTUDY
+		  FROM JOINSTUDY
 	 	 WHERE S_NO = ?
 	       AND USER_NO = ?
    </entry>
    
-   
+   <entry key="userStudyLimit">
+   SELECT
+          MAX(S_LIMIT)          
+   FROM PRODUCT P
+   JOIN PURCHASE PR ON(P.PRODUCT_NO = PR.PRODUCT_NO)
+   JOIN MEMBER M ON(PR.USER_NO = M.USER_NO)
+   WHERE M.USER_NO = ?
+   <![CDATA[AND TO_CHAR(PR.EXPIRATION_DATE, 'yyyymmdd') >= TO_CHAR(SYSDATE, 'yyyymmdd')]]>
+   </entry>
    
    
    
