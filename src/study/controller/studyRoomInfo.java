@@ -50,7 +50,7 @@ public class studyRoomInfo extends HttpServlet {
 		System.out.println(s);
 		
 		int ssp_year = s.getS_startPeriod().getYear()-100;
-		int ssp_month = s.getS_startPeriod().getMonth()-1;
+		int ssp_month = s.getS_startPeriod().getMonth()+1;
 		int ssp_date = s.getS_startPeriod().getDate();
 		String ssp = "20" + ssp_year + "년 "+ ssp_month + "월 "+ssp_date + "일";
 		
@@ -59,7 +59,7 @@ public class studyRoomInfo extends HttpServlet {
 		System.out.println(ssp_date);
 		
 		int sep_year = s.gets_endPeriod().getYear()-100;
-		int sep_month = s.gets_endPeriod().getMonth()-1;
+		int sep_month = s.gets_endPeriod().getMonth()+1;
 		int sep_date = s.gets_endPeriod().getDate();
 		String sep = "20" + sep_year + "년 "+ sep_month + "월 "+sep_date + "일";
 		
