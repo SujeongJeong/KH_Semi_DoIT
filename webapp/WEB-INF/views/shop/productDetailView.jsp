@@ -200,11 +200,11 @@ opener.parent.location.reload();
 	</div>
 		
 
-		
-		
-	
+
 		
 	<script>
+	
+	
 			
 			function detailView(){
 				alert('로그인 후 이용 가능 합니다.');
@@ -247,6 +247,7 @@ opener.parent.location.reload();
 					if(confirm("코인이 부족합니다. 충전하시겠습니까?"))
 					  location.href='${contextPath}/coin';
 					  return false;
+					  
 				}
 			} 
 			
