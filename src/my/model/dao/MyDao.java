@@ -575,8 +575,9 @@ public class MyDao {
 	         
 	         while(rset.next()) {
 	        	 StudyRecodeList.add(new MemberTimer(rset.getDate("S_DAY"),
-                       								rset.getInt("S_TIME")
-                       								,""));
+                       								rset.getInt("S_TIME"),
+                       								"",
+                       								rset.getInt("S_NO")));
 	         }
 	      } catch (SQLException e) {
 	         e.printStackTrace();

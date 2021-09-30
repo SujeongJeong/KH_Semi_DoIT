@@ -143,7 +143,7 @@
                <h2>보유 코인</h2>
                <span id="coin"><h1>${ loginUser.userCoin } 코인</h1></span>
                <span class="btn_area">
-                  <button id="charge_btn" onclick="openPopup('<%=request.getContextPath()%>/coin', 'coin_charge', 700, 900);">충전</button>
+                  <button id="charge_btn" onclick="openPopup('<%=request.getContextPath()%>/coin', 'coin_charge', 900, 1200););">충전</button>
                   <button id="refund_btn" onclick="openPopup('<%=request.getContextPath()%>/my/refund', 'refund', 700, 900);">환불</button>
                </span>
             </div>

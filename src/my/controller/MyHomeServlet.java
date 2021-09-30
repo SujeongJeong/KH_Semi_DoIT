@@ -34,6 +34,8 @@ public class MyHomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("nav1", "my");
+
 		int page = 	1;
 		
 		// 메뉴바 클릭했을 때 페이지로 이동
@@ -68,7 +70,7 @@ public class MyHomeServlet extends HttpServlet {
 		sumStudyTime = formatDate(new MyService().sumStudyTime(userNo));
 		// 최근 30일 주 평균 공부시간
 		lastAvgStudyTime = formatDate(new MyService().lastAvgStudyTime(userNo));
-		
+				
 		request.setAttribute("todayStudyTime", todayStudyTime);
 		request.setAttribute("avgStudyTime", avgStudyTime);
 		request.setAttribute("sumStudyTime", sumStudyTime);
@@ -78,8 +80,6 @@ public class MyHomeServlet extends HttpServlet {
 		
 		request.setAttribute("pi", map.get("pi"));
 		request.setAttribute("StudyRecodeList", map.get("StudyRecodeList"));
-		
-		request.setAttribute("nav1", "my");
 		
 		RequestDispatcher view= request.getRequestDispatcher("/WEB-INF/views/my/home.jsp");
 		view.forward(request, response);
