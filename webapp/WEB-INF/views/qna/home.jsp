@@ -27,7 +27,8 @@
 	            </div>
             </form>
             <div class="newpost_btn">
-                    <button type="button" onClick="location.href='<%= request.getContextPath() %>/qna/insert'">새 글 쓰기</button>
+                    <%-- <button type="button" onClick="location.href='<%= request.getContextPath() %>/qna/insert'">새 글 쓰기</button> --%>
+                    <button type="button" onclick="newWriting()">새 글 쓰기</button>
             </div>
         </div>
             <table class="board_list">
@@ -124,7 +125,23 @@
 	<%@ include file='/WEB-INF/views/common/footer.jsp' %>
 	</footer>
 	
-
+	<c:choose>
+		<c:when test="${ !empty loginUser }">
+			<script>
+				function newWriting(){
+					location.href = '<%= request.getContextPath() %>/qna/insert';
+				}
+			</script>
+		</c:when>
+		<c:otherwise>
+			<script>
+				function newWriting(){
+					alert('로그인 후 이용 가능합니다.');
+					location.href= '<%= request.getContextPath() %>/login';
+				}
+			</script>
+		</c:otherwise>
+	</c:choose>
 	
 	
 	<c:choose>
