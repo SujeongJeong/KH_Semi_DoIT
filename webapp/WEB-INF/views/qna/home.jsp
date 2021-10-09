@@ -27,7 +27,6 @@
 	            </div>
             </form>
             <div class="newpost_btn">
-                    <%-- <button type="button" onClick="location.href='<%= request.getContextPath() %>/qna/insert'">새 글 쓰기</button> --%>
                     <button type="button" onclick="newWriting()">새 글 쓰기</button>
             </div>
         </div>
