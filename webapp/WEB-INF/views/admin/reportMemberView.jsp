@@ -8,7 +8,7 @@
 <title>관리 - Do IT</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-	<link href='<%= request.getContextPath() %>/resources/css/admin-ReportMember.css' rel='stylesheet'>
+	<link href='<%= request.getContextPath() %>/resources/css/admin-ReportMember.css?after' rel='stylesheet'>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <%
 	if(request.getAttribute("result") != null) {
@@ -70,7 +70,7 @@
 								<select name="category">
 									<option value="board" <c:if test="${ param.category == 'board' }">selected</c:if>>게시글</option>
 									<option value="reply" <c:if test="${ param.category == 'reply' }">selected</c:if>>댓글</option>
-									<option value="study-member" <c:if test="${ param.category == 'study-member' }">selected</c:if>>스터디 회원</option>
+									<%-- <option value="study-member" <c:if test="${ param.category == 'study-member' }">selected</c:if>>스터디 회원</option> --%>
 								</select>&emsp;
 								정렬 : 
 								<select name="range">

@@ -38,7 +38,7 @@ public class AdminReportListServlet extends HttpServlet {
 
 		List<Report> r = null;
 		
-		if(type.equals("게시판")) {
+		if(type.equals("게시글")) {
 			r = new AdminService().selectBoardReportList(br_no);			
 		} else {
 			r = new AdminService().selectReplyReportList(br_no);
