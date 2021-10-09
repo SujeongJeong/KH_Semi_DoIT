@@ -9,7 +9,7 @@
 <title>Q&A - Do IT</title>
 <!-- 외부 스타일 시트 -->
 	<link href='<%= request.getContextPath() %>/resources/css/all.css' rel='stylesheet'>
-	<link href='<%= request.getContextPath() %>/resources/css/qna-boardDetail.css?after' rel='stylesheet'>
+	<link href='<%= request.getContextPath() %>/resources/css/qna-boardDetail.css' rel='stylesheet'>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" 
 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
@@ -20,6 +20,9 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
     <h1 style = 'color : #5FC5FF; text-align:center; margin : 50px 0 '>DO IT - 공지사항</h1>
 	<div class="content">
 		<div class="board_wrap">
+	        <div class="board_title">
+	            <h1>${ notice.notice_title }</h1>
+	        </div>
         <div class="board_info">
             <div class="writer_info">
                 <img class="user_img" src="${ contextPath }/resources/images/admin.png"  alt="게시글 유저">
@@ -35,10 +38,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                 
             </div>
 	            <span>조회수 : ${ notice.count }</span>
-	        </div>
-	        <div class="board_title">
-	            <h1>${ notice.notice_title }</h1>
-	        </div>
+	      </div>
 	        <div class="board_text">
 	        	${ notice.notice_content }
 	        </div>
