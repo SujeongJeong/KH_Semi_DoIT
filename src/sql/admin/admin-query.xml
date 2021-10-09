@@ -165,12 +165,14 @@
 			   COUNT(*)
 		  FROM STUDY
 		 WHERE S_STATUS = 'Y'
+		 AND S_ENDPERIOD >= SYSDATE
 	</entry>
 	<entry key="getStudynameListCount">
 	SELECT
 		   COUNT(*)
 	  FROM STUDY
 	 WHERE S_STATUS = 'Y'
+	 AND S_ENDPERIOD >= SYSDATE
 	   AND S_NAME LIKE '%' || ? || '%'
 	</entry>
 	<entry key="selectStudyList">
@@ -215,6 +217,7 @@
 		      JOIN ATTACHMENT A ON A.S_NO = S.S_NO
 		      JOIN MEMBER USING(USER_NO)
 		      WHERE S_STATUS = 'Y'
+		      AND S_ENDPERIOD >= SYSDATE
 		      ORDER BY S_NO DESC) RLIST)
 			  WHERE RNUM BETWEEN ? AND ?
 	</entry>
@@ -259,6 +262,7 @@
 		      JOIN ATTACHMENT A ON A.S_NO = S.S_NO
 		      JOIN MEMBER USING(USER_NO)
 		      WHERE S_STATUS = 'Y'
+		      AND S_ENDPERIOD >= SYSDATE
 		      AND S_NAME LIKE '%' || ? || '%'
 		      ORDER BY S_NO DESC) RLIST)
 			  WHERE RNUM BETWEEN ? AND ?
